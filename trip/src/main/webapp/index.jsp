@@ -11,6 +11,8 @@
 
         <a href="ss">sss</a>
 
-		<a href="pkw">ssssssss</a>
+		<a href="spot">관광정보</a>
+		
+		<a href="spot_detail">관광 상세정보</a>
 </body>
 </html>
