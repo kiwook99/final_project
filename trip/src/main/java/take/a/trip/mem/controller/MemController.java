@@ -44,4 +44,11 @@ public class MemController {
 		return "mem/login";
 	}
 	
+	@GetMapping("kakaoLogin")
+	public String kakaoLogin() {
+		logger.info("UserController kakaoLogin 진입 >>> : ");
+		
+		return "mem/login";
+	}
+	
 }
