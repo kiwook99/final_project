@@ -25,7 +25,8 @@ public class SpotController {
 		return "spot/spot";
 	}
 	
-	@GetMapping("spot_detail")
+    @GetMapping("spot_detail/{contentid}")
+	//@GetMapping("spot_detail")
 	public String spot_detail() {
 		logger.info("SpotController spot_detail 진입 >>> : ");
 		

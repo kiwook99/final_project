@@ -86,8 +86,8 @@
 			console.log("spot 함수 진입 >>> : ");
 			
 			// ajax 시작
-			$.ajax({
-				type: 'GET', <!-- GET / POST -->
+			$.ajax({ 
+				type: 'GET', 
 				url: "http://127.0.0.1:5001/api_spot/spot", // url : flask, blueprint 참고, flask api 엔드 포인트
 				data: {page : currentPage}, // 페이징을 위한 값
 				dataType: 'JSON', // 데이터 타입
@@ -104,9 +104,10 @@
 				    // item은 키의 값을 가져옴(해당 태그안의 값, item태그 안에 값(태그))					
 					$.each(spot_list, function(index, item) {
 						
-						if(item.firstimage.length > 0) { // 이미지 값이 존재하는 경우, 없으면 안보여 줄것임
+						//if(item.firstimage.length > 0) { // 이미지 값이 존재하는 경우, 없으면 안보여 줄것임
 					    var itemHtml = '<li>' +
-									   '<a href="spot_detail" class="item">' +
+				 	                   //'<a href="spot_detail" class="item" onclick="spot_detail(' + item.contentid + ')">' +
+    								   '<a href="spot_detail/' + item.contentid + '" class="item">' +		
 									   '<span class="img">' + '<img src="' + item.firstimage + '" alt="' + item.title + '">' + 
 									   '</span>' +
 									   '<div class="spot_name" onclick="location.href=spot_detail">' + 
@@ -114,7 +115,7 @@
 									   '</div>' + 
 									   '</a>' +
 									   '</li>';
-						}									   
+						//}									   
 									   
 						spotList.append(itemHtml); // ul 태그안에 값을 추가
 						
