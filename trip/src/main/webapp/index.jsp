@@ -8,7 +8,8 @@
 
 </head>
 <body>
-
+		<a href="loginForm">로그인</a>
+		
         <a href="ss">sss</a>
 
 		<a href="spot">관광정보</a>
