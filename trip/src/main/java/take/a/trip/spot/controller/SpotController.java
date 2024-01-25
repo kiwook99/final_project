@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import take.a.trip.spot.util.CommonUtils;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -18,12 +21,25 @@ public class SpotController {
 	
 	
 	// @RequestMapping("spot")
+	// 로그인 전
 	@GetMapping("spot")
 	public String spot() {
 		logger.info("SpotController spot 진입 >>> : ");
+			
+		
+		
 		
 		return "spot/spot";
 	}
+	
+	// 로그인 후
+	@GetMapping("spot_login")
+	public String spot_login() {
+		logger.info("SpotController spot_login 진입 >>> : ");
+		
+		return "spot/spot_login";
+	}
+	
 	
     @GetMapping("spot_detail/{contentid}")
 	//@GetMapping("spot_detail")
