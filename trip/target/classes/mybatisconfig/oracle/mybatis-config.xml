@@ -4,7 +4,7 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="take.a.trip.user.vo.UserVO" alias="uvo"/>
+		<typeAlias type="take.a.trip.mem.vo.MemVO" alias="mvo"/>
 		<typeAlias type="take.a.trip.hotel.vo.HotelVO" alias="hvo"/>
 		<typeAlias type="take.a.trip.adminBoard.vo.AdminBoardVO" alias="abvo"/>
 		<typeAlias type="take.a.trip.cart.vo.CartVO" alias="cvo"/>	

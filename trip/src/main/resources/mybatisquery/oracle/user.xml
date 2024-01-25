@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="take.a.trip.user.dao.UserDAO">
-	<select id="userLogin" parameterType="uvo" resultType="uvo">
-		SELECT * FROM USER_TABLE WHERE USERID=#{USERID} AND USERPW=#{USERPW}
+<mapper namespace="take.a.trip.mem.dao.MemDAO">
+	<select id="memLogin" parameterType="mvo" resultType="mvo">
+		SELECT * FROM MEM WHERE MEMID=#{memid} AND MEMPW=#{mempw}
 	</select>
 </mapper>         	  

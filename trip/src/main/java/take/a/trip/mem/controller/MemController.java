@@ -1,4 +1,4 @@
-package take.a.trip.user.controller;
+package take.a.trip.mem.controller;
 
 import java.util.List;
 
@@ -10,38 +10,45 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import take.a.trip.user.service.UserService;
-import take.a.trip.user.vo.UserVO;
+import take.a.trip.mem.service.MemService;
+import take.a.trip.mem.vo.MemVO;
 
 
 @Controller
-public class UserController {
+public class MemController {
 	
 	// Logger 객체 생성
-	Logger logger = LogManager.getLogger(UserController.class);
+	Logger logger = LogManager.getLogger(MemController.class);
 	
 	@Autowired(required = false)
-	private UserService userService;
+	private MemService memService;
 	
 	//로그인 폼
 	@GetMapping("loginForm")
 	public String loginForm() {
 		logger.info("UserController loginForm 진입 >>> : ");
 		
-		return "user/loginForm";
+		return "mem/loginForm";
 	}
 	
 	@PostMapping("login")
-	public String login(UserVO uvo) {
+	public String login(MemVO mvo) {
 		logger.info("UserController login 진입 >>> : ");
 		
-		logger.info("userid >>> : " + uvo.getUSERID());
-		logger.info("userpw >>> : " + uvo.getUSERPW());
+		logger.info("userid >>> : " + mvo.getMemid());
+		logger.info("userpw >>> : " + mvo.getMempw());
 		
-		List<UserVO> userLogin = userService.userLogin(uvo);
+		List<MemVO> userLogin = memService.memLogin(mvo);
 		
 		
-		return "user/login";
+		return "mem/login";
+	}
+	
+	@GetMapping("kakaoLogin")
+	public String kakaoLogin() {
+		logger.info("UserController kakaoLogin 진입 >>> : ");
+		
+		return "mem/login";
 	}
 	
 }

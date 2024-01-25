@@ -1,4 +1,4 @@
-package take.a.trip.user.dao;
+package take.a.trip.mem.dao;
 
 import java.util.List;
 
@@ -10,17 +10,17 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import take.a.trip.user.vo.UserVO;
+import take.a.trip.mem.vo.MemVO;
 
 @Repository
-public class UserDAOImpl implements UserDAO {
-	Logger logger = LogManager.getLogger(UserDAOImpl.class);
+public class MemDAOImpl implements MemDAO {
+	Logger logger = LogManager.getLogger(MemDAOImpl.class);
 	
 	@Autowired(required = false)
 	@Resource(name = "sqlSession_oracle")
 	private DefaultSqlSessionFactory sqlSession;
 	
-	public List<UserVO> userLogin(UserVO uvo) {
-		return sqlSession.openSession().selectList("userLogin", uvo);
+	public List<MemVO> memLogin(MemVO mvo) {
+		return sqlSession.openSession().selectList("memLogin", mvo);
 	}
 }
