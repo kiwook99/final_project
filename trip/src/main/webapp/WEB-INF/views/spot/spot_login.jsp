@@ -250,9 +250,11 @@
 			<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" 
 			style="width:200px;height:30px;font-size:15px;">
 			<input type="button" id="search_btn" name="search_btn" value="검색">
-			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-			<input type="button" name="login" id="loginBtn" value="로그인" onclick="location.href='#'" >
+			<input type="button" name="logout" id="logoutBtn" value="로그아웃" onclick="location.href='#'" >
+			&nbsp;&nbsp;&nbsp;
+			<input type="button" name="mypage" id="MyPageBtn" value="마이페이지" onclick="location.href='#'" >
  
 			</form>
 
