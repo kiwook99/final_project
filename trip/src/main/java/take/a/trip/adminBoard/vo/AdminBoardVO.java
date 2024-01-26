@@ -2,91 +2,124 @@ package take.a.trip.adminBoard.vo;
 
 public class AdminBoardVO {
 	
-	private String ADBOARDNUM;
-	private String USERNUM;
-	private String TITLE;
-	private String COMENT;
-	private String IMAGE;
-	private String DELETEYN;
-	private String INSERTDATE;
-	private String UPDATEDATE;
-	private String VIEW;
+	private String adboardnum;
+	private String memnum;
+	private String adboardtitle;
+	private String adboardcoment;
+	private String adboardimage;
+	private String insertdate;
+	private String updatedate;
+	private String deleteyn;
+	private String adboardhits;
 	
-	// 생성자
+	// 생성자 
 	public AdminBoardVO() {
 		
 	}
-
-	public String getADBOARDNUM() {
-		return ADBOARDNUM;
+	
+	
+	public AdminBoardVO(String adboardnum, String memnum, String adboardtitle, String adboardcoment, String adboardimage, String insertdate,
+			String updatedate, String deleteyn, String adboardhits) {
+		
+		this.adboardnum = adboardnum;
+		this.memnum = memnum;
+		this.adboardtitle = adboardtitle;
+		this.adboardcoment = adboardcoment;
+		this.adboardimage = adboardimage;
+		this.insertdate = insertdate;
+		this.updatedate = updatedate;
+		this.deleteyn = deleteyn;
+		this.adboardhits = adboardhits;
 	}
 
-	public void setADBOARDNUM(String aDBOARDNUM) {
-		ADBOARDNUM = aDBOARDNUM;
+
+	public String getAdboardnum() {
+		return adboardnum;
 	}
 
-	public String getUSERNUM() {
-		return USERNUM;
+
+	public void setAdboardnum(String adboardnum) {
+		this.adboardnum = adboardnum;
 	}
 
-	public void setUSERNUM(String uSERNUM) {
-		USERNUM = uSERNUM;
+
+	public String getMemnum() {
+		return memnum;
 	}
 
-	public String getTITLE() {
-		return TITLE;
+
+	public void setMemnum(String memnum) {
+		this.memnum = memnum;
 	}
 
-	public void setTITLE(String tITLE) {
-		TITLE = tITLE;
+
+	public String getAdboardtitle() {
+		return adboardtitle;
 	}
 
-	public String getCOMENT() {
-		return COMENT;
+
+	public void setAdboardtitle(String adboardtitle) {
+		this.adboardtitle = adboardtitle;
 	}
 
-	public void setCOMENT(String cOMENT) {
-		COMENT = cOMENT;
+
+	public String getAdboardcoment() {
+		return adboardcoment;
 	}
 
-	public String getIMAGE() {
-		return IMAGE;
+
+	public void setAdboardcoment(String adboardcoment) {
+		this.adboardcoment = adboardcoment;
 	}
 
-	public void setIMAGE(String iMAGE) {
-		IMAGE = iMAGE;
+
+	public String getAdboardimage() {
+		return adboardimage;
 	}
 
-	public String getDELETEYN() {
-		return DELETEYN;
+
+	public void setAdboardimage(String adboardimage) {
+		this.adboardimage = adboardimage;
 	}
 
-	public void setDELETEYN(String dELETEYN) {
-		DELETEYN = dELETEYN;
+
+	public String getInsertdate() {
+		return insertdate;
 	}
 
-	public String getINSERTDATE() {
-		return INSERTDATE;
+
+	public void setInsertdate(String insertdate) {
+		this.insertdate = insertdate;
 	}
 
-	public void setINSERTDATE(String iNSERTDATE) {
-		INSERTDATE = iNSERTDATE;
+
+	public String getUpdatedate() {
+		return updatedate;
 	}
 
-	public String getUPDATEDATE() {
-		return UPDATEDATE;
+
+	public void setUpdatedate(String updatedate) {
+		this.updatedate = updatedate;
 	}
 
-	public void setUPDATEDATE(String uPDATEDATE) {
-		UPDATEDATE = uPDATEDATE;
+
+	public String getDeleteyn() {
+		return deleteyn;
 	}
 
-	public String getVIEW() {
-		return VIEW;
+
+	public void setDeleteyn(String deleteyn) {
+		this.deleteyn = deleteyn;
 	}
 
-	public void setVIEW(String vIEW) {
-		VIEW = vIEW;
+
+	public String getAdboardhits() {
+		return adboardhits;
 	}
 
+
+	public void setAdboardhits(String adboardhits) {
+		this.adboardhits = adboardhits;
+	}
+	
 }
