@@ -80,5 +80,123 @@ public class SpotVO {
 		this.totalCount = totalCount;	
 		this.spothit = spothit;
 		
-	}		
+	}
+
+	// setter / getter
+	public String getTripnum() {
+		return tripnum;
+	}
+
+	public void setTripnum(String tripnum) {
+		this.tripnum = tripnum;
+	}
+
+	public String getTripname() {
+		return tripname;
+	}
+
+	public void setTripname(String tripname) {
+		this.tripname = tripname;
+	}
+
+	public String getTripcatalogue() {
+		return tripcatalogue;
+	}
+
+	public void setTripcatalogue(String tripcatalogue) {
+		this.tripcatalogue = tripcatalogue;
+	}
+
+	public String getTripcoment() {
+		return tripcoment;
+	}
+
+	public void setTripcoment(String tripcoment) {
+		this.tripcoment = tripcoment;
+	}
+
+	public String getTripregion() {
+		return tripregion;
+	}
+
+	public void setTripregion(String tripregion) {
+		this.tripregion = tripregion;
+	}
+
+	public String getTripimage() {
+		return tripimage;
+	}
+
+	public void setTripimage(String tripimage) {
+		this.tripimage = tripimage;
+	}
+
+	public String getInsertdate() {
+		return insertdate;
+	}
+
+	public void setInsertdate(String insertdate) {
+		this.insertdate = insertdate;
+	}
+
+	public String getUpdatedate() {
+		return updatedate;
+	}
+
+	public void setUpdatedate(String updatedate) {
+		this.updatedate = updatedate;
+	}
+
+	public String getDeleteyn() {
+		return deleteyn;
+	}
+
+	public void setDeleteyn(String deleteyn) {
+		this.deleteyn = deleteyn;
+	}
+
+	public String getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(String pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public String getGroupSize() {
+		return groupSize;
+	}
+
+	public void setGroupSize(String groupSize) {
+		this.groupSize = groupSize;
+	}
+
+	public String getCurPage() {
+		return curPage;
+	}
+
+	public void setCurPage(String curPage) {
+		this.curPage = curPage;
+	}
+
+	public String getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(String totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	public int getSpothit() {
+		return spothit;
+	}
+
+	public void setSpothit(int spothit) {
+		this.spothit = spothit;
+	}
+		
+	
+	
+	
+	
 }

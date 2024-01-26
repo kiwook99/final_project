@@ -33,12 +33,12 @@
 					console.log("spot_isud_insertBtn >>> : ");
 					
 					// 등록 버튼 눌렀을때 보냄
+					// 이미지 파일 업로드시 type명은 file, 메소드는 post, enctype은 multipart/form-data
 					$('#spot_IsudForm').attr({
 						'action' : 'spot_IsudInsert',
 						'method' : 'POST',
-						//'enctype' : 'application/x-www-form-urlencoded'
-						'enctype' : 'multipart/form-data' // 이미지 파일 업로드시 type명은 file, 메소드는 post, enctype은 multipart/form-data
-					}).submit();
+						'enctype' : 'multipart/form-data' 
+					}).submit(); 
 				});
 			});
 			
