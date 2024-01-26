@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="take.a.trip.spot.dao.SpotDAO">
+
+	<!-- 여행지 등록 -->
+	<insert id="sptoInsert" parameterType="svo">
+	
+		INSERT INTO TRIP(TRIPNUM, TRIPNAME, TRIPCATALOGUE, TRIPCOMENT, TRIPREGION, TRIPIMAGE, INSERTDATE, UPDATEDATE, DELETEYN, SPOTHIT)
+					VALUES ( (SELECT 'S' || LPAD(NVL(MAX(SUBSTR(A.TRIPNUM, -4)), 0) + 1, 4, 0) AS CHABUM FROM TRIP A),
+							#{tripname, jdbcType=VARCHAR},
+							#{tripcatalogue, jdbcType=VARCHAR},
+							#{tripcoment, jdbcType=VARCHAR},
+							#{tripregion, jdbcType=VARCHAR},
+							#{tripimage, jdbcType=VARCHAR},
+							SYSDATE,
+							SYSDATE,
+							'Y'
+							0)
+					
+	
+	
+	</insert>
+
+
+	<select id="spot_IsudSelectAll" parameterType="svo" resultType="svo">
+		SELECT * FROM TRIP
+	</select>
+	
+	
+</mapper>     

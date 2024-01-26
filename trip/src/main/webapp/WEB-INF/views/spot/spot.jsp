@@ -265,7 +265,8 @@
 					 <li class="topMenuLi">
 					 <a class="menuLink" href="#content1">여행정보</a>
 					 	 <ul class ="sb">
-							  <li><a href="spot" class="submenuLink " >관광정보</a></li>
+							  <li><a href="spot" class="submenuLink" >관광정보</a></li>
+							  <li><a href="spot_ISUD" class="submenuLink" >관광정보(ISUD)</a></li>
 					  	</ul>
 					 </li>							  
 					  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  

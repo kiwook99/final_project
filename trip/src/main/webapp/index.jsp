@@ -17,5 +17,7 @@
 		<a href="spot_login">관광정보(로그인 후)</a>
 		
 		<a href="spot_detail">관광 상세정보</a>
+		
+		<a href="spot_ISUD">관광정보(ISUD)</a>
 </body>
 </html>
