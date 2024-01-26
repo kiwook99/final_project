@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import take.a.trip.spot.service.SpotService;
 import take.a.trip.spot.util.CommonUtils;
 
+ 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
