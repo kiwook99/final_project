@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+		  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="take.a.trip.mem.vo.MemVO" alias="mvo"/>
+		<typeAlias type="take.a.trip.hotel.vo.HotelVO" alias="hvo"/>
+		<typeAlias type="take.a.trip.adminBoard.vo.AdminBoardVO" alias="abvo"/>
+		<typeAlias type="take.a.trip.cart.vo.CartVO" alias="cvo"/>	
+		<typeAlias type="take.a.trip.pay.vo.PayVO" alias="pvo"/>
+		
+		<typeAlias type="take.a.trip.spot.vo.SpotVO" alias="svo"/>				
+	</typeAliases>
+</configuration>
