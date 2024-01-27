@@ -18,14 +18,23 @@
 							SYSDATE,
 							'Y'
 							0)
-					
-	
-	
 	</insert>
 
 
 	<select id="spot_IsudSelectAll" parameterType="svo" resultType="svo">
-		SELECT * FROM TRIP
+		SELECT A.TRIPNUM		TRIPNUM,
+			   A.TRIPNAME		TRIPNAME,
+			   A.TRIPCALOGUE	TRIPCATALOGUE,
+			   A.TRIPCOMENT		TRIPCOMENT,
+			   A.TRIPREGION		TRIPREGION,
+			   A.TRIPIMAGE		TRIPIMAGE,
+			   TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD')	INSERTDATE,
+			   TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD')	UPDATEDATE,
+			   A.DELETEYN		DELETEYN,
+			   A.SPOTHIT		SPOTHIT
+		FROM	TRIP A
+		WHERE A.DELETEYN = 'Y'
+		AMD   A.TRIPNUM = #{tripnum}
 	</select>
 	
 	

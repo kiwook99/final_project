@@ -12,9 +12,9 @@
 		
         <a href="ss">sss</a>
 
-		<a href="spot">관광정보</a>
+		<a href="spot/spot">관광정보</a>
 		
-		<a href="spot_login">관광정보(로그인 후)</a>
+		<a href="spot/spot_login">관광정보(로그인 후)</a>
 		
 		<a href="spot_detail">관광 상세정보</a>
 		
