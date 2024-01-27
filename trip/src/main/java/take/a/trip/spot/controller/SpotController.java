@@ -58,7 +58,7 @@ public class SpotController {
 		logger.info("SpotController spot_IsudInsert 진입 >>> : ");
 
 		return "spot/spot_IsudInsert";
-	}	
+	}
 	
 	
 	
