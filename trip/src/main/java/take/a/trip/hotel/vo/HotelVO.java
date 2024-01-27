@@ -27,6 +27,9 @@ public class HotelVO {
 	// 조회수
 	private int hotelhis;
 	
+	//search 변수
+	private String keyword;			// 검색어
+	private String searchFilter;	// 검색조건
 	
 	public HotelVO() {
 		
@@ -51,6 +54,30 @@ public class HotelVO {
 		this.insertdate = insertdate;
 		this.updatedate = updatedate;
 		this.deleteyn = deleteyn;
+		
+	}
+	
+	// 지역별검색
+	public HotelVO(String hotelnum, String regionid, String hotelname, String hoteltel, String hotelimage, String hotelprice, String hotelcoment, String hoteladress, String hotelmapx, String hotelmapy
+					,String hotelcheckin, String hotelcheckout, String insertdate, String updatedate, String deleteyn, String keyword, String searchFilter) {
+		
+		this.hotelnum = hotelnum;
+		this.regionid = regionid;
+		this.hotelname = hotelname;
+		this.hoteltel = hoteltel;
+		this.hotelimage = hotelimage;
+		this.hotelprice = hotelprice;
+		this.hotelcoment = hotelcoment;
+		this.hoteladress = hoteladress;
+		this.hotelmapx = hotelmapx;
+		this.hotelmapy = hotelmapy;
+		this.hotelcheckin = hotelcheckin;
+		this.hotelcheckout = hotelcheckout;
+		this.insertdate = insertdate;
+		this.updatedate = updatedate;
+		this.deleteyn = deleteyn;
+		this.keyword = keyword;
+		this.searchFilter = searchFilter;
 		
 	}
 	
@@ -105,6 +132,24 @@ public class HotelVO {
 		this.totalCount = totalCount;	
 		this.hotelhis = hotelhis;
 		
+	}
+	
+	
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getSearchFilter() {
+		return searchFilter;
+	}
+
+	public void setSearchFilter(String searchFilter) {
+		this.searchFilter = searchFilter;
 	}
 
 	public String getHotelnum() {
