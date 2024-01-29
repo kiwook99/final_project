@@ -10,6 +10,7 @@
 		SELECT *
 		FROM HOTEL
 		WHERE DELETEYN ='Y'
+		ORDER BY HOTELNAME
 		
 </select>
 
@@ -27,6 +28,8 @@
 		<if test="searchFilter == 'key_02'">
 			<![CDATA[ AND HOTELNAME LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 		</if>
+		
+		ORDER BY HOTELNAME
 		
 </select>
 
