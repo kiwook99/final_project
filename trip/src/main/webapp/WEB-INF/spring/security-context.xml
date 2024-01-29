@@ -9,6 +9,7 @@
     
     <http auto-config="true" use-expressions="false">
         <intercept-url pattern="/spot/**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/hotel/**" access="ROLE_ADMIN"/>
     </http>
 
     <authentication-manager>
