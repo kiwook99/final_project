@@ -65,12 +65,9 @@ public class HotelController {
 		 List<HotelVO> listAll = hotelService.hotel_main(hvo);
 		 if (listAll.size()>0) {
 			 logger.info("hotel listAll.size() => "+listAll.size());
-		 	 // 현재 페이지에 해당하는 숙소 목록만 가져오도록 수정
-	         int startIdx = (curPage - 1) * pageSize;
-	         int endIdx = Math.min(startIdx + pageSize, listAll.size());
 			 
 			 model.addAttribute("listAll",listAll);
-			 model.addAttribute("paginghvo",hvo);
+			 model.addAttribute("pagingHVO",hvo);
 			 return "hotel/hotel_main";
 			 
 		 }
