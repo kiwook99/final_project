@@ -73,16 +73,43 @@
 	int linkPage = curGroup * groupSize;
 	System.out.println("linkPage >>> : " + linkPage);
 %>
-<p style="text-align:right;">
+
+<style type=text/css>
+
+	.page{
+		background: #0aa4b5;
+	    border-radius: 50%;
+	    color: #fff;
+	    font-weight: 800;
+	    margin: 0 5px;
+	    width: 30px;
+   	 	height: 30px;
+   	 	text-align:center;
+	}
+	
+	.page-num {
+		display: flex;	
+		text-align:center;
+		justify-content: center;
+	}
+	
+	.paging {
+		margin: 0 5px;
+		width: 30px;
+ 	    height: 30px;
+ 	    color: #888;
+ 	    text-align:center;
+	}
+</style>
+
+<div class=page-num>
 <%
 	// 첫번째 그룹인 아닌경우
 	if(curGroup > 0) {
 		
-	//boardSelectList.jsp?&curPage=1	
-	//boardSelectList.jsp?&curPage=0
 %>
 	<a href="<%=url%>?<%=str%>curPage=1">≪</a>&nbsp;
-	<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>">＜</a>&nbsp;
+	<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>">＜</a>&nbsp;&nbsp;
 <%
 	}else{
 %>
@@ -90,11 +117,11 @@
 		<%
 		if (curGroup > 0){
 		%>
-		<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>-1">＜</a>&nbsp;
+		<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>-1">＜</a>&nbsp;&nbsp;
 		<% 
 		} else {
 		%>
-		<a href="<%=url%>?<%=str%>curPage=1">＜</a>&nbsp;
+		<a href="<%=url%>?<%=str%>curPage=1">＜</a>&nbsp;&nbsp;
 		<% 
 		}
 		%>
@@ -118,29 +145,24 @@
 			System.out.println("그룹범위내에서 페이지 링크 if");
 		//linkPage :1
 %>
-	<%=linkPage%>
+	<a class=page> <%=linkPage%> </a>
 <%
 		}else{
 			System.out.println("그룹범위내에서 페이지 링크 else");
-			//[2][3][4][5]
 %>
-	[<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>"><%=linkPage%></a>]&nbsp;
+	<a class=paging href="<%=url%>?<%=str%>curPage=<%=linkPage%>"><%=linkPage%></a>
 <%
 		}
-		
 		linkPage++;
 		loopCount--;
 	}
-	
-	// 다음그룹이 있는 경우
-	//		6			40
+
 	if(linkPage <= pageCount){
 		System.out.println("다음그룹이 있는 경우 linkPage >>> : " + linkPage);
 		System.out.println("다음그룹이 있는 경우 pageCount >>> : " + pageCount);
-		
-	//	boardSelectList.jsp?&curPage=6
-	//	boardSelectList.jsp?&curPage=40	
 %>
+	
+	
 	<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>">＞</a>&nbsp;
 	<a href="<%=url%>?<%=str%>curPage=<%=pageCount%>">≫</a>&nbsp;
 <%
@@ -151,7 +173,7 @@
 %>
 		
 		<%
-		if (curGroup < 3){
+		if (curGroup < pageCount/5){
 		%>
 		<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>+1">＞</a>&nbsp;
 		<% 
@@ -165,4 +187,4 @@
 <%
 	}
 %>
-</p>
+</div>

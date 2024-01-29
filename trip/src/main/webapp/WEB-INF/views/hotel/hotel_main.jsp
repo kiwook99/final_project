@@ -243,7 +243,8 @@
 					 <li class="topMenuLi">
 					 <a class="menuLink" href="#content1">여행정보</a>
 					 	 <ul class ="sb">
-							  <li><a href="spot" class="submenuLink " >관광정보</a></li>
+							  <li><a href="<%= request.getContextPath() %>/spot/spot" class="submenuLink" >관광정보</a></li>
+							  <li><a href="spot_ISUD" class="submenuLink" >관광정보(ISUD)</a></li>
 					  	</ul>
 					 </li>							  
 					  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
@@ -299,7 +300,6 @@
 							%>
 						</li>
 					</ul>
-					<hr>
 						<jsp:include page="hotelPaging.jsp" flush="true">
 							<jsp:param name="url" value="hotel_main"/>
 							<jsp:param name="str" value=""/>
