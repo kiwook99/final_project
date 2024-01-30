@@ -1,5 +1,6 @@
 package take.a.trip.mem.dao;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,13 +15,17 @@ import take.a.trip.mem.vo.MemVO;
 
 @Repository
 public class MemDAOImpl implements MemDAO {
-	Logger logger = LogManager.getLogger(MemDAOImpl.class);
-	
-	@Autowired(required = false)
-	@Resource(name = "sqlSession_oracle")
-	private DefaultSqlSessionFactory sqlSession;
-	
-	public List<MemVO> memLogin(MemVO mvo) {
-		return sqlSession.openSession().selectList("memLogin", mvo);
-	}
+    Logger logger = LogManager.getLogger(MemDAOImpl.class);
+
+    @Autowired(required = false)
+    @Resource(name = "sqlSession_oracle")
+    private DefaultSqlSessionFactory sqlSession;
+
+    public List<MemVO> memLogin(MemVO mvo) {
+        return sqlSession.openSession().selectList("memLogin", mvo);
+    }
+
+    public int memInsert(MemVO mvo) {
+        return sqlSession.openSession().insert("memInsert", mvo);
+    }
 }

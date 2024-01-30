@@ -14,12 +14,16 @@ import take.a.trip.mem.vo.MemVO;
 @Service
 @Transactional
 public class MemServiceImpl implements MemService {
-	Logger logger = LogManager.getLogger(MemServiceImpl.class);
-	
-	@Autowired
-	private MemDAO memDAO;
-	
-	public List<MemVO> memLogin(MemVO mvo) {
-		return memDAO.memLogin(mvo);
-	}
+    Logger logger = LogManager.getLogger(MemServiceImpl.class);
+
+    @Autowired
+    private MemDAO memDAO;
+
+    public List<MemVO> memLogin(MemVO mvo) {
+        return memDAO.memLogin(mvo);
+    }
+
+    public int memInsert(MemVO mvo) {
+        return memDAO.memInsert(mvo);
+    }
 }

@@ -114,7 +114,7 @@
 					});
 					
 					$(document).on("click","#insertbtn",function(){
-						location.href = "#"
+						location.href = "insertForm"
 					});
 					
 					$(document).on("click","#idbtn",function(){

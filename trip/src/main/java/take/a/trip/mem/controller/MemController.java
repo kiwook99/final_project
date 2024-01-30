@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import take.a.trip.mem.service.MemService;
 import take.a.trip.mem.vo.MemVO;
@@ -51,4 +52,25 @@ public class MemController {
 		return "mem/login";
 	}
 	
+	// 회원가입 폼
+    @GetMapping("insertForm")
+    public String insertForm() {
+        logger.info("UserController insertForm 진입 >>> : ");
+
+        return "mem/insertForm";
+    }
+
+    @PostMapping("insert")
+	public String insert(MemVO mvo) {
+		logger.info("UserController insert 진입 >>> : ");
+		
+		logger.info("userid >>> : " + mvo.getMemid());
+		logger.info("userpw >>> : " + mvo.getMempw());
+
+		int userinsert = memService.memInsert(mvo);
+		
+		
+		return "mem/loginForm";
+	}
+		
 }
