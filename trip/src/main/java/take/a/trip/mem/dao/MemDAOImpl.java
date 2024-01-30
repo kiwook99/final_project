@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -28,4 +29,5 @@ public class MemDAOImpl implements MemDAO {
     public int memInsert(MemVO mvo) {
         return sqlSession.openSession().insert("memInsert", mvo);
     }
+    
 }

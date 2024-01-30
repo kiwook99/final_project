@@ -273,7 +273,7 @@
 					 <li class="topMenuLi">
 					 <a class="menuLink" href="#content2">숙소예약</a>
 					 	<ul class ="sb"> 
-							 <li><a href="#" class="submenuLink" >숙소정보</a></li>
+							 <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink" >숙소정보</a></li>
 					 	</ul>
 					 </li>
 					  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  

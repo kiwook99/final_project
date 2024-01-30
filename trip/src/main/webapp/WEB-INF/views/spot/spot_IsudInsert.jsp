@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<
 <script>
 	
 	alert("여행지 등록 완료!");
@@ -15,6 +15,5 @@
 	location.href="spot_IsudSelectAll";
 
 </script>
-
 </body>
 </html>

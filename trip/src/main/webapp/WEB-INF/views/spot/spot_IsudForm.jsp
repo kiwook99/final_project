@@ -82,8 +82,7 @@
 									2. 문화시설<br><br>
 									3. 축제공연행사<br><br>
 									4. 레포츠<br><br>
-									5. 쇼핑<br><br>
-									6. 음식점<br><br><br><br><br><br><br><br><br><br><br>							
+									5. 음식점<br><br><br><br><br><br><br><br><br><br><br>							
 						</td>												
 					</tr>
 					<tr>
@@ -112,7 +111,7 @@
 					</tr>	
 					<tr>	
 						<td class="tt"> 이미지 업로드 </td>
-						<td>
+						<td>												   
 							<input type="file" name="tripimage" id="tripimage">
 						</td>
 					</tr>					

@@ -26,4 +26,6 @@ public class MemServiceImpl implements MemService {
     public int memInsert(MemVO mvo) {
         return memDAO.memInsert(mvo);
     }
+    
+    
 }

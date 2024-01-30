@@ -3,6 +3,7 @@ package take.a.trip.spot.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -17,13 +18,14 @@ import take.a.trip.spot.service.SpotService;
 import take.a.trip.spot.util.CommonUtils;
 import take.a.trip.spot.vo.SpotVO;
 
-
+ 
  
 
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -87,7 +89,7 @@ public class SpotController {
 			svo.setTripcatalogue(mr.getParameter("tripcatalogue"));
 			svo.setTripcoment(mr.getParameter("tripcoment"));
 			svo.setTripregion(mr.getParameter("tripregion"));
-			svo.setTripimage(mr.getParameter("tripimage"));
+			svo.setTripimage(mr.getFilesystemName("tripimage"));
 			
 			logger.info("spot_IsudInsert svo.setTripname() >>> : " + svo.getTripname());
 			logger.info("spot_IsudInsert svo.setTripcatalogue() >>> : " + svo.getTripcatalogue());
@@ -112,7 +114,7 @@ public class SpotController {
 	
 	
 	// 전체조회(ISUD)
-	@PostMapping("spot/spot_IsudSelectAll")
+	@GetMapping("spot/spot_IsudSelectAll")
 	public String spot_IsudSelectAll(SpotVO svo, Model model) {
 		logger.info("SpotController spot_IsudSelectAll 진입 >>> : ");
 
@@ -122,11 +124,14 @@ public class SpotController {
 		int curPage = CommonUtils.SPOT_CUR_PAGE;	// 현재 페이지 
 		int totalCount = CommonUtils.SPOT_TOTAL_COUNT;		
 		
+		// 페이지가 null이 아닐때 실행
 		if(svo.getCurPage() != null) {
 			// parseInt : 문자열 숫자로 변환
 			curPage = Integer.parseInt(svo.getCurPage());
+			
 		}
 		
+		// 메모리에 올림
 		svo.setPageSize(String.valueOf(pageSize));;
 		svo.setGroupSize(String.valueOf(groupSize));
 		svo.setCurPage(String.valueOf(curPage));
@@ -146,12 +151,67 @@ public class SpotController {
 			model.addAttribute("pagingSVO", svo);
 			model.addAttribute("listAll", listAll);
 			
-			return "spot/spot_IsudForm";
+			return "spot/spot_IsudSelectAll";
 		}
 			
-		return "spot/spot_IsudSelectAll";
+		return "spot/spot_IsudForm";
 	}		
 	
+	// 여행지 조회
+	@GetMapping("spot/spot_IsudSelect")
+	public String spot_IsudSelect(SpotVO svo, Model model) {
+		logger.info("SpotController spot_IsudSelect 진입 >>> : ");
+		logger.info("spot_IsudSelect 함수 진입 obvo.getTripnum() >>> : " + svo.getTripnum());
+		
+		// 서비스 호출
+		List<SpotVO> listS = spotService.spot_IsudSelect(svo);
+		
+		if(listS.size() == 1) {
+			logger.info("spot_IsudSelect listS.size() >>> : " + listS.size());
+			
+			// 조회수 업데이트
+			int spotCnt = spotService.spot_IsudSpothit(svo);
+			logger.info("spot_IsudSelect spotCnt >>> : " + spotCnt);
+			
+			model.addAttribute("listS", listS);
+			
+			return "spot/spot_IsudSelect";
+		}
+		return "spot/spot_IsudSelectAll";
+	}
+	
+	
+	// 여행지 수정
+	@GetMapping("spot/spot_IsudUpdate")
+	public String spot_IsudUpdate(SpotVO svo, Model model) {
+		logger.info("SpotController spot_IsudUpdate 진입 >>> : ");
+		logger.info("spot_IsudUpdate 함수 진입 obvo.getTripnum() >>> : " + svo.getTripnum());
+		
+		int nCnt = spotService.spot_IsudUpdate(svo);
+		
+		if (nCnt > 0) {
+			logger.info("spot_IsudUpdate nCnt >>> : " + nCnt);
+			
+			return "spot/spot_IsudUpdate";
+		}
+		return "spot/spot_IsudSelectAll";
+	}
+	
+	// 여행지 삭제
+	@GetMapping("spot/spot_IsudDelete")
+	public String spot_IsudDelete(SpotVO svo, Model model) {
+		logger.info("SpotController spot_IsudDelete 진입 >>> : ");
+		logger.info("spot_IsudDelete 함수 진입 svo.getTripnum() >>> : " + svo.getTripnum()); 
+		
+		int nCnt = spotService.spot_IsudDelete(svo); 
+		
+		if (nCnt > 0) {
+			logger.info("spot_IsudDelete nCnt >>> : " + nCnt);
+			
+			return "spot/spot_IsudDelete";
+		}
+		return "spot/spot_IsudSelectAll";
+	}	
 	
 	// 상세정보
     @GetMapping("spot/pot_detail/{contentid}")

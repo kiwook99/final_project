@@ -17,9 +17,14 @@
 		
 		<a href="spot_detail">관광 상세정보</a>
 		
-		<a href="spot_ISUD">관광정보(ISUD)</a>
+		<a href="adminBoardSelectAll">공지사항 게시판</a>
+
+		<a href="spot/spot_ISUD">관광정보입력(ISUD)</a>
+		
+		<a href="spot/spot_IsudSelectAll">관광정보(ISUD)</a>
 		
 		<a href="hotel/hotel_main">숙소메인</a>
 		
+
 </body>
 </html>
