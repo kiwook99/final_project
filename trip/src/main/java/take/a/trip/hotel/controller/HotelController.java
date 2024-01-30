@@ -95,5 +95,27 @@ public class HotelController {
 		 return "hotel/hotel_main";
 	 }
 	 
+	 // 지역별 검색
+	 @GetMapping("hotel/hotelSelect")
+	 public String hotelSelect(HotelVO hvo, Model model) {		 
+		 logger.info("hotelSelect 함수진입 ");
+		 
+		 logger.info("hotelSelect hvo.getHotelnum()=> "+ hvo.getHotelnum());
+
+		 
+		 List<HotelVO> selectList = hotelService.hotelSelect(hvo);
+		 
+		 int nCnt = selectList.size();
+		 
+		 if (nCnt>0) {
+			 logger.info("hotelSelect nCnt = "+ nCnt);
+			 
+			 model.addAttribute("selectList",selectList);
+			 
+			 return "hotel/hotelSelect";
+		 }
+		 
+		 return "hotel/hotel_main";
+	 }
 
 }
