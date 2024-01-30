@@ -36,4 +36,11 @@ public class HotelDAOImpl implements HotelDAO {
 		
 		return sqlSession.openSession().selectList("hotelSearch",hvo);
 	}
+	
+	@Override
+	public List<HotelVO> hotelSelect(HotelVO hvo){
+		logger.info("hotelSelect 함수 진입");
+		
+		return sqlSession.openSession().selectList("hotelSelect",hvo);
+	}
 }

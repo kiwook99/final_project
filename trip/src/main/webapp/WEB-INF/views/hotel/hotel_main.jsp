@@ -283,7 +283,7 @@
 						<li>
 							
 							<!-- 숙박시설 -->
-							<a href="hotel/hotelSelect?hotelnum=<%= hvo.getHotelnum() %>">
+							<a href="hotelSelect?hotelnum=<%= hvo.getHotelnum() %>">
 							<span class="img">
 								<img src="<%= hvo.getHotelimage().indexOf(",") >= 0 ? hvo.getHotelimage().substring(0, hvo.getHotelimage().indexOf(",")) : hvo.getHotelimage() %>">
 							

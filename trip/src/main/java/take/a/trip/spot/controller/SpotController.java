@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile; // 최신
 import com.oreilly.servlet.MultipartRequest;	// 구
 
 
 import take.a.trip.spot.service.SpotService;
 import take.a.trip.spot.util.CommonUtils;
+import take.a.trip.spot.vo.ReviewVO;
 import take.a.trip.spot.vo.SpotVO;
 
  
@@ -148,8 +150,9 @@ public class SpotController {
 		if(listAll.size() > 0) {
 			logger.info("spot_IsudSelectAll listAll.size() >>> : " + listAll.size());
 			
-			model.addAttribute("pagingSVO", svo);
+			
 			model.addAttribute("listAll", listAll);
+			model.addAttribute("pagingSVO", svo);
 			
 			return "spot/spot_IsudSelectAll";
 		}
@@ -220,5 +223,120 @@ public class SpotController {
 		logger.info("SpotController spot_detail 진입 >>> : ");
 		
 		return "spot/spot_detail";
-	}	
+	}
+    
+    // 댓글 ====================================================================================
+	// 댓글 등록
+	@PostMapping("spot/spot_IsudCommentInsert")
+	@ResponseBody
+	public String spot_IsudCommentInsert(ReviewVO rvo) {
+		logger.info("SpotController spot_IsudCommentInsert 진입 >>> : ");
+		logger.info("SpotController rvo.getTripnum() >>> : " + rvo.getTripnum());
+		
+		logger.info("rvo.getTripnum() >>> : " + rvo.getTripnum());
+		logger.info("rvo.getMemnum() >>> : " + rvo.getMemnum());
+		logger.info("rvo.getReviewcoment() >>> : " + rvo.getReviewcoment());
+		
+		int nCnt = spotService.spot_IsudCommentInsert(rvo);
+		logger.info("nCnt >>> : " + nCnt);
+		
+		if (1 == nCnt) { return "GOOD"; }
+		else {return "BAD"; }
+	}
+	
+	// 댓글 전체 조회
+	@PostMapping(value="spot/spot_IsudCommentSelectAll", produces ="text/html; charset=utf-8")
+	@ResponseBody
+	public String spot_IsudCommentSelectAll(ReviewVO rvo) {
+		logger.info("SpotController spot_IsudCommentSelectAll 진입 >>> : ");
+		logger.info("SpotController rvo.getTripnum() >>> : " + rvo.getTripnum());
+		
+		List<ReviewVO> list = spotService.spot_IsudCommentSelectAll(rvo);
+		logger.info("spot_IsudCommentSelectAll list >>> : " + list);
+		
+		String ss = "";
+		String listStr = "";
+		for (int i = 0; i < list.size(); i++) {
+			ReviewVO _rvo = list.get(i);
+			
+			String s0 = _rvo.getReviewnum();
+			String s1 = _rvo.getMemnum();
+			String s2 = _rvo.getReviewcoment();
+			String s3 = _rvo.getInsertdate();
+			ss = s0 + "," + s1 + "," + s2 + "," + s3;
+			listStr += ss+"&";
+			logger.info("listStr >>> : " + listStr);
+		}
+		return listStr;
+	}
+	
+	
+	// 댓글 삭제 
+	@PostMapping("spot/spot_IsudCommentDelete")
+	@ResponseBody
+	public String spot_IsudCommentDelete(ReviewVO rvo) {
+		logger.info("SpotController spot_IsudCommentDelete 진입 >>> : ");
+		logger.info("SpotController rvo.getTripnum() >>> : " + rvo.getTripnum());
+		
+		int nCnt = spotService.spot_IsudCommentDelete(rvo);
+		logger.info("spot_IsudCommentDelete nCnt >>> : " + nCnt);
+		
+		if (1 == nCnt) { return "GOOD"; }
+		else {return "BAD"; }
+	}
+    
+    // 검색 =======================================================================================
+	
+	// 검색
+	@GetMapping(value="spot/spot_Search")
+		public String spot_Search(SpotVO svo, Model model) {
+	  logger.info("spot_Search svo.getSearchFilter_1() >>> : " + svo.getSearchFilter_1());
+	  logger.info("spot_Search svo.getKeyword() >>> : " + svo.getKeyword());
+	  
+	  
+		// 페이징
+		int pageSize = CommonUtils.SPOT_PAGE_SIZE;  // 페이지에 나올 값
+		int groupSize = CommonUtils.SPOT_GROUP_SIZE;	// 그룹으로 묶을 값
+		int curPage = CommonUtils.SPOT_CUR_PAGE;	// 현재 페이지 
+		int totalCount = CommonUtils.SPOT_TOTAL_COUNT;		
+		
+		// 페이지가 null이 아닐때 실행
+		if(svo.getCurPage() != null) {
+			// parseInt : 문자열 숫자로 변환
+			curPage = Integer.parseInt(svo.getCurPage());
+			
+		}
+		
+		// 메모리에 올림
+		svo.setPageSize(String.valueOf(pageSize));;
+		svo.setGroupSize(String.valueOf(groupSize));
+		svo.setCurPage(String.valueOf(curPage));
+		svo.setTotalCount(String.valueOf(totalCount));
+		
+		logger.info("spot_IsudSelectAll svo.setPageSize() >>> : " + svo.getPageSize());
+		logger.info("spot_IsudSelectAll svo.getGroupSize() >>> : " + svo.getGroupSize());
+		logger.info("spot_IsudSelectAll svo.getCurPage() >>> : " + svo.getCurPage());
+		logger.info("spot_IsudSelectAll svo.getTotalCount() >>> : " + svo.getTotalCount());
+	  
+	  List<SpotVO> searchList = spotService.spot_Search(svo);
+	  
+	  int nCnt = searchList.size();
+	
+		if (nCnt > 0) {
+			logger.info("spot_Search nCnt >>> : " + nCnt);
+			
+			model.addAttribute("listAll",searchList);
+			model.addAttribute("pagingSVO", svo);
+			
+			
+			return "spot/spot_IsudSelectAll";
+	
+	}
+		return "spot/spot_IsudSelectAll";
+	}
+
+
+
+					
+	
 }

@@ -22,6 +22,10 @@ public class SpotVO {
 	// 조회수
 	private int spothit;
 	
+	//search 변수
+	private String keyword;			// 검색어
+	private String searchFilter_1;	// 검색조건
+	
 	
 	// 생성자
 	public SpotVO() {
@@ -43,6 +47,30 @@ public class SpotVO {
 		
 	}
 	
+	// 검색
+	public SpotVO(String tripnum, String tripname, String tripcatalogue, String tripcoment, String tripregion, String tripimage, String insertdate, String updatedate, String deleteyn, String pageSize, String groupSize, String curPage, String totalCount, int spothit, String keyword, String searchFilter_1) {
+		
+		this.tripnum = tripnum;
+		this.tripname = tripname;
+		this.tripcatalogue = tripcatalogue;
+		this.tripcoment = tripcoment;
+		this.tripregion = tripregion;
+		this.tripimage = tripimage;
+		this.insertdate = insertdate;
+		this.updatedate = updatedate;
+		this.deleteyn = deleteyn;
+		this.pageSize = pageSize;
+		this.groupSize = groupSize;
+		this.curPage = curPage;
+		this.totalCount = totalCount;	
+		this.spothit = spothit;
+		this.keyword = keyword;
+		this.searchFilter_1 = searchFilter_1;
+		
+	}
+	
+	
+	
 	// 페이징
 	public SpotVO(String tripnum, String tripname, String tripcatalogue, String tripcoment, String tripregion, String tripimage, String insertdate, String updatedate, String deleteyn, String pageSize, String groupSize, String curPage, String totalCount) {
 		
@@ -59,7 +87,7 @@ public class SpotVO {
 		this.groupSize = groupSize;
 		this.curPage = curPage;
 		this.totalCount = totalCount;		
-		
+
 	}	
 	
 	// 조회수
@@ -79,6 +107,7 @@ public class SpotVO {
 		this.curPage = curPage;
 		this.totalCount = totalCount;	
 		this.spothit = spothit;
+
 		
 	}
 
@@ -194,6 +223,24 @@ public class SpotVO {
 	public void setSpothit(int spothit) {
 		this.spothit = spothit;
 	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getSearchFilter_1() {
+		return searchFilter_1;
+	}
+
+	public void setSearchFilter_1(String searchFilter_1) {
+		this.searchFilter_1 = searchFilter_1;
+	}
+
+
 		
 	
 	

@@ -108,12 +108,12 @@
 	if(curGroup > 0) {
 		
 %>
-	<a href="<%=url%>?<%=str%>curPage=1">≪</a>&nbsp;
+	<a href="<%=url%>?<%=str%>curPage=1">≪</a>&nbsp;&nbsp;
 	<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>">＜</a>&nbsp;&nbsp;
 <%
 	}else{
 %>
-		<a href="<%=url%>?<%=str%>curPage=1">≪</a>&nbsp;
+		<a href="<%=url%>?<%=str%>curPage=1">≪</a>&nbsp;&nbsp;
 		<%
 		if (curGroup > 0){
 		%>
@@ -163,7 +163,7 @@
 %>
 	
 	
-	<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>">＞</a>&nbsp;
+	&nbsp;<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>">＞</a>&nbsp;&nbsp;
 	<a href="<%=url%>?<%=str%>curPage=<%=pageCount%>">≫</a>&nbsp;
 <%
 	}else{
@@ -175,11 +175,11 @@
 		<%
 		if (curGroup < pageCount/5){
 		%>
-		<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>+1">＞</a>&nbsp;
+		&nbsp;<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>+1">＞</a>&nbsp;&nbsp;
 		<% 
 		} else {
 		%>
-		<a href="<%=url%>?<%=str%>curPage=<%=pageCount%>">＞</a>&nbsp;
+		&nbsp;<a href="<%=url%>?<%=str%>curPage=<%=pageCount%>">＞</a>&nbsp;&nbsp;
 		<% 
 		}
 		%>

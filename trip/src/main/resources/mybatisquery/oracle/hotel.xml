@@ -32,12 +32,7 @@
 		ORDER BY 1 DESC
 		<!--  ? : 현재 페이지 : curPage -->
 	)	WHERE pageSize = #{curPage}
-	
-	<!--SELECT * 
-		FROM HOTEL
-		WHERE DELETEYN ='Y'
-		ORDER BY HOTELNAME -->
-		
+			
 </select>
 
 <!-- hotel 지역별 검색 -->
@@ -56,6 +51,29 @@
 		</if>
 		
 		ORDER BY HOTELNAME
+		
+</select>
+
+<select id="hotelSelect" parameterType="hvo" resultType="hvo">
+	
+	SELECT 		H.HOTELNUM		HOTELNUM,
+				H.REGIONID		REGIONID,
+				H.HOTELNAME		HOTELNAME,
+				H.HOTELTEL		HOTELTEL,
+				H.HOTELIMAGE	HOTELIMAGE,
+				H.HOTELPRICE	HOTELPRICE,
+				H.HOTELADRESS	HOTELADRESS,
+				H.HOTELCOMENT	HOTELCOMENT,
+				H.HOTELMAPX		HOTELMAPX,
+				H.HOTELMAPY		HOTELMAPY,
+				H.HOTELCHECKIN	HOTELCHECKIN,
+				H.HOTELCHECKOUT	HOTELCHECKOUT,
+				H.INSERTDATE	INSERTDATE,
+				H.UPDATEDATE	UPDATEDATE,
+				H.DELETEYN		DELETEYN
+		FROM HOTEL H
+		WHERE	H.DELETEYN='Y'
+		AND		H.HOTELNUM = #{hotelnum}
 		
 </select>
 

@@ -32,5 +32,12 @@ public class HotelServiceImpl implements HotelService {
 		
 		return hotelDAO.hotelSearch(hvo);
 	}
+	
+	@Override
+	public List<HotelVO> hotelSelect(HotelVO hvo){
+		logger.info("hotelSelect 함수 진입");
+		
+		return hotelDAO.hotelSelect(hvo);
+	}
 
 }
