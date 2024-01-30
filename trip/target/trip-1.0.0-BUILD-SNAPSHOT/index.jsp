@@ -20,4 +20,4 @@
 		
 		<a href="spot_ISUD">관광정보(ISUD)</a>
 </body>
-</html>
+</html>  
