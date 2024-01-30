@@ -2,6 +2,7 @@ package take.a.trip.spot.dao;
 
 import java.util.List;
 
+import take.a.trip.spot.vo.ReviewVO;
 import take.a.trip.spot.vo.SpotVO;
 
 public interface SpotDAO {
@@ -24,4 +25,20 @@ public interface SpotDAO {
 	
 	// 삭제
 	public int spot_IsudDelete(SpotVO svo);	
+	
+	// 댓글 ============================================
+	
+	// 입력
+	public int spot_IsudCommentInsert(ReviewVO rvo);
+	
+	// 전체 조회
+	public List<ReviewVO>spot_IsudCommentSelectAll(ReviewVO rvo);
+	
+	// 삭제
+	public int spot_IsudCommentDelete(ReviewVO rvo);
+	
+	// 검색 ==============================================
+	
+	// 검색
+	public List<SpotVO> spot_Search(SpotVO svo);
 }
