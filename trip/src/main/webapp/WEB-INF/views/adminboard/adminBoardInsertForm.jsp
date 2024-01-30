@@ -81,10 +81,6 @@
 	        <td><input type="text" name="adboardnum" id="adboardnum" size="20" readonly></td>
 	    </tr>
 	    <tr>
-	        <td>작성자 번호</td>
-	        <td><input type="text" name="memnum" id="memnum"></td>
-	    </tr>
-	    <tr>
 	        <td>제목</td>
 	        <td><input type="text" name="adboardtitle" id="adboardtitle" size="53"></td>
 	    </tr>
@@ -95,10 +91,6 @@
 	    <tr>
 	        <td>이미지</td>
 	        <td><input type="file" name="adboardimage" id="adboardimage"></td>
-	    </tr>
-	    <tr>
-	        <td>조회수</td>
-	        <td><input type="text" name="adboardhits" id="adboardhits"></td>
 	    </tr>
 	    <tr>
 	        <td colspan="2" align="right">

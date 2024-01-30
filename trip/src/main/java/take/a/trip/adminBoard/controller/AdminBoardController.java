@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import take.a.trip.common.*;
 import take.a.trip.adminBoard.vo.AdminBoardVO;
 import take.a.trip.adminBoard.service.AdminBoardService;
 
@@ -28,10 +29,33 @@ public class AdminBoardController {
 	@GetMapping("adminBoardSelectAll")
 	public String adminBoardSelectAll(AdminBoardVO abvo, Model model) {
 		logger.info("adminBoardSelectAll 함수 진입 >>> : ");
+		
+		// 페이징 처리 ====================================================================
+				int pageSize = CommonUtils.ADMINBOARD_PAGE_SIZE;
+				int groupSize = CommonUtils.ADMINBOARD_GROUP_SIZE;
+				int curPage = CommonUtils.ADMINBOARD_CUR_PAGE;
+				int totalCount = CommonUtils.ADMINBOARD_TOTAL_COUNT;
+				
+				if (abvo.getCurPage() !=null){
+					curPage = Integer.parseInt(abvo.getCurPage());
+				}
+				
+				abvo.setPageSize(String.valueOf(pageSize));
+				abvo.setGroupSize(String.valueOf(groupSize));
+				abvo.setCurPage(String.valueOf(curPage));
+				abvo.setTotalCount(String.valueOf(totalCount));
+
+				logger.info("abvo.getPageSize() >>> : 	" + abvo.getPageSize());
+				logger.info("abvo.getGroupSize() >>> : 	" + abvo.getGroupSize());
+				logger.info("abvo.getCurPage() >>> : 	" + abvo.getCurPage());
+				logger.info("abvo.getTotalCount() >>> : " + abvo.getTotalCount());
+		// 페이징 처리 ======================================================================================
+				
 		List<AdminBoardVO> listAll = adminBoardService.adminBoardSelectAll(abvo);
 		if (listAll.size() > 0) {
 			logger.info("adminBoardSelectAll listAll.size() 함수 진입 >>> : " + listAll.size());
 			
+			model.addAttribute("pagingABVO", abvo);
 			model.addAttribute("listAll", listAll);
 			
 			return "adminboard/adminBoardSelectAll";

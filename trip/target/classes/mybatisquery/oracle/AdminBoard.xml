@@ -5,40 +5,39 @@
 <mapper namespace="take.a.trip.adminBoard.dao.AdminBoardDAO">
     <insert id="adminBoardInsert" parameterType="take.a.trip.adminBoard.vo.AdminBoardVO">
         INSERT INTO ADBOARD (
-							    ADBOARDNUM, 
-							    MEMNUM,    
+							    ADBOARDNUM,   
 							    ADBOARDTITLE,     
 							    ADBOARDCOMENT,    
 							    ADBOARDIMAGE,   
 							    INSERTDATE, 
 							    UPDATEDATE, 
-							    DELETEYN, 
-							    ADBOARDHITS 
+							    DELETEYN  
 							 )
 				  	VALUES (
-							    adboard_seq.NEXTVAL,   <!-- 시퀀스를 사용하여 새로운 값 생성 -->  
-							    #{memnum, jdbcType=VARCHAR},      
+							    adboard_seq.NEXTVAL,   <!-- 시퀀스를 사용하여 새로운 값 생성 -->       
 							    #{adboardtitle, jdbcType=VARCHAR},        
 							    #{adboardcoment, jdbcType=VARCHAR},       
 							    #{adboardimage, jdbcType=VARCHAR},      
 							    SYSDATE,                        
 							    SYSDATE,                           
-							    'Y',                          
-							    #{adboardhits, jdbcType=VARCHAR}
+							    'Y'                          
 							 )
     </insert>
     <select id="adminBoardSelectAll" parameterType="take.a.trip.adminBoard.vo.AdminBoardVO" resultType="take.a.trip.adminBoard.vo.AdminBoardVO">	
 	SELECT * FROM (
 					SELECT 	A.ADBOARDNUM 		ADBOARDNUM
-					       ,A.ADBOARDTITLE 	ADBOARDTITLE	   
-					       ,A.DELETEYN 	DELETEYN
+					       ,A.ADBOARDTITLE 		ADBOARDTITLE	   
+					       ,A.DELETEYN 			DELETEYN
 					       ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
-					       ,A.ADBOARDHITS      ADBOARDHITS	 						    
+					       ,A.ADBOARDHITS      ADBOARDHITS
+					       <!--  ? : 페이지 사이즈 : pageSize  -->
+					       ,CEIL(ROW_NUMBER() OVER(ORDER BY A.ADBOARDNUM DESC)/ #{pageSize} ) pageSize		
+						   ,COUNT(A.ADBOARDNUM) OVER() AS totalCount	 						    
 					FROM 	ADBOARD A
-					WHERE 	A.DELETEYN = 'Y' 	
+					WHERE 	A.DELETEYN = 'Y'
 					ORDER BY 1 DESC  
-				
-				) 
+	    			<!--  ? : 현재 페이지 : curPage -->
+				) WHERE pageSize = #{curPage}
 		
 	
 	</select>
