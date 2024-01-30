@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="take.a.trip.hotel.dao.HotelDAO">
+
+<!-- hotel_main -->
+<select id="hotel_main" parameterType="hvo" resultType="hvo">
+	
+	
+	SELECT * FROM (
+		SELECT 	H.HOTELNUM		HOTELNUM,
+				H.REGIONID		REGIONID,
+				H.HOTELNAME		HOTELNAME,
+				H.HOTELTEL		HOTELTEL,
+				H.HOTELIMAGE	HOTELIMAGE,
+				H.HOTELPRICE	HOTELPRICE,
+				H.HOTELADRESS	HOTELADRESS,
+				H.HOTELCOMENT	HOTELCOMENT,
+				H.HOTELMAPX		HOTELMAPX,
+				H.HOTELMAPY		HOTELMAPY,
+				H.HOTELCHECKIN	HOTELCHECKIN,
+				H.HOTELCHECKOUT	HOTELCHECKOUT,
+				H.INSERTDATE	INSERTDATE,
+				H.UPDATEDATE	UPDATEDATE,
+				H.DELETEYN		DELETEYN,
+				<!--  ? : 페이지 사이즈 : pageSize  -->
+				CEIL(ROW_NUMBER() OVER(ORDER BY H.HOTELNAME) / #{pageSize} ) pageSize,
+				COUNT(H.HOTELNAME) OVER() AS totalCount
+		FROM HOTEL H
+		WHERE	H.DELETEYN='Y'
+		ORDER BY 1 DESC
+		<!--  ? : 현재 페이지 : curPage -->
+	)	WHERE pageSize = #{curPage}
+	
+	<!--SELECT * 
+		FROM HOTEL
+		WHERE DELETEYN ='Y'
+		ORDER BY HOTELNAME -->
+		
+</select>
+
+<!-- hotel 지역별 검색 -->
+<select id="hotelSearch" parameterType="hvo" resultType="hvo">
+
+		SELECT *
+		FROM HOTEL
+		WHERE 1=1 AND DELETEYN='Y'
+		
+		<if test="searchFilter == 'key_01'">
+			<![CDATA[ AND REGIONID LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		</if>
+		
+		<if test="searchFilter == 'key_02'">
+			<![CDATA[ AND HOTELNAME LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		</if>
+		
+		ORDER BY HOTELNAME
+		
+</select>
+
+</mapper>

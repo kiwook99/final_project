@@ -1,2 +1,7 @@
 db.properties
+<<<<<<< HEAD
 pom.properties
+=======
+pom.properties
+pom.xml
+>>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git

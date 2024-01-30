@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="take.a.trip.spot.dao.SpotDAO">
+
+	<!-- 여행지 등록 -->
+	<insert id="spot_IsudInsert" parameterType="svo">
+	
+		INSERT INTO TRIP(TRIPNUM, TRIPNAME, TRIPCATALOGUE, TRIPCOMENT, TRIPREGION, TRIPIMAGE, INSERTDATE, UPDATEDATE, DELETEYN, SPOTHIT)
+					VALUES ( (SELECT 'S' || LPAD(NVL(MAX(SUBSTR(A.TRIPNUM, -4)), 0) + 1, 4, 0) AS CHABUM FROM TRIP A),
+							#{tripname},
+							#{tripcatalogue},
+							#{tripcoment},
+							#{tripregion},
+							#{tripimage, jdbcType=VARCHAR},
+							SYSDATE,
+							SYSDATE,
+							'Y',
+							0)
+	</insert>
+
+	<!-- 전체조회 -->
+	<select id="spot_IsudSelectAll" parameterType="svo" resultType="svo">
+		SELECT * FROM(
+		SELECT A.TRIPNUM		TRIPNUM,
+			   A.TRIPNAME		TRIPNAME,
+			   A.TRIPCATALOGUE	TRIPCATALOGUE,
+			   A.TRIPCOMENT		TRIPCOMENT,
+			   A.TRIPREGION		TRIPREGION,
+			   A.TRIPIMAGE		TRIPIMAGE,
+			   TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD')	INSERTDATE,
+			   TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD')	UPDATEDATE,
+			   A.DELETEYN		DELETEYN,
+			   A.SPOTHIT		SPOTHIT,
+			   CEIL(ROW_NUMBER() OVER(ORDER BY A.TRIPNUM DESC) / #{pageSize} ) pageSize,
+			   COUNT(A.TRIPNUM) OVER() AS totalCount			   
+		FROM	TRIP A
+		WHERE A.DELETEYN = 'Y'
+		ORDER BY 1 DESC
+		<!-- ? : 현재 페이지 -->
+	) WHERE pageSize = #{curPage}		
+	</select>
+	
+	
+	<!-- 조회 -->
+	<select id="spot_IsudSelect" parameterType="svo" resultType="svo">
+			
+		SELECT A.TRIPNUM		TRIPNUM,
+			   A.TRIPNAME		TRIPNAME,
+			   A.TRIPCATALOGUE	TRIPCATALOGUE,
+			   A.TRIPCOMENT		TRIPCOMENT,
+			   A.TRIPREGION		TRIPREGION,
+			   A.TRIPIMAGE		TRIPIMAGE,
+			   TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD')	INSERTDATE,
+			   TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD')	UPDATEDATE,
+			   A.DELETEYN		DELETEYN,
+			   A.SPOTHIT		SPOTHIT	   
+		FROM	TRIP A
+		WHERE A.DELETEYN = 'Y'
+		AND    A.TRIPNUM = #{tripnum}
+	</select>
+	
+	<!-- 조회수 -->
+	<update id="spot_IsudSpothit" parameterType="svo">
+	
+		UPDATE  TRIP
+		   SET  SPOTHIT = (SELECT NVL(MAX(SPOTHIT), 0) + 1 FROM TRIP WHERE DELETEYN = 'Y' AND TRIPNUM = #{tripnum}),UPDATEDATE = SYSDATE
+		 WHERE  DELETEYN = 'Y'
+		   AND  TRIPNUM = #{tripnum}
+	</update>
+	
+	<!-- 수정 -->
+	<update id="spot_IsudUpdate" parameterType="svo">
+	
+		UPDATE  TRIP
+		   SET  TRIPNAME = #{tripname}, TRIPCATALOGUE = #{tripcatalogue}, TRIPCOMENT = #{tripcoment}, TRIPREGION = #{tripregion}, UPDATEDATE = SYSDATE
+		 WHERE  DELETEYN = 'Y'
+		   AND  TRIPNUM = #{tripnum}
+	</update>	
+	
+	
+	<!-- 삭제 -->
+	<update id="spot_IsudDelete" parameterType="svo">
+	
+		UPDATE  TRIP
+		   SET  DELETEYN = 'N', UPDATEDATE = SYSDATE
+		 WHERE  DELETEYN = 'Y'
+		   AND  TRIPNUM = #{tripnum}
+	</update>
+	
+</mapper>     

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ 
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +38,13 @@
 			<tr>
 				<td>
 					<a href="javascript:kakaoLoginApi()">
-					<img height="30" width="208" src="/trip/img/img_sns/o.jpg"/></a>
+					<img height="30" width="208" src="resources/images/kakao.png"/></a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="#">
+					<img height="30" width="208" src="resources/images/naver.png"/></a>
 				</td>
 			</tr>
 		</table>
