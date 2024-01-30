@@ -9,12 +9,12 @@
 		<typeAlias type="take.a.trip.adminBoard.vo.AdminBoardVO" alias="abvo"/>
 		<typeAlias type="take.a.trip.cart.vo.CartVO" alias="cvo"/>	
 		<typeAlias type="take.a.trip.pay.vo.PayVO" alias="pvo"/>
-<<<<<<< HEAD
+
 		<typeAlias type="take.a.trip.spot.vo.SpotVO" alias="svo"/>				
-=======
+
 		
 		<typeAlias type="take.a.trip.spot.vo.SpotVO" alias="svo"/>
 		<typeAlias type="take.a.trip.spot.vo.ReviewVO" alias="rvo"/>					
->>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
+
 	</typeAliases>
 </configuration>
