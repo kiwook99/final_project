@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import take.a.trip.spot.vo.ReviewVO;
 import take.a.trip.spot.vo.SpotVO;
 
 @Repository //("SpotDAO")
@@ -78,6 +79,43 @@ public class SpotDAOImpl implements SpotDAO {
 		logger.info("SpotDAOImpl spot_IsudSelectAll 진입 >>> : ");
 		
 		return sqlSession.openSession().update("spot_IsudDelete", svo);
-	}	
+	}
+	
+	// 댓글 ================================================================
+	
+	// 입력
+	@Override
+	public int spot_IsudCommentInsert(ReviewVO rvo) {
+		// TODO Auto-generated method stub
+		logger.info("SpotDAOImpl spot_IsudCommentInsert 진입 >>> : ");
+		
+		return sqlSession.openSession().insert("spot_IsudCommentInsert", rvo);
+	}
 
+	// 전체조회
+	@Override
+	public List<ReviewVO> spot_IsudCommentSelectAll(ReviewVO rvo) {
+		// TODO Auto-generated method stub
+		logger.info("SpotDAOImpl spot_IsudCommentInsert 진입 >>> : ");
+		return sqlSession.openSession().selectList("spot_IsudCommentSelectAll", rvo);
+	}
+
+	// 삭제
+	@Override
+	public int spot_IsudCommentDelete(ReviewVO rvo) {
+		// TODO Auto-generated method stub
+		logger.info("SpotDAOImpl spot_IsudCommentInsert 진입 >>> : ");
+		return sqlSession.openSession().update("spot_IsudCommentDelete", rvo);
+	}
+
+	// 검색 ====================================================================
+	
+	// 검색 
+	@Override
+	public List<SpotVO> spot_Search(SpotVO svo) {
+		// TODO Auto-generated method stub
+		logger.info("SpotDAOImpl spot_Search 진입 >>> : ");
+		
+		return sqlSession.openSession().selectList("spot_Search", svo);		
+	}
 }

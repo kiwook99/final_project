@@ -8,7 +8,7 @@
 	<insert id="spot_IsudInsert" parameterType="svo">
 	
 		INSERT INTO TRIP(TRIPNUM, TRIPNAME, TRIPCATALOGUE, TRIPCOMENT, TRIPREGION, TRIPIMAGE, INSERTDATE, UPDATEDATE, DELETEYN, SPOTHIT)
-					VALUES ( (SELECT 'S' || LPAD(NVL(MAX(SUBSTR(A.TRIPNUM, -4)), 0) + 1, 4, 0) AS CHABUM FROM TRIP A),
+					VALUES ( TRIPNUM_SEQ.NEXTVAL,
 							#{tripname},
 							#{tripcatalogue},
 							#{tripcoment},
@@ -37,7 +37,7 @@
 			   COUNT(A.TRIPNUM) OVER() AS totalCount			   
 		FROM	TRIP A
 		WHERE A.DELETEYN = 'Y'
-		ORDER BY 1 DESC
+		ORDER BY SPOTHIT DESC, TRIPNUM ASC
 		<!-- ? : 현재 페이지 -->
 	) WHERE pageSize = #{curPage}		
 	</select>
@@ -89,4 +89,83 @@
 		   AND  TRIPNUM = #{tripnum}
 	</update>
 	
+	<!-- 댓글 -->
+	
+	<!-- 입력 -->
+	<insert id="spot_IsudCommentInsert" parameterType="rvo">
+	
+		INSERT INTO REVIEW (REVIEWNUM, TRIPNUM,	MEMNUM,	REVIEWCOMENT, INSERTDATE, UPDATEDATE, DELETEYN)
+						VALUES(
+								REVIEW_SEQ.NEXTVAL,
+								#{tripnum},
+								#{memnum},
+								#{reviewcoment},
+								SYSDATE,
+								SYSDATE,
+								'Y'
+							  )
+	</insert>
+	
+	<!-- 전체조회 -->
+	<select id="spot_IsudCommentSelectAll" parameterType="rvo" resultType="rvo">
+	
+		SELECT  A.REVIEWNUM		 REVIEWNUM,
+				A.TRIPNUM		 TRIPNUM,
+				A.MEMNUM	 MEMNUM,
+				A.REVIEWCOMENT  REVIEWCOMENT,
+				A.INSERTDATE INSERTDATE
+				
+		FROM	REVIEW A
+		WHERE DELETEYN = 'Y'
+		AND A.TRIPNUM = #{tripnum}
+		ORDER BY 1 DESC
+		
+	</select>
+	
+	
+	<!-- 삭제 -->
+	<update id="spot_IsudCommentDelete" parameterType="rvo">
+	
+		UPDATE REVIEW
+		SET	   DELETEYN = 'N'
+		WHERE  DELETEYN = 'Y'
+		AND    REVIEWNUM = #{reviewnum}
+		
+	</update>
+	
+	<!-- 검색 -->
+	
+	<!-- 검색 -->
+
+	<select id = "spot_Search" parameterType="svo" resultType="svo">
+SELECT * FROM(
+SELECT A.TRIPNUM     TRIPNUM,
+       A.TRIPNAME    TRIPNAME,
+       A.TRIPCATALOGUE TRIPCATALOGUE,
+       A.TRIPCOMENT  TRIPCOMENT,
+       A.TRIPREGION  TRIPREGION,
+       A.TRIPIMAGE   TRIPIMAGE,
+       TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE,
+       TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE,
+       A.DELETEYN    DELETEYN,
+       A.SPOTHIT     SPOTHIT,
+       CEIL(ROW_NUMBER() OVER(ORDER BY A.TRIPNUM DESC) / #{pageSize} ) pageSize,
+       COUNT(A.TRIPNUM) OVER() AS totalCount               
+FROM    TRIP A
+WHERE A.DELETEYN = 'Y'
+        
+<if test="searchFilter_1 == 'key_01'">
+    <![CDATA[ AND A.TRIPREGION LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+</if>
+
+<if test="searchFilter_1 == 'key_02'">
+    <![CDATA[ AND A.TRIPCATALOGUE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+</if>
+ORDER BY SPOTHIT DESC, TRIPNUM ASC
+<!-- ? : 현재 페이지 -->
+) WHERE pageSize = #{curPage}
+
+		
+</select>
+
 </mapper>     

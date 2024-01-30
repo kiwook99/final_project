@@ -10,6 +10,7 @@
 		<typeAlias type="take.a.trip.cart.vo.CartVO" alias="cvo"/>	
 		<typeAlias type="take.a.trip.pay.vo.PayVO" alias="pvo"/>
 		
-		<typeAlias type="take.a.trip.spot.vo.SpotVO" alias="svo"/>				
+		<typeAlias type="take.a.trip.spot.vo.SpotVO" alias="svo"/>
+		<typeAlias type="take.a.trip.spot.vo.ReviewVO" alias="rvo"/>					
 	</typeAliases>
 </configuration>

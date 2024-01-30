@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import take.a.trip.spot.dao.SpotDAO;
+import take.a.trip.spot.vo.ReviewVO;
 import take.a.trip.spot.vo.SpotVO;
 
 @Service
@@ -73,5 +74,43 @@ public class SpotServiceImpl implements SpotService {
 		logger.info("SpotServiceImpl spot_IsudDelete 진입 >>> : ");
 		
 		return spotDAO.spot_IsudDelete(svo);
+	}
+	
+	// 댓글 ============================================================
+	
+	// 입력
+	@Override
+	public int spot_IsudCommentInsert(ReviewVO rvo) {
+		// TODO Auto-generated method stub
+		logger.info("SpotServiceImpl spot_IsudCommentInsert 진입 >>> : ");
+		
+		return spotDAO.spot_IsudCommentInsert(rvo);
+	}
+	
+	// 전체조회
+	@Override
+	public List<ReviewVO> spot_IsudCommentSelectAll(ReviewVO rvo) {
+		// TODO Auto-generated method stub
+		logger.info("SpotServiceImpl spot_IsudCommentSelectAll 진입 >>> : ");
+		
+		return spotDAO.spot_IsudCommentSelectAll(rvo);
+	}
+
+	// 삭제
+	@Override
+	public int spot_IsudCommentDelete(ReviewVO rvo) {
+		// TODO Auto-generated method stub
+		logger.info("SpotServiceImpl spot_IsudCommentDelete 진입 >>> : ");
+		
+		return spotDAO.spot_IsudCommentDelete(rvo);
+	}
+	
+	// 검색 ================================================================
+	@Override
+	public List<SpotVO> spot_Search(SpotVO svo) {
+		// TODO Auto-generated method stub
+		logger.info("SpotServiceImpl spot_Search 진입 >>> : ");
+		
+		return spotDAO.spot_Search(svo);		
 	}
 }

@@ -35,7 +35,7 @@
 		
 			//  U
 			$(document).on("click", "#U", function(e){
-				alert("U");
+				
 				e.preventDefault();
 				$("#spotUpdateForm").attr({ 
 					"method":"GET", 
@@ -45,7 +45,7 @@
 			
 			// D
 			$(document).on("click", "#D", function(e){
-				alert("D");
+				
 				e.preventDefault();
 				$("#spotUpdateForm").attr({ 
 					"method":"GET", 
@@ -72,7 +72,7 @@
 					</tr>
 				<tr>
 					<td colspan="2">
-					<img src="http://localhost:8088/trip/resources/fileupload/spot/<%= svo.getTripimage() %>" border="1" width="40" height="50" alt="image">
+					<img src="${pageContext.request.contextPath}/resources/images/img_spot/<%= svo.getTripimage() %>" border="1" width="40" height="50" alt="image">
 					</td>
 				</tr>					
 					<tr>
@@ -114,5 +114,9 @@
 				</tr>																							
 				</table>
 			</form>
+		<!-- 댓글 처리 -->
+		<jsp:include page="spot_IusdComment.jsp">  
+			<jsp:param value="<%= svo.getTripnum() %>" name="tripnum" />
+		</jsp:include>				
 	</body>
 </html>
