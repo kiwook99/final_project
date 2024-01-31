@@ -45,9 +45,11 @@
 				text-align: center;	
 			}
 			
-						.list_content ul {
+			.list_content ul {
 				display: flex; 		/* flex : 수평으로 나열*/
 				flex-wrap: wrap;	/* 화면 크기에 따라 자동 줄바꿈 */
+				justify-content: center; /* 가로 방향으로 가운데 정렬  ( 가로축 - 중심축 )*/
+				
 			}
 			
 			ul, li {
@@ -167,6 +169,42 @@
 			 h1 {
 			 	text-align: center;
 			 }
+			 
+			 
+		 	 .area {
+		    position: absolute;
+		    background: rgba(0, 0, 0, 0.5);
+		    border-radius: 20px;
+		    color: #fff;
+		    font-weight: 700;
+		    top: 10px; /* 조절할 수 있는 값으로 변경 */
+		    left: 10px; /* 조절할 수 있는 값으로 변경 */
+			}
+	
+			.area::before {
+			    content: '';
+			    display: inline-block;
+			    background: url('${pageContext.request.contextPath}/resources/images/지도.png') 0 0 / 100% 100% no-repeat;
+			    width: 11px;
+			    height: 13px;
+			    margin-right: 3px;
+		        vertical-align: -1px;
+			}
+			 
+		
+			.area {
+			    height: 26px;
+			    line-height: 26px;
+			    padding: 0 10px;
+			    font-size: 13px;
+			}
+			
+			.name strong {
+			    font-size: 16px;
+			    color: #000;
+			}
+	
+
 
 		</style>	
 		<!-- 폰트 어썸 CDN -->
@@ -258,7 +296,6 @@
 			         alert('검색합니다.');
 			         
 			         $("#miniSearchForm").attr({
-
 			        	 'method':'GET'
 			         }).submit();
 			      });
@@ -330,27 +367,11 @@
 				 </nav>
 			</div>		
 			<br><br><br>
-			<div class= "container">
-				<form name="tripList" id="tripList">
-					<table border="1">
-						<thead>
-							<tr>
-								<td colspan="7">
-									<h3>관광정보 (ISUD)</h3>
-								</td>
-							</tr>
-							<tr>
-								<th>
-									<input type="checkbox" name="chkAll" id="chkAll"> 
-								</th>
-								<th>번호</th>
-								<th>사진</th>
-								<th>이름</th>
-								<th>지역</th>
-								<th>분야</th> <!-- 카테고리 -->
-								<th>조회수</th>
-							</tr>
-						</thead>
+			<div class= "main">
+				<div class="contents">
+					<div class="list_content">
+						<ul id="tripList">
+	
 <%  
 for(int i=0; i < nCnt; i++){
 	SpotVO svo = list.get(i);
@@ -362,25 +383,24 @@ for(int i=0; i < nCnt; i++){
 	curPage = Integer.parseInt(pagingSVO.getCurPage());
 	totalCount = Integer.parseInt(svo.getTotalCount());
 %>						
-						<tbody>
-							<tr>
-								<td style="width:5%">
-									<input type="checkbox" name="tripnum" id="tripnum" class="tripnum" value=<%= svo.getTripnum() %>>
-								</td>
-								<td style="width:10%"><%= svo.getTripnum() %></td>
-								<%-- <td style="width:10%"><img src="<%= _svo.getTripimage() %>" border="1" width="25" height="25" alt="image"></td> --%>  
-								<td style="width:10%"><img src="${pageContext.request.contextPath}/resources/images/img_spot/<%= svo.getTripimage() %>" border="1" width="25" height="25" alt="image"></td> 
-								
-								<td style="text-align:left;"><%= svo.getTripname() %></td>
-								<td style="width:10%"><%= svo.getTripregion() %></td>
-								<td style="width:10%"><%= svo.getTripcatalogue() %></td>
-								<td style="width:8%"><%= svo.getSpothit() %></td>
-							</tr>
-<%
-} // 종료
- %>						
- 							<tr>
- 								<td colspan="7" id="paging">
+
+							<li>  
+								<a href="spot_IsudSelect?tripnum=<%= svo.getTripnum() %>">
+								<span class="img">
+									<img src="${pageContext.request.contextPath}/resources/images/img_spot/<%= svo.getTripimage() %>" border="1" width="25" height="25" alt="image">
+								<span class="area">
+								 	<%= svo.getTripregion() %>
+								 </span>
+								 </span>
+								 <div class="name">
+									<strong><%= svo.getTripname() %></strong> 
+								 </div>
+								</a>
+							<%
+								} // 종료
+							%>						
+							</li>
+				</ul>
  									<jsp:include page="spot_IsudPaging.jsp" flush="true">
  										<jsp:param name="url" value="spot_IsudSelectAll"/>
  										<jsp:param name="str" value=""/>
@@ -389,20 +409,17 @@ for(int i=0; i < nCnt; i++){
  										<jsp:param name="curPage" value="<%= curPage %>"/>
  										<jsp:param name="totalCount" value="<%= totalCount %>"/>
  									</jsp:include>
- 								</td>
- 							</tr>
- 							<tr>
- 								<td colspan="7">
+
  									<button type="button" id="insertBtn">등록</button>
  									<button type="button" id="selectAllBtn">목록</button>
  									<button type="button" id="selectBtn">수정</button>
- 									<button type="button" id="deleteBtn">삭제</button>
- 								</td>
- 							</tr> 		
-						</tbody>
-					</table>
-				</form>
+ 									<button type="button" id="deleteBtn">삭제</button>		
+
+					</div>
+				</div>
 			</div>
+			
+			
 	</body>
 </html>
 

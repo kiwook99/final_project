@@ -217,7 +217,7 @@ public class SpotController {
 	}	
 	
 	// 상세정보
-    @GetMapping("spot/pot_detail/{contentid}")
+    @GetMapping("spot/spot_detail/{contentid}")
 	//@GetMapping("spot_detail")
 	public String spot_detail() {
 		logger.info("SpotController spot_detail 진입 >>> : ");
