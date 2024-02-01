@@ -27,8 +27,9 @@
 	SELECT
 			A.MEMID		MEMID
 		   ,A.MEMPW		MEMPW
+		   ,A.ADMINYN   ADMINYN
 	FROM	MEM A
-	WHERE A.DELETEYN = 'N'
+	WHERE A.DELETEYN = 'Y'
 	AND A.MEMID = #{memid, jdbcType = VARCHAR}
 	AND A.MEMPW = #{mempw, jdbcType = VARCHAR}
 	</select>

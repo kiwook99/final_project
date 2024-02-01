@@ -23,6 +23,7 @@ public class MemDAOImpl implements MemDAO {
     private DefaultSqlSessionFactory sqlSession;
 
     public List<MemVO> memLogin(MemVO mvo) {
+    	logger.info("MemDAOImpl memLogin >>> : ");
         return sqlSession.openSession().selectList("memLogin", mvo);
     }
 
