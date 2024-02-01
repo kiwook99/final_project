@@ -32,5 +32,44 @@ public class AdminBoardDAOImpl implements AdminBoardDAO {
         return sqlSession.selectList("adminBoardSelectAll");
     }
 	
+	@Override
+	public List<AdminBoardVO> adminBoardSelect(AdminBoardVO abvo) {
+		// TODO Auto-generated method stub
+		logger.info("adminBoardSelect 함수 진입 >>> : ");	
+		
+		return sqlSession.selectList("adminBoardSelect", abvo);
+	}
+	
+	@Override
+	public int adminBoardHits(AdminBoardVO abvo) {
+		// TODO Auto-generated method stub
+		logger.info("adminBoardHits 함수 진입 >>> : ");	
+		
+		return sqlSession.update("adminBoardHits", abvo);
+	}
+
+	@Override
+	public int adminBoardUpdate(AdminBoardVO abvo) {
+		// TODO Auto-generated method stub
+		logger.info("adminBoardUpdate 함수 진입 >>> : ");	
+		
+		return sqlSession.update("adminBoardUpdate", abvo);
+	}
+
+	@Override
+	public int adminBoardDelete(AdminBoardVO abvo) {
+		// TODO Auto-generated method stub
+		logger.info("adminBoardDelete 함수 진입 >>> : ");	
+		
+		return sqlSession.update("adminBoardDelete", abvo);
+	}
+	
+	@Override
+	public List<AdminBoardVO> adminBoardUpdateForm(AdminBoardVO abvo) {
+		// TODO Auto-generated method stub
+		logger.info("adminBoardUpdateForm 함수 진입 >>> : ");	
+		
+		return sqlSession.selectList("adminBoardUpdateForm", abvo);
+	}
 
 }

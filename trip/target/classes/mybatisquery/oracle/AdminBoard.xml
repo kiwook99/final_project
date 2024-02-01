@@ -3,9 +3,10 @@
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="take.a.trip.adminBoard.dao.AdminBoardDAO">
-    <insert id="adminBoardInsert" parameterType="take.a.trip.adminBoard.vo.AdminBoardVO">
+    <insert id="adminBoardInsert" parameterType="abvo">
         INSERT INTO ADBOARD (
-							    ADBOARDNUM,   
+							    ADBOARDNUM, 
+							    MEMNUM,  
 							    ADBOARDTITLE,     
 							    ADBOARDCOMENT,    
 							    ADBOARDIMAGE,   
@@ -14,7 +15,8 @@
 							    DELETEYN  
 							 )
 				  	VALUES (
-							    adboard_seq.NEXTVAL,   <!-- 시퀀스를 사용하여 새로운 값 생성 -->       
+							    adboard_seq.NEXTVAL,  			<!-- 시퀀스를 사용하여 새로운 값 생성 -->  
+							    #{memnum, jdbcType=VARCHAR},   
 							    #{adboardtitle, jdbcType=VARCHAR},        
 							    #{adboardcoment, jdbcType=VARCHAR},       
 							    #{adboardimage, jdbcType=VARCHAR},      
@@ -23,9 +25,10 @@
 							    'Y'                          
 							 )
     </insert>
-    <select id="adminBoardSelectAll" parameterType="take.a.trip.adminBoard.vo.AdminBoardVO" resultType="take.a.trip.adminBoard.vo.AdminBoardVO">	
+    <select id="adminBoardSelectAll" parameterType="abvo" resultType="abvo">	
 	SELECT * FROM (
 					SELECT 	A.ADBOARDNUM 		ADBOARDNUM
+						   ,A.MEMNUM			MEMNUM
 					       ,A.ADBOARDTITLE 		ADBOARDTITLE	   
 					       ,A.DELETEYN 			DELETEYN
 					       ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
@@ -35,11 +38,73 @@
 						   ,COUNT(A.ADBOARDNUM) OVER() AS totalCount	 						    
 					FROM 	ADBOARD A
 					WHERE 	A.DELETEYN = 'Y'
-					ORDER BY 1 DESC  
+					ORDER BY TO_NUMBER(ADBOARDNUM) DESC  
 	    			<!--  ? : 현재 페이지 : curPage -->
 				) WHERE pageSize = #{curPage}
 		
 	
 	</select>
+	
+	<select id="adminBoardSelect" parameterType="abvo" resultType="abvo">	
+	
+		SELECT 	A.ADBOARDNUM 			ADBOARDNUM
+		       ,A.MEMNUM 				MEMNUM
+		       ,A.ADBOARDTITLE 			ADBOARDTITLE
+		       ,A.ADBOARDCOMENT 		ADBOARDCOMENT
+		       ,A.ADBOARDIMAGE 			ADBOARDIMAGE   
+		       ,A.DELETEYN 		DELETEYN
+		       ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
+		       ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
+		       ,A.ADBOARDHITS      	ADBOARDHITS 	
+		FROM 	ADBOARD A		
+		WHERE 	A.DELETEYN = 'Y' 
+		AND     A.ADBOARDNUM = #{adboardnum}	
+
+	</select>
+	
+	<select id="adminBoardUpdateForm" parameterType="abvo" resultType="abvo">	
+	
+		SELECT 	A.ADBOARDNUM 			ADBOARDNUM
+		       ,A.MEMNUM 				MEMNUM
+		       ,A.ADBOARDTITLE 			ADBOARDTITLE
+		       ,A.ADBOARDCOMENT 		ADBOARDCOMENT
+		       ,A.ADBOARDIMAGE 			ADBOARDIMAGE   
+		       ,A.DELETEYN 		DELETEYN
+		       ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
+		       ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
+		       	
+		FROM 	ADBOARD A		
+		WHERE 	A.DELETEYN = 'Y' 
+		AND     A.ADBOARDNUM = #{adboardnum, jdbcType=VARCHAR}	
+
+	</select>
+	
+	<update id="adminBoardHits" parameterType="abvo" >
+ 
+	UPDATE  ADBOARD 
+		SET ADBOARDHITS = (SELECT NVL(MAX(ADBOARDHITS), 0) + 1 FROM ADBOARD WHERE DELETEYN = 'Y' AND ADBOARDNUM = #{adboardnum})
+		   <!--,UPDATEDATE = SYSDATE  -->
+	WHERE   DELETEYN = 'Y'
+	AND     ADBOARDNUM = #{adboardnum}		   
+	</update>
+	
+	<update id="adminBoardUpdate" parameterType="abvo" >
+	
+		UPDATE  ADBOARD
+	   	   SET	ADBOARDCOMENT    = #{adboardcoment, jdbcType=VARCHAR}
+	   	   	   ,ADBOARDTITLE	 = #{adboardtitle, jdbcType=VARCHAR}
+		  	   ,UPDATEDATE 	= SYSDATE
+		WHERE   DELETEYN = 'Y'
+		AND     ADBOARDNUM = #{adboardnum, jdbcType=VARCHAR}	
+	</update>
+	
+	<update id="adminBoardDelete" parameterType="abvo" >
+	
+		UPDATE  ADBOARD
+	   	   SET	DELETEYN 	= 'N'
+	      	   ,UPDATEDATE  = SYSDATE
+		WHERE  	DELETEYN    = 'Y'
+		AND    	ADBOARDNUM = #{adboardnum}	
+	</update>
 
 </mapper>

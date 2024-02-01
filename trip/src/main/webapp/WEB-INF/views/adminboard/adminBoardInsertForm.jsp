@@ -12,13 +12,12 @@
 	$(document).ready(function(){
 		
 		$(document).on("click", "#abIBtn", function(){
-			console.log("abbBtn >>> : ");
+			console.log("abIBtn >>> : ");
 			
 			$('#abInsert').attr({
 				'action':'adminBoardInsert',
-				'method':'GET',
-				'enctype' : 'application/x-www-form-urlencoded'
-				//'enctype':'multipart/form-data'
+				'method':'POST',
+				'enctype':'multipart/form-data'
 			}).submit();
 		});
 	});	
@@ -74,12 +73,16 @@
 <form name="abInsert" id="abInsert">
 	<table>
 	    <tr>
-	        <td colspan="2" align="center">게시판 글쓰기</td>
+	        <td colspan="2" align="center">공지사항 글쓰기</td>
 	    </tr>
 	    <tr>
 	        <td>글번호</td>
 	        <td><input type="text" name="adboardnum" id="adboardnum" size="20" readonly></td>
 	    </tr>
+	    <tr>
+	        <td>작성자</td>
+	        <td><input type="text" name="memnum" id="memnum" size="20"></td>
+	    </tr>	    
 	    <tr>
 	        <td>제목</td>
 	        <td><input type="text" name="adboardtitle" id="adboardtitle" size="53"></td>
@@ -94,7 +97,7 @@
 	    </tr>
 	    <tr>
 	        <td colspan="2" align="right">
-	            <input type="button" value="글쓰기" id="abIBtn">
+	            <input type="button" value="등록" id="abIBtn">
 	        </td>
 	    </tr>
   	</table>
