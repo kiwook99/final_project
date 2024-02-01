@@ -30,5 +30,38 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	    return adminBoardDAO.adminBoardSelectAll(abvo);
 	}
 	
+	@Override
+	public List<AdminBoardVO> adminBoardSelect(AdminBoardVO abvo) {
+	    logger.info("adminBoardSelectAll 함수 진입 >>> : ");
+	    return adminBoardDAO.adminBoardSelect(abvo);
+	}
+	
+	@Override
+	public int adminBoardHits(AdminBoardVO abvo) {
+		// TODO Auto-generated method stub
+		logger.info("adminBoardHits 함수 진입 >>> : ");			
+		return adminBoardDAO.adminBoardHits(abvo);
+	}
+	
+	@Override
+	public int adminBoardUpdate(AdminBoardVO abvo) {
+		// TODO Auto-generated method stub
+		logger.info("adminBoardUpdate 함수 진입 >>> : ");			
+		return adminBoardDAO.adminBoardUpdate(abvo);
+	}
+
+	@Override
+	public int adminBoardDelete(AdminBoardVO abvo) {
+		// TODO Auto-generated method stub
+		logger.info("adminBoardDelete 함수 진입 >>> : ");			
+		return adminBoardDAO.adminBoardDelete(abvo);
+	}
+	
+	@Override
+	public List<AdminBoardVO> adminBoardUpdateForm(AdminBoardVO abvo) {
+	    logger.info("adminBoardUpdateForm 함수 진입 >>> : ");
+	    return adminBoardDAO.adminBoardUpdateForm(abvo);
+	}
+	
 
 }
