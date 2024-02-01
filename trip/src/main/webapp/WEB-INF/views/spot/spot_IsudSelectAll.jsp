@@ -205,7 +205,22 @@
 			}
 	
 
-
+			#search_btn {
+				padding: 5px 15px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+			}
+			
+			#loginBtn {
+				padding: 5px 15px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+			}
+			
 		</style>	
 		<!-- 폰트 어썸 CDN -->
 		<script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
