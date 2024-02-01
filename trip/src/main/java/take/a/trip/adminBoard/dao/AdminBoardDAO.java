@@ -9,10 +9,13 @@ public interface AdminBoardDAO {
 	public int adminBoardInsert(AdminBoardVO abvo);
 	
 	public List<AdminBoardVO> adminBoardSelectAll(AdminBoardVO abvo);
-	/*
-	adminBoardSelect(BoardVO bvo);
-	adminBoardUpdate(BoardVO bvo);
-	adminBoardDelete(BoardVO bvo);
-	*/
-
+	public List<AdminBoardVO> adminBoardSelect(AdminBoardVO abvo);
+	public List<AdminBoardVO> adminBoardUpdateForm(AdminBoardVO abvo);
+	
+	// 게시글 조회 수 
+	public int adminBoardHits(AdminBoardVO abvo);
+	
+	public int adminBoardUpdate(AdminBoardVO abvo);
+	public int adminBoardDelete(AdminBoardVO abvo);
+	
 }

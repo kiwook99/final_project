@@ -1,6 +1,8 @@
 package take.a.trip.adminBoard.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.io.IOException;
 import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import take.a.trip.common.*;
+import com.oreilly.servlet.MultipartRequest;
+
+import take.a.trip.adminBoard.common.CommonUtils;
 import take.a.trip.adminBoard.vo.AdminBoardVO;
 import take.a.trip.adminBoard.service.AdminBoardService;
 
@@ -61,8 +65,30 @@ public class AdminBoardController {
 			return "adminboard/adminBoardSelectAll";
 		}
 			
-		return "adminboard/adminBoardSelectAll";
+		return "adminboard/adminBoardInsertForm";
 	}
+	
+		// 게시글 조회 
+		@GetMapping("adminBoardSelect")
+		public String adminBoardSelect(AdminBoardVO abvo, Model model) {
+			logger.info("adminBoardSelect 함수 진입 >>> : ");
+			
+			logger.info("adminBoardSelect 함수 진입  abvo.getAdboardnum() >>> : " + abvo.getAdboardnum());
+			
+			// 서비스 호출
+			List<AdminBoardVO> listS = adminBoardService.adminBoardSelect(abvo);		
+			if (listS.size() == 1) { 
+				logger.info("adminBoardSelect listS.size() >>> : " + listS.size());
+				
+				// 조회수 업데이트 
+				int bhitCnt = adminBoardService.adminBoardHits(abvo);
+				logger.info("adminBoardSelect bhitCnt >>> : " + bhitCnt);
+						
+				model.addAttribute("listS", listS);
+				return "adminboard/adminBoardSelect";
+			}		
+			return "adminboard/adminBoardSelectAll";
+		}
 	
 	
 	@GetMapping("adminBoardInsertForm")
@@ -73,27 +99,93 @@ public class AdminBoardController {
     }
 
 	// 입력
-	@GetMapping("adminBoardInsert")
-	public String adminBoardInsert(AdminBoardVO abvo, Model model) {
-	    logger.info("adminBoardInsert 함수 진입 >>> : "+ abvo.getAdboardtitle());
-
-	    // Service를 통한 데이터베이스 입력
-	    int insertCnt = adminBoardService.adminBoardInsert(abvo);
-
-	    if (insertCnt > 0) {
-	        logger.info("adminBoardService nCnt >>> : " + insertCnt);
-	        
-	        // 모델에 속성 추가: 입력 건수를 뷰로 전달
-	        model.addAttribute("insertCnt", insertCnt);
-	        logger.info("insertCnt 함수 진입 >>> : " + insertCnt);
-
-	        // 성공 페이지로 이동
-	        return "adminboard/adminBoardInsert";
+	@PostMapping("/adminBoardInsert")
+	public String adminBoardInsert(HttpServletRequest req) {
+	    logger.info("adminBoardInsert 함수 진입 >>> : "+ req);
+	    
+	    	// 파일 업로드
+	 		String filePath = CommonUtils.ADMINBOARD_IMG_UPLOAD_PATH;
+	 		int imgfileSize = CommonUtils.ADMINBOARD_IMG_FILE_SIZE;
+	 		String encodeType = CommonUtils.ADMINBOARD_ENCODE;
+	 		
+	 		try {
+				MultipartRequest mr = new MultipartRequest(req, filePath, imgfileSize, encodeType); 
+				 
+				AdminBoardVO abvo = null;  
+				abvo = new AdminBoardVO(); 
+			
+				// 입력한 데이터 값 확인
+				abvo.setAdboardtitle(mr.getParameter("adboardtitle"));
+				abvo.setAdboardcoment(mr.getParameter("adboardcoment"));
+				abvo.setAdboardimage(mr.getFilesystemName("adboardimage"));
+				abvo.setMemnum(mr.getParameter("memnum"));
+				
+				logger.info("abvo.setAdboardtitle() >>> : " + abvo.getAdboardtitle());
+				logger.info("abvo.setAdboardcoment() >>> : " + abvo.getAdboardcoment());
+				logger.info("abvo.setAdboardimage() >>> : " + abvo.getAdboardimage());
+				logger.info("abvo.setMemnum() >>> : " + abvo.getMemnum());
+				
+				// 서비스 호출
+				int nCnt = adminBoardService.adminBoardInsert(abvo);
+				
+				if(nCnt > 0) {
+					logger.info("nCnt >>> : " + nCnt);
+					
+					return "adminboard/adminBoardInsert";
+				}
+					
+				}catch (IOException e) {
+					logger.info("파일 업로드 중 에러 발생 >>> : " + e.getMessage());
+				}
+	        return "adminboard/adminBoardSelectAll";
 	    }
 
-	    // 입력이 실패한 경우 실패 페이지로 이동
-	    return "adminboard/adminBoardSelectAll";
-	}
+	
+		// 게시글 수정 
+		@GetMapping("adminBoardUpdateForm")
+		public String adminBoardUpdateForm(AdminBoardVO abvo, Model model) {
+			logger.info("adminBoardUpdateForm 함수 진입 >>> : ");
+			
+			// 서비스 호출
+			List<AdminBoardVO> listU = adminBoardService.adminBoardUpdateForm(abvo);		
+			if (listU.size() == 1) { 
+				logger.info("adminBoardUpdateForm listU.size() >>> : " + listU.size());
+
+				model.addAttribute("listU", listU);
+				return "adminboard/adminBoardUpdateForm";
+			}		
+			return "adminboard/adminBoardSelect";
+		}
+	
+		// 게시글 수정 
+		@GetMapping("adminBoardUpdate")
+		public String adminBoardUpdate(AdminBoardVO abvo, Model model) {
+			logger.info("adminBoardUpdate 함수 진입 >>> : ");
+			logger.info("adminBoardUpdate 함수 진입 abvo.getAdboardnum() >>> : " + abvo.getAdboardnum());
+
+			int nCnt = adminBoardService.adminBoardUpdate(abvo);
+			
+			if (nCnt > 0) { 
+				logger.info("adminBoardUpdate nCnt >>> : " + nCnt);
+				return "adminboard/adminBoardUpdate";
+			}
+			return "adminboard/adminBoardSelectAll";		
+		}
+		
+		// 게시글 삭제
+		@GetMapping("adminBoardDelete")
+		public String adminBoardDelete(AdminBoardVO abvo, Model model) {
+			logger.info("adminBoardDelete 함수 진입 >>> : ");
+			logger.info("adminBoardDelete 함수 진입 abvo.getAdboardnum() >>> : " + abvo.getAdboardnum());
+			
+			int nCnt = adminBoardService.adminBoardDelete(abvo);
+			
+			if (nCnt > 0) { 
+				logger.info("adminBoardDelete nCnt >>> : " + nCnt);
+				return "adminboard/adminBoardDelete";
+			}
+			return "#";		
+		}
 	
 
 }
