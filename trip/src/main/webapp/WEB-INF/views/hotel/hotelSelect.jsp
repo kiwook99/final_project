@@ -35,7 +35,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hotel Main</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 <title>Hotel Main</title>
     <!-- 기존 jQuery 제거 -->
     <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
@@ -43,7 +44,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css">
-    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=zsrcsa9kp7"></script>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=zsrcsa9kp7&submodules=panorama"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- 슬라이드 CDN -->
@@ -170,7 +171,7 @@
 	    }
 	
 		.swiper-container{
-		height:550px;
+		height:700px;
 		position: relative;	/* 요소 자기 자신을 기준으로 배치 */
 		}
 	
@@ -232,11 +233,12 @@
     margin-right: 100px;
 	}
 	
-	hr {
+	.next {
    	margin-left: 100px;
     margin-right: 100px;
+    border: 1px solid #000;
 	}
-	 
+	
 	.detail-basic{
 	padding-bottom: 60px;
     display: flex;
@@ -295,15 +297,13 @@
 
     /* 입실일, 퇴실일 부분의 스타일도 조절해야 할 수 있습니다. */
     .datePickerContainer {
-        width: 40%; /* 예시로 지정한 너비 값, 필요에 따라 조절 가능 */
         margin-bottom: 10px; /* 날짜 선택 부분 간의 간격 조절 */
-        margin-right:200px;
     }
     
     .datePickerContainer {
         display: flex;
         justify-content: space-around; /* 각 요소 간의 여백을 고르게 배분 */
-        margin-top: 20px; /* 필요에 따라 조절 */
+        margin-top: 40px; /* 필요에 따라 조절 */
     }
 
     .datePickerBox {
@@ -336,7 +336,31 @@
     color:#444;
 	}
 	
+	.pay {
+	font-size:25px;
+	}
+	
+	#mapContainer {
+        display: flex;
+        width: 100%;
+        height: 600px;
+        margin-bottom: 30px;
+    	margin-top: 10px;
+    }
 
+    #map,
+    #pano {
+        flex: 1;
+        height: 100%;
+    }
+
+	#map{
+	margin-left:100px;
+	}
+	
+	#pano{
+	margin-right:100px;
+	}
 
 	</style>
 		
@@ -403,8 +427,8 @@
 	     	// 최종 가격 계산 및 초기 표시 함수
 	        function calculateAndDisplayDefaultPrice() {
 	            // 기본 가격 표시
-	            var defaultPrice = parseInt(<%= hvo.getHotelprice() %>);
-	            $('#finalPrice').text('최종 가격: ' + defaultPrice + '원');
+	            var hotelprice = parseInt(<%= hvo.getHotelprice() %>);
+	            $('#finalPrice').text('이용요금: ' + hotelprice + '원');
 	        }
 	        
 	     // 최종 가격 계산 및 표시 함수
@@ -415,11 +439,11 @@
 	            var timeDiff = Math.abs(checkoutDate.getTime() - checkinDate.getTime());
 	            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-	            var finalPrice = diffDays * parseInt(<%= hvo.getHotelprice() %>);
+	            var hotelprice = diffDays * parseInt(<%= hvo.getHotelprice() %>);
 
 	            console.log(finalPrice);
 	            // 최종 가격을 표시할 div에 텍스트 설정
-	            $('#finalPrice').text('최종 가격: ' + finalPrice + '원');
+	            $('#finalPrice').text('이용요금: ' + hotelprice + '원');
 	        }
 	        
 		      $("#search_btn").click(function(){
@@ -434,8 +458,9 @@
 	   
 	   function viewMap(name,mapx,mapy) {
 			
-	        var mapContainer = $('<div id="map" style="width: 100%; height: 100%;"></div>');
-	        $('#mapContainer').empty().append(mapContainer);
+	        var mapContainer = $('<div id="map"></div>');
+	        var panoContainer = $('<div id="pano"></div>');
+	        $('#mapContainer').empty().append(mapContainer).append(panoContainer);
 
 	        var map = new naver.maps.Map(mapContainer[0], {
 	            center: new naver.maps.LatLng(mapy, mapx),
@@ -446,6 +471,54 @@
 	            position: new naver.maps.LatLng(mapy, mapx),
 	            map: map
 	        });
+	        
+	        pano = new naver.maps.Panorama("pano", {
+                position: new naver.maps.LatLng(mapy, mapx),
+                pov: {
+                    pan: -133,
+                    tilt: 0,
+                    fov: 100
+                }
+            });
+	        
+	        naver.maps.Event.addListener(pano, 'pano_changed', function () {
+                var latlng = pano.getPosition();
+
+                if (!latlng.equals(map.getCenter())) {
+                    map.setCenter(latlng);
+                }
+            });
+	        
+	        var streetLayer = new naver.maps.StreetLayer();
+            naver.maps.Event.once(map, 'init', function () {
+                streetLayer.setMap(map);
+            });
+
+            var btn = $('#street');
+            btn.on("click", function (e) {
+                e.preventDefault();
+
+                if (streetLayer.getMap()) {
+                    streetLayer.setMap(null);
+                } else {
+                    streetLayer.setMap(map);
+                }
+            });
+            
+            naver.maps.Event.addListener(map, 'streetLayer_changed', function (streetLayer) {
+                if (streetLayer) {
+                    btn.addClass('control-on');
+                } else {
+                    btn.removeClass('control-on');
+                }
+            });
+            
+            naver.maps.Event.addListener(map, 'click', function (e) {
+                if (streetLayer.getMap()) {
+                    var latlng = e.coord;
+                    pano.setPosition(latlng);
+                }
+            });
 		   
 	        var contentString = [
 	            '<div class="iw_inner">',
@@ -466,7 +539,7 @@
 	            }
 	        });
 
-	        infowindow.open(map, marker);
+	        infowindow.open(map, marker, pano);
 	    }
 </script>
 </head>
@@ -563,9 +636,9 @@
 								<span class="info"><br>
 									<ul>
 										<li> 주소	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= hvo.getHoteladress() %> </li>
-										<li> 번호	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= hvo.getHoteltel() %> </li>
-										<li> 체크인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckin() %> </li>
-										<li> 체크아웃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckout() %> </li>
+										<li> 번호	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= hvo.getHoteltel().replace("<br>", "&nbsp;/&nbsp;") %>
+										<li> 체크인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckin().replace("<br>", "&nbsp;/&nbsp;") %>
+										<li> 체크아웃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckout().replace("<br>", "&nbsp;/&nbsp;") %>
 									</ul>
 								</span>
 								</div><br>
@@ -574,9 +647,23 @@
 										<%= hvo.getHotelcoment() %>
 									</p>
 								</div>
+								<div class="datePickerContainer">
+								    <div class="datePickerBox">
+								        <label for="checkinDate"> 체크인 </label>
+								        <input type="text" id="checkinDate" readonly>
+								    </div>
+								    <div class="datePickerBox">
+								        <label for="checkoutDate"> 체크아웃 </label>
+								        <input type="text" id="checkoutDate" readonly>
+								    </div>
+								   <div >
+								   		<span id="finalPrice"></span><br>
+								   		<span class="pay"><a href=""> 결제하기 </a></span>
+									</div>
+								</div>
 							</div>
 						</div>
-						<hr><br>
+						<hr class="next"><br>
 						<div class="container">
 						<div class="txt">
 							<h2>지도</h2>
@@ -586,18 +673,7 @@
 								        viewMap('<%= hvo.getHotelname() %>', <%= hvo.getHotelmapx() %>, <%= hvo.getHotelmapy() %>);
 								    </script>
 						</div>
-						<div class="datePickerContainer">
-						    <div class="datePickerBox">
-						        <label for="checkinDate"> 체크인 </label>
-						        <input type="text" id="checkinDate" readonly>
-						    </div>
-						    <div class="datePickerBox" style=margin-right:320px>
-						        <label for="checkoutDate"> 체크아웃 </label>
-						        <input type="text" id="checkoutDate" readonly>
-						    </div>
-						   <table id="finalPrice">
-							</table>
-						</div>
+
 
 					</div>
 				</div>
