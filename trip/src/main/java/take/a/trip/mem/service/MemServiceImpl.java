@@ -20,6 +20,7 @@ public class MemServiceImpl implements MemService {
     private MemDAO memDAO;
 
     public List<MemVO> memLogin(MemVO mvo) {
+    	logger.info("MemServiceImpl memLogin >>> : ");
         return memDAO.memLogin(mvo);
     }
 
