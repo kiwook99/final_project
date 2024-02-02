@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="/main.jsp" %>
 	<form name="loginForm" id="loginForm">
 		<table border = "1">
 			<tr>

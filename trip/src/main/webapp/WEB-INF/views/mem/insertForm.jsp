@@ -36,7 +36,7 @@
             $(document).on("click", "#inBtn", function(){
                 console.log("inBtn >>> : ");            
                 $('#MemInsert').attr({
-                    'action':'insert',
+                    'action':'mem/insert',
                     'method':'POST',
                 }).submit();
             });
