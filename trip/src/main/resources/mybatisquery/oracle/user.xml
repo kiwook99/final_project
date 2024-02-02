@@ -21,6 +21,7 @@
          SYSDATE,
          'Y',
          'N')
+
 </insert>
 	
 	<select id="memLogin" resultType="take.a.trip.mem.vo.MemVO" parameterType="take.a.trip.mem.vo.MemVO">

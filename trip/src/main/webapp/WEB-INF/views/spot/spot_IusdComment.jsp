@@ -8,6 +8,30 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<!-- 스타일 -->
+		<style type="text/css">
+			h3 {
+				text-align: center;
+			}
+			
+			#insertbtn {
+				padding: 5px 15px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+			}
+			
+			.deleteBtn {
+			    padding: 5px 10px;
+			    background-color: #0aa4b5;
+			    color: white;
+			    border: 0;
+			    border-radius: 10px;
+			}
+			
+		</style>
+		
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -224,6 +248,8 @@
 		</script>
 	</head>
 	<body>
+		<br><br>
+		<hr>
 		<h3>덧글</h3>
 		<hr>
 <% request.setCharacterEncoding("utf-8"); %>
@@ -235,6 +261,12 @@
 	logger.info("spot_IusdComment tripnum 페이지 >>> : " + tripnum);
 %>
 		<form name="commentForm" id="commentForm">
+					<div>
+				<ul name="commentlist" id="commentlist">
+				
+				</ul>
+			</div>
+			<hr>
 			<table>
 				<tr>
 					<td>작성자</td>
@@ -253,12 +285,7 @@
 					</td>
 				</tr>
 			</table>
-			<hr>
-			<div>
-				<ul name="commentlist" id="commentlist">
-				
-				</ul>
-			</div>
+			
 		</form>
 	</body>
 </html>

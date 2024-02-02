@@ -1,34 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ page import="take.a.trip.spot.vo.SpotVO" %>
-    <%@ page import="java.util.List" %> 
-        
+<%@ page import="org.apache.log4j.Logger"%>
+<%@ page import="org.apache.log4j.LogManager"%>
+
 <% request.setCharacterEncoding("UTF-8");%>	
-<%
-	Object obj = request.getAttribute("listS");
-	if (obj == null) return;
-	
-	List<SpotVO> list = (List<SpotVO>)obj;
-	int nCnt = list.size();
-	
-	SpotVO svo = null;
-	if(nCnt == 1) {
-		svo = list.get(0);
-	}
-%>     
+<% Logger logger = LogManager.getLogger(this.getClass()); %>    
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
-				<!-- 스타일 -->
+		<title>경기도 관광지</title>
+		
+		<!-- 스타일 -->
 		<style type="text/css">
 			table {
 				text-align: center;	
- 				margin: 0 auto; 
+				margin: 0 auto;
 			}
 			
 			#miniSearchForm {
@@ -88,7 +76,6 @@
 			
 			img {
 			    border: 0 none;	/* 외곽선 제거, 두께 0, 유형 없음*/
-			    display: block;
 			}			
 		
 
@@ -162,10 +149,6 @@
 			 }
 			 
 			 
-			 h2 {
-			 	text-align: center;
-			 }			 
-			 
 		 	 .area {
 		    position: absolute;
 		    background: rgba(0, 0, 0, 0.5);
@@ -200,74 +183,156 @@
 			}
 	
 
-			.btn {
-				text-align: center;
-				
+			#search_btn {
+				padding: 5px 15px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
 			}
 			
-			#U, #B, #D {
-			padding: 10px 30px;
-			background-color: #0aa4b5;
-			color: white;
-			border: 0;
-			border-radius: 10px;
+			#loginBtn {
+				padding: 5px 15px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
 			}
-			
-			
-			#imgs {
-				margin: 0px 100px;
-			}
-			
-			
 			
 		</style>	
 		<!-- 폰트 어썸 CDN -->
 		<script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
+		<!-- 자바 스크립트 & 제이쿼리 -->
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script type="text/javascript">
-		console.log("자바스크립트 진입 >>> : ");
 		
-		$(document).ready(function(){	
-			console.log("jQuery 진입 >>> : ");
-			
+		// 현재 페이지 선언
+		var currentPage = 1;
 		
-			//  U
-			$(document).on("click", "#U", function(e){
-				
-				e.preventDefault();
-				$("#spotUpdateForm").attr({ 
-					"method":"GET", 
-					"action":"spot_IsudSelect_admin"
-// 					"action":"spot_IsudUpdate"
-				}).submit();
-			});
+		// gyeonggi_spot.py
+		function spot() {
+			console.log("spot 함수 진입 >>> : ");
 			
-			
-			
-			
-			
-			
-			// D
-			$(document).on("click", "#D", function(e){
-				
-				e.preventDefault();
-				$("#spotUpdateForm").attr({ 
-					"method":"GET", 
-					"action":"spot_IsudDelete"
-				}).submit();
-			});
-			
-			// B
-			$(document).on("click", "#B", function(e){
+			// ajax 시작
+			$.ajax({ 
+				type: 'GET', 
+				url: "http://127.0.0.1:5001/api_spot/spot", // url : flask, blueprint 참고, flask api 엔드 포인트
+				data: {page : currentPage}, // 페이징을 위한 값
+				dataType: 'JSON', // 데이터 타입
+				success : function(spot_list) { // 성공할 시 실행되는 콜백 함수
+					console.log("ajax 진입 >>> : ");
 					
-				location.href = "spot_IsudSelectAll";
+					console.log("spot_list >>> : " + spot_list); // flask로 받아온 데이터 값
+					
+					var spotList = $('#spotList'); // ul태그의 id
+					
+
+		            // 반복문: spot_list의 각 요소에 대해 작업
+					// $.each() 메서드의 첫번째 매겨변수로 위에서 선언한 객체를 전달
+				    // 객체를 전달받으면 index는 객체의 key(property)를 가리키고(반복문의 횟수)
+				    // item은 키의 값을 가져옴(해당 태그안의 값, item태그 안에 값(태그))					
+					$.each(spot_list, function(index, item) {
+						/*
+					    var code = ["가평군", "고양시", "과천시", "광명시", "광주시", "구리시", "군포시", "김포시", "남양주시", "동두천시", "부천시", "성남시", "수원시", "시흥시", "안산시", "안성시", "안양시", "양주시", "양평군", "여주시", "연천군", "오산시", "용인시", "의왕시", "의정부시", "이천시", "파주시", "평택시", "포천시", "하남시", "화성시"];
+					    
+					    var sigunguName = "Unknown"; // 기본값 설정
+
+					    // sigungucode가 인덱스 범위 내에 있는지 확인합니다.
+					    if (item.sigungucode >= 1 && item.sigungucode <= code.length) {
+					        sigunguName = code[item.sigungucode - 1]; // 코드 배열에서 해당하는 이름을 가져옵니다.
+					    }
+
+					    var itemHtml = '<li>' +
+					                   '<a href="spot_detail/' + item.contentid + '" class="item">' +		
+					                   '<span class="img">' + '<img src="' + item.firstimage + '" alt="' + item.title + '">' + 
+					                   '<span class="area">' + sigunguName + '</span>' + '</span>' +
+					                   '<div class="name" onclick="location.href=spot_detail">' +
+					                   '<strong>' + item.title + '</strong>' +
+					                   '</div>' + 
+					                   '</a>' +
+					                   '</li>';
+					     */
+						
+						
+						var code = ["가평군", "고양시", "과천시", "광명시", "광주시", "구리시", "군포시", "김포시", "남양주시", "동두천시", "부천시", "성남시", "수원시", "시흥시", "안산시", "안성시", "안양시", "양주시", "양평군", "여주시", "연천군", "오산시", "용인시", "의왕시", "의정부시", "이천시", "파주시", "평택시", "포천시", "하남시", "화성시"];
+						
+						var sigunguName = "Unknown"; // 기본값 설정
+						var sigungucode = item.sigungucode;
+						
+						
+						for (var sgc=0; sgc <= code.length; sgc++){
+							if (sigungucode == sgc) {
+								sigunguName = code[sgc - 1];
+								break; // 찾았으면 반복문 종료
+							}
+						}
+
+						//if(item.firstimage.length > 0) { // 이미지 값이 존재하는 경우, 없으면 안보여 줄것임
+					    var itemHtml = '<li>' +
+				 	                   //'<a href="spot_detail" class="item" onclick="spot_detail(' + item.contentid + ')">' +
+    								   '<a href="spot_detail/' + item.contentid + '" class="item">' +		
+									   '<span class="img">' + '<img src="' + item.firstimage + '" alt="' + item.title + '">' + 
+									   '<span class="area">' + sigunguName + '</span>' + '</span>' +
+									   '<div class="name" onclick="location.href=spot_detail">' +
+									   '<strong>' + item.title + '</strong>' +
+									   '</div>' + 
+									   '</a>' +
+									   '</li>';
+						//}									   
+					    			   
+
+						
+						spotList.append(itemHtml); // ul 태그안에 값을 추가
+						
+						console.log("location.origin >>> : " + location.origin); // url 값
+
+					});
+					
+					// 페이지 버튼 추가
+					addPageButtons();
+				},
+				// 에러 발생시 실행되는 콜백 함수
+				error : function(xtr, status, error) {
+						alert(xtr + ":" + status + ":" + error);
+						console.log("location.origin error >>> : " + location.origin); // url 값
+				}
 			});
 			
-		});			
-		</script>		
+		}		
+				// 페이지 변경 함수
+				function changePage(direction) { // direction : 매개변수, 현재 페이지 조절하는 역할(changePage(값=direction))
+					
+					currentPage += direction; // 페이지 1씩 증가
+					
+					if (currentPage < 1) { // 현재페이지가 1미만이면 1로 선언
+						currentPage = 1
+					} // false일때
+					$('#spotList').empty(); // ul태그 안에있는 자식요소 itemHtml를 모두 제거 새로운 페이지를 위해 이전 목록 비우는 역할
+					console.log("currentPage >>> : " + currentPage);
+					
+					// spot() 함수 다시 실행
+					spot();
+				}
+				
+
+				
+				// 페이지 버튼 함수
+				function addPageButtons() {
+					$('#buttonContainer').find('.pageButton').remove(); // pageButton 클래스를 찾아 제거
+					$('#buttonContainer').prepend('<button class="pageButton" type="button" onclick="changePage(-1)"> 이전 페이지 </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'); // 페이지 1씩 줄어듬
+					$('#buttonContainer').append('<button class="pageButton" type="button" onclick="changePage(1)"> 다음 페이지 </button>'); // 페이지 1씩 늘어남
+				}
+				
+				// 맨 처음 화면 시작할때 작동
+				$(document).ready(function() {
+					console.log("jQuery 진입 >>> : ");
+					spot(); // spot() 함수 실행
+				});
+		</script>
 	</head>
 	<body>
-		<br>
+	<br>
+	<br>
 		<!-- 검색 -->
 		<div id="header">
 			<table>
@@ -330,88 +395,29 @@
 				 </nav>
 			</div>		
 			<br><br><br>
-		<hr>
-		<h2>관광정보</h2>
-		<hr>
-		<br>
-			<form name="spotUpdateForm" id="spotUpdateForm">
-				<div id="imgs">
-				<img src="${pageContext.request.contextPath}/resources/images/img_spot/<%= svo.getTripimage() %>" border="1" width="500" height="300" alt="image">
+		<div class="main">
+			<div class="contents">
+				<div class="sub_header">
+				<!-- 제목 -->
 				</div>
-				<input type="hidden" name="tripnum" id="tripnum" value="<%= svo.getTripnum() %>">
-				<br>
-				<table width="60%">				
-					<tr>
-						<td class="tt" width="5%"> 여행지명 <hr></td>
-						<td width="50%">
-							<%= svo.getTripname() %>
-							<hr>
-						</td>
-					</tr>
-					<tr>
-						<td class="tt"> 카테고리 <hr></td>
-						<td>
-							<%= svo.getTripcatalogue() %>
-							<hr>
-						</td>
-					</tr>
-					<tr>
-						<td class="tt"> 소개 </td>
-						<td>
-							<%= svo.getTripcoment() %>
-							<hr>
-						</td>
-					</tr>	
-					<tr>
-						<td class="tt"> 지역 <hr></td>
-						<td>
-							<%= svo.getTripregion() %>
-							<hr>
-						</td>
-					</tr>	
-				<tr>
-					<td colspan="3">
-
-					</td>	
-				</tr>																							
-				</table>
-				
-				<br>
-				<div class="btn">
-					<button type="button" id="U">수정</button>&nbsp;&nbsp;&nbsp;
-					<button type="button" id="D">삭제</button>&nbsp;&nbsp;&nbsp;
-					<button type="button" id="B">돌아가기</button>
-				</div>
-			</form>
-			<div class="main">
-				<div class="contents">
-					<div class="sub_header">
-					<!-- 제목 -->
+				<div class="sub_content">
+					<div class="sub_search">
+						<!-- 조건 검색 -->
 					</div>
-					<div class="sub_content">
-						<div class="sub_search">
-							<!-- 조건 검색 -->
+					<div class="sub_list">
+						<div class="list_head">
+							<!-- 페이지 수 -->
 						</div>
-						<div class="sub_list">
-							<div class="list_head">
-								<!-- 페이지 수 -->
-							</div>
-							<div class="list_content">
-								<!-- 관광지 -->
-								<ul id="spotList">
-									<!-- 데이터 들어갈 것임 -->
-								</ul>
-								<div id="buttonContainer"></div>							
-							</div>
+						<div class="list_content">
+							<!-- 관광지 -->
+							<ul id="spotList">
+								<!-- 데이터 들어갈 것임 -->
+							</ul>
+							<div id="buttonContainer"></div>							
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			
-		<!-- 댓글 처리 -->
-		<jsp:include page="spot_IusdComment.jsp">  
-			<jsp:param value="<%= svo.getTripnum() %>" name="tripnum" />
-		</jsp:include>				
+		</div>
 	</body>
 </html>

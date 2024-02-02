@@ -81,6 +81,15 @@ public class SpotDAOImpl implements SpotDAO {
 		return sqlSession.openSession().update("spot_IsudDelete", svo);
 	}
 	
+	// 조회 후 수정 폼
+	@Override
+	public List<SpotVO> spot_IsudSelect_admin(SpotVO svo) {
+		// TODO Auto-generated method stub
+		logger.info("SpotDAOImpl spot_IsudSelect_admin 진입 >>> : ");
+		
+		return sqlSession.openSession().selectList("spot_IsudSelect_admin", svo);
+	}
+		
 	// 댓글 ================================================================
 	
 	// 입력
@@ -107,6 +116,7 @@ public class SpotDAOImpl implements SpotDAO {
 		logger.info("SpotDAOImpl spot_IsudCommentInsert 진입 >>> : ");
 		return sqlSession.openSession().update("spot_IsudCommentDelete", rvo);
 	}
+	
 
 	// 검색 ====================================================================
 	
