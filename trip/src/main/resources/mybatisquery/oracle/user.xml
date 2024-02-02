@@ -19,8 +19,8 @@
          #{memphone, jdbcType=VARCHAR},
          SYSDATE,
          SYSDATE,
-         'N',
-         'N')
+         'Y',
+         'Y')
 </insert>
 	
 	<select id="memLogin" resultType="take.a.trip.mem.vo.MemVO" parameterType="take.a.trip.mem.vo.MemVO">
