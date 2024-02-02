@@ -10,7 +10,7 @@ public class CommonUtils {
 	
 	
 	// 여행지 페이징  
-	public static final int SPOT_PAGE_SIZE = 15; // 페이지에 나올 값
+	public static final int SPOT_PAGE_SIZE = 16; // 페이지에 나올 값
 	public static final int SPOT_GROUP_SIZE = 5; // 그룹으로 묶을 값
 	public static final int SPOT_CUR_PAGE = 1; // 현재 페이지 
 	public static final int SPOT_TOTAL_COUNT = 0;

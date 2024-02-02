@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>boardInsert.jsp</h3>
+<h3>adminBoardUpdate.jsp</h3>
 <hr>
 <script>
 	location.href="adminBoardSelectAll";

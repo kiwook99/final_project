@@ -2,102 +2,90 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="take.a.trip.adminBoard.vo.AdminBoardVO" %>
-<%@ page import="take.a.trip.adminBoard.common.CommonUtils" %>
 <%@ page import="java.util.List" %>
- 
-<%@ page import=" org.apache.log4j.LogManager" %>
-<%@ page import="org.apache.log4j.Logger" %>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <% request.setCharacterEncoding("UTF-8");%> 
 <%	
-	Logger logger = LogManager.getLogger(this.getClass());
-	logger.info("adminBoardSelectAll.jsp 페이지 >>> : ");
+	Object obj = request.getAttribute("listU");
+	if (obj == null) return;
+
+	List<AdminBoardVO> list = (List<AdminBoardVO>)obj;	
+	int nCnt = list.size();
 	
-	//페이징 변수 세팅
-	int pageSize = 0;
-	int groupSize = 0;
-	int curPage = 0;
-	int totalCount = 0;
-
-	Object objPaging = request.getAttribute("pagingABVO");
-	AdminBoardVO pagingABVO = (AdminBoardVO)objPaging;
-	
-	Object obj = request.getAttribute("listAll");
-	List<AdminBoardVO> list = (List<AdminBoardVO>)obj;
-
-%>    
-<% 
-int nCnt = 0; // 변수를 바깥으로 이동하여 선언
-
-if (list != null) {
-    nCnt = list.size();
-}
-%>
-
- 
+	AdminBoardVO _abvo = null;
+	if (nCnt == 1){
+		_abvo = list.get(0);
+	}	
+%> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 : 게시판</title>
+<title>Insert title here</title>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-	//alert("자바스크립트 블럭 진입 >>> : ");
-	// abnum 체크박스 체크 확인하기
-	$(document).on("click", "#adboardnum", function(){				
-		
-		if($(this).prop('checked')){			 			
-			$('.adboardnum').prop('checked',false);
-			$(this).prop('checked',true);
-		}
-	});
-	
-	$(document).ready(function(){
 
-		$(document).on("click", "#abBtn", function(){
-			
-			location.href="adminBoardInsertForm";
+	$(document).ready(function(){
+		//  취소
+		$(document).on("click", "#ccBtn", function(e){
+			alert("취소");
+			e.preventDefault();
+			$("#adBoardUpdate").attr({ "method":"GET", "action":"adminBoardSelectAll"}).submit();
+			//location.href="adminBoardSelect";
 		});	
-			
-	});	
+		
+		// U
+		$(document).on("click", "#abbUpdateBtn", function(e){
+			alert("수정하기");
+			e.preventDefault();
+			$("#adBoardUpdate").attr({ "method":"GET", "action":"adminBoardUpdate"}).submit();
+		});
+	});
 	
 
 </script>
- <style type="text/css">
+<style type="text/css">
         h3 {
             text-align: center;
         }
 
         table {
             border-collapse: collapse;
-            width: 60%;
+            width: 50%;
             margin: 0 auto;
         }
 
         th, td {
             border: 1px solid black;
             padding: 10px;
-            text-align: center;
+            /*text-align: center;*/
         }
-
-        .col1 {
-	        width: 10%;
-	    }
-	
-	    .col2 {
-	        width: 40%;
+        
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+        
+         /* 텍스트 박스 스타일 */
+	    textarea {
+	        width: 100%; /* 테이블의 100% 크기로 조절 */
+	        box-sizing: border-box; /* 패딩과 테두리를 포함한 전체 크기로 설정 */
+	        
 	    }
 	    
-	    .col3, .col4 {
-	    	width: 10%;
-	    }
-	    
-	    .col5 {
-	    	width: 5%;
+	    .mem {
+		    text-align: left;
+		    display: inline-block;
+		}
+		
+		img {
+	        max-width: 100%; /* 이미지가 부모 요소를 넘어가지 않도록 최대 너비 설정 */
+	        height: auto; /* 높이는 자동으로 조절 */
+	        display: block; /* 인라인 요소에서 블록 요소로 변환하여 가로로 정렬 */
 	    }
 
+		
         button {
             padding: 8px 15px;
             background-color: #4CAF50;
@@ -105,13 +93,17 @@ if (list != null) {
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            display: flex; /* 버튼을 블록 요소로 변경 */
+            display: flex; 
         	float: right; /* 오른쪽으로 이동 */
         }
 
         button:hover {
             background-color: #45a049;
         }
+        
+        .right button {
+		    margin-right: 10px;
+		}
         
        
 			table {
@@ -289,7 +281,7 @@ if (list != null) {
     <script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
 </head>
 <body>
-		<!-- 검색 -->
+<!-- 검색 -->
 		<div id="header">
 			<table>
 				<tr>
@@ -352,78 +344,67 @@ if (list != null) {
 			</div>	
 
 
-<h3>공지사항 글 목록</h3>
+
+<h3 style="text-align:center;">게시글 내용</h3>
 <hr>
-<form name="adminboardList" id="adminboardList">
-   <table>
-      <thead>
-          <tr>
-              <td colspan="5" style="text-align:center">
-                  <h3>공지사항</h3>
-              </td>
-          </tr>
-          <tr>
-              <th class="col1">체크박스</th>    
-		      <th class="col2">제목</th>
-		      <th class="col3">글쓴이</th>    
-		      <th class="col4">날짜</th>
-		      <th class="col5">조회수</th>
-          </tr>
-      </thead>
-<%
-for(int i=0; i<nCnt; i++){		
-	AdminBoardVO _abvo = list.get(i);	
-	
-	// 페이징 세팅
-	pageSize = Integer.parseInt(pagingABVO.getPageSize());
-	groupSize = Integer.parseInt(pagingABVO.getGroupSize());
-	curPage = Integer.parseInt(pagingABVO.getCurPage());
-	totalCount = Integer.parseInt(_abvo.getTotalCount());
-%>
-      <tbody>
-      <tr>
-		<td style="width:5%">
-			<input type="checkbox" id="adboardnum" name="adboardnum" class="adboardnum" value=<%= _abvo.getAdboardnum() %> >
-		</td>			
-		<td style="width:10%"><a href="adminBoardSelect?adboardnum=<%= _abvo.getAdboardnum() %>"><%= _abvo.getAdboardtitle() %> </td>
-		<td style="text-align:center;"><%= _abvo.getMemnum() %> </td>	
-		<td style="width:10%"><%= _abvo.getInsertdate() %></td> 
-		<td style="width:8%"><%= _abvo.getAdboardhits() %></td>				
-	 </tr>	
-<%
-}//end of for
-%>
- 
-<%
-int curGroup = 0;
-
-if (groupSize != 0) {
-    curGroup = (curPage - 1) / groupSize;
-}
-%>		
-
-                
-                <tr>
-	<td colspan="7">
-		<jsp:include page="adminBoardPaging.jsp" flush="true">
-			<jsp:param name="url" value="adminBoardSelectAll"/>
-			<jsp:param name="str" value=""/>
-			<jsp:param name="pageSize" value="<%=pageSize%>"/>
-			<jsp:param name="groupSize" value="<%=groupSize%>"/>
-			<jsp:param name="curPage" value="<%=curPage%>"/>
-			<jsp:param name="totalCount" value="<%=totalCount%>"/>
-		</jsp:include>
-	</td>
+<form name="adBoardUpdate" id="adBoardUpdate">
+<table>
+<tr>
+<td colspan="2" align="center">공지사항 수정하기</td>
 </tr>
-                
-                
-                <tr>
-                	<td colspan="5" class="right">
-                	<button type="button" value="글쓰기" id="abBtn">글쓰기</button>
-              	    </td>      	
-                </tr>
-      </tbody>
-   </table>
+<tr>
+<td>글번호</td>
+<td><input type="text" class="mem" name="adboardnum" id="adboardnum" value="<%= _abvo.getAdboardnum() %>" 
+			style="width:100px; height:30px; font-size:16px;" readonly/></td>
+</tr>
+<tr>
+<td>제목</td>
+<td>
+<input type="text" class="mem" name="adboardtitle" id="adboardtitle" value="<%= _abvo.getAdboardtitle() %>" 
+			style="width:100%; height:30px; font-size:16px;"/>
+</td>
+</tr>
+<tr>
+<td>작성자</td>
+<td><input type="text" class="mem" name="memnum" id="memnum" value="<%=  _abvo.getMemnum() %>" 
+			style="width:300px; height:30px; font-size:16px;" readonly/></td>
+</tr>
+
+<tr>
+<td>내용</td>
+<td>
+<textarea name="adboardcoment" id="adboardcoment" cols="70" rows="10" style="font-size: 18px;"><%= _abvo.getAdboardcoment() %>					
+</textarea>
+</td>
+</tr>
+<tr>
+<td>사진</td>
+<td> 
+<img src="${pageContext.request.contextPath}/resources/fileupload/adminboard/<%= _abvo.getAdboardimage() %>" 
+			border="1" width="100" height="100" alt="image">
+</td>
+</tr>
+<tr>
+<td>등록일</td>
+<td>
+<input type="text" class="mem" name="insertdate" id="insertdate" value="<%= _abvo.getInsertdate() %>" 
+		style="width:100%; height:30px; font-size:16px;" readonly />		      
+</td>
+</tr>	 
+<tr>
+<td>수정일</td>
+<td> 
+<input type="text" class="mem" name="updatedate" id="updatedate" value="<%= _abvo.getUpdatedate() %>" 
+		style="width:100%; height:30px; font-size:16px;" readonly />		      
+</td>
+</tr>
+<tr>
+	<td colspan="5" class="right">
+	<button type="button" value="수정" id="abbUpdateBtn">수정하기</button>
+	<button type="button" value="취소" id="ccBtn">취소</button>
+    </td>      	
+</tr>
+</table>
 </form>
 </body>
 </html>

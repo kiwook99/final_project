@@ -15,9 +15,20 @@
 		<!-- 스타일 -->
 		<style type="text/css">
 		
+			table {
+				text-align: center;	
+				margin: 0 auto;
+			}
+			
+			#miniSearchForm {
+				text-align: center;	
+			}
+			
 			.list_content ul {
 				display: flex; 		/* flex : 수평으로 나열*/
 				flex-wrap: wrap;	/* 화면 크기에 따라 자동 줄바꿈 */
+				justify-content: center; /* 가로 방향으로 가운데 정렬  ( 가로축 - 중심축 )*/
+				
 			}
 			
 			ul, li {
@@ -50,9 +61,10 @@
 			}
 			
 			
-			a:link, a:visited, a:focus, a:active {
+			a:link, a:visited, a:focus, a:active { /* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
 			    text-decoration: none;
-			}	/* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
+			    color: black;
+			}	
 			
 							
 			
@@ -71,69 +83,113 @@
 			body {
 			    font-size: 17px;
 			}
-				
-	/*카테고리*/
-	#topMenu { 
-	 height: 50px; 
-	 width: 100%; 
-	 margin: 0 auto;
-	 }
-	 
-	 #topMenu ul{
-		 list-style-type: none;
-		 margin: 0px;
-		 padding: 0px; 
-		 font-size : 20px;
-	 }
-	 
-	 #topMenu ul li 
-	 { 
-	 list-style: none; 
-	 display: inline-block;
-	 line-height: 30px; 
-	 vertical-align: middle; 
-	 text-align: center;
-	 position: relative;
-	 }
-	 
-	 .submenuLink{
-		 text-decoration:none;
-		 display: block;
-		 width: 150px;
-		 font-size: 12px;
-		 font-weight: bold;
-		 font-family: "Trebuchet Ms", Dotum;
-	 }
-	 
-	  #topMenu { 
-	 color: white; 
-	 background-color: #aaa; }
+						
+			/*카테고리*/
+			#topMenu { 
+
+			 width: 100%; 
+			 margin: 0 auto;
+			 }
+			 
+			 #topMenu ul{
+				 list-style-type: none;
+				 margin: 0px;
+				 padding: 0px; 
+				 font-size : 20px;
+				 text-align: center;
+			 }
+			 
+			 #topMenu ul li 
+			 { 
+			 list-style: none; 
+			 display: inline-block;
+			 line-height: 30px; 
+			 vertical-align: middle; 
+			 text-align: center;
+			 position: relative;
+			 }
+			 
+			 .submenuLink{
+				 text-decoration:none;
+				 display: block;
+				 width: 150px;
+				 font-size: 12px;
+				 font-weight: bold;
+				 font-family: "Trebuchet Ms", Dotum;
+			 }
+			 
+			  #topMenu { 
+			 color: white; 
+			 background-color: #aaa; }
+			
+			 .submenuLink{
+				 color: white;
+				 background-color: #aaa;
+				 border: solid 1px white;
+				 margin-top: -1px;
+			 }
+			 
+			 .sb{
+				 position: absolute;
+				 height: 0px;
+				 overflow: hidden;
+				 transition: height .2s;
+			 }
+			 
+			 .topMenuLi:hover .sb{
+				 height: 100px;
+			 }
+			 
+			 .submenuLink:hover { 
+			 color: black;
+			 background-color: #aaa;
+			 }	
+			 
+			 h1 {
+			 	text-align: center;
+			 }
+			 
+			 
+		 	 .area {
+		    position: absolute;
+		    background: rgba(0, 0, 0, 0.5);
+		    border-radius: 20px;
+		    color: #fff;
+		    font-weight: 700;
+		    top: 10px; /* 조절할 수 있는 값으로 변경 */
+		    left: 10px; /* 조절할 수 있는 값으로 변경 */
+			}
 	
-	 .submenuLink{
-		 color: white;
-		 background-color: #aaa;
-		 border: solid 1px white;
-		 margin-top: -1px;
-	 }
-	 
-	 .sb{
-		 position: absolute;
-		 height: 0px;
-		 overflow: hidden;
-		 transition: height .2s;
-	 }
-	 
-	 .topMenuLi:hover .sb{
-		 height: 100px;
-	 }
-	 
-	 .submenuLink:hover { 
-	 color: black;
-	 background-color: #aaa;
-	 }				
+			.area::before {
+			    content: '';
+			    display: inline-block;
+			    background: url('${pageContext.request.contextPath}/resources/images/지도.png') 0 0 / 100% 100% no-repeat;
+			    width: 11px;
+			    height: 13px;
+			    margin-right: 3px;
+		        vertical-align: -1px;
+			}
+			 
+		
+			.area {
+			    height: 26px;
+			    line-height: 26px;
+			    padding: 0 10px;
+			    font-size: 13px;
+			}
+			
+			.name strong {
+			    font-size: 16px;
+			    color: #000;
+			}
+	 			 	
+			.pageButton {
+			 	margin: auto;
+			}
 		</style>
 		
-		
+		<!-- 폰트 어썸 CDN -->
+		<script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
 		<!-- 자바 스크립트 & 제이쿼리 -->
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script type="text/javascript">
@@ -158,25 +214,62 @@
 					
 					var spotList = $('#spotList'); // ul태그의 id
 					
+
 		            // 반복문: spot_list의 각 요소에 대해 작업
 					// $.each() 메서드의 첫번째 매겨변수로 위에서 선언한 객체를 전달
 				    // 객체를 전달받으면 index는 객체의 key(property)를 가리키고(반복문의 횟수)
 				    // item은 키의 값을 가져옴(해당 태그안의 값, item태그 안에 값(태그))					
 					$.each(spot_list, function(index, item) {
+						/*
+					    var code = ["가평군", "고양시", "과천시", "광명시", "광주시", "구리시", "군포시", "김포시", "남양주시", "동두천시", "부천시", "성남시", "수원시", "시흥시", "안산시", "안성시", "안양시", "양주시", "양평군", "여주시", "연천군", "오산시", "용인시", "의왕시", "의정부시", "이천시", "파주시", "평택시", "포천시", "하남시", "화성시"];
+					    
+					    var sigunguName = "Unknown"; // 기본값 설정
+
+					    // sigungucode가 인덱스 범위 내에 있는지 확인합니다.
+					    if (item.sigungucode >= 1 && item.sigungucode <= code.length) {
+					        sigunguName = code[item.sigungucode - 1]; // 코드 배열에서 해당하는 이름을 가져옵니다.
+					    }
+
+					    var itemHtml = '<li>' +
+					                   '<a href="spot_detail/' + item.contentid + '" class="item">' +		
+					                   '<span class="img">' + '<img src="' + item.firstimage + '" alt="' + item.title + '">' + 
+					                   '<span class="area">' + sigunguName + '</span>' + '</span>' +
+					                   '<div class="name" onclick="location.href=spot_detail">' +
+					                   '<strong>' + item.title + '</strong>' +
+					                   '</div>' + 
+					                   '</a>' +
+					                   '</li>';
+					     */
 						
+						
+						var code = ["가평군", "고양시", "과천시", "광명시", "광주시", "구리시", "군포시", "김포시", "남양주시", "동두천시", "부천시", "성남시", "수원시", "시흥시", "안산시", "안성시", "안양시", "양주시", "양평군", "여주시", "연천군", "오산시", "용인시", "의왕시", "의정부시", "이천시", "파주시", "평택시", "포천시", "하남시", "화성시"];
+						
+						var sigunguName = "Unknown"; // 기본값 설정
+						var sigungucode = item.sigungucode;
+						
+						
+						for (var sgc=0; sgc <= code.length; sgc++){
+							if (sigungucode == sgc) {
+								sigunguName = code[sgc - 1];
+								break; // 찾았으면 반복문 종료
+							}
+						}
+
 						//if(item.firstimage.length > 0) { // 이미지 값이 존재하는 경우, 없으면 안보여 줄것임
 					    var itemHtml = '<li>' +
 				 	                   //'<a href="spot_detail" class="item" onclick="spot_detail(' + item.contentid + ')">' +
     								   '<a href="spot_detail/' + item.contentid + '" class="item">' +		
 									   '<span class="img">' + '<img src="' + item.firstimage + '" alt="' + item.title + '">' + 
-									   '</span>' +
-									   '<div class="spot_name" onclick="location.href=spot_detail">' + 
+									   '<span class="area">' + sigunguName + '</span>' + '</span>' +
+									   '<div class="name" onclick="location.href=spot_detail">' +
 									   '<strong>' + item.title + '</strong>' +
 									   '</div>' + 
 									   '</a>' +
 									   '</li>';
 						//}									   
-									   
+					    			   
+
+						
 						spotList.append(itemHtml); // ul 태그안에 값을 추가
 						
 						console.log("location.origin >>> : " + location.origin); // url 값
@@ -209,10 +302,12 @@
 					spot();
 				}
 				
+
+				
 				// 페이지 버튼 함수
 				function addPageButtons() {
 					$('#buttonContainer').find('.pageButton').remove(); // pageButton 클래스를 찾아 제거
-					$('#buttonContainer').prepend('<button class="pageButton" type="button" onclick="changePage(-1)"> 이전 페이지 </button>'); // 페이지 1씩 줄어듬
+					$('#buttonContainer').prepend('<button class="pageButton" type="button" onclick="changePage(-1)"> 이전 페이지 </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'); // 페이지 1씩 줄어듬
 					$('#buttonContainer').append('<button class="pageButton" type="button" onclick="changePage(1)"> 다음 페이지 </button>'); // 페이지 1씩 늘어남
 				}
 				
@@ -224,40 +319,39 @@
 		</script>
 	</head>
 	<body>
-		<div class="header">
-			<!-- 이미지 아이콘 -->
-			<a href="#">
-			<img src="#" width="50px" height="50px" title="로고 이미지">
-			</a>
-			<!-- 제목 -->
-			<h1>여행가기 좋은날</h1>
-			<!-- 조건 검색 --> 	
-			<form name="miniSearchForm" id="miniSearchForm"> 
-			<select id="searchFilter" name="searchFilter" style="width:100px;font-size:15px;">
-				<option value="key_01">전체</option>
-				<option value="key_02">가평군</option> 	<option value="key_03">고양시</option> 	<option value="key_04">과천시</option>
-				<option value="key_05">광명시</option> 	<option value="key_06">광주시</option> 	<option value="key_07">구리시</option>
-				<option value="key_08">군포시</option> 	<option value="key_09">김포시</option> 	<option value="key_10">남양주시</option>
-				<option value="key_11">동두천시</option>	<option value="key_12">부천시</option> 	<option value="key_13">성남시</option>
-				<option value="key_14">수원시</option> 	<option value="key_15">시흥시</option> 	<option value="key_16">안산시</option>
-				<option value="key_17">안성시</option> 	<option value="key_18">안양시</option> 	<option value="key_19">양주시</option>
-				<option value="key_20">양평군</option> 	<option value="key_21">여주시</option> 	<option value="key_22">연천군</option>
-				<option value="key_23">오산시</option> 	<option value="key_24">용인시</option> 	<option value="key_25">의왕시</option>
-				<option value="key_26">의정부시</option> <option value="key_27">이천시</option> 	<option value="key_28">파주시</option>
-				<option value="key_29">평택시</option> 	<option value="key_30">포천시</option> 	<option value="key_31">하남시</option>
-				<option value="key_32">수원시</option>
-			</select>			
-			<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" 
-			style="width:200px;height:30px;font-size:15px;">
-			<input type="button" id="search_btn" name="search_btn" value="검색">
-			
-
-			<input type="button" name="login" id="loginBtn" value="로그인" onclick="location.href='#'" >
- 
-			</form>
-
-		</div>	
-	
+	<br>
+		<!-- 검색 -->
+		<div id="header">
+			<table>
+				<tr>
+					<td>
+					<!-- 이미지 아이콘 -->
+						<a href="spot_IsudSelectAll">
+						<!-- <img src="${pageContext.request.contextPath}/resources/images/img_spot/지도.png" width="50px" height="50px" title="로고 이미지">  -->
+							<i class="fa-solid fa-plane-up fa-xl"></i> <!-- 폰트사이즈 :  fa-2xs - 0.625em - 10px / fa-xs - 0.75em - 12px / fa-sm - 0.875em - 14px / fa-lg - 1.25em - 20px / fa-xl - 1.5em - 24px / fa-2xl - 2em - 32px  -->
+						</a>
+						&nbsp;&nbsp;
+					</td>
+					<td>
+					<!-- 제목 -->
+					<h1>여행가기 좋은날</h1>
+					</td>
+				</tr>
+			</table>
+			<br>
+				<form name="miniSearchForm" id="miniSearchForm" action='spot_Search'> 
+				<select id="searchFilter_1" name="searchFilter_1" style="width:100px;font-size:15px;">
+					<option value="key_01">지역별</option>
+					<option value="key_02">분야별</option>
+				</select>
+				<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" 
+				style="width:200px;height:30px;font-size:15px;">
+				<input type="button" id="search_btn" name="search_btn" value="검색">
+				
+				<input type="button" name="login" id="loginBtn" value="로그인" onclick="location.href='#'" >
+				</form>		
+		</div>
+		<br>
 		<div class="topnav">
 			<!--메뉴-->
 			<nav id="topMenu" >
@@ -287,7 +381,7 @@
 				 </ul> 
 			 </nav>
 		</div>	
-	
+		<br><br><br>
 		<div class="main">
 			<div class="contents">
 				<div class="sub_header">

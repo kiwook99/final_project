@@ -58,7 +58,7 @@
 	// 전체게시물수와 페이지크기를 가지고 전체 페이지 개수를 계산함.
 	// 소수점에 따라 계산상의 오류가 없도록 한것임.
 	// ex) pageCount (100 / 5 + 10.0);
-	pageCount = (int)Math.ceil(totalCount / (groupSize + 10.0));
+	pageCount = (int)Math.ceil(totalCount / (groupSize + 11.0));
 	System.out.println("pageCount >>> : " + pageCount);	
 	//(0/page)
 	
