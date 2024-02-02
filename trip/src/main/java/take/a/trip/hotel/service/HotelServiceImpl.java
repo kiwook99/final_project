@@ -39,5 +39,14 @@ public class HotelServiceImpl implements HotelService {
 		
 		return hotelDAO.hotelSelect(hvo);
 	}
+	
+	// 여행지 등록
+	@Override
+	public int hotelInsert(HotelVO hvo) {
+		// TODO Auto-generated method stub
+		logger.info("SpotServiceImpl spot_IsudInsert 진입 >>> : ");
+		
+		return hotelDAO.hotelInsert(hvo);
+	}
 
 }

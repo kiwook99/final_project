@@ -236,11 +236,11 @@
 	.next {
    	margin-left: 100px;
     margin-right: 100px;
-    border: 1px solid #000;
+    
 	}
 	
 	.detail-basic{
-	padding-bottom: 60px;
+	padding-bottom: 80px;
     display: flex;
     justify-content: space-between;
 	}
@@ -345,7 +345,7 @@
         width: 100%;
         height: 600px;
         margin-bottom: 30px;
-    	margin-top: 10px;
+    	margin-top: 30px;
     }
 
     #map,

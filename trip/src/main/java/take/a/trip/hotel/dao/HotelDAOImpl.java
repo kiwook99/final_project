@@ -43,4 +43,13 @@ public class HotelDAOImpl implements HotelDAO {
 		
 		return sqlSession.openSession().selectList("hotelSelect",hvo);
 	}
+	
+	// 숙소 등록
+	@Override
+	public int hotelInsert(HotelVO hvo) {
+		// TODO Auto-generated method stub
+		logger.info("hotelInsert 함수 진입");
+		
+		return sqlSession.openSession().insert("hotelInsert", hvo);
+	}
 }
