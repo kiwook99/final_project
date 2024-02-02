@@ -24,7 +24,6 @@
 		<a href="spot/spot_IsudSelectAll">관광정보(ISUD)</a>
 		
 		<a href="hotel/hotel_main">숙소메인</a>
-		
 
 </body>
 </html>
