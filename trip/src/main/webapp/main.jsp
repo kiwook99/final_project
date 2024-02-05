@@ -53,12 +53,8 @@
 			}
 			
 			
-			a:link, a:visited, a:focus, a:active { /* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
-			    text-decoration: none;
-			    color: black;
-			}	
-			
-							
+	
+						
 			
 			.img img {
 				width: 100%; /* width, height 부모 요소에 대해 이미지가 가득 차도록 함*/
@@ -117,42 +113,24 @@
 			  color: #fff;
 			}				 
 					 
-			/* 위치 */ 
-		 	 .area {
-		    position: absolute;
-		    background: rgba(0, 0, 0, 0.5);
-		    border-radius: 20px;
-		    color: #fff;
-		    font-weight: 700;
-		    top: 10px; /* 조절할 수 있는 값으로 변경 */
-		    left: 10px; /* 조절할 수 있는 값으로 변경 */
+			.logo a:link,
+			.logo a:visited,
+			.logo a:focus,
+			.logo a:active {
+			    /* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
+			    text-decoration: none;
+			    color: black;
 			}
-	
-			.area::before {
-			    content: '';
-			    display: inline-block;
-			    background: url('${pageContext.request.contextPath}/resources/images/지도.png') 0 0 / 100% 100% no-repeat;
-			    width: 11px;
-			    height: 13px;
-			    margin-right: 3px;
-		        vertical-align: -1px;
-			}
-			 
-		
-			.area {
-			    height: 26px;
-			    line-height: 26px;
-			    padding: 0 10px;
-			    font-size: 13px;
-			}
-			
-			.name strong {
-			    font-size: 16px;
-			    color: #000;
-			}
-	
 
-			
+			.topnav	 a:link,
+			.topnav a:visited,
+			.topnav a:focus,
+			.topnav a:active {
+			    /* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
+			    text-decoration: none;
+			    
+			}
+		
 			#loginBtn {
 				padding: 5px 15px;
 				background-color: #0aa4b5;
@@ -244,9 +222,6 @@
 						 </li>				 
 					 </ul> 
 			</div>				 
-		<br>
-		<hr>
-		<br>
 </body>
 </html>
 

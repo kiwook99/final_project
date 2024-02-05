@@ -237,6 +237,9 @@
 	</head>
 	<body>
 		<%@ include file="/main.jsp" %>
+		<br>
+		<hr>
+		<br>
 		<!-- 검색 -->
 		<div id="header">
 				<form name="miniSearchForm" id="miniSearchForm" action='spot_Search'> 
@@ -251,9 +254,7 @@
 		</div>
 		<br>
 			<div id="btn">
-				<button type="button" id="insertBtn">등록</button>
-				<button type="button" id="selectAllBtn">목록</button>
-				<button type="button" id="selectBtn">수정</button>
+				<button type="button" id="insertBtn">여행지 등록</button>
 			</div>
 		<br>
 		<hr>

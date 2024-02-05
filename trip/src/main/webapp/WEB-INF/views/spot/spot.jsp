@@ -10,7 +10,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>경기도 관광지</title>
+		<title>관광정보</title>
 		
 		<!-- 스타일 -->
 		<style type="text/css">
@@ -66,7 +66,6 @@
 			    color: black;
 			}	
 			
-							
 			
 			.img img {
 				width: 100%; /* width, height 부모 요소에 대해 이미지가 가득 차도록 함*/
@@ -83,73 +82,14 @@
 			body {
 			    font-size: 17px;
 			}
-						
-			/*카테고리*/
-			#topMenu { 
-
-			 width: 100%; 
-			 margin: 0 auto;
-			 }
-			 
-			 #topMenu ul{
-				 list-style-type: none;
-				 margin: 0px;
-				 padding: 0px; 
-				 font-size : 20px;
-				 text-align: center;
-			 }
-			 
-			 #topMenu ul li 
-			 { 
-			 list-style: none; 
-			 display: inline-block;
-			 line-height: 30px; 
-			 vertical-align: middle; 
-			 text-align: center;
-			 position: relative;
-			 }
-			 
-			 .submenuLink{
-				 text-decoration:none;
-				 display: block;
-				 width: 150px;
-				 font-size: 12px;
-				 font-weight: bold;
-				 font-family: "Trebuchet Ms", Dotum;
-			 }
-			 
-			  #topMenu { 
-			 color: white; 
-			 background-color: #aaa; }
-			
-			 .submenuLink{
-				 color: white;
-				 background-color: #aaa;
-				 border: solid 1px white;
-				 margin-top: -1px;
-			 }
-			 
-			 .sb{
-				 position: absolute;
-				 height: 0px;
-				 overflow: hidden;
-				 transition: height .2s;
-			 }
-			 
-			 .topMenuLi:hover .sb{
-				 height: 100px;
-			 }
-			 
-			 .submenuLink:hover { 
-			 color: black;
-			 background-color: #aaa;
-			 }	
 			 
 			 h1 {
 			 	text-align: center;
 			 }
 			 
-			 
+ 			 h2 {
+			 	text-align: center;
+			 }
 		 	 .area {
 		    position: absolute;
 		    background: rgba(0, 0, 0, 0.5);
@@ -182,10 +122,23 @@
 			    font-size: 16px;
 			    color: #000;
 			}
-	 			 	
+
+		#buttonContainer {
+			text-align: center;
+		}
+		
+			
 			.pageButton {
-			 	margin: auto;
+				padding: 15px 45px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+				
 			}
+			
+			
+			
 		</style>
 		
 		<!-- 폰트 어썸 CDN -->
@@ -321,7 +274,13 @@
 	<body>
 	<br>
 	<%@ include file="/main.jsp" %>
-	
+		<br>
+		<hr>
+		<br>
+		<h2>관광정보</h2>
+		<br>
+		<hr>
+		<br>
 		<div class="main">
 			<div class="contents">
 				<div class="sub_header">

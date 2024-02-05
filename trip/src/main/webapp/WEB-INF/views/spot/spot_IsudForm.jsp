@@ -60,6 +60,9 @@
 	</head>
 	<body>
 	<%@ include file="/main.jsp" %>
+		<br>
+		<hr>
+		<br>
 		<h2> 여행지 등록</h2>
 		<br>
 		<hr>

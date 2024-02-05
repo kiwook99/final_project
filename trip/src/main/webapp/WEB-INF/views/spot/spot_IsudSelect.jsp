@@ -29,8 +29,14 @@
 			table {
 				text-align: center;	
  				margin: 0 auto; 
+ 				font-size: 20px;
+ 				border-radius: 5px;
 			}					
 
+			.tt {
+				font-weight: bold;
+			}
+			
 						
 
 			body {
@@ -63,11 +69,13 @@
 			}	
 			
 			
-/* 		    /* 소개 부분의 텍스트 자동 줄 바꿈 설정 */ */
-/* 		    .trip-introduction { */
-/* 		        word-wrap: break-word; /* 텍스트가 부모 요소를 벗어날 때 자동으로 줄 바꿈 */ */
-/* 		        max-width: 480px; /* 최대 너비를 지정하여 한 줄에 최대 30자까지 표시 */ */
-/* 		    }		 */
+ 		    /* 소개 부분의 텍스트 자동 줄 바꿈 설정 */ 
+ 		    .tripcoment { 
+ 		        word-wrap: break-word; /* 텍스트가 부모 요소를 벗어날 때 자동으로 줄 바꿈 */ 
+ 		        max-width: 480px; /* 최대 너비를 지정하여 한 줄에 최대 30자까지 표시 */ 
+ 		        height: 200px; /* 원하는 높이로 설정하세요 */
+ 		        
+ 		    }		 
 		    	
 		</style>	
 		<!-- 폰트 어썸 CDN -->
@@ -113,54 +121,49 @@
 	</head>
 	<body>
 	<%@ include file="/main.jsp" %>
-
+		<br>
+		<hr>
+		<br>
 		<h2>관광정보</h2>
 		<br>
 		<hr>
 		<br>
+		   <!-- 이미지 부분을 테이블 외부로 이동 -->
+		   <div style="text-align: center;">
+		       <img src="${pageContext.request.contextPath}/resources/images/img_spot/<%= svo.getTripimage() %>" border="1" width="600" height="400" alt="image">
+		   </div>		
+		
 			<form name="spotUpdateForm" id="spotUpdateForm">
 				<input type="hidden" name="tripnum" id="tripnum" value="<%= svo.getTripnum() %>">
 				<br>
-				<table>
+				<table border="1">					
 					<tr>
-						<td colspan="2" height="30px">
-						<img src="${pageContext.request.contextPath}/resources/images/img_spot/<%= svo.getTripimage() %>" border="1" width="500" height="300" alt="image">
-						</td>
-					</tr>	
-							
-					<tr>
-						<td class="tt" width="5%"> 여행지명 <hr></td>
-						<td width="50%">
+						<td class="tt" width="5%" height="40px"> 여행지명 </td>
+						<td width="50%" style="font-weight: bold;">
 							<%= svo.getTripname() %>
-							<hr>
+
 						</td>
 					</tr>
-					<tr><br>
-						<td class="tt"> 카테고리 <hr></td>
+					<tr>
+						<td class="tt" height="40px"> 카테고리 </td>
 						<td  width="50%">
 							<%= svo.getTripcatalogue() %>
-							<hr>
+
 						</td>
 					</tr>
 					<tr>
 						<td class="tt"> 소개 </td>
-						<td  width="50%" class="trip-introduction">
+						<td  width="50%" class="tripcoment">
 							<%= svo.getTripcoment() %>
-							<hr>
 						</td>
+
 					</tr>	
 					<tr>
-						<td class="tt"> 지역 <hr></td>
+						<td class="tt" height="40px"> 지역 </td>
 						<td  width="50%">
 							<%= svo.getTripregion() %>
-							<hr>
 						</td>
-					</tr>	
-				<tr>
-					<td colspan="3">
-
-					</td>	
-				</tr>																							
+					</tr>																							
 				</table>
 				
 				<br>

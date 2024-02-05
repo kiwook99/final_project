@@ -303,6 +303,7 @@ public class SpotController {
 	public String spot_IsudCommentDelete(ReviewVO rvo) {
 		logger.info("SpotController spot_IsudCommentDelete 진입 >>> : ");
 		logger.info("SpotController rvo.getTripnum() >>> : " + rvo.getTripnum());
+		logger.info("SpotController rvo.getReviewnum() >>> : " + rvo.getReviewnum());
 		
 		int nCnt = spotService.spot_IsudCommentDelete(rvo);
 		logger.info("spot_IsudCommentDelete nCnt >>> : " + nCnt);

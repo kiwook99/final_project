@@ -10,7 +10,7 @@
 		<title>Insert title here</title>
 		<!-- 스타일 -->
 		<style type="text/css">
-			h3 {
+			h2 {
 				text-align: center;
 			}
 			
@@ -30,6 +30,9 @@
 			    border-radius: 10px;
 			}
 			
+			.name {
+				font-weight: bold;
+			}
 		</style>
 		
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -95,6 +98,7 @@
 					let deleteURL = "spot_IsudCommentDelete";
 					let method = "POST";
 					let dataParam = { tripnum: $('#tripnum').val(rbnumV) };
+					
 					
 					dataParam = $('#commentForm').serialize();
 					console.log("dataParam >>> : " + dataParam);
@@ -228,7 +232,6 @@
 				t = t.substring(0, l);
 			}
 			$(obj).val(t);
-			$('.bytes').text(getTextLength(t));
 		}
 		
 		// 댓글 등록 후 입력창 초기화
@@ -250,7 +253,9 @@
 	<body>
 		<br><br>
 		<hr>
-		<h3>덧글</h3>
+		<br>
+		<h2>덧글</h2>
+		<br>
 		<hr>
 <% request.setCharacterEncoding("utf-8"); %>
 <%
@@ -263,25 +268,28 @@
 		<form name="commentForm" id="commentForm">
 					<div>
 				<ul name="commentlist" id="commentlist">
-				
+				<!-- 입력한 값이 들어갈 것임 -->
 				</ul>
 			</div>
 			<hr>
+			<br>
 			<table>
 				<tr>
-					<td>작성자</td>
+					<td style="width:120px;">작성자</td>
 					<td>
-						<input type="text" name="memnum" id="memnum" />
+						<input type="text" name="memnum" id="memnum"  size="40" style="height: 25px;"/>
 						<input type="hidden" name="tripnum" id="tripnum" value="<%= tripnum %>">
 						<input type="hidden" name="reviewnum" id="reviewnum" >
 						<input type="button" value="저장" id="insertbtn" >
 					</td>
 				</tr>
 				<tr>
+				<td colspan="2" style="height:20px;"></td>
+				</tr>
+				<tr>
 					<td>덧글 내용</td>
 					<td>
-						<textarea name="reviewcoment" id="reviewcoment" rows="5" cols="50"></textarea>
-						<div><span class="bytes">0</span> bytes</div>
+						<textarea name="reviewcoment" id="reviewcoment" rows="5" cols="60"></textarea>
 					</td>
 				</tr>
 			</table>
