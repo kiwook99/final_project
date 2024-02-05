@@ -320,68 +320,8 @@
 	</head>
 	<body>
 	<br>
-		<!-- 검색 -->
-		<div id="header">
-			<table>
-				<tr>
-					<td>
-					<!-- 이미지 아이콘 -->
-						<a href="spot_IsudSelectAll">
-						<!-- <img src="${pageContext.request.contextPath}/resources/images/img_spot/지도.png" width="50px" height="50px" title="로고 이미지">  -->
-							<i class="fa-solid fa-plane-up fa-xl"></i> <!-- 폰트사이즈 :  fa-2xs - 0.625em - 10px / fa-xs - 0.75em - 12px / fa-sm - 0.875em - 14px / fa-lg - 1.25em - 20px / fa-xl - 1.5em - 24px / fa-2xl - 2em - 32px  -->
-						</a>
-						&nbsp;&nbsp;
-					</td>
-					<td>
-					<!-- 제목 -->
-					<h1>여행가기 좋은날</h1>
-					</td>
-				</tr>
-			</table>
-			<br>
-				<form name="miniSearchForm" id="miniSearchForm" action='spot_Search'> 
-				<select id="searchFilter_1" name="searchFilter_1" style="width:100px;font-size:15px;">
-					<option value="key_01">지역별</option>
-					<option value="key_02">분야별</option>
-				</select>
-				<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" 
-				style="width:200px;height:30px;font-size:15px;">
-				<input type="button" id="search_btn" name="search_btn" value="검색">
-				
-				<input type="button" name="login" id="loginBtn" value="로그인" onclick="location.href='#'" >
-				</form>		
-		</div>
-		<br>
-		<div class="topnav">
-			<!--메뉴-->
-			<nav id="topMenu" >
-				 <ul>
-					 <li class="topMenuLi">
-					 <a class="menuLink" href="#content1">여행정보</a>
-					 	 <ul class ="sb">
-							  <li><a href="spot" class="submenuLink" >관광정보</a></li>
-							  <li><a href="spot_ISUD" class="submenuLink" >관광정보(ISUD)</a></li>
-					  	</ul>
-					 </li>							  
-					  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
-					 <li class="topMenuLi">
-					 <a class="menuLink" href="#content2">숙소예약</a>
-					 	<ul class ="sb"> 
-							 <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink" >숙소정보</a></li>
-					 	</ul>
-					 </li>
-					  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
-					 <li class="topMenuLi">
-					 <a class="menuLink" href="#content3">게시판</a>
-					 	<ul class ="sb"> 
-							 <li><a href="#" class="submenuLink" >자유 게시판</a></li>
-							 <li><a href="#" class="submenuLink" >공지사항 게시판</a></li>
-					 	</ul>
-					 </li>				 
-				 </ul> 
-			 </nav>
-		</div>	
-		<br><br><br>
+	<%@ include file="/main.jsp" %>
+	
 		<div class="main">
 			<div class="contents">
 				<div class="sub_header">

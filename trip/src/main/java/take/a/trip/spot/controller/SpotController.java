@@ -346,23 +346,20 @@ public class SpotController {
 	  
 	  List<SpotVO> searchList = spotService.spot_Search(svo);
 	  
+	  
 	  int nCnt = searchList.size();
 	
 		if (nCnt > 0) {
 			logger.info("spot_Search nCnt >>> : " + nCnt);
 			
 			model.addAttribute("listAll",searchList);
-			model.addAttribute("pagingSVO", svo);
+			model.addAttribute("pagingSVO", svo);			
 			
-			
-			return "spot/spot_IsudSelectAll";
+			return "spot/spot_IsudSelectAll";			
 	
 	}
+
 		return "spot/spot_IsudSelectAll";
-	}
-
-
-
-					
+	}					
 	
 }

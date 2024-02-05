@@ -1,44 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="take.a.trip.spot.vo.SpotVO" %>
-<%@ page import="java.util.List" %> 
-
-<%@ page import=" org.apache.log4j.LogManager" %>
-<%@ page import="org.apache.log4j.Logger" %>
-
+    <%@ page import="java.util.List" %> 
+        
 <% request.setCharacterEncoding("UTF-8");%>	
 <%
-	Logger logger = LogManager.getLogger(this.getClass());
-	logger.info("spot_IsudSelectAll.jsp 페이지 진입 >>> : ");
-	
-	// 페이지 변수 세팅
-	int pageSize = 0;
-	int groupSize = 0;
-	int curPage = 0;
-	int totalCount = 0;
-	
-	
-	Object objPaging = request.getAttribute("pagingSVO"); 
-	SpotVO pagingSVO = (SpotVO)objPaging;
-	
-	Object obj = request.getAttribute("listAll");
+	Object obj = request.getAttribute("listSa");
+	if (obj == null) return;
 	
 	List<SpotVO> list = (List<SpotVO>)obj;
 	int nCnt = list.size();
 	
-
+	SpotVO svo = null;
+	if(nCnt == 1) {
+		svo = list.get(0);
+	}
 %>     
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>관광정보 (ISUD)</title>
-		<!-- 스타일 -->
+		<title>Insert title here</title>
+				<!-- 스타일 -->
 		<style type="text/css">
 			table {
 				text-align: center;	
-				margin: 0 auto;
+ 				margin: 0 auto; 
 			}
 			
 			#miniSearchForm {
@@ -98,6 +88,7 @@
 			
 			img {
 			    border: 0 none;	/* 외곽선 제거, 두께 0, 유형 없음*/
+			    display: block;
 			}			
 		
 
@@ -171,6 +162,10 @@
 			 }
 			 
 			 
+			 h2 {
+			 	text-align: center;
+			 }			 
+			 
 		 	 .area {
 		    position: absolute;
 		    background: rgba(0, 0, 0, 0.5);
@@ -205,121 +200,71 @@
 			}
 	
 
-			#search_btn {
-				padding: 5px 15px;
-				background-color: #0aa4b5;
-				color: white;
-				border: 0;
-				border-radius: 10px;
+			.btn {
+				text-align: center;
+				
 			}
 			
-			#loginBtn {
-				padding: 5px 15px;
-				background-color: #0aa4b5;
-				color: white;
-				border: 0;
-				border-radius: 10px;
+			#U, #B, #D {
+			padding: 10px 30px;
+			background-color: #0aa4b5;
+			color: white;
+			border: 0;
+			border-radius: 10px;
 			}
 			
+			
+			#imgs {
+				margin: 0px 100px;
+				
+			}		
+			
+			
+			input[type="text"] {
+		    text-align: center; /* 입력 필드 안의 텍스트를 가운데 정렬합니다. */
+			}
+
 		</style>	
-		<!-- 폰트 어썸 CDN -->
-		<script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script type="text/javascript">
-			console.log("자바스크립트 진입 >>> : ");
-			
-			$(document).ready(function(){
-				console.log("jQuery 진입 >>> : ");
-				
-			// 체크박스 확인
-			$(document).on("click", "#chkAll", function(){
-				
-				if($(this).prop('checked')){
-					$('.tripnum').prop('checked',false);
-				}
-			});
-			
-
-			// bnum 체크 확인
-			$(document).on("click", "#tripnum", function(){
-				
-				if($(this).prop('checked')){
-					$('.tripnum').prop('checked',false);
-					$(this).prop('checked',true);
-				}
-				alert("선택완료");
-			});	
-			
-			// I
-			$(document).on("click", "#insertBtn", function(){
-				console.log("insertBtn >>> : ");
-				
-				location.href="spot_ISUD";
-			});
-			
-			
-			
-			// SALL
-			$(document).on("click", "#selectAllBtn", function(){
-				console.log("selectAllBtn >>> : ");
-				
-				$('#tripList').attr({
-					'action' : 'spot_IsudSelectAll',
-					'method' : 'GET',
-				}).submit();
-			});
-			
-			
-			
-			// S(U)
-			$(document).on("click", "#selectBtn", function(){
-				console.log("selectBtn >>> : ");
-				
-				if($('.tripnum:checked').length == 0){
-						alert("수정할 글 번호 하나를 선택하세요");
-						
-						return;
-					}
-				
-				
-				$('#tripList').attr({
-					'action' : 'spot_IsudSelect',
-					'method' : 'GET',
-				}).submit();
-			});
+		console.log("자바스크립트 진입 >>> : ");
+		
+		$(document).ready(function(){	
+			console.log("jQuery 진입 >>> : ");
 			
 		
+			//  U
+			$(document).on("click", "#U", function(e){
+				
+				e.preventDefault();
+				$("#spotUpdateForm").attr({ 
+					"method":"GET", 
+ 					"action":"spot_IsudUpdate"
+				}).submit();
+			});
+				
 			
 			// D
-			$(document).on("click", "#deleteBtn", function(){
-				console.log("deletetBtn >>> : ");
+			$(document).on("click", "#D", function(e){
 				
-				if($('.tripnum:checked').length == 0){
-					alert("삭제할 글 번호 하나를 선택하세요");
-					
-					return;
-				}
-				
-				$('#tripList').attr({
-					'action' : 'spot_IsudDelete',
-					'method' : 'GET',
+				e.preventDefault();
+				$("#spotUpdateForm").attr({ 
+					"method":"GET", 
+					"action":"spot_IsudDelete"
 				}).submit();
 			});
 			
-			// 검색
-		      $("#search_btn").click(function(){
-			         alert('검색합니다.');
-			         
-			         $("#miniSearchForm").attr({
-			        	 'method':'GET'
-			         }).submit();
-			      });
-		});		
+			// B
+			$(document).on("click", "#B", function(e){
+					
+				window.history.back();
+			});
 			
+		});			
 		</script>		
 	</head>
 	<body>
-		<%@ include file="/main.jsp" %>
+	<%@ include file="/main.jsp" %>
 		<!-- 검색 -->
 		<div id="header">
 				<form name="miniSearchForm" id="miniSearchForm" action='spot_Search'> 
@@ -333,59 +278,58 @@
 				</form>		
 		</div>
 		<br>
-			<div class= "main">
-				<div class="contents">
-					<div class="list_content">
-						<ul id="tripList">
-	
-<%  
-for(int i=0; i < nCnt; i++){
-	SpotVO svo = list.get(i);
-	
-	
-	// 페이지 세팅
-	pageSize = Integer.parseInt(pagingSVO.getPageSize());
-	groupSize = Integer.parseInt(pagingSVO.getGroupSize());
-	curPage = Integer.parseInt(pagingSVO.getCurPage());
-	totalCount = Integer.parseInt(svo.getTotalCount());
-%>						
-
-							<li>  
-								<a href="spot_IsudSelect?tripnum=<%= svo.getTripnum() %>">
-								<span class="img">
-									<img src="${pageContext.request.contextPath}/resources/images/img_spot/<%= svo.getTripimage() %>" border="1" width="25" height="25" alt="image">
-								<span class="area">
-								 	<%= svo.getTripregion() %>
-								 </span>
-								 </span>
-								 <div class="name">
-									<strong><%= svo.getTripname() %></strong> 
-								 </div>
-								</a>
-							<%
-								} // 종료
-							%>						
-							</li>
-				</ul>
-						<jsp:include page="spot_IsudPaging.jsp" flush="true">
-							<jsp:param name="url" value="spot_IsudSelectAll"/>
-							<jsp:param name="str" value=""/>
-							<jsp:param name="pageSize" value="<%= pageSize %>"/>
-							<jsp:param name="groupSize" value="<%= groupSize %>"/>
-							<jsp:param name="curPage" value="<%= curPage %>"/>
-							<jsp:param name="totalCount" value="<%= totalCount %>"/>
-						</jsp:include>
-
-						<button type="button" id="insertBtn">등록</button>
-						<button type="button" id="selectAllBtn">목록</button>
-						<button type="button" id="selectBtn">수정</button>
-						<button type="button" id="deleteBtn">삭제</button>		
-
-					</div>
+		<hr>
+		<h2>관광정보</h2>
+		<hr>
+		<br>
+			<form name="spotUpdateForm" id="spotUpdateForm">
+				<div id="imgs">
+				<img src="${pageContext.request.contextPath}/resources/images/img_spot/<%= svo.getTripimage() %>" border="1" width="500" height="300" alt="image">
 				</div>
-			</div>
-			
-			
+				<input type="hidden" name="tripnum" id="tripnum" value="<%= svo.getTripnum() %>">
+				<br>
+				<table width="60%">				
+					<tr>
+						<td class="tt" width="5%"> 여행지명 <hr></td>
+						<td class="tt" width="50%">
+							<input type="text" name="tripname" id="tripname" value="<%= svo.getTripname() %>" size="40">
+							<hr>
+						</td>
+					</tr>
+					<tr>
+						<td class="tt"> 카테고리 <hr></td>
+						<td class="tt">
+						<input type="text" name="tripcatalogue" id="tripcatalogue" value="<%= svo.getTripcatalogue() %>" size="40">
+							<hr>
+						</td>
+					</tr>
+					<tr>
+						<td class="tt"> 소개 </td>
+						<td class="tt">
+						<textarea name="tripcoment" id="tripcoment" cols="100" rows="20"><%= svo.getTripcoment() %></textarea> 
+							<hr>
+						</td>
+					</tr>	
+					<tr>
+						<td class="tt"> 지역 <hr></td>
+						<td class="tt">
+						<input type="text" name="tripregion" id="tripregion" value="<%= svo.getTripregion() %>" size="40">						
+							<hr>
+						</td>
+					</tr>	
+				<tr>
+					<td colspan="3">
+
+					</td>	
+				</tr>																							
+				</table>
+				
+				<br>
+				<div class="btn">
+					<button type="button" id="U">수정</button>&nbsp;&nbsp;&nbsp;
+					<button type="button" id="D">삭제</button>&nbsp;&nbsp;&nbsp;
+					<button type="button" id="B">돌아가기</button>
+				</div>
+			</form>			
 	</body>
 </html>
-

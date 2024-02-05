@@ -15,6 +15,7 @@ import com.oreilly.servlet.MultipartRequest;	// 구
 import take.a.trip.hotel.service.HotelService;
 import take.a.trip.hotel.util.CommonUtils;
 import take.a.trip.hotel.vo.HotelVO;
+import take.a.trip.spot.vo.SpotVO;
 import take.a.trip.hotel.controller.HotelController;
 import take.a.trip.hotel.service.HotelService;
 
@@ -56,10 +57,10 @@ public class HotelController {
 		 hvo.setCurPage(String.valueOf(curPage));
 		 hvo.setTotalCount(String.valueOf(totalCount));
 		
-		 logger.info("spot_IsudSelectAll svo.setPageSize() >>> : " + hvo.getPageSize());
-		 logger.info("spot_IsudSelectAll svo.getGroupSize() >>> : " + hvo.getGroupSize());
-		 logger.info("spot_IsudSelectAll svo.getCurPage() >>> : " + hvo.getCurPage());
-		 logger.info("spot_IsudSelectAll svo.getTotalCount() >>> : " + hvo.getTotalCount());
+		 logger.info("spot_IsudSelectAll hvo.getPageSize() >>> : " + hvo.getPageSize());
+		 logger.info("spot_IsudSelectAll hvo.getGroupSize() >>> : " + hvo.getGroupSize());
+		 logger.info("spot_IsudSelectAll hvo.getCurPage() >>> : " + hvo.getCurPage());
+		 logger.info("spot_IsudSelectAll hvo.getTotalCount() >>> : " + hvo.getTotalCount());
 		 
 		 // 서비스 호출
 		 List<HotelVO> listAll = hotelService.hotel_main(hvo);
@@ -81,6 +82,27 @@ public class HotelController {
 		 logger.info("hotelSearch hvo.getSerachFilter()=> "+ hvo.getSearchFilter());
 		 logger.info("hotelSearch hvo.getKeyword()=> "+ hvo.getKeyword());
 		 
+		// 페이징
+		 int pageSize = CommonUtils.HOTEL_PAGE_SIZE; 	// 한페이지의 값
+		 int groupSize = CommonUtils.HOTEL_GROUP_SIZE;	// 그룹 값
+		 int curPage = CommonUtils.HOTEL_CUR_PAGE;		// 현재페이지
+		 int totalCount = CommonUtils.HOTEL_TOTAL_COUNT;
+		 
+		 if(hvo.getCurPage() != null) {
+				// parseInt : 문자열 숫자로 변환
+				curPage = Integer.parseInt(hvo.getCurPage());
+			}
+		 
+		 hvo.setPageSize(String.valueOf(pageSize));;
+		 hvo.setGroupSize(String.valueOf(groupSize));
+		 hvo.setCurPage(String.valueOf(curPage));
+		 hvo.setTotalCount(String.valueOf(totalCount));
+		
+		 logger.info("spot_IsudSelectAll hvo.getPageSize() >>> : " + hvo.getPageSize());
+		 logger.info("spot_IsudSelectAll hvo.getGroupSize() >>> : " + hvo.getGroupSize());
+		 logger.info("spot_IsudSelectAll hvo.getCurPage() >>> : " + hvo.getCurPage());
+		 logger.info("spot_IsudSelectAll hvo.getTotalCount() >>> : " + hvo.getTotalCount());
+		 
 		 List<HotelVO> searchList = hotelService.hotelSearch(hvo);
 		 
 		 int nCnt = searchList.size();
@@ -89,13 +111,15 @@ public class HotelController {
 			 logger.info("hotelSearch nCnt = "+nCnt);
 			 
 			 model.addAttribute("listAll",searchList);
+			 model.addAttribute("pagingHVO",hvo);
 			 
 			 return "hotel/hotel_main";
 		 }
+		 
 		 return "hotel/hotel_main";
 	 }
 	 
-	 // 지역별 검색
+	 // 지역별 
 	 @GetMapping("hotel/hotelSelect")
 	 public String hotelSelect(HotelVO hvo, Model model) {		 
 		 logger.info("hotelSelect 함수진입 ");
@@ -117,5 +141,70 @@ public class HotelController {
 		 
 		 return "hotel/hotel_main";
 	 }
+	 
+	 
+		// 호텔 입력폼(ISUD)
+		@GetMapping("hotel/hotelInsertForm")
+		public String spot_ISUD() {
+			logger.info("hotelInsertForm 함수 진입");
+
+			return "hotel/hotelInsertForm";
+		}	
+	 
+		// 호텔 입력(ISUD)
+		@PostMapping("hotel/hotelInsert")
+		public String spot_IsudInsert(HttpServletRequest req) {
+			logger.info("hotelInsert 함수 진입 ");
+
+
+			// 파일 업로드
+			String filePath = CommonUtils.HOTEL_IMG_UPLOAD_PATH;
+			int imgfileSize = CommonUtils.HOTEL_IMG_FILE_SIZE;
+			String encodeType = CommonUtils.HOTEL_ENCODE;
+			
+			try {
+				MultipartRequest mr = new MultipartRequest(req, filePath, imgfileSize, encodeType); 
+				 
+				HotelVO hvo = null;  
+				hvo = new HotelVO(); 
+			
+				// 입력한 데이터 값 확인
+				hvo.setRegionid(mr.getParameter("regionid"));
+				hvo.setHotelname(mr.getParameter("hotelname"));
+				hvo.setHoteltel(mr.getParameter("hoteltel"));
+				hvo.setHotelprice(mr.getParameter("hotelprice"));
+				hvo.setHotelimage(mr.getFilesystemName("hotelimage"));
+				hvo.setHoteladress(mr.getParameter("hoteladress"));
+				hvo.setHotelcoment(mr.getParameter("hotelcoment"));
+				hvo.setHotelmapx(mr.getParameter("hotelmapx"));
+				hvo.setHotelmapy(mr.getParameter("hotelmapy"));
+				hvo.setHotelcheckin(mr.getParameter("hotelcheckin"));
+				hvo.setHotelcheckout(mr.getParameter("hotelcheckout"));
+				
+				logger.info("hotelInsert hvo.getRegionid() >>> : " + hvo.getRegionid());
+				logger.info("hotelInsert hvo.getHotelname() >>> : " + hvo.getHotelname());
+				logger.info("hotelInsert hvo.getHoteltel() >>> : " + hvo.getHoteltel());
+				logger.info("hotelInsert hvo.getHotelprice() >>> : " + hvo.getHotelprice());
+				logger.info("hotelInsert hvo.getHotelimage() >>> : " + hvo.getHotelimage());
+				logger.info("hotelInsert hvo.getHoteladress() >>> : " + hvo.getHoteladress());
+				logger.info("hotelInsert hvo.getHotelcoment() >>> : " + hvo.getHotelcoment());
+				logger.info("hotelInsert hvo.getHotelmapx() >>> : " + hvo.getHotelmapx());
+				logger.info("hotelInsert hvo.getHotelmapy() >>> : " + hvo.getHotelmapy());
+				logger.info("hotelInsert hvo.getHotelcheckin() >>> : " + hvo.getHotelcheckin());
+				logger.info("hotelInsert hvo.getHotelcheckout() >>> : " + hvo.getHotelcheckout());
+				
+				// 서비스 호출
+				int nCnt = hotelService.hotelInsert(hvo);
+				
+				if(nCnt > 0) {
+					logger.info("nCnt >>> : " + nCnt);
+					
+					return "hotel/hotelInsert";		
+				}
+			} catch (IOException e) {
+				logger.info("파일 업로드 중 에러 발생 >>> : " + e.getMessage());
+			}
+			return "hotel/hotelInsertForm";
+		}
 
 }

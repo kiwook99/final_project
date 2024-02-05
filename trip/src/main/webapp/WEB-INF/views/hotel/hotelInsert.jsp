@@ -7,6 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script>
+	
+	alert("숙소 등록 완료!");
+	
+	location.href="hotel_main";
 
+</script>
 </body>
 </html>
