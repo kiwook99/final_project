@@ -299,13 +299,7 @@
 	   $(document).ready(function(){
 		      console.log("숙소 상세페이지 접속");
 		     
-		      $('#checkinDate, #checkoutDate').datepicker({
-		          format: 'yyyy-mm-dd',
-		          autoclose: true
-		      });
-
-				
-				$(document).on("click", "#cardBtn", function(){
+		      $(document).on("click", "#cardBtn", function(){
 					console.log("cardBtn >>> : ");
 					alert("결제하기");
 					 var memname = '<%=memname%>';
@@ -317,7 +311,11 @@
 						'enctype':'multipart/form-data'
 					}).submit();
 				});
-		
+		      
+		      $('#checkinDate, #checkoutDate').datepicker({
+		          format: 'yyyy-mm-dd',
+		          autoclose: true
+		      });
 		     
 		   // 현재 날짜 구하기
 	        var currentDate = new Date();
@@ -377,7 +375,17 @@
 	            // 최종 가격을 표시할 div에 텍스트 설정
 	            $('#finalPrice').text('이용요금: ' + hotelprice + '원');
 	        }
-
+	       
+		      $("#search_btn").click(function(){
+		         alert('검색합니다.');
+		        
+		         $("#miniSearchForm").attr({
+		            "method":"GET",
+		            "action":"hotelSearch"
+		         }).submit();
+		      });
+		   });
+	  
 	   function viewMap(name,mapx,mapy) {
 			
 	        var mapContainer = $('<div id="map"></div>');
@@ -454,8 +462,6 @@
 	        });
 	        infowindow.open(map, marker, pano);
 	    }
-	   
-
 </script>
 </head>
 <body>
