@@ -375,15 +375,6 @@
 	            // 최종 가격을 표시할 div에 텍스트 설정
 	            $('#finalPrice').text('이용요금: ' + hotelprice + '원');
 	        }
-	       
-		      $("#search_btn").click(function(){
-		         alert('검색합니다.');
-		        
-		         $("#miniSearchForm").attr({
-		            "method":"GET",
-		            "action":"hotelSearch"
-		         }).submit();
-		      });
 		   });
 	  
 	   function viewMap(name,mapx,mapy) {
