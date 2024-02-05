@@ -94,70 +94,7 @@
 		box-sizing: border-box;
 		}
 				
-	/*카테고리*/
-	#topMenu { 
-	 height: 50px; 
-	 width: 100%; 
-	 margin: 0 auto;
-	 }
-	 
-	 #topMenu ul{
-		 list-style-type: none;
-		 margin: 0px;
-		 padding: 0px; 
-		 font-size : 20px;
-	 }
-	 
-	 #topMenu ul li 
-	 { 
-	 list-style: none; 
-	 display: inline-block;
-	 line-height: 30px; 
-	 vertical-align: middle; 
-	 text-align: center;
-	 position: relative;
-	 text-align: -webkit-match-parent;
-	 }
-	 
-		 .submenuLink{
-			 text-decoration:none;
-			 display: block;
-			 width: 150px;
-			 font-size: 12px;
-			 font-weight: bold;
-			 font-family: "Trebuchet Ms", Dotum;
-		 }
-		 
-		  #topMenu { 
-		 color: white; 
-		 background-color: #aaa; }
-		
-		 .submenuLink{
-			 color: white;
-			 background-color: #aaa;
-			 border: solid 1px white;
-			 margin-top: -1px;
-		 }
-		 
-		 .sb{
-			 position: absolute;
-			 height: 0px;
-			 overflow: hidden;
-			 transition: height .2s;
-		 }
-		 
-		 .topMenuLi:hover .sb{
-			 height: 100px;
-		 }
-		 
-		 .submenuLink:hover { 
-		 color: black;
-		 background-color: #aaa;
-		 }		
-
-
-    
-	    .swiper-pagination {
+		 .swiper-pagination {
 	     position: absolute;
 	     left: 50%;
 	     bottom: 20px;
@@ -171,7 +108,7 @@
 	    }
 	
 		.swiper-container{
-		height:700px;
+		height:670px;
 		position: relative;	/* 요소 자기 자신을 기준으로 배치 */
 		}
 	
@@ -187,16 +124,21 @@
 		object-position: 50% 50%;	/* 이미지 중앙 정렬*/
 	}
 		 
-	 .area {
+	 .regionarea {
 	    background: rgba(0, 0, 0, 0.5);
 	    border-radius: 20px;
 	    color: #fff;
 	    font-weight: 700;
 	    top: 10px; /* 조절할 수 있는 값으로 변경 */
 	    left: 10px; /* 조절할 수 있는 값으로 변경 */
+    	font-size: 20px;
+	    height: 26px;
+	    line-height: 26px;
+	    padding: 0 9px;
+	    position: static;
 	}
 	
-	.area::before {
+	.regionarea::before {
 	    content: '';
 	    display: inline-block;
 	    background: url('${pageContext.request.contextPath}/resources/images/지도.png') 0 0 / 100% 100% no-repeat;
@@ -204,16 +146,6 @@
 	    height: 20px;
 	    margin-right: 3px;
         vertical-align: -1px;
-	}
-	 
-
-	.area {
-	   	font-size: 20px;
-	    height: 26px;
-	    line-height: 26px;
-	    padding: 0 9px;
-	    border-radius: 20px;
-	    position: static;
 	}
 	
 	.sub-title{
@@ -223,7 +155,7 @@
     color: #000;
     font-weight: 800;
     text-align: center;
-    margin-left: 30px;
+    margin-left: 175px;
 	}
 	
 	.sub-header{
@@ -249,7 +181,7 @@
 	.slider {
 	flex: 1; /* 나머지 공간을 모두 채우도록 설정 */
     max-width: 40%; /* 최대 너비 설정 */
-	margin: 0px 100px;
+	margin: 0px 130px;
 	}
 	
 	.txt-wrap {
@@ -270,6 +202,7 @@
 	
 	.name {
 	font-size:23px;
+
 	}
 	
 	.info li {
@@ -329,7 +262,7 @@
 	
 	}
     
-	.coment{
+	.coment, .info ul, .name h3{
 	background-color:#f7f7f7;
 	border-radius: 10px;
 	padding: 20px;
@@ -363,9 +296,13 @@
 	margin-right:100px;
 	}
 	
-	.update-link, .delete-link {
+	.sub-header a {
 	    margin-right: 10px; /* 링크 간의 간격 조절 */
-	    color: #70bdff; /* 삭제 링크의 텍스트 색상 */
+        padding: 5px 15px;
+	    background-color: #0aa4b5;
+	    color: white;
+	    border: 0;
+	    border-radius: 10px;
 	    FLOAT: RIGHT;
 	}
 	
@@ -453,15 +390,6 @@
 	            // 최종 가격을 표시할 div에 텍스트 설정
 	            $('#finalPrice').text('이용요금: ' + hotelprice + '원');
 	        }
-	        
-		      $("#search_btn").click(function(){
-		         alert('검색합니다.');
-		         
-		         $("#miniSearchForm").attr({
-		            "method":"GET",
-		            "action":"hotelSearch"
-		         }).submit();
-		      }); 
 		   });
 	   
 	   function viewMap(name,mapx,mapy) {
@@ -552,65 +480,12 @@
 </script>
 </head>
 <body>
-	<div class="header">
-			<!-- 이미지 아이콘 -->
-			<a href="#">
-			<img src="#" width="50px" height="50px" title="로고 이미지">
-			</a>
-			<!-- 제목 -->
-			<h1>여행가기 좋은날</h1>
-			<!-- 조건 검색 --> 	
-			<form name="miniSearchForm" id="miniSearchForm"> 
-			<select id="searchFilter" name="searchFilter" style="width:100px;font-size:15px;">
-				<option value="key_01">지역</option>
-				<option value="key_02">숙소명</option>
-			</select>			
-			<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" 
-			style="width:200px;height:30px;font-size:15px;">
-			<input type="submit" id="search_btn" name="search_btn" value="검색">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			<input type="button" name="logout" id="logoutBtn" value="로그아웃" onclick="location.href='#'" >
-			&nbsp;&nbsp;&nbsp;
-			<input type="button" name="mypage" id="MyPageBtn" value="마이페이지" onclick="location.href='#'" >
- 
-			</form>
-	</div>
-	
-	<div class="topnav">
-			<!--메뉴-->
-			<nav id="topMenu" >
-				 <ul>
-					 <li class="topMenuLi">
-					 <a class="menuLink" href="#content1">여행정보</a>
-					 	 <ul class ="sb">
-							  <li><a href="<%= request.getContextPath() %>/spot/spot" class="submenuLink" >관광정보</a></li>
-							  <li><a href="spot_ISUD" class="submenuLink" >관광정보(ISUD)</a></li>
-					  	</ul>
-					 </li>							  
-					  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
-					 <li class="topMenuLi">
-					 <a class="menuLink" href="#content2">숙소예약</a>
-					 	<ul class ="sb"> 
-							 <li><a href="hotel_main" class="submenuLink" >숙소정보</a></li>
-					 	</ul>
-					 </li>
-					  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
-					 <li class="topMenuLi">
-					 <a class="menuLink" href="#content3">게시판</a>
-					 	<ul class ="sb"> 
-							 <li><a href="#" class="submenuLink" >자유 게시판</a></li>
-							 <li><a href="#" class="submenuLink" >공지사항 게시판</a></li>
-					 	</ul>
-					 </li>				 
-				 </ul> 
-			 </nav>
-		</div>	
+	<%@ include file="/main.jsp" %>
 		
 		<div class="sub-header">
 			<h3 class="sub-title">숙박 
-				<a href="hotelDelete?hotelnum=<%= hvo.getHotelnum() %>" class="delete-link"> 삭제</a> 
-				<a href="hotelUpdateForm?hotelnum=<%= hvo.getHotelnum() %>" class="update-link" >수정</a>
+				<a href="hotelDelete?hotelnum=<%= hvo.getHotelnum() %>" class="delete-link" id="delete-link"> 삭제</a> 
+				<a href="hotelUpdateForm?hotelnum=<%= hvo.getHotelnum() %>" class="update-link" id="update-link">수정</a>
 			 </h3>
 		</div>
 			<div class="hotelSelect">
@@ -638,7 +513,7 @@
 					</div>	
 					<div class="txt-wrap">
 						<div class="title">
-							<span class="area">
+							<span class="regionarea">
 								<%= hvo.getRegionid() %>
 							</span><br><br>
 							<span class="name">

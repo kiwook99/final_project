@@ -181,7 +181,7 @@
 	.slider {
 	flex: 1; /* 나머지 공간을 모두 채우도록 설정 */
     max-width: 40%; /* 최대 너비 설정 */
-	margin: 0px 100px;
+	margin: 0px 130px;
 	}
 	
 	.hotelUpdate {
@@ -229,7 +229,7 @@
     }
 
     
-	.coment{
+	.coment, .info ul, .name h3{
 	background-color:#f7f7f7;
 	border-radius: 10px;
 	padding: 20px;
@@ -263,8 +263,25 @@
 	.update{
 	margin-top:30px;
 	}
+	
+	.hotelupdateBtn, .hotelback {
+	padding: 10px 20px;
+    background-color: #0aa4b5;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+	}
+	
+	.addressCheckBtn {
+	padding: 2px 15px;
+    background-color: #0aa4b5;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+	}
+	
 	</style>
-		
+	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d8e532a4251bcd6e33a49bd260de47d3&libraries=services"></script>
 	<script type="text/javascript">
 	   $(document).ready(function(){
 		      console.log("숙소 상세페이지 접속");
@@ -281,6 +298,33 @@
                'enctype' : 'multipart/form-data' 
            }).submit(); 
        });
+	   
+	   $(document).on("click", "#addressCheckBtn", function(event){
+           event.preventDefault();
+           geocodeAddress();
+       });
+	   
+	   function geocodeAddress() {
+           var address = document.getElementById('hoteladress').value;
+
+           var geocoder = new kakao.maps.services.Geocoder();
+
+           geocoder.addressSearch(address, function (result, status) {
+               if (status === kakao.maps.services.Status.OK) {
+                   var hotelmapx = result[0].x;
+                   var hotelmapy = result[0].y;
+                   
+                	// 좌표 값을 숨겨진 필드에 설정
+                   $('#hotelmapx').val(hotelmapx);
+                   $('#hotelmapy').val(hotelmapy);
+
+                   // 이제 mapx와 mapy를 사용하여 필요한 작업을 수행할 수 있습니다.
+                   alert("주소의 좌표값: " + hotelmapx + ", " + hotelmapy);
+               } else {
+                   alert("주소를 찾을 수 없습니다.");
+               }
+           });
+       }
 	   
 	   function viewMap(name,mapx,mapy) {
 			
@@ -375,7 +419,7 @@
 
 
 <div class="sub-header">
-			<h3 class="sub-title">숙박 수정  </h3>
+			<h3 class="sub-title">정보 수정  </h3>
 				</div>
 				<div class="hotelSelect">
 					<div class="detail">
@@ -410,7 +454,11 @@
 								</span><br><hr>
 								<span class="info"><br>
 									<ul>
-										<li> 주소	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="hoteladress" name="hoteladress" id="hoteladress" value="<%= hvo.getHoteladress() %>" size="40"> </li>
+										<li> 주소	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="hoteladress" name="hoteladress" id="hoteladress" value="<%= hvo.getHoteladress() %>" size="40"> 
+											<button id="addressCheckBtn" class="addressCheckBtn">좌표값 생성</button>
+											<input type="hidden" name="hotelmapx" id="hotelmapx" value="<%= hvo.getHotelmapx() %>">
+											<input type="hidden" name="hotelmapy" id="hotelmapy" value="<%= hvo.getHotelmapy() %>">
+										</li>
 										<li> 번호	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="hoteltel" name="hoteltel" id="hoteltel" value="<%= hvo.getHoteltel().replace("<br>", "&nbsp;/&nbsp;") %>" size="40"></li>
 										<li> 가격	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="hotelprice" name="hotelprice" id="hotelprice" value="<%= hvo.getHotelprice() %>" size="40"> </li>
 										<li> 체크인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="hotelcheckin" name="hotelcheckin" id="hotelcheckin" value="<%= hvo.getHotelcheckin().replace("<br>", "&nbsp;/&nbsp;") %>" size="40"></li>
@@ -424,8 +472,8 @@
 									</p>
 								</div>
 								<div class="update">
-									<input type="submit" value="수정하기" id="hotelupdateBtn" class="hotelupdateBtn">
-									<a href ="hotelSelect?hotelnum=<%= hvo.getHotelnum() %>"> <input type="button" value="돌아가기" > </a>
+									<input type="submit" value="수정하기" id="hotelupdateBtn" class="hotelupdateBtn" >
+									<a href ="hotelSelect?hotelnum=<%= hvo.getHotelnum() %>"> <input type="button" value="돌아가기" id="hotelback" class="hotelback"> </a>
 								</div>
 							</form>
 						</div>

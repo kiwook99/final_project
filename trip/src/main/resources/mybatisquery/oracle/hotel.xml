@@ -153,7 +153,9 @@
 	   		H.HOTELPRICE = #{hotelprice}, 
 	   		H.HOTELCHECKIN = #{hotelcheckin}, 
 	   		H.HOTELCHECKOUT = #{hotelcheckout}, 
-	   		H.HOTELCOMENT = #{hotelcoment}, 
+	   		H.HOTELCOMENT = #{hotelcoment},
+	   		H.HOTELMAPX = #{hotelmapx},
+	   		H.HOTELMAPY = #{hotelmapy}, 
 	   		H.UPDATEDATE = SYSDATE
 	 WHERE  H.DELETEYN = 'Y'
 	   AND  H.HOTELNUM = #{hotelnum}

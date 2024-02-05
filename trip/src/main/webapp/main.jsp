@@ -23,7 +23,7 @@
 				
 			}
 			
-			ul, li {
+			.logo ul, .logo li {
 				list-style: none;	/* 목록 스타일 제거*/
 			}
 			
@@ -53,10 +53,14 @@
 			}
 			
 			
-			a:link, a:visited, a:focus, a:active { /* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
+			.logo a:link,
+			.logo a:visited,
+			.logo a:focus,
+			.logo a:active {
+			    /* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
 			    text-decoration: none;
 			    color: black;
-			}	
+			}
 			
 							
 			
@@ -190,6 +194,12 @@
 			 	text-align: center;
 			 }
 			 
+		 	.update-link, .delete-link {
+			    margin-right: 10px; /* 링크 간의 간격 조절 */
+			    color: #70bdff; /* 삭제 링크의 텍스트 색상 */
+			    FLOAT: RIGHT;
+			}
+			 
 			 	
 		</style>
 </head>
@@ -244,8 +254,6 @@
 						 </li>				 
 					 </ul> 
 			</div>				 
-		<br>
-		<hr>
 		<br>
 </body>
 </html>

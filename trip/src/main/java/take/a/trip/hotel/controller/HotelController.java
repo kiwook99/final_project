@@ -246,6 +246,8 @@ public class HotelController {
 		        hvo.setHotelcheckin(req.getParameter("hotelcheckin"));
 		        hvo.setHotelcheckout(req.getParameter("hotelcheckout"));
 		        hvo.setHotelcoment(req.getParameter("hotelcoment"));
+		        hvo.setHotelmapx(req.getParameter("hotelmapx"));
+		        hvo.setHotelmapy(req.getParameter("hotelmapy"));
 
 		        logger.info("hotelUpdate hvo.getHotelnum() >>> : " + hvo.getHotelnum());
 		        logger.info("hotelUpdate hvo.getHotelname() >>> : " + hvo.getHotelname());
@@ -255,6 +257,8 @@ public class HotelController {
 		        logger.info("hotelUpdate hvo.getHotelcoment() >>> : " + hvo.getHotelcoment());
 		        logger.info("hotelUpdate hvo.getHotelcheckin() >>> : " + hvo.getHotelcheckin());
 		        logger.info("hotelUpdate hvo.getHotelcheckout() >>> : " + hvo.getHotelcheckout());
+		        logger.info("hotelUpdate hvo.getHotelcheckin() >>> : " + hvo.getHotelmapx());
+		        logger.info("hotelUpdate hvo.getHotelcheckout() >>> : " + hvo.getHotelmapy());
 
 		        // 서비스 호출
 		        int nCnt = hotelService.hotelUpdate(hvo);
@@ -274,7 +278,7 @@ public class HotelController {
 		@GetMapping("hotel/hotelDelete")
 		public String hotelDelete(HotelVO hvo, Model model) {
 			logger.info("hotelDelete 함수 진입 ");
-			logger.info("hvo.getTripnum() >>> : " + hvo.getHotelnum()); 
+			logger.info("hvo.getHotelnum() >>> : " + hvo.getHotelnum()); 
 			
 			int nCnt = hotelService.hotelDelete(hvo); 
 			
