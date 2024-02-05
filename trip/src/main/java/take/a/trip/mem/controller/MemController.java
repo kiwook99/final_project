@@ -38,19 +38,19 @@ public class MemController {
 	private MemService memService;
 	
 	//로그인 폼
-	@GetMapping("loginForm")
+	@GetMapping("mem/loginForm")
 	public String loginForm() {
 		logger.info("UserController loginForm 진입 >>> : ");
 		
 		return "mem/loginForm";
 	}
 	
-	@PostMapping("login")
+	@PostMapping("mem/login")
 	public String login(Model model, MemVO mvo, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info("UserController login 진입 >>> : ");
 		
-		HttpSession session = request.getSession(true);
-		String memid = "";
+		HttpSession session = request.getSession(true);		// HttpServletRequest에서 세션을 가져오거나 새로 생성
+		String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
 		String adminyn = "";
 		
 		logger.info("userid >>> : " + mvo.getMemid());
@@ -60,23 +60,24 @@ public class MemController {
 		
 		if (userLogin != null && userLogin.size() != 0) {
 			
+			// List<MemVO> userLogin 에서 adminyn 값 추출
 			for (int i=0; i<userLogin.size(); i++) {
 				MemVO mvo_1 = userLogin.get(i);
-				memid = mvo_1.getMemid();
 				adminyn = mvo_1.getAdminyn();
 			}
 
-
-			logger.info("memid >>> : " + memid);
+			logger.info("sessionId >>> : " + sessionId);
 			logger.info("adimnyn >>> : " + adminyn);
 			
+			// 모델객체에 로그인정보 담기
 			model.addAttribute("userLogin", userLogin);
-			session.setAttribute("memid", memid);
 			
 			 try (Jedis jedis = jedisPool.getResource()) {
 		        	
 				 	// Redis에 데이터 저장
-		            jedis.set( memid, adminyn);
+		            jedis.set( sessionId, adminyn);
+		            // Redis 만료 시간 설정 (3600=1시간)
+		            jedis.expire(sessionId, 3600*24);
 		            logger.info("jedis.set >>> : ");
 		        }
 			 
@@ -85,7 +86,7 @@ public class MemController {
 		return "mem/loginForm";
 	}
 	
-	@GetMapping("kakaoLogin")
+	@GetMapping("mem/kakaoLogin")
 	public String kakaoLogin() {
 		logger.info("UserController kakaoLogin 진입 >>> : ");
 		
@@ -93,14 +94,14 @@ public class MemController {
 	}
 	
 	// 회원가입 폼
-    @GetMapping("insertForm")
+    @GetMapping("mem/insertForm")
     public String insertForm() {
         logger.info("UserController insertForm 진입 >>> : ");
 
         return "mem/insertForm";
     }
 
-    @PostMapping("insert")
+    @PostMapping("mem/insert")
 	public String insert(MemVO mvo) {
 		logger.info("UserController insert 진입 >>> : ");
 		
@@ -113,5 +114,13 @@ public class MemController {
 		return "mem/loginForm";
 	}
     
+    //===================================================
+	@GetMapping("main")
+	public String main() {
+		logger.info("UserController main 진입 >>> : ");
+		
+		return "main";
+	}
+	//===================================================
 		
 }

@@ -7,21 +7,21 @@
   
 <% request.setCharacterEncoding("UTF-8"); %>    
 <%
+	String memname = request.getParameter("memname");
+	String memnum = request.getParameter("memnum");	
+	String paynum = request.getParameter("paynum");
 	String hotelname = request.getParameter("hotelname");
 	String hotelprice = request.getParameter("hotelprice");
+	String hotelnum = request.getParameter("hotelnum");
 	hotelprice = NumUtil.comma_replace(hotelprice);
 	
 	Object obj = request.getAttribute("orderList");
 
-	List<HotelVO> list = (List<HotelVO>)obj;
-	int nCnt = list.size();
-	
-	HotelVO hvo = null;
-	
-	if(nCnt==1){
-		hvo = list.get(0);
-	}
-%> 
+	List<HotelVO> orderList = (List<HotelVO>) obj;
+
+	HotelVO hvo = (orderList != null && orderList.size() > 0) ? orderList.get(0) : new HotelVO();
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,12 +33,11 @@
 <!-- 다음 우편번호 주소 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="/kosmoSprng/js/common.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
 		
-		var memname = 'memname';
+		var memname = "";
 		var hotelprice = '<%= hotelprice %>';		
 		alert(memname + " : " + hotelprice);
 		
@@ -55,19 +54,7 @@
 				}
 			}); 
 		}); 	
-		
-		// 우편번호	
-		$("#zoneBtn").click(function(){
-			console.log("zonecode >>> : ");
-			new daum.Postcode({
-				oncomplete: function(data) {
-				    $("#kozone").val(data.zonecode); //5자리 새우편번호 사용
-				    $("#koroad").val(data.roadAddress); //도로명 주소
-				    $("#kojibun").val(data.jibunAddress); //지번주소			
-				}
-			}).open();
-		});
-		
+
 		
 		$(document).on('click', '#cardBtn', function(){
 				
@@ -141,21 +128,14 @@
 <td colspan="6" align="left"><font size="3" style="color:blue;">1. 주문확인</font></td>
 </tr>
 <tr>
-<td class="mem">상품명</td>
+<td class="mem">주문자명</td>
+<td class="mem">호텔명</td>
 <td class="mem">금액</td>
 </tr>
 <tr>
-<td class="mem"><%= hvo.getPaynum() %>원</td>
-<td class="mem"><%= hvo.getMemnum() %>원</td>
-<td class="mem"><%= hvo.getHotelnum() %>원</td>
-<td class="mem"><%= hvo.getHotelname() %>원</td>
+<td class="mem"><%= hvo.getMemname() %></td>
+<td class="mem"><%= hvo.getHotelname() %></td>
 <td class="mem"><%= hvo.getHotelprice() %>원</td>
-<tr>
-<td colspan="6" align="left"><font size="3" style="color:blue;">2. 배송지 정보</font></td>
-</tr>
-<tr>
-	<td class="mem">예약자명</td>
-	<td colspan="5"><input type="text" name="memnum" id="memnum"/></td>
 </tr>
 <tr>
 	<td class="mem">핸드폰</td>

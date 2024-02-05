@@ -240,6 +240,7 @@
 		</script>
 	</head>
 	<body>
+		<%@ include file="/main.jsp" %>
 		<div class="main">
 			<div class="contents">
 				<div class="sub_header">

@@ -20,8 +20,10 @@
 
 	List<HotelVO> list = (List<HotelVO>)obj;
 	int nCnt = list.size();
-	
+
 	String hotelprice="";
+	String hotelname="";
+	String memname="";
 	HotelVO hvo = null;
 	
 	if(nCnt==1){
@@ -236,11 +238,11 @@
 	.next {
    	margin-left: 100px;
     margin-right: 100px;
-    border: 1px solid #000;
+    
 	}
 	
 	.detail-basic{
-	padding-bottom: 60px;
+	padding-bottom: 80px;
     display: flex;
     justify-content: space-between;
 	}
@@ -345,7 +347,7 @@
         width: 100%;
         height: 600px;
         margin-bottom: 30px;
-    	margin-top: 10px;
+    	margin-top: 30px;
     }
 
     #map,
@@ -547,9 +549,11 @@
 			
 			$(document).on("click", "#cardBtn", function(){
 				console.log("cardBtn >>> : ");
+				 var memname = '<%=memname%>';
+				 var hotelprice = '<%= hotelprice %>';
 				
 				$('#miniSearchForm').attr({
-					'action':'hotelOrderForm',
+					'action':'hotelOrder?memname=<%= hvo.getMemname() %>&hotelnum=<%= hvo.getHotelnum() %>&hotelprice=<%= hvo.getHotelprice() %>',
 					'method':'POST',
 					'enctype':'multipart/form-data'
 				}).submit();
@@ -584,6 +588,7 @@
 	</div>
 	
 	<div class="topnav">
+	
 			<!--메뉴-->
 			<nav id="topMenu" >
 				 <ul>
@@ -611,10 +616,13 @@
 					 </li>				 
 				 </ul> 
 			 </nav>
-		</div>	
+		</div>
 		
+		<form class="hotelOrderForm">
+	
 		<div class="sub-header">
-			<h3 class="sub-title">숙박</h3>
+
+			<h3 class="sub-title">숙박  <a href="hotelUpdateForm?hotelnum=<%= hvo.getHotelnum() %>" style="float: right;" >수정</a> </h3>
 				</div>
 				<div class="hotelSelect">
 					<div class="detail">
@@ -644,7 +652,7 @@
 								<span class="area">
 									<%= hvo.getRegionid() %>
 								</span><br><br>
-								<span class="name">
+								<span class="name" name="hotelname">
 									<h3><%= hvo.getHotelname() %></h3>
 								</span><br><hr>
 								<span class="info"><br>
@@ -676,7 +684,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div></form>
 						<hr class="next"><br>
 						<div class="container">
 						<div class="txt">

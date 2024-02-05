@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -45,11 +46,38 @@ public class HotelDAOImpl implements HotelDAO {
 		return sqlSession.openSession().selectList("hotelSelect",hvo);
 	}
 
+
 	@Override
-	public List<HotelVO> hotelOrderForm(HotelVO hvo) {
+	public List<HotelVO> hotelOrder(HotelVO hvo) {
 		// TODO Auto-generated method stub
 		logger.info("hotelOrderForm 함수 진입 >>> : ");	
 		
 		return sqlSession.openSession().selectList("hotelOrderForm", hvo);
 	}
+
+	
+	// 숙소 등록
+	@Override
+	public int hotelInsert(HotelVO hvo) {
+		// TODO Auto-generated method stub
+		logger.info("hotelInsert 함수 진입");
+		
+		return sqlSession.openSession().insert("hotelInsert", hvo);
+	}
+	
+	@Override
+	public List<HotelVO> hotelUpdateForm(HotelVO hvo){
+		logger.info("hotelUpdateForm 함수 진입");
+		
+		return sqlSession.openSession().selectList("hotelUpdateForm",hvo);
+	}
+	
+	@Override
+	public int hotelUpdate(HotelVO hvo){
+		logger.info("hotelUpdate 함수 진입");
+		
+		return sqlSession.openSession().update("hotelUpdate",hvo);
+	}
+	
+
 }

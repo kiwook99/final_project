@@ -40,10 +40,37 @@ public class HotelServiceImpl implements HotelService {
 		return hotelDAO.hotelSelect(hvo);
 	}
 	
+
 	@Override
-	public List<HotelVO> hotelOrderForm(HotelVO hvo) {
+	public List<HotelVO> hotelOrder(HotelVO hvo) {
 		logger.info("hotelOrderForm 함수 진입 >>> : ");
-		return hotelDAO.hotelOrderForm(hvo);
+		
+		return hotelDAO.hotelOrder(hvo);
+		
+	}
+
+	// 여행지 등록
+	@Override
+	public int hotelInsert(HotelVO hvo) {
+		// TODO Auto-generated method stub
+		logger.info("SpotServiceImpl spot_IsudInsert 진입 >>> : ");
+		
+		return hotelDAO.hotelInsert(hvo);
+	}
+	
+	@Override
+	public List<HotelVO> hotelUpdateForm(HotelVO hvo){
+		logger.info("hotelUpdateForm 함수 진입");
+		
+		return hotelDAO.hotelUpdateForm(hvo);
+	}
+	
+	@Override
+	public int hotelUpdate(HotelVO hvo){
+		logger.info("hotelUpdate 함수 진입");
+		
+		return hotelDAO.hotelUpdate(hvo);
+
 	}
 
 }
