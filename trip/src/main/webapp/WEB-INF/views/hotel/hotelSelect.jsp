@@ -372,6 +372,7 @@
 		          format: 'yyyy-mm-dd',
 		          autoclose: true
 		      });
+
 		      
 		   // 현재 날짜 구하기
 	        var currentDate = new Date();
@@ -541,6 +542,19 @@
 
 	        infowindow.open(map, marker, pano);
 	    }
+	   
+	   $(document).ready(function(){
+			
+			$(document).on("click", "#cardBtn", function(){
+				console.log("cardBtn >>> : ");
+				
+				$('#miniSearchForm').attr({
+					'action':'hotelOrderForm',
+					'method':'POST',
+					'enctype':'multipart/form-data'
+				}).submit();
+			});
+		});	
 </script>
 </head>
 <body>
@@ -658,7 +672,7 @@
 								    </div>
 								   <div >
 								   		<span id="finalPrice"></span><br>
-								   		<span class="pay"><a href=""> 결제하기 </a></span>
+								   		<span class="pay"><button type="button" id="cardBtn"> 결제하기 </span>
 									</div>
 								</div>
 							</div>

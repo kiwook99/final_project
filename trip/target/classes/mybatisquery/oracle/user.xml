@@ -19,7 +19,7 @@
          #{memphone, jdbcType=VARCHAR},
          SYSDATE,
          SYSDATE,
-         'N',
+         'Y',
          'N')
 </insert>
 	

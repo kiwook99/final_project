@@ -7,14 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile; // 최신
 import com.oreilly.servlet.MultipartRequest;	// 구
 
 import take.a.trip.hotel.service.HotelService;
 import take.a.trip.hotel.util.CommonUtils;
+import take.a.trip.hotel.util.NumUtil;
 import take.a.trip.hotel.vo.HotelVO;
+import take.a.trip.order.vo.OrderVO;
 import take.a.trip.hotel.controller.HotelController;
 import take.a.trip.hotel.service.HotelService;
 
@@ -117,5 +119,32 @@ public class HotelController {
 		 
 		 return "hotel/hotel_main";
 	 }
+	 
+	// 주문 입력 폼
+	 	@PostMapping("hotel/hotelOrderForm")
+	    public String hotelOrderForm(HotelVO hvo, Model model) {
+	        logger.info("HotelController hotelOrderForm 함수 진입 >>> : ");
+	        
+	        List<HotelVO> orderList = hotelService.hotelOrderForm(hvo);
+			 
+			 int nCnt = orderList.size();
+			 
+			 if (nCnt>0) {
+				 logger.info("hotelOrderForm nCnt = "+ nCnt);
+				 
+				 model.addAttribute("orderList",orderList);
+	        
+	        
+	        logger.info("hvo.getHotelname() >>> : " + hvo.getHotelname());
+	        logger.info("hvo.getHotelprice() >>> : " + hvo.getHotelprice());
+	        hvo.setHotelprice(NumUtil.comma_replace(hvo.getHotelprice()));
+
+
+	        // 서비스 호출
+	        
+	        return "hotel/hotelOrderForm";
+	    }
+			 return "hotel/hotelSelect";
+	 	}
 
 }

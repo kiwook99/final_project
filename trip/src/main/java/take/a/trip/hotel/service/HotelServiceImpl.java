@@ -39,5 +39,11 @@ public class HotelServiceImpl implements HotelService {
 		
 		return hotelDAO.hotelSelect(hvo);
 	}
+	
+	@Override
+	public List<HotelVO> hotelOrderForm(HotelVO hvo) {
+		logger.info("hotelOrderForm 함수 진입 >>> : ");
+		return hotelDAO.hotelOrderForm(hvo);
+	}
 
 }

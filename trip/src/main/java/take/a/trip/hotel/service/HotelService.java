@@ -9,4 +9,6 @@ public interface HotelService {
 	public List<HotelVO> hotel_main(HotelVO hvo);
 	public List<HotelVO> hotelSearch(HotelVO hvo);
 	public List<HotelVO> hotelSelect(HotelVO hvo);
+	
+	public List<HotelVO> hotelOrderForm(HotelVO hvo);
 }

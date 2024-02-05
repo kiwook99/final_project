@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import take.a.trip.hotel.vo.HotelVO;
 
+
 @Repository//("HotelDAO")
 public class HotelDAOImpl implements HotelDAO {
 	
@@ -42,5 +43,13 @@ public class HotelDAOImpl implements HotelDAO {
 		logger.info("hotelSelect 함수 진입");
 		
 		return sqlSession.openSession().selectList("hotelSelect",hvo);
+	}
+
+	@Override
+	public List<HotelVO> hotelOrderForm(HotelVO hvo) {
+		// TODO Auto-generated method stub
+		logger.info("hotelOrderForm 함수 진입 >>> : ");	
+		
+		return sqlSession.openSession().selectList("hotelOrderForm", hvo);
 	}
 }

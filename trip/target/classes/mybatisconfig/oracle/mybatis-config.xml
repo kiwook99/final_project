@@ -15,6 +15,7 @@
 		
 		<typeAlias type="take.a.trip.spot.vo.SpotVO" alias="svo"/>
 		<typeAlias type="take.a.trip.spot.vo.ReviewVO" alias="rvo"/>					
+		
 
 	</typeAliases>
 </configuration>
