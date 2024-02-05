@@ -15,7 +15,6 @@ import com.oreilly.servlet.MultipartRequest;	// 구
 import take.a.trip.hotel.service.HotelService;
 import take.a.trip.hotel.util.CommonUtils;
 import take.a.trip.hotel.vo.HotelVO;
-import take.a.trip.spot.vo.SpotVO;
 import take.a.trip.hotel.controller.HotelController;
 import take.a.trip.hotel.service.HotelService;
 
@@ -145,7 +144,7 @@ public class HotelController {
 	 
 		// 호텔 입력폼(ISUD)
 		@GetMapping("hotel/hotelInsertForm")
-		public String spot_ISUD() {
+		public String hotelInsertForm() {
 			logger.info("hotelInsertForm 함수 진입");
 
 			return "hotel/hotelInsertForm";
@@ -153,7 +152,7 @@ public class HotelController {
 	 
 		// 호텔 입력(ISUD)
 		@PostMapping("hotel/hotelInsert")
-		public String spot_IsudInsert(HttpServletRequest req) {
+		public String hotelInsert(HttpServletRequest req) {
 			logger.info("hotelInsert 함수 진입 ");
 
 
@@ -206,5 +205,51 @@ public class HotelController {
 			}
 			return "hotel/hotelInsertForm";
 		}
+		
+		// 숙소 입력폼(ISUD)
+		@GetMapping("hotel/hotelUpdateForm")
+		public String hotelUpdateForm(HotelVO hvo, Model model) {
+			logger.info("hotelUpdateForm 함수 진입");
 
-}
+			List<HotelVO> updateList = hotelService.hotelUpdateForm(hvo);
+			 
+			 int nCnt = updateList.size();
+			 
+			 if (nCnt>0) {
+				 logger.info("updateList nCnt = "+ nCnt);
+				 
+				 model.addAttribute("updateList",updateList);
+				 
+				 return "hotel/hotelUpdateForm";
+			 }
+			 
+			 return "hotel/hotelSelect";
+		 }
+	
+		// 호텔 수정(ISUD)
+		@GetMapping("hotel/hotelUpdate")
+		public String hotelUpdate(HotelVO hvo, Model model) {
+			logger.info("hotelUpdate 함수 진입 ");
+
+			
+			logger.info("hotelInsert hvo.getHotelnum() >>> : " + hvo.getHotelnum());
+			logger.info("hotelInsert hvo.getHotelname() >>> : " + hvo.getHotelname());
+			logger.info("hotelInsert hvo.getHoteltel() >>> : " + hvo.getHoteltel());
+			logger.info("hotelInsert hvo.getHotelprice() >>> : " + hvo.getHotelprice());
+			logger.info("hotelInsert hvo.getHoteladress() >>> : " + hvo.getHoteladress());
+			logger.info("hotelInsert hvo.getHotelcoment() >>> : " + hvo.getHotelcoment());
+			logger.info("hotelInsert hvo.getHotelcheckin() >>> : " + hvo.getHotelcheckin());
+			logger.info("hotelInsert hvo.getHotelcheckout() >>> : " + hvo.getHotelcheckout());
+				
+			// 서비스 호출
+			int nCnt = hotelService.hotelUpdate(hvo);
+			
+			if(nCnt > 0) {
+				logger.info("nCnt >>> : " + nCnt);
+				return "hotel/hotelSelect";		
+			}
+
+			return "hotel/hotel_main";
+		}
+	
+	}

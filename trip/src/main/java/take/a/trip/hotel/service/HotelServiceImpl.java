@@ -48,5 +48,19 @@ public class HotelServiceImpl implements HotelService {
 		
 		return hotelDAO.hotelInsert(hvo);
 	}
+	
+	@Override
+	public List<HotelVO> hotelUpdateForm(HotelVO hvo){
+		logger.info("hotelUpdateForm 함수 진입");
+		
+		return hotelDAO.hotelUpdateForm(hvo);
+	}
+	
+	@Override
+	public int hotelUpdate(HotelVO hvo){
+		logger.info("hotelUpdate 함수 진입");
+		
+		return hotelDAO.hotelUpdate(hvo);
+	}
 
 }

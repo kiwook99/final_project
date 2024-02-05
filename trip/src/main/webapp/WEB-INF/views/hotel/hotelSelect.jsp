@@ -600,7 +600,7 @@
 		</div>	
 		
 		<div class="sub-header">
-			<h3 class="sub-title">숙박</h3>
+			<h3 class="sub-title">숙박  <a href="hotelUpdateForm?hotelnum=<%= hvo.getHotelnum() %>" style="float: right;" >수정</a> </h3>
 				</div>
 				<div class="hotelSelect">
 					<div class="detail">
