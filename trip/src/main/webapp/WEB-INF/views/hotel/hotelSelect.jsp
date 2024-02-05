@@ -120,11 +120,7 @@
 		object-fit: fill; /*  이미지가 자동으로 크기 조정되어 부모 요소에 가득 차도록 설정, 이미지는 종횡비를 유지하고 주어진 크기를 채움, 이미지가 맞게 잘림 */
 		object-position: 50% 50%;	/* 이미지 중앙 정렬*/
 	}
-<<<<<<< HEAD
-		 
-=======
-		
->>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
+
 	 .regionarea {
 	    background: rgba(0, 0, 0, 0.5);
 	    border-radius: 20px;
@@ -254,12 +250,8 @@
     #finalPrice {
 	
 	}
-<<<<<<< HEAD
-    
+
 	.coment, .info ul, .name h3{
-=======
-	.coment, .info ul, .name{
->>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 	background-color:#f7f7f7;
 	border-radius: 10px;
 	padding: 20px;
@@ -294,11 +286,7 @@
 	.sub-header a {
 	    margin-right: 10px; /* 링크 간의 간격 조절 */
         padding: 5px 15px;
-<<<<<<< HEAD
-	    background-color: #0aa4b5;
-=======
 	    background-color: #0AA4B5;
->>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 	    color: white;
 	    border: 0;
 	    border-radius: 10px;
@@ -389,20 +377,7 @@
 	            // 최종 가격을 표시할 div에 텍스트 설정
 	            $('#finalPrice').text('이용요금: ' + hotelprice + '원');
 	        }
-<<<<<<< HEAD
-=======
-	       
-		      $("#search_btn").click(function(){
-		         alert('검색합니다.');
-		        
-		         $("#miniSearchForm").attr({
-		            "method":"GET",
-		            "action":"hotelSearch"
-		         }).submit();
-		      });
->>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
-		   });
-	  
+
 	   function viewMap(name,mapx,mapy) {
 			
 	        var mapContainer = $('<div id="map"></div>');
@@ -485,19 +460,12 @@
 </head>
 <body>
 	<%@ include file="/main.jsp" %>
-<<<<<<< HEAD
-		
-=======
+
 	<form id="hotelOrderForm">
->>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
+
 		<div class="sub-header">
-<<<<<<< HEAD
-			<h3 class="sub-title">숙박 
-				<a href="hotelDelete?hotelnum=<%= hvo.getHotelnum() %>" class="delete-link" id="delete-link"> 삭제</a> 
-=======
 			<h3 class="sub-title">숙박
 				<a href="hotelDelete?hotelnum=<%= hvo.getHotelnum() %>" class="delete-link" id="delete-link"> 삭제</a>
->>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 				<a href="hotelUpdateForm?hotelnum=<%= hvo.getHotelnum() %>" class="update-link" id="update-link">수정</a>
 			 </h3>
 		</div>
