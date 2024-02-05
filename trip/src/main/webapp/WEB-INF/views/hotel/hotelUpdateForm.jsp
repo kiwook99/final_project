@@ -276,8 +276,9 @@
            alert("수정버튼");
 
            $('#hotelUpdate').attr({
-               'action' : "hotelUpdate",
-               'method' : 'GET'
+        	   'action' : 'hotelUpdate?hotelnum=<%= hvo.getHotelnum() %>',
+               'method' : 'POST',
+               'enctype' : 'multipart/form-data' 
            }).submit(); 
        });
 	   
@@ -399,30 +400,31 @@
 								</div>
 							</div>
 						</div>	
-						<form class="hotelUpdate">
+						<form class="hotelUpdate" method="POST" action="hotelUpdate?hotelnum=<%= hvo.getHotelnum() %>">
 							<div class="title">
 								<span class="area">
 									<%= hvo.getRegionid() %>
 								</span><br><br>
 								<span class="name">
-									<h3><input type="text" class="hotelname" id="hotelname" value="<%= hvo.getHotelname() %>" size="40"></h3>
+									<h3><input type="text" class="hotelname" name="hotelname" id="hotelname" value="<%= hvo.getHotelname() %>" size="40"></h3>
 								</span><br><hr>
 								<span class="info"><br>
 									<ul>
-										<li> 주소	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="hoteladress" id="hoteladress" value="<%= hvo.getHoteladress() %>" size="40"> </li>
-										<li> 번호	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="hoteltel" id="hoteltel" value="<%= hvo.getHoteltel().replace("<br>", "&nbsp;/&nbsp;") %>" size="40"></li>
-										<li> 체크인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="hotelcheckin" id="hotelcheckin" value="<%= hvo.getHotelcheckin().replace("<br>", "&nbsp;/&nbsp;") %>" size="40"></li>
-										<li> 체크아웃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="hotelcheckout" id="hotelcheckout" value="<%= hvo.getHotelcheckout().replace("<br>", "&nbsp;/&nbsp;") %>" size="40"></li>
+										<li> 주소	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="hoteladress" name="hoteladress" id="hoteladress" value="<%= hvo.getHoteladress() %>" size="40"> </li>
+										<li> 번호	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="hoteltel" name="hoteltel" id="hoteltel" value="<%= hvo.getHoteltel().replace("<br>", "&nbsp;/&nbsp;") %>" size="40"></li>
+										<li> 가격	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="hotelprice" name="hotelprice" id="hotelprice" value="<%= hvo.getHotelprice() %>" size="40"> </li>
+										<li> 체크인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="hotelcheckin" name="hotelcheckin" id="hotelcheckin" value="<%= hvo.getHotelcheckin().replace("<br>", "&nbsp;/&nbsp;") %>" size="40"></li>
+										<li> 체크아웃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="hotelcheckout" name="hotelcheckout" id="hotelcheckout" value="<%= hvo.getHotelcheckout().replace("<br>", "&nbsp;/&nbsp;") %>" size="40"></li>
 									</ul>
 								</span>
 								</div><br>
 								<div class="coment">
 									<p class="overview">
-										<textarea class="hotelcoment" id="hotelcoment" style="width: 100%; height: 100px;" oninput="autoResize(this)"><%= hvo.getHotelcoment() %></textarea>
+										<textarea class="hotelcoment" name="hotelcoment" id="hotelcoment" style="width: 100%; height: 100px;" oninput="autoResize(this)"><%= hvo.getHotelcoment() %></textarea>
 									</p>
 								</div>
 								<div class="update">
-									<input type="submit" value="수정하기" id="hotelupdateBtn" >
+									<input type="submit" value="수정하기" id="hotelupdateBtn" class="hotelupdateBtn">
 									<a href ="hotelSelect?hotelnum=<%= hvo.getHotelnum() %>"> <input type="button" value="돌아가기" > </a>
 								</div>
 							</form>

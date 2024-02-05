@@ -72,5 +72,12 @@ public class HotelServiceImpl implements HotelService {
 		return hotelDAO.hotelUpdate(hvo);
 
 	}
+	
+	@Override
+	public int hotelDelete(HotelVO hvo){
+		logger.info("hotelDelete 함수 진입");
+		
+		return hotelDAO.hotelDelete(hvo);
+	}
 
 }

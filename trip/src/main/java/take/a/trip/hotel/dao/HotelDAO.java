@@ -20,4 +20,7 @@ public interface HotelDAO {
 	// 숙소 수정
 	public int hotelUpdate(HotelVO hvo);
 
+	// 숙소 수정
+	public int hotelDelete(HotelVO hvo);
+
 }

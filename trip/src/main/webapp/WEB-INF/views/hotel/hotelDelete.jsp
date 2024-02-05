@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<script>
+	alert("삭제 완료!");
+	
+	location.href="hotel_main";
+</script>	
 </body>
 </html>
