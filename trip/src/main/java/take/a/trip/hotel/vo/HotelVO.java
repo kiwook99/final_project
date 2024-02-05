@@ -1,7 +1,10 @@
 package take.a.trip.hotel.vo;
 
 public class HotelVO {
-	
+	private String paynum;
+	private String memnum;
+	private String memname;
+	private String memphone;
 	private String hotelnum;			// 여행지 번호(시퀀스)
 	private String regionid;		// 여행지 이름
 	private String hotelname;	// 여행지 카테고리
@@ -111,6 +114,7 @@ public class HotelVO {
 	public HotelVO(String hotelnum, String regionid, String hotelname, String hoteltel, String hotelimage, String hotelprice, String hotelcoment, String hoteladress, String hotelmapx, String hotelmapy
 					,String hotelcheckin, String hotelcheckout, String insertdate, String updatedate, String deleteyn, String pageSize, String groupSize, String curPage, String totalCount, int hotelhis) {
 		
+		
 		this.hotelnum = hotelnum;
 		this.regionid = regionid;
 		this.hotelname = hotelname;
@@ -134,7 +138,52 @@ public class HotelVO {
 		
 	}
 	
+	public HotelVO(String paynum, String memnum, String memname, String memphone, String hotelnum, String hotelname, String hotelprice
+			) {
 	
+	this.memnum = memnum;
+	this.memname = memname;
+	this.memphone = memphone;	
+	this.hotelnum = hotelnum;
+	this.hotelname = hotelname;	
+	this.hotelprice = hotelprice;
+	
+	
+	}
+	
+	
+
+	public String getPaynum() {
+		return paynum;
+	}
+
+	public void setPaynum(String paynum) {
+		this.paynum = paynum;
+	}
+
+	public String getMemnum() {
+		return memnum;
+	}
+
+	public void setMemnum(String memnum) {
+		this.memnum = memnum;
+	}
+
+	public String getMemname() {
+		return memname;
+	}
+
+	public void setMemname(String memname) {
+		this.memname = memname;
+	}
+
+	public String getMemphone() {
+		return memphone;
+	}
+
+	public void setMemphone(String memphone) {
+		this.memphone = memphone;
+	}
 
 	public String getKeyword() {
 		return keyword;

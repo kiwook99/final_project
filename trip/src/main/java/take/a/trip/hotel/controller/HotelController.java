@@ -8,14 +8,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile; // 최신
 import com.oreilly.servlet.MultipartRequest;	// 구
 
 import take.a.trip.hotel.service.HotelService;
 import take.a.trip.hotel.util.CommonUtils;
+import take.a.trip.hotel.util.NumUtil;
 import take.a.trip.hotel.vo.HotelVO;
+import take.a.trip.order.vo.OrderVO;
 import take.a.trip.spot.vo.SpotVO;
 import take.a.trip.hotel.controller.HotelController;
 import take.a.trip.hotel.service.HotelService;
@@ -126,6 +128,7 @@ public class HotelController {
 		 logger.info("hotelSelect 함수진입 ");
 		 
 		 logger.info("hotelSelect hvo.getHotelnum()=> "+ hvo.getHotelnum());
+		 logger.info("hotelSelect hvo.getHotelname()=> "+ hvo.getHotelname());
 
 		 
 		 List<HotelVO> selectList = hotelService.hotelSelect(hvo);
@@ -136,6 +139,9 @@ public class HotelController {
 			 logger.info("hotelSelect nCnt = "+ nCnt);
 			 
 			 model.addAttribute("selectList",selectList);
+			
+			 model.addAttribute("hotelname", hvo.getHotelname());
+			 model.addAttribute("hotelprice", hvo.getHotelprice());
 			 
 			 return "hotel/hotelSelect";
 		 }
@@ -143,11 +149,78 @@ public class HotelController {
 		 return "hotel/hotel_main";
 	 }
 	 
+
+	 	// 주문 입력 폼
+	 	@PostMapping("hotel/hotelOrder")
+	    public String hotelOrder(Model model, HttpServletRequest req) {
+	        logger.info("HotelController hotelOrder 함수 진입 >>> : ");
+	        
+	        try {
+	         logger.info("hotelOrder 함수 진입 ");
+	         	
+	         	// 한글 인코딩 설정
+		        req.setCharacterEncoding("UTF-8");
+		        HotelVO hvo = new HotelVO();
+	         
+	 	        String hotelname = req.getParameter("hotelname");
+	 	        String hotelprice = req.getParameter("hotelprice");
+	 	        String memname = req.getParameter("memname");
+		        
+		        logger.info("hotelOrder hvo.getMemname() >>> : " + hvo.getMemname());
+		        logger.info("hotelOrder hvo.getHotelname() >>> : " + hvo.getHotelname());
+		        logger.info("hotelOrder hvo.getHotelprice() >>> : " + hvo.getHotelprice());
+		        
+	 	        model.addAttribute("hotelname", hotelname);
+	 	        model.addAttribute("hotelprice", hotelprice);
+	 	        model.addAttribute("memname", memname);
+	 	        
+	 	       logger.info("hotelOrderForm memname: " + memname);
+	 	       logger.info("hotelOrderForm hotelname: " + hotelname);
+	 	       logger.info("hotelOrderForm hotelprice: " + hotelprice);
+
+	 	        return "hotel/hotelOrderForm";
+	 	    } catch (IOException e) {
+	 	        e.printStackTrace(); // 예외 처리
+	 	    }
+
+	 	    return "hotel/hotelSelect";
+	 	}
+	 	
+	 	@PostMapping("hotel/hotelOrderForm")
+	 	public String hotelOrderForm(Model model, HttpServletRequest req) {
+	 	    logger.info("hotelOrderForm 함수 진입");
+
+	 	    try {
+	 	        // 한글 인코딩 설정
+	 	        req.setCharacterEncoding("UTF-8");
+
+	 	        // 여기서 필요한 값들을 가져와서 model에 추가
+	 	        String hotelname = req.getParameter("hotelname");
+	 	        String hotelprice = req.getParameter("hotelprice");
+	 	        String memname = req.getParameter("memname");
+
+	 	        model.addAttribute("hotelname", hotelname);
+	 	        model.addAttribute("hotelprice", hotelprice);
+	 	        model.addAttribute("memname", memname);
+	 	        
+	 	       logger.info("hotelOrderForm memname: " + memname);
+	 	       logger.info("hotelOrderForm hotelname: " + hotelname);
+	 	       logger.info("hotelOrderForm hotelprice: " + hotelprice);
+
+	 	        return "hotel/hotelOrderForm";
+	 	    } catch (IOException e) {
+	 	        e.printStackTrace(); // 예외 처리
+	 	    }
+
+	 	    return "hotel/hotelSelect";
+	 	}
+
 	 
 		// 호텔 입력폼(ISUD)
 		@GetMapping("hotel/hotelInsertForm")
 		public String hotelInsertForm() {
 			logger.info("hotelInsertForm 함수 진입");
+
 
 			return "hotel/hotelInsertForm";
 		}	

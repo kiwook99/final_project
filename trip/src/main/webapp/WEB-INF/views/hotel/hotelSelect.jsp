@@ -20,8 +20,10 @@
 
 	List<HotelVO> list = (List<HotelVO>)obj;
 	int nCnt = list.size();
-	
+
 	String hotelprice="";
+	String hotelname="";
+	String memname="";
 	HotelVO hvo = null;
 	
 	if(nCnt==1){
@@ -54,14 +56,11 @@
 		<style type="text/css">
 		
 		
-
 		
 		* {
 			margin: 0;		/* 여백 제거*/
 			padding: 0;		/* 패딩 제거*/
 		}
-
-
 		.img {
 			display: block;	/* 한 줄 모두 차지*/
 		}
@@ -75,7 +74,7 @@
 		
 		.img img {
 			width: 100%; /* width, height 부모 요소에 대해 이미지가 가득 차도록 함*/
-			height: 100%; 
+			height: 100%;
 			object-fit: cover; /*  이미지가 자동으로 크기 조정되어 부모 요소에 가득 차도록 설정, 이미지는 종횡비를 유지하고 주어진 크기를 채움, 이미지가 맞게 잘림 */
 			object-position: 50% 50%;	/* 이미지 중앙 정렬*/
 		}
@@ -84,10 +83,9 @@
 		    border: 0 none;	/* 외곽선 제거, 두께 0, 유형 없음*/
 		}			
 	
-
 		body {
 		    font-size: 17px;
-		    
+		   
 		}
 		
 		div {
@@ -116,14 +114,17 @@
 	    align-items: center;
 	    justify-content: center;
 		}
-
 	.swiper-slide img {
 	    width: 100%; /* width, height 부모 요소에 대해 이미지가 가득 차도록 함*/
-		height: 100%; 
+		height: 100%;
 		object-fit: fill; /*  이미지가 자동으로 크기 조정되어 부모 요소에 가득 차도록 설정, 이미지는 종횡비를 유지하고 주어진 크기를 채움, 이미지가 맞게 잘림 */
 		object-position: 50% 50%;	/* 이미지 중앙 정렬*/
 	}
+<<<<<<< HEAD
 		 
+=======
+		
+>>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 	 .regionarea {
 	    background: rgba(0, 0, 0, 0.5);
 	    border-radius: 20px;
@@ -169,7 +170,6 @@
 	.next {
    	margin-left: 100px;
     margin-right: 100px;
-    
 	}
 	
 	.detail-basic{
@@ -192,7 +192,6 @@
 		
 	.detail {
     padding-top: 20px;
-
 	}
 	
 	.swiper-button-prev,
@@ -226,20 +225,17 @@
 	.mapContainer {
       width: 30.3%; /* 지도 컨테이너의 최대 너비 설정 */
       margin-right: auto;
-      height: 450px 
+      height: 450px
     }
-
     /* 입실일, 퇴실일 부분의 스타일도 조절해야 할 수 있습니다. */
     .datePickerContainer {
         margin-bottom: 10px; /* 날짜 선택 부분 간의 간격 조절 */
     }
-    
     .datePickerContainer {
         display: flex;
         justify-content: space-around; /* 각 요소 간의 여백을 고르게 배분 */
         margin-top: 40px; /* 필요에 따라 조절 */
     }
-
     .datePickerBox {
         padding: 10px;
         border: 1px solid #ccc; /* 테두리 추가 */
@@ -247,22 +243,23 @@
         text-align-last: center;
         margin-bottom:20px;
     }
-    
     .datePickerBox label{
     	display: block;
     }
-    
 	
 	input[type="text"] {
         border: none;
         outline: none;
     }
-    
     #finalPrice {
 	
 	}
+<<<<<<< HEAD
     
 	.coment, .info ul, .name h3{
+=======
+	.coment, .info ul, .name{
+>>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 	background-color:#f7f7f7;
 	border-radius: 10px;
 	padding: 20px;
@@ -281,13 +278,11 @@
         margin-bottom: 30px;
     	margin-top: 30px;
     }
-
     #map,
     #pano {
         flex: 1;
         height: 100%;
     }
-
 	#map{
 	margin-left:100px;
 	}
@@ -299,72 +294,79 @@
 	.sub-header a {
 	    margin-right: 10px; /* 링크 간의 간격 조절 */
         padding: 5px 15px;
+<<<<<<< HEAD
 	    background-color: #0aa4b5;
+=======
+	    background-color: #0AA4B5;
+>>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 	    color: white;
 	    border: 0;
 	    border-radius: 10px;
 	    FLOAT: RIGHT;
 	}
 	
-
 	</style>
 		
 	<script type="text/javascript">
 	   $(document).ready(function(){
 		      console.log("숙소 상세페이지 접속");
-		      
+		     
 		      $('#checkinDate, #checkoutDate').datepicker({
 		          format: 'yyyy-mm-dd',
 		          autoclose: true
 		      });
-		      
+
+				
+				$(document).on("click", "#cardBtn", function(){
+					console.log("cardBtn >>> : ");
+					alert("결제하기");
+					 var memname = '<%=memname%>';
+					 var hotelprice = '<%= hotelprice %>';
+					
+					$('#hotelOrderForm').attr({
+						'action':'hotelOrder?memname=<%= hvo.getMemname() %>&hotelnum=<%= hvo.getHotelnum() %>&hotelprice=<%= hvo.getHotelprice() %>',
+						'method':'POST',
+						'enctype':'multipart/form-data'
+					}).submit();
+				});
+		
+		     
 		   // 현재 날짜 구하기
 	        var currentDate = new Date();
 	        var formattedCurrentDate = currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0');
-
 	        // 내일 날짜 구하기
 	        var tomorrowDate = new Date();
 	        tomorrowDate.setDate(tomorrowDate.getDate() + 1);
 	        var formattedTomorrowDate = tomorrowDate.getFullYear() + '-' + (tomorrowDate.getMonth() + 1).toString().padStart(2, '0') + '-' + tomorrowDate.getDate().toString().padStart(2, '0');
-
 	     	// 최종 가격 계산 및 초기 표시
 	        calculateAndDisplayDefaultPrice()
-
 	        // 입실일, 퇴실일 텍스트 박스에 값 설정
 	        $('#checkinDate').val(formattedCurrentDate);
 	        $('#checkoutDate').val(formattedTomorrowDate);
-
 	        // 체크인 날짜 선택 이벤트
 	        $('#checkinDate').change(function () {
 	            var checkinDate = new Date($(this).val());
 	            var nextDay = new Date(checkinDate);
 	            nextDay.setDate(checkinDate.getDate() + 1);
-
 	            // 체크인 날짜 선택 시, 체크아웃 날짜를 체크인 날짜의 다음 날짜로 설정
 	            $('#checkoutDate').datepicker('setDate', nextDay);
-
 	            // 체크아웃 날짜 텍스트 상자로 포커스 이동
 	            setTimeout(function () {
 	                $('#checkoutDate').focus();
 	            }, 0);
-
 	            // 최종 가격 계산 및 표시
 	            calculateAndDisplayFinalPrice();
 	        });
-
 	        // 체크아웃 날짜 선택 이벤트
 	        $('#checkoutDate').change(function (e) {
 	            e.preventDefault();  // 기본 동작 막기
 	            e.stopPropagation();  // 이벤트 전파 중지
-
 	            var checkinDate = new Date($('#checkinDate').val());
 	            var checkoutDate = new Date($(this).val());
-
 	            if (checkoutDate <= checkinDate) {
 	                alert('체크아웃 날짜는 체크인 날짜보다 미래여야 합니다.');
 	                return;
 	            }
-
 	            // 최종 가격 계산 및 표시
 	            calculateAndDisplayFinalPrice();
 	        });
@@ -375,39 +377,46 @@
 	            var hotelprice = parseInt(<%= hvo.getHotelprice() %>);
 	            $('#finalPrice').text('이용요금: ' + hotelprice + '원');
 	        }
-	        
+	       
 	     // 최종 가격 계산 및 표시 함수
 	        function calculateAndDisplayFinalPrice() {
 	            var checkinDate = new Date($('#checkinDate').val());
 	            var checkoutDate = new Date($('#checkoutDate').val());
-
 	            var timeDiff = Math.abs(checkoutDate.getTime() - checkinDate.getTime());
 	            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
 	            var hotelprice = diffDays * parseInt(<%= hvo.getHotelprice() %>);
-
 	            console.log(finalPrice);
 	            // 최종 가격을 표시할 div에 텍스트 설정
 	            $('#finalPrice').text('이용요금: ' + hotelprice + '원');
 	        }
+<<<<<<< HEAD
+=======
+	       
+		      $("#search_btn").click(function(){
+		         alert('검색합니다.');
+		        
+		         $("#miniSearchForm").attr({
+		            "method":"GET",
+		            "action":"hotelSearch"
+		         }).submit();
+		      });
+>>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 		   });
-	   
+	  
 	   function viewMap(name,mapx,mapy) {
 			
 	        var mapContainer = $('<div id="map"></div>');
 	        var panoContainer = $('<div id="pano"></div>');
 	        $('#mapContainer').empty().append(mapContainer).append(panoContainer);
-
 	        var map = new naver.maps.Map(mapContainer[0], {
 	            center: new naver.maps.LatLng(mapy, mapx),
 	            zoom: 18
 	        });
-
 	        var marker = new naver.maps.Marker({
 	            position: new naver.maps.LatLng(mapy, mapx),
 	            map: map
 	        });
-	        
+	       
 	        pano = new naver.maps.Panorama("pano", {
                 position: new naver.maps.LatLng(mapy, mapx),
                 pov: {
@@ -416,31 +425,27 @@
                     fov: 100
                 }
             });
-	        
+	       
 	        naver.maps.Event.addListener(pano, 'pano_changed', function () {
                 var latlng = pano.getPosition();
-
                 if (!latlng.equals(map.getCenter())) {
                     map.setCenter(latlng);
                 }
             });
-	        
+	       
 	        var streetLayer = new naver.maps.StreetLayer();
             naver.maps.Event.once(map, 'init', function () {
                 streetLayer.setMap(map);
             });
-
             var btn = $('#street');
             btn.on("click", function (e) {
                 e.preventDefault();
-
                 if (streetLayer.getMap()) {
                     streetLayer.setMap(null);
                 } else {
                     streetLayer.setMap(map);
                 }
             });
-            
             naver.maps.Event.addListener(map, 'streetLayer_changed', function (streetLayer) {
                 if (streetLayer) {
                     btn.addClass('control-on');
@@ -448,25 +453,23 @@
                     btn.removeClass('control-on');
                 }
             });
-            
             naver.maps.Event.addListener(map, 'click', function (e) {
                 if (streetLayer.getMap()) {
                     var latlng = e.coord;
                     pano.setPosition(latlng);
                 }
             });
-		   
+		  
 	        var contentString = [
 	            '<div class="iw_inner">',
 	            '   <h3>' + name + '</h3>',
 	            '   </p>',
 	            '</div>'
 	        ].join('');
-		   
+		  
 	        var infowindow = new naver.maps.InfoWindow({
 	            content: contentString
 	        });
-
 	        naver.maps.Event.addListener(marker, "click", function(e) {
 	            if (infowindow.getMap()) {
 	                infowindow.close();
@@ -474,17 +477,27 @@
 	                infowindow.open(map, marker);
 	            }
 	        });
-
 	        infowindow.open(map, marker, pano);
 	    }
+	   
+
 </script>
 </head>
 <body>
 	<%@ include file="/main.jsp" %>
+<<<<<<< HEAD
 		
+=======
+	<form id="hotelOrderForm">
+>>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 		<div class="sub-header">
+<<<<<<< HEAD
 			<h3 class="sub-title">숙박 
 				<a href="hotelDelete?hotelnum=<%= hvo.getHotelnum() %>" class="delete-link" id="delete-link"> 삭제</a> 
+=======
+			<h3 class="sub-title">숙박
+				<a href="hotelDelete?hotelnum=<%= hvo.getHotelnum() %>" class="delete-link" id="delete-link"> 삭제</a>
+>>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 				<a href="hotelUpdateForm?hotelnum=<%= hvo.getHotelnum() %>" class="update-link" id="update-link">수정</a>
 			 </h3>
 		</div>
@@ -544,11 +557,11 @@
 							    </div>
 							   <div >
 							   		<span id="finalPrice"></span><br>
-							   		<span class="pay"><a href=""> 결제하기 </a></span>
+							   		<span class="pay"><button type="button" id="cardBtn"> 결제하기</span>
 								</div>
 							</div>
 						</div>
-					</div>
+					</div></form>
 					<hr class="next"><br>
 					<div class="container">
 					<div class="txt">
@@ -559,8 +572,6 @@
 							        viewMap('<%= hvo.getHotelname() %>', <%= hvo.getHotelmapx() %>, <%= hvo.getHotelmapy() %>);
 							    </script>
 					</div>
-
-
 				</div>
 			</div>
 		</div>
@@ -592,4 +603,4 @@
 		
 		
 	</body>
-</html>		
+</html>
