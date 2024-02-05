@@ -223,6 +223,7 @@
     color: #000;
     font-weight: 800;
     text-align: center;
+    margin-left: 30px;
 	}
 	
 	.sub-header{
@@ -361,6 +362,13 @@
 	#pano{
 	margin-right:100px;
 	}
+	
+	.update-link, .delete-link {
+	    margin-right: 10px; /* 링크 간의 간격 조절 */
+	    color: #70bdff; /* 삭제 링크의 텍스트 색상 */
+	    FLOAT: RIGHT;
+	}
+	
 
 	</style>
 		
@@ -600,84 +608,87 @@
 		</div>	
 		
 		<div class="sub-header">
-			<h3 class="sub-title">숙박  <a href="hotelUpdateForm?hotelnum=<%= hvo.getHotelnum() %>" style="float: right;" >수정</a> </h3>
-				</div>
-				<div class="hotelSelect">
-					<div class="detail">
-						<div class="detail-basic">
-						<div class="slider">
-							<div class="swiper-container">
-								<div class="swiper-wrapper">
-									<%
-								        String[] imageUrls = hvo.getHotelimage().split(",");
-								        for (String imageUrl : imageUrls) {
-								    %>
-										<div class="swiper-slide">
-											 <img src="<%= imageUrl.trim() %>">
-										</div>
-									<%
-										}
-									%>
-								</div>
-								<div class="page_box">
-									<div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"></div>
-									<div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide"></div>
-								</div>
-							</div>
-						</div>	
-						<div class="txt-wrap">
-							<div class="title">
-								<span class="area">
-									<%= hvo.getRegionid() %>
-								</span><br><br>
-								<span class="name">
-									<h3><%= hvo.getHotelname() %></h3>
-								</span><br><hr>
-								<span class="info"><br>
-									<ul>
-										<li> 주소	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= hvo.getHoteladress() %> </li>
-										<li> 번호	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= hvo.getHoteltel().replace("<br>", "&nbsp;/&nbsp;") %>
-										<li> 체크인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckin().replace("<br>", "&nbsp;/&nbsp;") %>
-										<li> 체크아웃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckout().replace("<br>", "&nbsp;/&nbsp;") %>
-									</ul>
-								</span>
-								</div><br>
-								<div class="coment">
-									<p class="overview">
-										<%= hvo.getHotelcoment() %>
-									</p>
-								</div>
-								<div class="datePickerContainer">
-								    <div class="datePickerBox">
-								        <label for="checkinDate"> 체크인 </label>
-								        <input type="text" id="checkinDate" readonly>
-								    </div>
-								    <div class="datePickerBox">
-								        <label for="checkoutDate"> 체크아웃 </label>
-								        <input type="text" id="checkoutDate" readonly>
-								    </div>
-								   <div >
-								   		<span id="finalPrice"></span><br>
-								   		<span class="pay"><a href=""> 결제하기 </a></span>
+			<h3 class="sub-title">숙박 
+				<a href="hotelDelete?hotelnum=<%= hvo.getHotelnum() %>" class="delete-link"> 삭제</a> 
+				<a href="hotelUpdateForm?hotelnum=<%= hvo.getHotelnum() %>" class="update-link" >수정</a>
+			 </h3>
+		</div>
+			<div class="hotelSelect">
+				<div class="detail">
+					<div class="detail-basic">
+					<div class="slider">
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<%
+							        String[] imageUrls = hvo.getHotelimage().split(",");
+							        for (String imageUrl : imageUrls) {
+							    %>
+									<div class="swiper-slide">
+										 <img src="<%= imageUrl.trim() %>">
 									</div>
+								<%
+									}
+								%>
+							</div>
+							<div class="page_box">
+								<div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"></div>
+								<div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide"></div>
+							</div>
+						</div>
+					</div>	
+					<div class="txt-wrap">
+						<div class="title">
+							<span class="area">
+								<%= hvo.getRegionid() %>
+							</span><br><br>
+							<span class="name">
+								<h3><%= hvo.getHotelname() %></h3>
+							</span><br><hr>
+							<span class="info"><br>
+								<ul>
+									<li> 주소	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= hvo.getHoteladress() %> </li>
+									<li> 번호	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= hvo.getHoteltel().replace("<br>", "&nbsp;/&nbsp;") %>
+									<li> 체크인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckin().replace("<br>", "&nbsp;/&nbsp;") %>
+									<li> 체크아웃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckout().replace("<br>", "&nbsp;/&nbsp;") %>
+								</ul>
+							</span>
+							</div><br>
+							<div class="coment">
+								<p class="overview">
+									<%= hvo.getHotelcoment() %>
+								</p>
+							</div>
+							<div class="datePickerContainer">
+							    <div class="datePickerBox">
+							        <label for="checkinDate"> 체크인 </label>
+							        <input type="text" id="checkinDate" readonly>
+							    </div>
+							    <div class="datePickerBox">
+							        <label for="checkoutDate"> 체크아웃 </label>
+							        <input type="text" id="checkoutDate" readonly>
+							    </div>
+							   <div >
+							   		<span id="finalPrice"></span><br>
+							   		<span class="pay"><a href=""> 결제하기 </a></span>
 								</div>
 							</div>
 						</div>
-						<hr class="next"><br>
-						<div class="container">
-						<div class="txt">
-							<h2>지도</h2>
-						</div>
-						<div class="mapContainer" id="mapContainer">
-								    <script type="text/javascript">
-								        viewMap('<%= hvo.getHotelname() %>', <%= hvo.getHotelmapx() %>, <%= hvo.getHotelmapy() %>);
-								    </script>
-						</div>
-
-
 					</div>
+					<hr class="next"><br>
+					<div class="container">
+					<div class="txt">
+						<h2>지도</h2>
+					</div>
+					<div class="mapContainer" id="mapContainer">
+							    <script type="text/javascript">
+							        viewMap('<%= hvo.getHotelname() %>', <%= hvo.getHotelmapx() %>, <%= hvo.getHotelmapy() %>);
+							    </script>
+					</div>
+
+
 				</div>
 			</div>
+		</div>
 			
 		<script>
 			new Swiper('.swiper-container',{

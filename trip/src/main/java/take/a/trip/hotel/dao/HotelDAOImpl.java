@@ -68,4 +68,11 @@ public class HotelDAOImpl implements HotelDAO {
 		return sqlSession.openSession().update("hotelUpdate",hvo);
 	}
 	
+	@Override
+	public int hotelDelete(HotelVO hvo){
+		logger.info("hotelDelete 함수 진입");
+		
+		return sqlSession.openSession().update("hotelDelete",hvo);
+	}
+	
 }
