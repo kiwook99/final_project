@@ -128,8 +128,6 @@ public class HotelController {
 		 logger.info("hotelSelect 함수진입 ");
 		 
 		 logger.info("hotelSelect hvo.getHotelnum()=> "+ hvo.getHotelnum());
-		 logger.info("hotelSelect hvo.getHotelname()=> "+ hvo.getHotelname());
-
 		 
 		 List<HotelVO> selectList = hotelService.hotelSelect(hvo);
 		 
@@ -139,10 +137,7 @@ public class HotelController {
 			 logger.info("hotelSelect nCnt = "+ nCnt);
 			 
 			 model.addAttribute("selectList",selectList);
-			
-			 model.addAttribute("hotelname", hvo.getHotelname());
-			 model.addAttribute("hotelprice", hvo.getHotelprice());
-			 
+
 			 return "hotel/hotelSelect";
 		 }
 		 
@@ -165,11 +160,7 @@ public class HotelController {
 	 	        String hotelname = req.getParameter("hotelname");
 	 	        String hotelprice = req.getParameter("hotelprice");
 	 	        String memname = req.getParameter("memname");
-		        
-		        logger.info("hotelOrder hvo.getMemname() >>> : " + hvo.getMemname());
-		        logger.info("hotelOrder hvo.getHotelname() >>> : " + hvo.getHotelname());
-		        logger.info("hotelOrder hvo.getHotelprice() >>> : " + hvo.getHotelprice());
-		        
+
 	 	        model.addAttribute("hotelname", hotelname);
 	 	        model.addAttribute("hotelprice", hotelprice);
 	 	        model.addAttribute("memname", memname);

@@ -97,24 +97,6 @@
 		
 </select>
 
-<insert id="hotelOrder" parameterType="hvo">
-	 INSERT INTO PAY (
-        PAYNUM, 
-        MEMNUM,
-        HOTELNUM,
-        HOTELNAME,
-        HOTELPRICE
-    )
-    VALUES (
-        pay_seq.NEXTVAL,
-        #{memnum, jdbcType=VARCHAR},
-        #{hotelnum, jdbcType=VARCHAR},
-        #{hotelname, jdbcType=VARCHAR},
-        #{hotelprice, jdbcType=VARCHAR}
-    )
-</insert>
-
-
 <!-- 숙소 등록 -->
 <insert id="hotelInsert" parameterType="hvo">
 

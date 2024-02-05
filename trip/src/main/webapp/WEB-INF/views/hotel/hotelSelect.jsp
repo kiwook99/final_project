@@ -306,7 +306,7 @@
 					 var hotelprice = '<%= hotelprice %>';
 					
 					$('#hotelOrderForm').attr({
-						'action':'hotelOrder?memname=<%= hvo.getMemname() %>&hotelnum=<%= hvo.getHotelnum() %>&hotelprice=<%= hvo.getHotelprice() %>',
+						'action':'hotelOrder?memname=<%= hvo.getMemname() %>&hotelname=<%= hvo.getHotelname() %>&hotelprice=<%= hvo.getHotelprice() %>',
 						'method':'POST',
 						'enctype':'multipart/form-data'
 					}).submit();
@@ -522,7 +522,7 @@
 							    </div>
 							   <div >
 							   		<span id="finalPrice"></span><br>
-							   		<span class="pay"><button type="button" id="cardBtn"> 결제하기</span>
+							   		<span class="pay"><button type="button" id="cardBtn"> 예약하기</span>
 								</div>
 							</div>
 						</div>
