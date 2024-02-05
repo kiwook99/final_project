@@ -95,7 +95,7 @@
 	    color: black;
 		}	
 				
-	 .area {
+	 .regionarea {
 	    position: absolute;
 	    background: rgba(0, 0, 0, 0.5);
 	    border-radius: 20px;
@@ -103,9 +103,13 @@
 	    font-weight: 700;
 	    top: 10px; /* 조절할 수 있는 값으로 변경 */
 	    left: 10px; /* 조절할 수 있는 값으로 변경 */
+	    height: 26px;
+	    line-height: 26px;
+	    padding: 0 10px;
+	    font-size: 13px;
 	}
 	
-	.area::before {
+	.regionarea::before {
 	    content: '';
 	    display: inline-block;
 	    background: url('${pageContext.request.contextPath}/resources/images/지도.png') 0 0 / 100% 100% no-repeat;
@@ -116,13 +120,6 @@
 	}
 	 
 
-	.area {
-	    height: 26px;
-	    line-height: 26px;
-	    padding: 0 10px;
-	    font-size: 13px;
-	}
-	
 	.name strong {
 	    font-size: 16px;
 	    color: #000;
@@ -131,6 +128,14 @@
 	.miniSearchForm{
 	    margin-bottom: 20px;
 	    text-align: center;
+	}
+	
+	#search_btn{
+	padding: 5px 15px;
+    background-color: #0aa4b5;
+    color: white;
+    border: 0;
+    border-radius: 10px;
 	}
 		</style>
 		
@@ -164,6 +169,7 @@
 				<input type="submit" id="search_btn" name="search_btn" value="검색">
 			</form>
 		</div>
+		<hr><br><br>
 		<div class="main">
 			<div class="contents">
 				<div class="list_content">
@@ -191,7 +197,7 @@
 					                <img src="${pageContext.request.contextPath}/resources/fileupload/hotel/<%= hvo.getHotelimage() %>">
 					            <% } %>
 					        </span>
-							<span class="area">
+							<span class="regionarea">
 								<%= hvo.getRegionid() %>
 							</span>
 							</span>

@@ -17,7 +17,7 @@
 		
 		<a href="spot/spot_detail">관광 상세정보</a>
 		
-		<a href="adminBoardSelectAll">공지사항 게시판</a>
+		<a href="adminboard/adminBoardSelectAll">공지사항 게시판</a>
 
 		<a href="spot/spot_ISUD">관광정보입력(ISUD)</a>
 		
@@ -27,6 +27,7 @@
 		
 		<a href="main">메인상단</a>
 		
+
 
 </body>
 </html>

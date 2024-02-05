@@ -97,7 +97,6 @@
 		
 </select>
 
-
 <!-- 숙소 등록 -->
 <insert id="hotelInsert" parameterType="hvo">
 
@@ -142,4 +141,33 @@
 		AND		H.HOTELNUM = #{hotelnum}
 		
 </select>
+
+<!-- 수정 -->
+<update id="hotelUpdate" parameterType="hvo">
+
+	UPDATE  HOTEL H
+	   SET  H.HOTELNAME = #{hotelname}, 
+	   		H.HOTELTEL = #{hoteltel},
+	   		H.HOTELADRESS = #{hoteladress}, 
+	   		H.HOTELPRICE = #{hotelprice}, 
+	   		H.HOTELCHECKIN = #{hotelcheckin}, 
+	   		H.HOTELCHECKOUT = #{hotelcheckout}, 
+	   		H.HOTELCOMENT = #{hotelcoment},
+	   		H.HOTELMAPX = #{hotelmapx},
+	   		H.HOTELMAPY = #{hotelmapy}, 
+	   		H.UPDATEDATE = SYSDATE
+	 WHERE  H.DELETEYN = 'Y'
+	   AND  H.HOTELNUM = #{hotelnum}
+	   
+</update>	
+
+<!-- 삭제 -->
+<update id="hotelDelete" parameterType="hvo">
+
+	UPDATE  HOTEL H
+	   SET  H.DELETEYN = 'N'
+	 WHERE  H.HOTELNUM = #{hotelnum}
+	   
+</update>	
+
 </mapper>

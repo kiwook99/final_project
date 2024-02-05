@@ -15,19 +15,21 @@
 			}
 			
 			#insertbtn {
-				padding: 5px 15px;
+				padding: 10px 25px;
 				background-color: #0aa4b5;
 				color: white;
 				border: 0;
 				border-radius: 10px;
+				font-size: 15px;
 			}
 			
 			.deleteBtn {
-			    padding: 5px 10px;
+			    padding: 5px 15px;
 			    background-color: #0aa4b5;
 			    color: white;
 			    border: 0;
 			    border-radius: 10px;
+			    font-size: 15px;
 			}
 			
 			.name {
@@ -293,7 +295,7 @@
 					</td>
 				</tr>
 			</table>
-			
 		</form>
+		<br><br>
 	</body>
 </html>

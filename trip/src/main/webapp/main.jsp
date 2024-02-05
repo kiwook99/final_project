@@ -23,7 +23,7 @@
 				
 			}
 			
-			ul, li {
+			.logo ul, .logo li {
 				list-style: none;	/* 목록 스타일 제거*/
 			}
 			
@@ -53,8 +53,21 @@
 			}
 			
 			
+<<<<<<< HEAD
 	
 						
+=======
+			.logo a:link,
+			.logo a:visited,
+			.logo a:focus,
+			.logo a:active {
+			    /* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
+			    text-decoration: none;
+			    color: black;
+			}
+			
+							
+>>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 			
 			.img img {
 				width: 100%; /* width, height 부모 요소에 대해 이미지가 가득 차도록 함*/
@@ -132,19 +145,21 @@
 			}
 		
 			#loginBtn {
-				padding: 5px 15px;
+				padding: 10px 20px;
 				background-color: #0aa4b5;
 				color: white;
 				border: 0;
 				border-radius: 10px;
+				font-size: 15px;
 			}
 			
 			#logoutBtn {
-				padding: 5px 15px;
+				padding: 10px 20px;
 				background-color: #0aa4b5;
 				color: white;
 				border: 0;
 				border-radius: 10px;
+				font-size: 15px;
 			}			
 			
 			
@@ -167,6 +182,12 @@
 			 h1 {
 			 	text-align: center;
 			 }
+			 
+		 	.update-link, .delete-link {
+			    margin-right: 10px; /* 링크 간의 간격 조절 */
+			    color: #70bdff; /* 삭제 링크의 텍스트 색상 */
+			    FLOAT: RIGHT;
+			}
 			 
 			 	
 		</style>
@@ -217,11 +238,16 @@
 						 <a class="menuLink" href="#content3">게시판</a>
 						 	<ul class ="sb"> 
 								 <li><a href="#" class="submenuLink" >자유 게시판</a></li>
-								 <li><a href="#" class="submenuLink" >공지사항 게시판</a></li>
+								 <li><a href="adminBoardSelectAll" class="submenuLink" >공지사항 게시판</a></li>
 						 	</ul>
 						 </li>				 
 					 </ul> 
-			</div>				 
+			</div>	
+		<!-- top 아이콘 -->
+		<div style="position:fixed; bottom: 20px; right:25px;">
+			<a href="#"><img src="${pageContext.request.contextPath}/resources/images/img/topbutton.png" width="50" height="50" title="상단으로"></a>
+		</div>			 
+		<br>
 </body>
 </html>
 

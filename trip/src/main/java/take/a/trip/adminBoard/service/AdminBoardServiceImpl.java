@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import take.a.trip.adminBoard.vo.AdminBoardVO;
 import take.a.trip.adminBoard.dao.AdminBoardDAO;
 

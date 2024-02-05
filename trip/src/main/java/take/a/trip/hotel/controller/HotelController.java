@@ -4,17 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile; // 최신
 import com.oreilly.servlet.MultipartRequest;	// 구
 
 import take.a.trip.hotel.service.HotelService;
 import take.a.trip.hotel.util.CommonUtils;
+import take.a.trip.hotel.util.NumUtil;
 import take.a.trip.hotel.vo.HotelVO;
+import take.a.trip.order.vo.OrderVO;
+import take.a.trip.spot.vo.SpotVO;
 import take.a.trip.hotel.controller.HotelController;
 import take.a.trip.hotel.service.HotelService;
 
@@ -124,7 +128,6 @@ public class HotelController {
 		 logger.info("hotelSelect 함수진입 ");
 		 
 		 logger.info("hotelSelect hvo.getHotelnum()=> "+ hvo.getHotelnum());
-
 		 
 		 List<HotelVO> selectList = hotelService.hotelSelect(hvo);
 		 
@@ -134,18 +137,81 @@ public class HotelController {
 			 logger.info("hotelSelect nCnt = "+ nCnt);
 			 
 			 model.addAttribute("selectList",selectList);
-			 
+
 			 return "hotel/hotelSelect";
 		 }
 		 
 		 return "hotel/hotel_main";
 	 }
 	 
+
+	 	// 주문 입력 폼
+	 	@PostMapping("hotel/hotelOrder")
+	    public String hotelOrder(Model model, HttpServletRequest req) {
+	        logger.info("HotelController hotelOrder 함수 진입 >>> : ");
+	        
+	        try {
+	         logger.info("hotelOrder 함수 진입 ");
+	         	
+	         	// 한글 인코딩 설정
+		        req.setCharacterEncoding("UTF-8");
+		        HotelVO hvo = new HotelVO();
+	         
+	 	        String hotelname = req.getParameter("hotelname");
+	 	        String hotelprice = req.getParameter("hotelprice");
+	 	        String memname = req.getParameter("memname");
+
+	 	        model.addAttribute("hotelname", hotelname);
+	 	        model.addAttribute("hotelprice", hotelprice);
+	 	        model.addAttribute("memname", memname);
+	 	        
+	 	       logger.info("hotelOrderForm memname: " + memname);
+	 	       logger.info("hotelOrderForm hotelname: " + hotelname);
+	 	       logger.info("hotelOrderForm hotelprice: " + hotelprice);
+
+	 	        return "hotel/hotelOrderForm";
+	 	    } catch (IOException e) {
+	 	        e.printStackTrace(); // 예외 처리
+	 	    }
+
+	 	    return "hotel/hotelSelect";
+	 	}
+	 	
+	 	@PostMapping("hotel/hotelOrderForm")
+	 	public String hotelOrderForm(Model model, HttpServletRequest req) {
+	 	    logger.info("hotelOrderForm 함수 진입");
+
+	 	    try {
+	 	        // 한글 인코딩 설정
+	 	        req.setCharacterEncoding("UTF-8");
+
+	 	        // 여기서 필요한 값들을 가져와서 model에 추가
+	 	        String hotelname = req.getParameter("hotelname");
+	 	        String hotelprice = req.getParameter("hotelprice");
+	 	        String memname = req.getParameter("memname");
+
+	 	        model.addAttribute("hotelname", hotelname);
+	 	        model.addAttribute("hotelprice", hotelprice);
+	 	        model.addAttribute("memname", memname);
+	 	        
+	 	       logger.info("hotelOrderForm memname: " + memname);
+	 	       logger.info("hotelOrderForm hotelname: " + hotelname);
+	 	       logger.info("hotelOrderForm hotelprice: " + hotelprice);
+
+	 	        return "hotel/hotelOrderForm";
+	 	    } catch (IOException e) {
+	 	        e.printStackTrace(); // 예외 처리
+	 	    }
+
+	 	    return "hotel/hotelSelect";
+	 	}
+
 	 
 		// 호텔 입력폼(ISUD)
 		@GetMapping("hotel/hotelInsertForm")
 		public String hotelInsertForm() {
 			logger.info("hotelInsertForm 함수 진입");
+
 
 			return "hotel/hotelInsertForm";
 		}	
@@ -216,7 +282,7 @@ public class HotelController {
 			 int nCnt = updateList.size();
 			 
 			 if (nCnt>0) {
-				 logger.info("updateList nCnt = "+ nCnt);
+				 logger.info("updateFormList nCnt = "+ nCnt);
 				 
 				 model.addAttribute("updateList",updateList);
 				 
@@ -227,29 +293,64 @@ public class HotelController {
 		 }
 	
 		// 호텔 수정(ISUD)
-		@GetMapping("hotel/hotelUpdate")
-		public String hotelUpdate(HotelVO hvo, Model model) {
-			logger.info("hotelUpdate 함수 진입 ");
+		@PostMapping("hotel/hotelUpdate")
+		public String hotelUpdate(Model model, HttpServletRequest req) {
+		    try {
+		        logger.info("hotelUpdate 함수 진입 ");
 
-			
-			logger.info("hotelInsert hvo.getHotelnum() >>> : " + hvo.getHotelnum());
-			logger.info("hotelInsert hvo.getHotelname() >>> : " + hvo.getHotelname());
-			logger.info("hotelInsert hvo.getHoteltel() >>> : " + hvo.getHoteltel());
-			logger.info("hotelInsert hvo.getHotelprice() >>> : " + hvo.getHotelprice());
-			logger.info("hotelInsert hvo.getHoteladress() >>> : " + hvo.getHoteladress());
-			logger.info("hotelInsert hvo.getHotelcoment() >>> : " + hvo.getHotelcoment());
-			logger.info("hotelInsert hvo.getHotelcheckin() >>> : " + hvo.getHotelcheckin());
-			logger.info("hotelInsert hvo.getHotelcheckout() >>> : " + hvo.getHotelcheckout());
-				
-			// 서비스 호출
-			int nCnt = hotelService.hotelUpdate(hvo);
-			
-			if(nCnt > 0) {
-				logger.info("nCnt >>> : " + nCnt);
-				return "hotel/hotelSelect";		
-			}
+		        // 한글 인코딩 설정
+		        req.setCharacterEncoding("UTF-8");
 
-			return "hotel/hotel_main";
+		        HotelVO hvo = new HotelVO();
+		        hvo.setHotelname(req.getParameter("hotelname"));
+		        hvo.setHotelnum(req.getParameter("hotelnum"));
+		        hvo.setHoteltel(req.getParameter("hoteltel"));
+		        hvo.setHotelprice(req.getParameter("hotelprice"));
+		        hvo.setHoteladress(req.getParameter("hoteladress"));
+		        hvo.setHotelcheckin(req.getParameter("hotelcheckin"));
+		        hvo.setHotelcheckout(req.getParameter("hotelcheckout"));
+		        hvo.setHotelcoment(req.getParameter("hotelcoment"));
+		        hvo.setHotelmapx(req.getParameter("hotelmapx"));
+		        hvo.setHotelmapy(req.getParameter("hotelmapy"));
+
+		        logger.info("hotelUpdate hvo.getHotelnum() >>> : " + hvo.getHotelnum());
+		        logger.info("hotelUpdate hvo.getHotelname() >>> : " + hvo.getHotelname());
+		        logger.info("hotelUpdate hvo.getHoteltel() >>> : " + hvo.getHoteltel());
+		        logger.info("hotelUpdate hvo.getHotelprice() >>> : " + hvo.getHotelprice());
+		        logger.info("hotelUpdate hvo.getHoteladress() >>> : " + hvo.getHoteladress());
+		        logger.info("hotelUpdate hvo.getHotelcoment() >>> : " + hvo.getHotelcoment());
+		        logger.info("hotelUpdate hvo.getHotelcheckin() >>> : " + hvo.getHotelcheckin());
+		        logger.info("hotelUpdate hvo.getHotelcheckout() >>> : " + hvo.getHotelcheckout());
+		        logger.info("hotelUpdate hvo.getHotelcheckin() >>> : " + hvo.getHotelmapx());
+		        logger.info("hotelUpdate hvo.getHotelcheckout() >>> : " + hvo.getHotelmapy());
+
+		        // 서비스 호출
+		        int nCnt = hotelService.hotelUpdate(hvo);
+
+		        if (nCnt > 0) {
+		            logger.info("nCnt >>> : " + nCnt);
+		            return "redirect:/hotel/hotelSelect?hotelnum=" + hvo.getHotelnum();
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace(); // 예외 처리
+		    }
+
+		    return "hotel/hotel_main";
 		}
-	
+		
+		// 숙소 삭제
+		@GetMapping("hotel/hotelDelete")
+		public String hotelDelete(HotelVO hvo, Model model) {
+			logger.info("hotelDelete 함수 진입 ");
+			logger.info("hvo.getHotelnum() >>> : " + hvo.getHotelnum()); 
+			
+			int nCnt = hotelService.hotelDelete(hvo); 
+			
+			if (nCnt > 0) {
+				logger.info("hotelDelete nCnt : " + nCnt);
+				
+				return "hotel/hotelDelete";
+			}
+			return "hotel/hotel_main";
+		}	
 	}

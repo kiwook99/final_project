@@ -61,6 +61,7 @@
 			color: white;
 			border: 0;
 			border-radius: 10px;
+			font-size: 15px;
 			}
 			
 			

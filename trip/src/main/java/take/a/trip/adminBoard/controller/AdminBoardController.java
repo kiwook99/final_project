@@ -30,7 +30,7 @@ public class AdminBoardController {
 	private AdminBoardService adminBoardService;
 
 	
-	@GetMapping("adminBoardSelectAll")
+	@GetMapping("adminboard/adminBoardSelectAll")
 	public String adminBoardSelectAll(AdminBoardVO abvo, Model model) {
 		logger.info("adminBoardSelectAll 함수 진입 >>> : ");
 		
@@ -69,7 +69,7 @@ public class AdminBoardController {
 	}
 	
 		// 게시글 조회 
-		@GetMapping("adminBoardSelect")
+		@GetMapping("adminboard/adminBoardSelect")
 		public String adminBoardSelect(AdminBoardVO abvo, Model model) {
 			logger.info("adminBoardSelect 함수 진입 >>> : ");
 			
@@ -91,7 +91,7 @@ public class AdminBoardController {
 		}
 	
 	
-	@GetMapping("adminBoardInsertForm")
+	@GetMapping("adminboard/adminBoardInsertForm")
     public String adminBoardInsertForm(AdminBoardVO abvo) {
 		logger.info("adminBoardInsertForm 함수 진입 >>> : ");
 		
@@ -99,7 +99,7 @@ public class AdminBoardController {
     }
 
 	// 입력
-	@PostMapping("/adminBoardInsert")
+	@PostMapping("adminboard/adminBoardInsert")
 	public String adminBoardInsert(HttpServletRequest req) {
 	    logger.info("adminBoardInsert 함수 진입 >>> : "+ req);
 	    
@@ -142,7 +142,7 @@ public class AdminBoardController {
 
 	
 		// 게시글 수정 
-		@GetMapping("adminBoardUpdateForm")
+		@GetMapping("adminboard/adminBoardUpdateForm")
 		public String adminBoardUpdateForm(AdminBoardVO abvo, Model model) {
 			logger.info("adminBoardUpdateForm 함수 진입 >>> : ");
 			
@@ -158,7 +158,7 @@ public class AdminBoardController {
 		}
 	
 		// 게시글 수정 
-		@GetMapping("adminBoardUpdate")
+		@GetMapping("adminboard/adminBoardUpdate")
 		public String adminBoardUpdate(AdminBoardVO abvo, Model model) {
 			logger.info("adminBoardUpdate 함수 진입 >>> : ");
 			logger.info("adminBoardUpdate 함수 진입 abvo.getAdboardnum() >>> : " + abvo.getAdboardnum());
@@ -173,7 +173,7 @@ public class AdminBoardController {
 		}
 		
 		// 게시글 삭제
-		@GetMapping("adminBoardDelete")
+		@GetMapping("adminboard/adminBoardDelete")
 		public String adminBoardDelete(AdminBoardVO abvo, Model model) {
 			logger.info("adminBoardDelete 함수 진입 >>> : ");
 			logger.info("adminBoardDelete 함수 진입 abvo.getAdboardnum() >>> : " + abvo.getAdboardnum());

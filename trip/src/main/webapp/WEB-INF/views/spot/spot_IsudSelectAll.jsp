@@ -99,9 +99,7 @@
 			img {
 			    border: 0 none;	/* 외곽선 제거, 두께 0, 유형 없음*/
 			}			
-		
-
-	
+			
 			 
 			 h1 {
 			 	text-align: center;
@@ -143,17 +141,19 @@
 	
 
 			#search_btn, #insertBtn, #selectAllBtn, #selectBtn, #deleteBtn {
-				padding: 5px 15px;
+				padding: 10px 25px;
 				background-color: #0aa4b5;
 				color: white;
 				border: 0;
 				border-radius: 10px;
+				font-size: 15px;
 			}
 
 			#btn {
 				text-align: center;
 			}
 			
+			h2{text-align: center;}
 			
 		</style>	
 		<!-- 폰트 어썸 CDN -->
@@ -240,6 +240,10 @@
 		<br>
 		<hr>
 		<br>
+		<h2>관광정보 (ISUD)</h2>
+		<br>
+		<hr>
+		<br>
 		<!-- 검색 -->
 		<div id="header">
 				<form name="miniSearchForm" id="miniSearchForm" action='spot_Search'> 
@@ -257,7 +261,7 @@
 				<button type="button" id="insertBtn">여행지 등록</button>
 			</div>
 		<br>
-		<hr>
+		
 		<br><br>
 			<div class= "main">
 				<div class="contents">
