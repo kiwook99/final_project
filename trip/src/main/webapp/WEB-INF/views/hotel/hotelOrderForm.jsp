@@ -8,11 +8,8 @@
 <% request.setCharacterEncoding("UTF-8"); %>    
 <%
 	String memname = request.getParameter("memname");
-	String memnum = request.getParameter("memnum");	
-	String paynum = request.getParameter("paynum");
 	String hotelname = request.getParameter("hotelname");
 	String hotelprice = request.getParameter("hotelprice");
-	String hotelnum = request.getParameter("hotelnum");
 	hotelprice = NumUtil.comma_replace(hotelprice);
 	
 	Object obj = request.getAttribute("orderList");
@@ -38,6 +35,7 @@
 	$(document).ready(function(){
 		
 		var memname = "";
+		var hotelname = '<%= hotelname %>';	
 		var hotelprice = '<%= hotelprice %>';		
 		alert(memname + " : " + hotelprice);
 		
@@ -133,9 +131,9 @@
 <td class="mem">금액</td>
 </tr>
 <tr>
-<td class="mem"><%= hvo.getMemname() %></td>
-<td class="mem"><%= hvo.getHotelname() %></td>
-<td class="mem"><%= hvo.getHotelprice() %>원</td>
+<td class="mem"><%= memname %></td>
+<td class="mem"><%= hotelname %></td>
+<td class="mem"><%= hotelprice %>원</td>
 </tr>
 <tr>
 	<td class="mem">핸드폰</td>
