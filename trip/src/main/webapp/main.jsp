@@ -77,72 +77,47 @@
 			}
 						
 			/*카테고리*/
-			#topMenu { 
-
-			 width: 100%; 
-			 margin: 0 auto;
-			 }
-			 
-			 #topMenu ul{
-				 list-style-type: none;
-				 margin: 0px;
-				 padding: 0px; 
-				 font-size : 20px;
-				 text-align: center;
-			 }
-			 
-			 #topMenu ul li 
-			 { 
-			 list-style: none; 
-			 display: inline-block;
-			 line-height: 30px; 
-			 vertical-align: middle; 
-			 text-align: center;
-			 position: relative;
-			 }
-			 
-			 .submenuLink{
-				 text-decoration:none;
-				 display: block;
-				 width: 150px;
-				 font-size: 12px;
-				 font-weight: bold;
-				 font-family: "Trebuchet Ms", Dotum;
-			 }
-			 
-			  #topMenu { 
-			 color: white; 
-			 background-color: #aaa; }
+			.menu {
+			  width: 100%;
+			  overflow: hidden;
+			  margin: 0 auto;
+			}
 			
-			 .submenuLink{
-/* 				 color: white; */
-				 background-color: #aaa;
-				 border: solid 1px white;
-				 margin-top: -1px;
-			 }
+			.menu > li {
+			  width: 100%;
+			  text-align: center;
+			  line-height: 40px;
+			  background-color: #0aa4b5;
+			} 
+
 			 
-			 .sb{
-				 position: absolute;
-				 height: 0px;
-				 overflow: hidden;
-				 transition: height .2s;
-			 }
+			.sb > li {
+			  line-height: 50px;
+			  background-color: #0bc5da;
+			}	
+			
+			.sb {
+ 			  height: 0; /*ul의 높이를 안보이게 처리*/ 
+			  overflow: hidden; 
+
+			}					 
 			 
-			 .topMenuLi:hover .sb{
-				 height: 100px;
-			 }
-			 
-			 .submenuLink:hover { 
-			 color: black;
-			 background-color: #aaa;
-			 margin-right: 15px;
-			 }		
-			 
-			 h1 {
-			 	text-align: center;
-			 }
-			 
-			 
+			.menu > li:hover {
+			  background-color: #0bc5da;
+			  transition-duration: 0.5s;
+			}	
+			
+			.menu > li:hover .sb {
+			  	height: 100px; /*서브메뉴 li한개의 높이 50*5*/
+			  	transition-duration: 1s;
+			  						 
+			}	
+					 
+			.menu a {
+			  color: #fff;
+			}				 
+					 
+			/* 위치 */ 
 		 	 .area {
 		    position: absolute;
 		    background: rgba(0, 0, 0, 0.5);
@@ -186,17 +161,19 @@
 				border-radius: 10px;
 			}
 			
-			
 			#logoutBtn {
 				padding: 5px 15px;
 				background-color: #0aa4b5;
 				color: white;
 				border: 0;
 				border-radius: 10px;
-			}									
+			}			
+			
 			
 			.logo {
 			    text-align: center;
+			    margin-top: 30px;
+			    font-size: 28px;
 			}
 			
 			.loginBtn {
@@ -204,7 +181,16 @@
 			    margin-right: 80px;
 			}
 
-			
+		
+			a {
+			    text-align: center;
+			}
+				
+			 h1 {
+			 	text-align: center;
+			 }
+			 
+			 	
 		</style>
 </head>
 <body>
@@ -214,10 +200,8 @@
 		        <a href="spot_IsudSelectAll">
 		            <!-- <img src="${pageContext.request.contextPath}/resources/images/img_spot/지도.png" width="50px" height="50px" title="로고 이미지">  -->
 		            <i class="fa-solid fa-plane-up fa-xl">여행가기 좋은날</i>
-		        </a>
-		    </div>
-		</div>
-		
+		        </a>		        
+		    </div>	
  			<div class="loginBtn">
 			    <c:choose>
 			        <c:when test="${loginCheck}">
@@ -229,30 +213,28 @@
 			            <input type="button" name="login" id="logoutBtn" value="로그아웃" onclick="location.href='#'">
 			        </c:otherwise>
 			    </c:choose>
-			</div>		
-		
-		
-
+			</div>			    	    
+		</div>
 		<br>
+		 
 			<div class="topnav">
-				<!--메뉴-->
-				<nav id="topMenu" >
-					 <ul>
+					<!-- 메뉴 -->
+					 <ul class="menu">
 						 <li class="topMenuLi">
 						 <a class="menuLink" href="#content1">여행정보</a>
+						 <hr>
 						 	 <ul class ="sb">
 								  <li><a href="spot" class="submenuLink" >관광정보</a></li>
-								  <li><a href="spot_ISUD" class="submenuLink" >관광정보(ISUD)</a></li>
+								  <li><a href="spot_IsudSelectAll" class="submenuLink" >관광정보(ISUD)</a></li>
 						  	</ul>
 						 </li>							  
-						  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
 						 <li class="topMenuLi">
 						 <a class="menuLink" href="#content2">숙소예약</a>
+						 <hr>
 						 	<ul class ="sb"> 
 								 <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink" >숙소정보</a></li>
 						 	</ul>
 						 </li>
-						  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
 						 <li class="topMenuLi">
 						 <a class="menuLink" href="#content3">게시판</a>
 						 	<ul class ="sb"> 
@@ -261,9 +243,10 @@
 						 	</ul>
 						 </li>				 
 					 </ul> 
-				 </nav>
-			</div>		
-			<br><br><br>	
+			</div>				 
+		<br>
+		<hr>
+		<br>
 </body>
 </html>
 

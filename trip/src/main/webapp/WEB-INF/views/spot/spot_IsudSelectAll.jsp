@@ -101,76 +101,13 @@
 			}			
 		
 
-			body {
-			    font-size: 17px;
-			}
-						
-			/*카테고리*/
-			#topMenu { 
-
-			 width: 100%; 
-			 margin: 0 auto;
-			 }
-			 
-			 #topMenu ul{
-				 list-style-type: none;
-				 margin: 0px;
-				 padding: 0px; 
-				 font-size : 20px;
-				 text-align: center;
-			 }
-			 
-			 #topMenu ul li 
-			 { 
-			 list-style: none; 
-			 display: inline-block;
-			 line-height: 30px; 
-			 vertical-align: middle; 
-			 text-align: center;
-			 position: relative;
-			 }
-			 
-			 .submenuLink{
-				 text-decoration:none;
-				 display: block;
-				 width: 150px;
-				 font-size: 12px;
-				 font-weight: bold;
-				 font-family: "Trebuchet Ms", Dotum;
-			 }
-			 
-			  #topMenu { 
-			 color: white; 
-			 background-color: #aaa; }
-			
-			 .submenuLink{
-				 color: white;
-				 background-color: #aaa;
-				 border: solid 1px white;
-				 margin-top: -1px;
-			 }
-			 
-			 .sb{
-				 position: absolute;
-				 height: 0px;
-				 overflow: hidden;
-				 transition: height .2s;
-			 }
-			 
-			 .topMenuLi:hover .sb{
-				 height: 100px;
-			 }
-			 
-			 .submenuLink:hover { 
-			 color: black;
-			 background-color: #aaa;
-			 }		
+	
 			 
 			 h1 {
 			 	text-align: center;
 			 }
 			 
-			 
+			/* 위치 */ 
 		 	 .area {
 		    position: absolute;
 		    background: rgba(0, 0, 0, 0.5);
@@ -205,21 +142,18 @@
 			}
 	
 
-			#search_btn {
+			#search_btn, #insertBtn, #selectAllBtn, #selectBtn, #deleteBtn {
 				padding: 5px 15px;
 				background-color: #0aa4b5;
 				color: white;
 				border: 0;
 				border-radius: 10px;
+			}
+
+			#btn {
+				text-align: center;
 			}
 			
-			#loginBtn {
-				padding: 5px 15px;
-				background-color: #0aa4b5;
-				color: white;
-				border: 0;
-				border-radius: 10px;
-			}
 			
 		</style>	
 		<!-- 폰트 어썸 CDN -->
@@ -288,23 +222,6 @@
 				}).submit();
 			});
 			
-		
-			
-			// D
-			$(document).on("click", "#deleteBtn", function(){
-				console.log("deletetBtn >>> : ");
-				
-				if($('.tripnum:checked').length == 0){
-					alert("삭제할 글 번호 하나를 선택하세요");
-					
-					return;
-				}
-				
-				$('#tripList').attr({
-					'action' : 'spot_IsudDelete',
-					'method' : 'GET',
-				}).submit();
-			});
 			
 			// 검색
 		      $("#search_btn").click(function(){
@@ -328,11 +245,19 @@
 					<option value="key_02">분야별</option>
 				</select>
 				<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" 
-				style="width:200px;height:30px;font-size:15px;">
+				style="width:350px;height:30px;font-size:15px;">
 				<input type="button" id="search_btn" name="search_btn" value="검색">
 				</form>		
 		</div>
 		<br>
+			<div id="btn">
+				<button type="button" id="insertBtn">등록</button>
+				<button type="button" id="selectAllBtn">목록</button>
+				<button type="button" id="selectBtn">수정</button>
+			</div>
+		<br>
+		<hr>
+		<br><br>
 			<div class= "main">
 				<div class="contents">
 					<div class="list_content">
@@ -374,18 +299,12 @@ for(int i=0; i < nCnt; i++){
 							<jsp:param name="groupSize" value="<%= groupSize %>"/>
 							<jsp:param name="curPage" value="<%= curPage %>"/>
 							<jsp:param name="totalCount" value="<%= totalCount %>"/>
-						</jsp:include>
-
-						<button type="button" id="insertBtn">등록</button>
-						<button type="button" id="selectAllBtn">목록</button>
-						<button type="button" id="selectBtn">수정</button>
-						<button type="button" id="deleteBtn">삭제</button>		
-
+						</jsp:include>	
 					</div>
 				</div>
 			</div>
 			
-			
+			<br><br>
 	</body>
 </html>
 
