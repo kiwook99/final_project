@@ -62,7 +62,7 @@
 				    pg : 'TC0ONETIME',
 				    pay_method : 'card',
 				    merchant_uid : 'merchant_' + new Date().getTime(),
-				    name : memname , //결제창에서 보여질 이름
+				    goodsname : memname , //결제창에서 보여질 이름
 				    amount: hotelprice, //실제 결제되는 가격
 				    buyer_name : '홍길동',
 				    buyer_tel : '010-1234-5678',
