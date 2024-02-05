@@ -459,7 +459,6 @@
 	<%@ include file="/main.jsp" %>
 
 	<form id="hotelOrderForm">
-
 		<div class="sub-header">
 			<h3 class="sub-title">숙박
 				<a href="hotelDelete?hotelnum=<%= hvo.getHotelnum() %>" class="delete-link" id="delete-link"> 삭제</a>
@@ -526,7 +525,8 @@
 								</div>
 							</div>
 						</div>
-					</div></form>
+					</div>
+				</form>
 					<hr class="next"><br>
 					<div class="container">
 					<div class="txt">
