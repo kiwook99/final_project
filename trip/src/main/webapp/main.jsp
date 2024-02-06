@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,10 +54,7 @@
 			}
 			
 			
-<<<<<<< HEAD
-	
-						
-=======
+
 			.logo a:link,
 			.logo a:visited,
 			.logo a:focus,
@@ -67,7 +65,6 @@
 			}
 			
 							
->>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 			
 			.img img {
 				width: 100%; /* width, height 부모 요소에 대해 이미지가 가득 차도록 함*/
@@ -81,9 +78,7 @@
 			}			
 		
 
-			body {
-			    font-size: 17px;
-			}
+
 						
 			/*카테고리*/
 			.menu {
@@ -202,16 +197,16 @@
 		        </a>		        
 		    </div>	
  			<div class="loginBtn">
-			    <c:choose>
-			        <c:when test="${loginCheck}">
+			    
+<%-- 			        <% if(memid != null) { %> --%>
 			            <!-- 조건이 참일 때 보이는 태그 -->
         			    <input type="button" name="login" id="loginBtn" value="로그인" onclick="location.href='#'">
-			        </c:when>
-			        <c:otherwise>
+<%--         			<% } else { %> --%>
+			        
 			            <!-- 조건이 거짓일 때 보이는 태그임 -->
-			            <input type="button" name="login" id="logoutBtn" value="로그아웃" onclick="location.href='loginForm'">
-			        </c:otherwise>
-			    </c:choose>
+			            <input type="button" name="login" id="logoutBtn" value="로그아웃" onclick="location.href='<%= request.getContextPath() %>/mem/loginForm'">
+<%-- 			        <% } %> --%>
+			    
 			</div>
 		</div>
 		<br>

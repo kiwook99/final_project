@@ -9,18 +9,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+			#loginbtn, #insertbtn, #idbtn, #pwbtn {
+				padding: 10px 20px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+				font-size: 15px;
+			}
+			
+			#sign {
+			
+				width: 400px;
+				height: 250px;
+			}
+			
+</style>
 </head>
 <body>
 <%@ include file="/main.jsp" %>
 	<form name="loginForm" id="loginForm">
-		<table border = "1">
+		<table border = "1" id="sign">
 			<tr>
-				<td>ID</td>
-				<td><input type="text" name="memid" id="memid"></td>
+				<td width="50px">ID</td>
+				<td><input type="text" name="memid" id="memid" size="35"></td>
 			</tr>
 			<tr>
 				<td>PW</td>
-				<td><input type="text" name="mempw" id="mempw"></td>
+				<td><input type="text" name="mempw" id="mempw" size="35"></td>
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -35,17 +52,19 @@
 				</td>
 			</tr>
 		</table>
-		<table border = "1">
+		<table border = "1"  id="signApi">
 			<tr>
 				<td>
 					<a href="javascript:kakaoLoginApi()">
-					<img height="30" width="208" src="resources/images/kakao.png"/></a>
+					<img height="30" width="208" src="/trip/resources/images/kakao.png"/>
+					</a>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<a href="#">
-					<img height="30" width="208" src="resources/images/naver.png"/></a>
+					<img height="30" width="208" src="/trip/resources/images/naver.png"/>
+					</a>
 				</td>
 			</tr>
 		</table>
