@@ -195,5 +195,5 @@
 <%
 	}
 %>
-<sapn class="hotelinsert"><h3><a href="hotelInsertForm">숙소등록</a></sapn></h3>
+
 </div>

@@ -25,7 +25,8 @@
 	HotelVO pagingHVO = (HotelVO)objPaging;
 
 	Object obj = request.getAttribute("listAll");
-
+	
+	Object objAdmin = request.getAttribute("adminyn");
 	List<HotelVO> list = (List<HotelVO>)obj;
 	int nCnt = list.size();
 	
@@ -219,7 +220,10 @@
 							<jsp:param name="curPage" value="<%=curPage%>"/>
 							<jsp:param name="totalCount" value="<%=totalCount%>"/>
 						</jsp:include>
-					</div>							
+					</div>
+					<% if ("Y".equals(objAdmin)) { %>
+					   <span class="hotelinsert"><h3><a href="hotelInsertForm">숙소등록</a></h3></span>
+					<% } %>			
 				</div>
 			</div>
 		</div>

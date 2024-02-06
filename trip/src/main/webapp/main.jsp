@@ -54,7 +54,14 @@
 			}
 			
 			
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+	
+						
+=======
+>>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 			.logo a:link,
 			.logo a:visited,
 			.logo a:focus,
@@ -64,7 +71,12 @@
 			    color: black;
 			}
 			
+<<<<<<< HEAD
 							
+=======
+							
+>>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
+>>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 			
 			.img img {
 				width: 100%; /* width, height 부모 요소에 대해 이미지가 가득 차도록 함*/
