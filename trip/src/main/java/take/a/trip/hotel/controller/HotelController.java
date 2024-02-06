@@ -184,7 +184,8 @@ public class HotelController {
 	 	    try {
 	 	        // 한글 인코딩 설정
 	 	        req.setCharacterEncoding("UTF-8");
-
+	 	        
+	 	        
 	 	        // 여기서 필요한 값들을 가져와서 model에 추가
 	 	        String hotelname = req.getParameter("hotelname");
 	 	        String hotelprice = req.getParameter("hotelprice");

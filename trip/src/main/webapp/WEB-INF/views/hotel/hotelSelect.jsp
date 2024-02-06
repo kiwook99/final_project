@@ -293,25 +293,22 @@
 	    FLOAT: RIGHT;
 	}
 	
+	#cardBtn {
+	padding: 5px 15px;
+    background-color: #0AA4B5;
+    color: white;
+    border: 0;
+	border-radius: 10px;
+    cursor: pointer;
+	}
+	
 	</style>
 		
 	<script type="text/javascript">
 	   $(document).ready(function(){
 		      console.log("숙소 상세페이지 접속");
 		     
-		      $(document).on("click", "#cardBtn", function(){
-					console.log("cardBtn >>> : ");
-					alert("결제하기");
-					 var memname = '<%=memname%>';
-					 var hotelprice = '<%= hotelprice %>';
-					
-					$('#hotelOrderForm').attr({
-						'action':'hotelOrder?memname=<%= hvo.getMemname() %>&hotelname=<%= hvo.getHotelname() %>&hotelprice=<%= hvo.getHotelprice() %>',
-						'method':'POST',
-						'enctype':'multipart/form-data'
-					}).submit();
-				});
-		      
+		  // 체크인일, 체크아웃일 DatePicker 설정 
 		      $('#checkinDate, #checkoutDate').datepicker({
 		          format: 'yyyy-mm-dd',
 		          autoclose: true
@@ -329,9 +326,10 @@
 	        // 입실일, 퇴실일 텍스트 박스에 값 설정
 	        $('#checkinDate').val(formattedCurrentDate);
 	        $('#checkoutDate').val(formattedTomorrowDate);
+	        
 	        // 체크인 날짜 선택 이벤트
 	        $('#checkinDate').change(function () {
-	            var checkinDate = new Date($(this).val());
+	            checkinDate = new Date($(this).val());
 	            var nextDay = new Date(checkinDate);
 	            nextDay.setDate(checkinDate.getDate() + 1);
 	            // 체크인 날짜 선택 시, 체크아웃 날짜를 체크인 날짜의 다음 날짜로 설정
@@ -347,8 +345,8 @@
 	        $('#checkoutDate').change(function (e) {
 	            e.preventDefault();  // 기본 동작 막기
 	            e.stopPropagation();  // 이벤트 전파 중지
-	            var checkinDate = new Date($('#checkinDate').val());
-	            var checkoutDate = new Date($(this).val());
+	            checkinDate = new Date($('#checkinDate').val());
+	            checkoutDate = new Date($(this).val());
 	            if (checkoutDate <= checkinDate) {
 	                alert('체크아웃 날짜는 체크인 날짜보다 미래여야 합니다.');
 	                return;
@@ -360,8 +358,9 @@
 	     	// 최종 가격 계산 및 초기 표시 함수
 	        function calculateAndDisplayDefaultPrice() {
 	            // 기본 가격 표시
-	            var hotelprice = parseInt(<%= hvo.getHotelprice() %>);
+	            hotelprice = parseInt(<%= hvo.getHotelprice() %>);
 	            $('#finalPrice').text('이용요금: ' + hotelprice + '원');
+	            $('#hotelprice').val(hotelprice);
 	        }
 	       
 	     // 최종 가격 계산 및 표시 함수
@@ -370,13 +369,41 @@
 	            var checkoutDate = new Date($('#checkoutDate').val());
 	            var timeDiff = Math.abs(checkoutDate.getTime() - checkinDate.getTime());
 	            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-	            var hotelprice = diffDays * parseInt(<%= hvo.getHotelprice() %>);
+	            hotelprice = diffDays * parseInt(<%= hvo.getHotelprice() %>);
 	            console.log(finalPrice);
 	            // 최종 가격을 표시할 div에 텍스트 설정
 	            $('#finalPrice').text('이용요금: ' + hotelprice + '원');
+	            $('#hotelprice').val(hotelprice);
 	        }
+	     
+	        function formatDate(date) {
+	            var day = date.getDate();
+	            var month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더합니다.
+	            var year = date.getFullYear();
+
+	            // 날짜와 월이 한 자리 수일 경우 앞에 0을 추가합니다.
+	            day = day < 10 ? '0' + day : day;
+	            month = month < 10 ? '0' + month : month;
+
+	            return year + '-' + month + '-' + day;
+	        }
+	     	
+	        $(document).on("click", "#cardBtn", function(){
+				console.log("cardBtn >>> : ");
+				 alert(formatDate(checkinDate));
+				 
+				var memname = '<%=memname%>';
+				$('#hotelname').val('<%= hvo.getHotelname() %>');
+				$('#hotelprice').val(hotelprice);
+				
+				$('#hotelOrderForm').attr({
+					'action':'hotelOrder?memname=<%= hvo.getMemname()%>&hotelname=<%=hvo.getHotelname()%>&hotelprice=' + hotelprice,
+					'method':'POST',
+					'enctype':'multipart/form-data'
+				}).submit();
+			});
 		   });
-	  
+	   
 	   function viewMap(name,mapx,mapy) {
 			
 	        var mapContainer = $('<div id="map"></div>');
@@ -458,8 +485,7 @@
 <body>
 	<%@ include file="/main.jsp" %>
 
-	<form id="hotelOrderForm">
-
+	
 		<div class="sub-header">
 			<h3 class="sub-title">숙박
 				<a href="hotelDelete?hotelnum=<%= hvo.getHotelnum() %>" class="delete-link" id="delete-link"> 삭제</a>
@@ -520,13 +546,19 @@
 							        <label for="checkoutDate"> 체크아웃 </label>
 							        <input type="text" id="checkoutDate" readonly>
 							    </div>
+							    <form form id="hotelOrderForm" action="hotelOrder" method="POST" enctype="multipart/form-data">
 							   <div >
-							   		<span id="finalPrice"></span><br>
-							   		<span class="pay"><button type="button" id="cardBtn"> 예약하기</span>
+							   		<input type="hidden" id="hotelname" name="hotelname" class="hotelname" value="<%= hvo.getHotelname() %>" />
+    								<input type="hidden" id="hotelprice" name="hotelprice" class="hotelprice" value="<%= hotelprice %>" />
+    								<span id="finalPrice"></span><br>
+							   		<span class="pay"><button type="button" id="cardBtn"> 예약하기 </button>
+							   		</span>
 								</div>
+								</form>
 							</div>
 						</div>
-					</div></form>
+					</div>
+				
 					<hr class="next"><br>
 					<div class="container">
 					<div class="txt">
