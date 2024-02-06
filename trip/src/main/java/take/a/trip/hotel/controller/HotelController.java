@@ -149,10 +149,13 @@ public class HotelController {
 	 
 	 // 지역별 
 	 @GetMapping("hotel/hotelSelect")
-	 public String hotelSelect(HotelVO hvo, Model model) {		 
+	 public String hotelSelect(HotelVO hvo, Model model, HttpServletRequest request) {		 
 		 logger.info("hotelSelect 함수진입 ");
-		 
 		 logger.info("hotelSelect hvo.getHotelnum()=> "+ hvo.getHotelnum());
+		 
+		 HttpSession session = request.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
+		 String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+		 logger.info("spot_IsudSelectAll sessionId >>> : " + sessionId);
 		 
 		 List<HotelVO> selectList = hotelService.hotelSelect(hvo);
 		 
@@ -162,7 +165,21 @@ public class HotelController {
 			 logger.info("hotelSelect nCnt = "+ nCnt);
 			 
 			 model.addAttribute("selectList",selectList);
-
+			 
+			 try (Jedis jedis = jedisPool.getResource()) {
+				 
+				 String adminyn = jedis.get(sessionId);
+				 
+				 if (adminyn != null) {
+				        // 값이 존재하는 경우
+				        logger.info("adminyn >>> : " + adminyn);
+				        model.addAttribute("adminyn", adminyn);
+				        logger.info("jedis.get >>> : ");
+				    } else {
+				        // 값이 없는 경우
+				        logger.info("adminyn is null");
+				        }
+			 } 
 			 return "hotel/hotelSelect";
 		 }
 		 

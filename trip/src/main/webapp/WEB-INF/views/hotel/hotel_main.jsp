@@ -138,6 +138,20 @@
     border: 0;
     border-radius: 10px;
 	}
+	
+	.hotelinsert a {
+	padding: 10px 25px;
+    background-color: #0aa4b5;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+    font-size: 15px;
+	}
+	
+	.hotelinsert {
+	text-align-last: center;
+	margin-bottom: 30px;
+	}
 		</style>
 		
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -170,6 +184,11 @@
 				<input type="submit" id="search_btn" name="search_btn" value="검색">
 			</form>
 		</div>
+		
+		<% if ("Y".equals(objAdmin)) { %>
+		<div class="hotelinsert">
+			   <span><h3><a href="hotelInsertForm">숙소등록</a></h3></span></div>
+		<% } %>		
 		<hr><br><br>
 		<div class="main">
 			<div class="contents">
@@ -221,9 +240,6 @@
 							<jsp:param name="totalCount" value="<%=totalCount%>"/>
 						</jsp:include>
 					</div>
-					<% if ("Y".equals(objAdmin)) { %>
-					   <span class="hotelinsert"><h3><a href="hotelInsertForm">숙소등록</a></h3></span>
-					<% } %>			
 				</div>
 			</div>
 		</div>
