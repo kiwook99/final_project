@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<% 	//세션에서 값을 가져오기
+	String memid = (String) session.getAttribute("memid");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -205,14 +207,15 @@
 		    </div>	
  			<div class="loginBtn">
 			    
-<%-- 			        <% if(memid != null) { %> --%>
+			        <% if(memid != null) { %> 
 			            <!-- 조건이 참일 때 보이는 태그 -->
-        			    <input type="button" name="login" id="loginBtn" value="로그인" onclick="location.href='#'">
-<%--         			<% } else { %> --%>
+			            <input type="button" name="login" id="logoutBtn" value="로그아웃" onclick="location.href='/trip/mem/logout'">
+
+       			   <% } else { %> 
 			        
 			            <!-- 조건이 거짓일 때 보이는 태그임 -->
-			            <input type="button" name="login" id="logoutBtn" value="로그아웃" onclick="location.href='<%= request.getContextPath() %>/mem/loginForm'">
-<%-- 			        <% } %> --%>
+			            <input type="button" name="login" id="loginBtn" value="로그인" onclick="location.href='/trip/mem/loginForm'">
+			        <% } %> 
 			    
 			</div>
 		</div>

@@ -7,12 +7,15 @@
   
 <% request.setCharacterEncoding("UTF-8"); %>    
 <%
+
+	//세션에서 값을 가져오기
+	//String memid = (String) session.getAttribute("memid");
 	String memname = request.getParameter("memname");
 	String hotelname = request.getParameter("hotelname");
 	String hotelprice = request.getParameter("hotelprice");
 	String hotelcheckin = request.getParameter("hotelcheckin");
 	String hotelcheckout = request.getParameter("hotelcheckout");
-	hotelprice = NumUtil.comma_replace(hotelprice);
+	String shotelprice = NumUtil.comma_replace(hotelprice);
 	
 	Object obj = request.getAttribute("orderList");
 
@@ -39,7 +42,7 @@
 		var memname = "";
 		var hotelname = '<%= hotelname %>';
 		var hotelprice = '<%= hotelprice %>';		
-		alert(hotelname + " : " + hotelprice);
+		// alert(hotelname + " : " + hotelprice);
 		
 		// 이메일 
 		$('#koemail2').change(function(){	
@@ -62,6 +65,7 @@
 				IMP.init('imp23814146');
 				
 				var dynamicGoodsName = 'aa'; // 서버에서 받아온 값
+				console.log("dynamicGoodsName: ", dynamicGoodsName);
 				
 				IMP.request_pay({
 				    mid : 'TC0ONETIME',
@@ -74,6 +78,7 @@
 				    //buyer_addr : '서울 양찬구 목동',
 				    //buyer_postcode : '123-456'
 				}, function(rsp) {
+					console.log("Goods Name in IMP.request_pay: ", dynamicGoodsName);
 					console.log(rsp);
 				    if ( rsp.success ) {
 				    	var msg = '결제가 완료되었습니다.';
@@ -90,34 +95,52 @@
 			});
 	});
 </script>
-
 <style type="text/css">
 
-	table, th, td {
-	    border: 1px solid #bcbcbc;	    
-	}
+    table {
+        border-collapse: collapse;
+        width: 60%;
+        margin: 20px auto;
+    }
 
-	th {
-		text-align: center;
-	}
-	
-	table {
-		margin: 20px auto;
-		width: 900px;
-	}
-	
-	.mem {
-		text-align: center;
-	}
-</style>
-<style type="text/css">
+    th, td {
+        border: 1px solid #bcbcbc;
+        padding: 10px;
+        text-align: center;
+    }
 
-	
+    th {
+        background-color: #0aa4b5;
+        color: white;
+    }
+
+    .mem {
+        text-align: center;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #0aa4b5;
+        color: white;
+        border: 0;
+        border-radius: 10px;
+        cursor: pointer;
+        display: inline-block;
+        margin: 10px;
+    }
+    
+    h3.mem {
+        font-size: 2em; /* 텍스트 크기 조절 */
+        margin-top: 10px; /* 위로 조금 올리기 */
+        text-align: center; /* 가운데 정렬 */
+    }
 
 </style>
 </head>
 <body>
-<h3  class="mem">예약하기</h3>
+<%@ include file="/main.jsp" %>
+
+<h3 class="mem">예약하기</h3>
 <hr>
 
 <form name="orderForm" id="orderForm">
@@ -128,15 +151,12 @@
 </td>
 </tr>
 <tr>
-<td colspan="4" align="left"><font size="3" style="color:blue;">1. 예약확인</font></td>
+	<td class="mem">예약자명</td>
+	<td class="mem"><%= memname %></td>
 </tr>
 <tr>
-<td class="mem">예약자명</td>
-<td class="mem"><%= memname %></td>
-</tr>
-<tr>
-<td class="mem">숙소명</td>
-<td class="mem"><%= hotelname %></td>
+	<td class="mem">숙소명</td>
+	<td class="mem"><%= hotelname %></td>
 </tr>
 <tr>
 	<td class="mem">입실일</td>
@@ -174,12 +194,12 @@
 </tr> 
 <tr>
 <td class="mem">결제금액</td>
-<td colspan="3"><%= hotelprice %>원</td>
+<td colspan="3"><%= shotelprice %>원</td>
 </tr>
- <tr>
-	<td  colspan="4" align="center"> 			
-		<button type="button" id="cardBtn">결제</button>
-		<button type="reset">다시 </button>	
+<tr>
+	<td colspan="4" align="center"> 			
+		<button type="button" id="cardBtn">결제하기</button>
+		<button type="reset">다시하기</button>	
 	</td>				
 </tr>
 </table>				 		        		     

@@ -56,23 +56,15 @@
 			<tr>
 				<td>
 					<a href="javascript:kakaoLoginApi()">
-
-					<img height="30" width="208" src="/trip/resources/images/kakao.png"/>
+						<img height="30" width="208" src="/trip/resources/images/kakao.png"/>
 					</a>
-
-					<img height="30" width="208" src="/trip/resources/images/kakao.png"/></a>
-
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<a href="#">
-
-					<img height="30" width="208" src="/trip/resources/images/naver.png"/>
+						<img height="30" width="208" src="/trip/resources/images/naver.png"/>
 					</a>
-
-					<img height="30" width="208" src="/trip//resources/images/naver.png"/></a>
-
 				</td>
 			</tr>
 		</table>

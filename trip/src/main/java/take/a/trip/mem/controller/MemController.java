@@ -52,7 +52,7 @@ public class MemController {
 	public String login(Model model, MemVO mvo, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info("UserController login 진입 >>> : ");
 		
-		HttpSession session = request.getSession(true);	// HttpServletRequest에서 세션을 가져오거나 새로 생성
+		HttpSession session = request.getSession();	// HttpServletRequest에서 세션을 가져오거나 새로 생성
 		String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
 		session.setAttribute("memid", mvo.getMemid()); // memid라는 새션키에 memid값을 넣음
 		String adminyn = "";
@@ -188,13 +188,26 @@ public class MemController {
 		return msg;
 	}
     
-    //===================================================
-	@GetMapping("main")
-	public String main() {
-		logger.info("UserController main 진입 >>> : ");
+    //로그아웃
+	@GetMapping("mem/logout")
+	public String logout(HttpSession session,HttpServletRequest request) {
+		logger.info("UserController logout 진입 >>> : ");
 		
-		return "main";
+		session = request.getSession();	// HttpServletRequest에서 세션을 가져오거나 새로 생성
+		String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+		logger.info("sessionId >>> : "+ sessionId);
+		
+		//래디스 연결
+		try (Jedis jedis = jedisPool.getResource()) {
+
+	            // 키를 삭제합니다.
+	            Long deletedKeysCount = jedis.del(sessionId);
+	        }
+		// 세션을 무효화하여 삭제
+		session.invalidate();
+		
+		return "redirect:/spot/spot_IsudSelectAll";
 	}
-	//===================================================
+
 		
 }
