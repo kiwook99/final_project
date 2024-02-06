@@ -104,7 +104,7 @@
 					
 					let deleteURL = "spot_IsudCommentDelete";
 					let method = "POST";
-					let dataParam = { reviewnum: $('#reviewnum').val(rbnumV) };  // 댓글 번호 기준으로 삭제
+					let dataParam = { reviewnum: $('#reviewnum').val(rbnumV) };  // 댓글 번호 기준으로 삭제함
 					
 					
 					dataParam = $('#commentForm').serialize();

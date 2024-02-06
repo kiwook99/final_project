@@ -208,11 +208,11 @@
         			    <input type="button" name="login" id="loginBtn" value="로그인" onclick="location.href='#'">
 			        </c:when>
 			        <c:otherwise>
-			            <!-- 조건이 거짓일 때 보이는 태그 -->
+			            <!-- 조건이 거짓일 때 보이는 태그임 -->
 			            <input type="button" name="login" id="logoutBtn" value="로그아웃" onclick="location.href='loginForm'">
 			        </c:otherwise>
 			    </c:choose>
-			</div>			    	    
+			</div>
 		</div>
 		<br>
 		 
