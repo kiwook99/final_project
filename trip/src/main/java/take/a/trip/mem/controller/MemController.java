@@ -15,8 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import take.a.trip.mem.common.GooglePwMail;
@@ -41,8 +43,9 @@ public class MemController {
 	
 	// 로그인 폼
 	@GetMapping("mem/loginForm")
-	public String loginForm() {
+	public String loginForm(Model model, HttpServletRequest request) {
 		logger.info("UserController loginForm 진입 >>> : ");
+	
 		
 		return "mem/loginForm";
 	}
@@ -92,12 +95,29 @@ public class MemController {
 	}
 	
 	// 카카오 로그인
-	@GetMapping("mem/kakaoLogin")
-	public String kakaoLogin() {
-		logger.info("UserController kakaoLogin 진입 >>> : ");
-		
-		return "mem/login";
-	}
+	@PostMapping("mem/kakaoLogin")
+	public String kakaoLogin(@RequestParam("memid") String memid, HttpServletRequest request) {
+		logger.info("UserController kakaoLogin 진입 >>> : ");		
+		try {
+            HttpSession session = request.getSession();
+            session.setAttribute("memid", memid);
+            String adminyn = "N";
+            String msg = "";
+            // Redis에 데이터 저장
+            try (Jedis jedis = jedisPool.getResource()) {
+                jedis.set(session.getId(), adminyn);
+                jedis.expire(session.getId(), 3600 * 24);
+            }
+            String path = request.getContextPath();
+            // 요청 성공 시 이동할 페이지 반환
+            return "/mem/loginForm";
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 오류 응답 생성
+            return "error";
+        }
+    }
+
 	
 	// 회원가입 폼
     @GetMapping("mem/insertForm")

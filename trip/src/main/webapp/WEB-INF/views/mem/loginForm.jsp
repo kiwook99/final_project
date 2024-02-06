@@ -91,19 +91,10 @@
 								success : function(res) {
 									console.log( "res  >>> : " + JSON.stringify(res));                   
 				                        
-			                        let k_id = res.id;
-			                        // let k_email = res.kakao_account.email;
-			                        //let k_gender = res.kakao_account.gender;
-			                        //let k_nickname = res.properties.nickname;
-			                        // let k_profile_image = res.properties.profile_image;
-			                        // let k_thumbnail_image = res.properties.thumbnail_image;
+			                        let k_id = res.id;	                     
 			                        
 			                        console.log("k_id >>> : " + k_id);
-			                        //console.log("k_gender >>> : " + k_gender);
-			                        //console.log("k_nickname >>> : " + k_nickname);
-			                        //console.log("k_profile_image >>> : " + k_profile_image);
-			                        // console.log("k_thumbnail_image >>> : " + k_thumbnail_image);
-			                        
+
 			                        kakaoLogin(k_id);						
 								}
 							});				
@@ -113,10 +104,25 @@
 				
 				function kakaoLogin(k_id) {
 					alert("kakaoLogin >>> : " + k_id );
-					
-					// Ajax 호출해서 로직 만들기 대신 자바스크립트 location 이용해보기  
-					// 학생들은 코딩할 때는 Ajax 로 하기 
-					location.href="kakaoLogin";
+
+					 var memid = k_id;
+
+					 $.ajax({
+			            type: "POST", // 또는 "GET"
+			            url: "/trip/mem/kakaoLogin", // 컨트롤러의 URL
+			            data: "memid=" + memid,
+			            success: function(response){
+			                // 요청 성공 시 처리할 내용
+			                console.log(response);
+			                location.href = '<%= request.getContextPath() %>/spot/spot_IsudSelectAll';
+
+			            },
+			            error: function(xhr, status, error){
+			                // 요청 실패 시 처리할 내용
+              			console.error(xhr.responseText);
+		           	 	}
+		        	});
+
 				}
 				//카카오 로그인 ===================================================================================
 

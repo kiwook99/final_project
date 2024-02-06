@@ -73,12 +73,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             ModelAndView modelAndView) throws Exception {
         // postHandle 메서드는 컨트롤러 메서드 실행 후, 뷰가 렌더링되기 전에 실행됩니다.
         // 필요에 따라 후처리 작업을 수행할 수 있습니다.
-    	boolean loginCheck = false;
-    	if (jds != null) {
-    		loginCheck = true;
-    		ModelMap modelMap = modelAndView.getModelMap();
-    		modelMap.addAttribute("loginCheck", loginCheck);
-    	}
     }
 
 }
