@@ -8,6 +8,8 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- Daum 우편번호 서비스 스크립트 로드 -->
     <script type="text/javascript" defer>
         $(document).ready(function () {
+        	
+      
         	// 비밀번호 확인
             $("#pwCheck").click(function () {
                 console.log("pwCheck 함수 진입");
@@ -98,7 +100,9 @@
                 <td>아이디</td>
                 <td>
                     <input type="text" name="memid" id="memid" size="20">
-                    <input type="button" id="idCheck" value="중복확인"></td>
+                    <input type="button" id="idCheck" value="중복확인">
+                    <input type="hidden" id="idDuplication" value="idUncheck">
+                </td>
                 </td>
             </tr>
             <tr>
