@@ -41,6 +41,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             return true; // main은 인터셉터를 거치지 않고 계속 진행
         }
         
+        // spot_main은 예외 처리
+        if (request.getRequestURI().startsWith("/trip/spot/spot_IsudSelectAll")) {
+            return true; // spot_main은 인터셉터를 거치지 않고 계속 진행
+        }
+        
         // mem으로 시작하는 경로는 예외 처리
         if (request.getRequestURI().startsWith("/trip/mem")) {
             return true; // mem 은 인터셉터를 거치지 않고 계속 진행
