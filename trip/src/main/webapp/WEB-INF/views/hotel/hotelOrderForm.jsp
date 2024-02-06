@@ -10,7 +10,7 @@
 
 	//세션에서 값을 가져오기
 	//String memid = (String) session.getAttribute("memid");
-	String memname = request.getParameter("memname");
+	
 	String hotelname = request.getParameter("hotelname");
 	String hotelprice = request.getParameter("hotelprice");
 	String hotelcheckin = request.getParameter("hotelcheckin");
@@ -35,66 +35,9 @@
 <!-- 다음 우편번호 주소 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
 
-	$(document).ready(function(){
-		
-		var memname = "";
-		var hotelname = '<%= hotelname %>';
-		var hotelprice = '<%= hotelprice %>';		
-		// alert(hotelname + " : " + hotelprice);
-		
-		// 이메일 
-		$('#koemail2').change(function(){	
-			$("#koemail2 option:selected").each(function () {
-				if($(this).val()== '1'){ //직접입력일 경우 
-						var aa = $("#koemail1").val();						
-						$("#koemail1").val(''); //값 초기화 
-						$("#koemail1").attr("readonly",false); //활성화 				
-				}else{ //직접입력이 아닐경우 
-						$("#koemail1").val($(this).text()); //선택값 입력 
-						$("#koemail1").attr("readonly",true); //비활성화 
-				}
-			}); 
-		}); 	
-
-		
-		$(document).on('click', '#cardBtn', function(){
-				
-				//가맹점 식별코드
-				IMP.init('imp23814146');
-				
-				var dynamicGoodsName = 'aa'; // 서버에서 받아온 값
-				console.log("dynamicGoodsName: ", dynamicGoodsName);
-				
-				IMP.request_pay({
-				    mid : 'TC0ONETIME',
-				    gopaymethod : 'card',
-				    oid : 'merchant_' + new Date().getTime(),
-				    goodname : dynamicGoodsName,
-			        amount: 69000, 
-				    buyername : '홍길동',
-				    buyertel : '010-1234-5678'
-				    //buyer_addr : '서울 양찬구 목동',
-				    //buyer_postcode : '123-456'
-				}, function(rsp) {
-					console.log("Goods Name in IMP.request_pay: ", dynamicGoodsName);
-					console.log(rsp);
-				    if ( rsp.success ) {
-				    	var msg = '결제가 완료되었습니다.';
-				        msg += '고유ID : ' + rsp.mid;
-				        msg += '상점 거래ID : ' + rsp.oid;
-				        msg += '결과코드 : ' + rsp.resultCode;
-				        msg += '결제요청시 세팅한 주문번호 : ' + rsp.orderNumber;
-				    } else {
-				    	 var msg = '결제에 실패하였습니다.';
-				         msg += '에러내용 : ' + rsp.error_msg;
-				    }
-				    alert(msg);
-				});			
-			});
-	});
 </script>
+
 <style type="text/css">
 
     table {
@@ -152,7 +95,7 @@
 </tr>
 <tr>
 	<td class="mem">예약자명</td>
-	<td class="mem"><%= memname %></td>
+	<td class="mem" id="memid"><%= memid %></td>
 </tr>
 <tr>
 	<td class="mem">숙소명</td>
@@ -205,5 +148,65 @@
 </table>				 		        		     
 </form>	
 
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		var memid = '<%= memid %>';
+		var hotelname = '<%= hotelname %>';
+		var hotelprice = '<%= hotelprice %>';		
+		// alert(hotelname + " : " + hotelprice);
+		
+		// 이메일 
+		$('#koemail2').change(function(){	
+			$("#koemail2 option:selected").each(function () {
+				if($(this).val()== '1'){ //직접입력일 경우 
+						var aa = $("#koemail1").val();						
+						$("#koemail1").val(''); //값 초기화 
+						$("#koemail1").attr("readonly",false); //활성화 				
+				}else{ //직접입력이 아닐경우 
+						$("#koemail1").val($(this).text()); //선택값 입력 
+						$("#koemail1").attr("readonly",true); //비활성화 
+				}
+			}); 
+		}); 	
+
+		
+		$(document).on('click', '#cardBtn', function(){
+			
+			//가맹점 식별코드
+			IMP.init('imp23814146');
+			
+			var dynamicGoodsName = 'aa'; // 서버에서 받아온 값
+			console.log("dynamicGoodsName: ", dynamicGoodsName);
+			
+			IMP.request_pay({
+			    mid : 'TC0ONETIME',
+			    gopaymethod : 'card',
+			    oid : 'merchant_' + new Date().getTime(),
+			    goodname : dynamicGoodsName,
+		        amount: 69000, 
+			    buyername : '홍길동',
+			    buyertel : '010-1234-5678'
+			    //buyer_addr : '서울 양찬구 목동',
+			    //buyer_postcode : '123-456'
+			}, function(rsp) {
+				console.log("Goods Name in IMP.request_pay: ", dynamicGoodsName);
+				console.log(rsp);
+			    if ( rsp.success ) {
+			    	var msg = '결제가 완료되었습니다.';
+			        msg += '고유ID : ' + rsp.mid;
+			        msg += '상점 거래ID : ' + rsp.oid;
+			        msg += '결과코드 : ' + rsp.resultCode;
+			        msg += '결제요청시 세팅한 주문번호 : ' + rsp.orderNumber;
+			    } else {
+			    	 var msg = '결제에 실패하였습니다.';
+			         msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    alert(msg);
+			});			
+		});
+});
+</script>
 </body>
 </html>

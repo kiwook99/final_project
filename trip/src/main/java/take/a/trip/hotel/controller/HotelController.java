@@ -152,10 +152,11 @@ public class HotelController {
 	 public String hotelSelect(HotelVO hvo, Model model, HttpServletRequest request) {		 
 		 logger.info("hotelSelect 함수진입 ");
 		 logger.info("hotelSelect hvo.getHotelnum()=> "+ hvo.getHotelnum());
-		 
+
 		 HttpSession session = request.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
 		 String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
 		 logger.info("spot_IsudSelectAll sessionId >>> : " + sessionId);
+
 		 
 		 List<HotelVO> selectList = hotelService.hotelSelect(hvo);
 		 
@@ -201,15 +202,15 @@ public class HotelController {
 	 	        String hotelprice = req.getParameter("hotelprice");
 	 	        String hotelcheckin = req.getParameter("hotelcheckin");
 	 	        String hotelcheckout = req.getParameter("hotelcheckout");
-	 	        String memname = req.getParameter("memname");
+	 	      
 
 	 	        model.addAttribute("hotelname", hotelname);
 	 	        model.addAttribute("hotelprice", hotelprice);
 	 	        model.addAttribute("hotelcheckin", hotelcheckin);
 	 	        model.addAttribute("hotelcheckout", hotelcheckout);
-	 	        model.addAttribute("memname", memname);
+	 	   
 	 	        
-	 	       logger.info("hotelOrderForm memname: " + memname);
+	 	     
 	 	       logger.info("hotelOrderForm hotelname: " + hotelname);
 	 	       logger.info("hotelOrderForm hotelprice: " + hotelprice);
 	 	       logger.info("hotelOrderForm hotelcheckin: " + hotelcheckin);
