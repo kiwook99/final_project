@@ -19,7 +19,7 @@
 	int curPage = 0;
 	int totalCount = 0;
 	
-	
+	 
 	Object objPaging = request.getAttribute("pagingSVO"); 
 	SpotVO pagingSVO = (SpotVO)objPaging;
 	
