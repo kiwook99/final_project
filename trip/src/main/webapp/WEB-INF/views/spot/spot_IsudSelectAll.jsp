@@ -8,9 +8,7 @@
 <%@ page import="org.apache.log4j.Logger" %>
 
 <% request.setCharacterEncoding("UTF-8");%>	
-<% 	//세션에서 값을 가져오기
-	String memid = (String) session.getAttribute("memid");
-%>
+
 <%
 	Logger logger = LogManager.getLogger(this.getClass());
 	logger.info("spot_IsudSelectAll.jsp 페이지 진입 >>> : ");
