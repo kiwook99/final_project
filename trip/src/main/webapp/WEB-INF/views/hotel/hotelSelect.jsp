@@ -19,7 +19,8 @@
 	//String memid = (String) session.getAttribute("memid");
 
 	Object obj = request.getAttribute("selectList");
-
+	Object objAdmin = request.getAttribute("adminyn"); 
+	
 	List<HotelVO> list = (List<HotelVO>)obj;
 	int nCnt = list.size();
 
@@ -110,6 +111,7 @@
 		.swiper-container{
 		height:670px;
 		position: relative;	/* 요소 자기 자신을 기준으로 배치 */
+		margin-top: 35px;
 		}
 	
 		.swiper-slide {
@@ -154,7 +156,6 @@
     color: #000;
     font-weight: 800;
     text-align: center;
-    margin-left: 175px;
 	}
 	
 	.sub-header{
@@ -253,9 +254,6 @@
         border: none;
         outline: none;
     }
-    #finalPrice {
-	
-	}
 
 	.coment, .info ul, .name h3{
 	background-color:#f7f7f7;
@@ -289,14 +287,18 @@
 	margin-right:100px;
 	}
 	
-	.sub-header a {
-	    margin-right: 10px; /* 링크 간의 간격 조절 */
-        padding: 5px 15px;
-	    background-color: #0AA4B5;
-	    color: white;
-	    border: 0;
-	    border-radius: 10px;
-	    FLOAT: RIGHT;
+	.admin{
+	margin-bottom:25px;
+	text-align: center;
+	}
+	
+	.admin a {
+    margin-right: 10px; /* 링크 간의 간격 조절 */
+    padding: 5px 15px;
+    background-color: #0AA4B5;
+    color: white;
+    border: 0;
+    border-radius: 10px;
 	}
 	
 	#cardBtn {
@@ -521,11 +523,17 @@
 
 	
 		<div class="sub-header">
-			<h3 class="sub-title">숙박
-				<a href="hotelDelete?hotelnum=<%= hvo.getHotelnum() %>" class="delete-link" id="delete-link"> 삭제</a>
-				<a href="hotelUpdateForm?hotelnum=<%= hvo.getHotelnum() %>" class="update-link" id="update-link">수정</a>
+			<h3 class="sub-title">숙소정보
 			 </h3>
-		</div>
+
+		<% if ("Y".equals(objAdmin)) { %>
+		   <!-- 관리자만 볼수있는 태그-->
+		   <div class="admin">
+		   <a href="hotelUpdateForm?hotelnum=<%= hvo.getHotelnum() %>" class="update-link" id="update-link">수정</a>
+		   <a href="hotelDelete?hotelnum=<%= hvo.getHotelnum() %>" class="delete-link" id="delete-link"> 삭제</a>
+			</div>
+		<% } %>
+				</div>
 			<div class="hotelSelect">
 				<div class="detail">
 					<div class="detail-basic">
@@ -560,9 +568,9 @@
 							<span class="info"><br>
 								<ul>
 									<li> 주소	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= hvo.getHoteladress() %> </li>
-									<li> 번호	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= hvo.getHoteltel().replace("<br>", "&nbsp;/&nbsp;") %>
-									<li> 체크인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckin().replace("<br>", "&nbsp;/&nbsp;") %>
-									<li> 체크아웃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckout().replace("<br>", "&nbsp;/&nbsp;") %>
+									<li> 번호 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= hvo.getHoteltel().replace("<br>", "&nbsp;/&nbsp;").replace("<br />", "&nbsp;/&nbsp;") %></li>
+									<li> 체크인 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckin().replace("<br>", "&nbsp;/&nbsp;").replace("<br />", "&nbsp;/&nbsp;") %></li>
+									<li> 체크아웃 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckout().replace("<br>", "&nbsp;/&nbsp;").replace("<br />", "&nbsp;/&nbsp;") %></li>
 								</ul>
 							</span>
 							</div><br>
