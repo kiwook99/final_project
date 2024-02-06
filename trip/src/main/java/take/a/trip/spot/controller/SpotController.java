@@ -225,6 +225,32 @@ public class SpotController {
 		return "spot/spot_detail";
 	}
     
+    
+	// 여행지 조회 후 수정
+	@GetMapping("spot/spot_IsudSelect_admin")
+	public String spot_IsudSelect_admin(SpotVO svo, Model model) {
+		logger.info("SpotController spot_IsudSelect_admin 진입 >>> : ");
+		logger.info("spot_IsudSelect 함수 진입 obvo.getTripnum() >>> : " + svo.getTripnum());
+		
+		// 서비스 호출
+		List<SpotVO> listSa = spotService.spot_IsudSelect(svo);
+		
+		if(listSa.size() == 1) {
+			logger.info("spot_IsudSelect_admin listSa.size() >>> : " + listSa.size());
+			
+			// 조회수 업데이트
+			int spotCnt = spotService.spot_IsudSpothit(svo);
+			logger.info("spot_IsudSelect_admin spotCnt >>> : " + spotCnt);
+			
+			model.addAttribute("listSa", listSa);
+			
+			return "spot/spot_IsudSelect_admin";
+		}
+		return "spot/spot_IsudSelectAll";
+	}
+    
+    
+    
     // 댓글 ====================================================================================
 	// 댓글 등록
 	@PostMapping("spot/spot_IsudCommentInsert")
@@ -277,6 +303,7 @@ public class SpotController {
 	public String spot_IsudCommentDelete(ReviewVO rvo) {
 		logger.info("SpotController spot_IsudCommentDelete 진입 >>> : ");
 		logger.info("SpotController rvo.getTripnum() >>> : " + rvo.getTripnum());
+		logger.info("SpotController rvo.getReviewnum() >>> : " + rvo.getReviewnum());
 		
 		int nCnt = spotService.spot_IsudCommentDelete(rvo);
 		logger.info("spot_IsudCommentDelete nCnt >>> : " + nCnt);
@@ -320,23 +347,20 @@ public class SpotController {
 	  
 	  List<SpotVO> searchList = spotService.spot_Search(svo);
 	  
+	  
 	  int nCnt = searchList.size();
 	
 		if (nCnt > 0) {
 			logger.info("spot_Search nCnt >>> : " + nCnt);
 			
 			model.addAttribute("listAll",searchList);
-			model.addAttribute("pagingSVO", svo);
+			model.addAttribute("pagingSVO", svo);			
 			
-			
-			return "spot/spot_IsudSelectAll";
+			return "spot/spot_IsudSelectAll";			
 	
 	}
+
 		return "spot/spot_IsudSelectAll";
-	}
-
-
-
-					
+	}					
 	
 }

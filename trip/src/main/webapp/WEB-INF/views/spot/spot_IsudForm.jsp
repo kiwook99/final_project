@@ -8,9 +8,10 @@
 		<style type="text/css">
 			table {
 				margin: 0 auto;
+				border-radius: 5px;
 			}
 			
-			h3 {
+			h2 {
 				text-align: center;
 			}
 			
@@ -18,7 +19,20 @@
 				text-align: center;
 			}
 
-
+			.ti {
+				text-align: left;
+			}
+			
+		
+			
+			#spot_isud_insertBtn {
+				padding: 5px 15px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+			}
+						
 		</style>
 		
 		
@@ -45,20 +59,25 @@
 		</script>		
 	</head>
 	<body>
-		<h3> 여행지 등록</h3>
+	<%@ include file="/main.jsp" %>
+		<br>
+		<hr>
+		<br>
+		<h2> 여행지 등록</h2>
+		<br>
 		<hr>
 		<br>	
 			<form name="spot_IsudForm" id="spot_IsudForm">
 				<table border="1">
 					<tr>
-						<td class="tt"> 여행지 번호 </td>
-						<td>
-							<input type="text" name="tripnum" id="tripnum" placeholder="자동으로 들어갑니다." readonly>
+						<td class="tt" width="120px"> 여행지 번호 </td>
+						<td class="ti">
+							<input type="text" name="tripnum" id="tripnum" size="40" placeholder="자동으로 들어갑니다." readonly >
 						</td>					
 						<td class="tt" rowspan="7" width="300px;">
 							     
 									경기도 지역 목록(지역별)<br>
-									<hr>
+									<br>
 									
 									1.	가평군 &nbsp;	2.	고양시 &nbsp;	3.	과천시 <br><br>
 									4.	광명시 &nbsp;	5.	광주시 &nbsp;	6.	구리시 <br><br>
@@ -73,56 +92,57 @@
 									31.	화성시
 									
 						</td>	
-						<td class="tt" rowspan="7" width="200px;">
-							     
+						<td class="tt" id="tc" rowspan="7" width="200px;">
+							     <br><br><br><br><br>
 									여행지 카테고리(분야별)<br>
-									<hr>
+									<br>
 									
 									1. 관광지<br><br>
 									2. 문화시설<br><br>
 									3. 축제공연행사<br><br>
 									4. 레포츠<br><br>
-									5. 음식점<br><br><br><br><br><br><br><br><br><br><br>							
+									5. 음식점<br><br><br><br><br><br><br>					
 						</td>												
 					</tr>
 					<tr>
 						<td class="tt"> 여행지 이름 </td>
-						<td>
+						<td class="ti">
 							<input type="text" name="tripname" id="tripname" size="40">
 						</td>
 					</tr>
 					<tr>
-						<td class="tt"> 여행지 카테고리 </td>
-						<td>
-							<input type="text" name="tripcatalogue" id="tripcatalogue" size="30">
+						<td class="tt"> 카테고리 </td>
+						<td class="ti">
+							<input type="text" name="tripcatalogue" id="tripcatalogue" size="40">
 						</td>
 					</tr>	
 					<tr>
 						<td class="tt"> 여행지 소개 </td>
-						<td>
-							<textarea name="tripcoment" id="tripcoment" cols="42" rows="20"></textarea>
+						<td class="ti">
+							<textarea name="tripcoment" id="tripcoment" cols="42" rows="25"></textarea>
 						</td>
 					</tr>			
 					<tr>
-						<td class="tt"> 여행지 지역 </td>
-						<td>
-							<input type="text" name="tripregion" id="tripregion" size="30">
+						<td class="tt"> 지역 </td>
+						<td class="ti">
+							<input type="text" name="tripregion" id="tripregion" size="40">
 						</td>
 					</tr>	
 					<tr>	
-						<td class="tt"> 이미지 업로드 </td>
+						<td class="tt" id="tf" height= "40px"> 이미지 </td>
 						<td>												   
 							<input type="file" name="tripimage" id="tripimage">
 						</td>
 					</tr>					
 					
 					<tr>
-						<td colspan="2" align="center">
+						<td colspan="2" align="center" height="50px">
 							<input type="submit" value="여행지 등록" id="spot_isud_insertBtn" >
 						</td>
 					</tr>			
 																						
 				</table>
 			</form>
+			<br><br><br><br><br>
 	</body>
 </html>

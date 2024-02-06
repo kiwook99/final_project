@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<script>
+	alert("수정 완료!");
+	
+	location.href="hotelSelect";
+</script>
 </body>
 </html>

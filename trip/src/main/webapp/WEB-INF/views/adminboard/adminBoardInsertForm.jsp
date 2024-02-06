@@ -52,28 +52,27 @@
         }
 
         input[type="button"] {
-            width: auto;
-            padding: 8px 15px;
-            background-color: #4CAF50;
+          
+            padding: 5px 15px;
+            background-color: #0aa4b5;
             color: white;
-            border: none;
-            border-radius: 4px;
+            border: 0;
+            border-radius: 10px;
             cursor: pointer;
         }
 
-        input[type="button"]:hover {
-            background-color: #45a049;
-        }
     </style>
 
 </head>
 <body>
-<h3>adminBoardInsert</h3>
+<%@ include file="/main.jsp" %>
+
+<h3>공지사항 글쓰기</h3>
 <hr>
 <form name="abInsert" id="abInsert">
 	<table>
 	    <tr>
-	        <td colspan="2" align="center">공지사항 글쓰기</td>
+	        <td colspan="2" align="center"></td>
 	    </tr>
 	    <tr>
 	        <td>글번호</td>

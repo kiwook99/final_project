@@ -24,7 +24,63 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+				<!-- 스타일 -->
+		<style type="text/css">
+			table {
+				text-align: center;	
+ 				margin: 0 auto; 
+ 				font-size: 20px;
+ 				border-radius: 5px;
+			}					
 
+			.tt {
+				font-weight: bold;
+			}
+			
+						
+
+			body {
+			    font-size: 17px;
+			}
+						
+			 
+			 h1 {
+			 	text-align: center;
+			 }
+			 
+			 
+			 h2 {
+			 	text-align: center;
+			 }			 
+	
+
+			
+			#U, #B, #D {
+			padding: 10px 30px;
+			background-color: #0aa4b5;
+			color: white;
+			border: 0;
+			border-radius: 10px;
+			font-size: 15px;
+			}
+			
+			
+			.btn {
+				text-align: center;
+			}	
+			
+			
+ 		    /* 소개 부분의 텍스트 자동 줄 바꿈 설정 */ 
+ 		    .tripcoment { 
+ 		        word-wrap: break-word; /* 텍스트가 부모 요소를 벗어날 때 자동으로 줄 바꿈 */ 
+ 		        max-width: 480px; /* 최대 너비를 지정하여 한 줄에 최대 30자까지 표시 */ 
+ 		        height: 200px; /* 원하는 높이로 설정하세요 */
+ 		        
+ 		    }		 
+		    	
+		</style>	
+		<!-- 폰트 어썸 CDN -->
+		<script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script type="text/javascript">
 		console.log("자바스크립트 진입 >>> : ");
@@ -39,10 +95,12 @@
 				e.preventDefault();
 				$("#spotUpdateForm").attr({ 
 					"method":"GET", 
-					"action":"spot_IsudUpdate"
+					"action":"spot_IsudSelect_admin"
+// 					"action":"spot_IsudUpdate"
 				}).submit();
 			});
 			
+	
 			// D
 			$(document).on("click", "#D", function(e){
 				
@@ -63,57 +121,85 @@
 		</script>		
 	</head>
 	<body>
-		<h3>관광정보 조회</h3>
+	<%@ include file="/main.jsp" %>
+		<br>
 		<hr>
+		<br>
+		<h2>관광정보</h2>
+		<br>
+		<hr>
+		<br>
+		   <!-- 이미지 부분을 테이블 외부로 이동 -->
+		   <div style="text-align: center;">
+		       <img src="${pageContext.request.contextPath}/resources/images/img_spot/<%= svo.getTripimage() %>" border="1" width="600" height="400" alt="image">
+		   </div>		
+		
 			<form name="spotUpdateForm" id="spotUpdateForm">
-				<table>
+				<input type="hidden" name="tripnum" id="tripnum" value="<%= svo.getTripnum() %>">
+				<br>
+				<table border="1">					
 					<tr>
-						<td colspan="2"> 정보 </td>
-					</tr>
-				<tr>
-					<td colspan="2">
-					<img src="${pageContext.request.contextPath}/resources/images/img_spot/<%= svo.getTripimage() %>" border="1" width="40" height="50" alt="image">
-					</td>
-				</tr>					
-					<tr>
-						<td class="tt"> 여행지 번호 </td>
-						<td>
-							<input type="text" name="tripnum" id="tripnum" value="<%= svo.getTripnum() %>" readonly>
-						</td>					
-					</tr>
-					<tr>
-						<td class="tt"> 여행지 이름 </td>
-						<td>
-							<input type="text" name="tripname" id="tripname" size="40" value="<%= svo.getTripname() %>">
+						<td class="tt" width="5%" height="40px"> 여행지명 </td>
+						<td width="50%" style="font-weight: bold;">
+							<%= svo.getTripname() %>
+
 						</td>
 					</tr>
 					<tr>
-						<td class="tt"> 여행지 카테고리 </td>
-						<td>
-							<input type="text" name="tripcatalogue" id="tripcatalogue" size="30" value="<%= svo.getTripcatalogue() %>">
+						<td class="tt" height="40px"> 카테고리 </td>
+						<td  width="50%">
+							<%= svo.getTripcatalogue() %>
+
 						</td>
 					</tr>
 					<tr>
-						<td class="tt"> 여행지 소개 </td>
-						<td>
-							<textarea name="tripcoment" id="tripcoment" cols="42" rows="20"><%= svo.getTripcoment() %></textarea>
+						<td class="tt"> 소개 </td>
+						<td  width="50%" class="tripcoment">
+							<%= svo.getTripcoment() %>
 						</td>
+
 					</tr>	
 					<tr>
-						<td class="tt"> 여행지 지역 </td>
-						<td>
-							<input type="text" name="tripregion" id="tripregion" size="30" value="<%= svo.getTripregion() %>">
+						<td class="tt" height="40px"> 지역 </td>
+						<td  width="50%">
+							<%= svo.getTripregion() %>
 						</td>
-					</tr>	
-				<tr>
-					<td colspan="3">
-					<button type="button" id="U">수정</button>
-					<button type="button" id="D">삭제</button>
-					<button type="button" id="B">돌아가기</button>
-					</td>	
-				</tr>																							
+					</tr>																							
 				</table>
+				
+				<br>
+				<div class="btn">
+					<button type="button" id="U">수정</button>&nbsp;&nbsp;&nbsp;
+					<button type="button" id="D">삭제</button>&nbsp;&nbsp;&nbsp;
+					<button type="button" id="B">돌아가기</button>
+				</div>
 			</form>
+			<div class="main">
+				<div class="contents">
+					<div class="sub_header">
+					<!-- 제목 -->
+					</div>
+					<div class="sub_content">
+						<div class="sub_search">
+							<!-- 조건 검색 -->
+						</div>
+						<div class="sub_list">
+							<div class="list_head">
+								<!-- 페이지 수 -->
+							</div>
+							<div class="list_content">
+								<!-- 관광지 -->
+								<ul id="spotList">
+									<!-- 데이터 들어갈 것임 -->
+								</ul>
+								<div id="buttonContainer"></div>							
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
 		<!-- 댓글 처리 -->
 		<jsp:include page="spot_IusdComment.jsp">  
 			<jsp:param value="<%= svo.getTripnum() %>" name="tripnum" />

@@ -38,9 +38,27 @@
 <!-- hotel 지역별 검색 -->
 <select id="hotelSearch" parameterType="hvo" resultType="hvo">
 
-		SELECT *
-		FROM HOTEL
-		WHERE 1=1 AND DELETEYN='Y'
+		SELECT * FROM (
+			SELECT 	H.HOTELNUM		HOTELNUM,
+				H.REGIONID		REGIONID,
+				H.HOTELNAME		HOTELNAME,
+				H.HOTELTEL		HOTELTEL,
+				H.HOTELIMAGE	HOTELIMAGE,
+				H.HOTELPRICE	HOTELPRICE,
+				H.HOTELADRESS	HOTELADRESS,
+				H.HOTELCOMENT	HOTELCOMENT,
+				H.HOTELMAPX		HOTELMAPX,
+				H.HOTELMAPY		HOTELMAPY,
+				H.HOTELCHECKIN	HOTELCHECKIN,
+				H.HOTELCHECKOUT	HOTELCHECKOUT,
+				H.INSERTDATE	INSERTDATE,
+				H.UPDATEDATE	UPDATEDATE,
+				H.DELETEYN		DELETEYN,
+				<!--  ? : 페이지 사이즈 : pageSize  -->
+				CEIL(ROW_NUMBER() OVER(ORDER BY H.HOTELNAME) / #{pageSize} ) pageSize,
+				COUNT(H.HOTELNAME) OVER() AS totalCount
+		FROM HOTEL H
+		WHERE 1=1 AND H.DELETEYN='Y'
 		
 		<if test="searchFilter == 'key_01'">
 			<![CDATA[ AND REGIONID LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
@@ -51,6 +69,8 @@
 		</if>
 		
 		ORDER BY HOTELNAME
+		<!--  ? : 현재 페이지 : curPage -->
+	)	WHERE pageSize = #{curPage}
 		
 </select>
 
@@ -76,5 +96,78 @@
 		AND		H.HOTELNUM = #{hotelnum}
 		
 </select>
+
+<!-- 숙소 등록 -->
+<insert id="hotelInsert" parameterType="hvo">
+
+	INSERT INTO HOTEL(HOTELNUM, REGIONID, HOTELNAME, HOTELTEL, HOTELIMAGE, HOTELPRICE, HOTELADRESS, HOTELCOMENT, HOTELMAPX, HOTELMAPY, HOTELCHECKIN, HOTELCHECKOUT, INSERTDATE, UPDATEDATE, DELETEYN)
+				VALUES ( HOTEL_SEQ.NEXTVAL,
+						#{regionid},
+						#{hotelname},
+						#{hoteltel},
+						#{hotelimage, jdbcType=VARCHAR},
+						#{hotelprice},
+						#{hoteladress},
+						#{hotelcoment},
+						#{hotelmapx},
+						#{hotelmapy},
+						#{hotelcheckin},
+						#{hotelcheckout},
+						SYSDATE,
+						SYSDATE,
+						'Y'
+						)
+</insert>
+
+<select id="hotelUpdateForm" parameterType="hvo" resultType="hvo">
+	
+	SELECT 		H.HOTELNUM		HOTELNUM,
+				H.REGIONID		REGIONID,
+				H.HOTELNAME		HOTELNAME,
+				H.HOTELTEL		HOTELTEL,
+				H.HOTELIMAGE	HOTELIMAGE,
+				H.HOTELPRICE	HOTELPRICE,
+				H.HOTELADRESS	HOTELADRESS,
+				H.HOTELCOMENT	HOTELCOMENT,
+				H.HOTELMAPX		HOTELMAPX,
+				H.HOTELMAPY		HOTELMAPY,
+				H.HOTELCHECKIN	HOTELCHECKIN,
+				H.HOTELCHECKOUT	HOTELCHECKOUT,
+				H.INSERTDATE	INSERTDATE,
+				H.UPDATEDATE	UPDATEDATE,
+				H.DELETEYN		DELETEYN
+		FROM HOTEL H
+		WHERE	H.DELETEYN='Y'
+		AND		H.HOTELNUM = #{hotelnum}
+		
+</select>
+
+<!-- 수정 -->
+<update id="hotelUpdate" parameterType="hvo">
+
+	UPDATE  HOTEL H
+	   SET  H.HOTELNAME = #{hotelname}, 
+	   		H.HOTELTEL = #{hoteltel},
+	   		H.HOTELADRESS = #{hoteladress}, 
+	   		H.HOTELPRICE = #{hotelprice}, 
+	   		H.HOTELCHECKIN = #{hotelcheckin}, 
+	   		H.HOTELCHECKOUT = #{hotelcheckout}, 
+	   		H.HOTELCOMENT = #{hotelcoment},
+	   		H.HOTELMAPX = #{hotelmapx},
+	   		H.HOTELMAPY = #{hotelmapy}, 
+	   		H.UPDATEDATE = SYSDATE
+	 WHERE  H.DELETEYN = 'Y'
+	   AND  H.HOTELNUM = #{hotelnum}
+	   
+</update>	
+
+<!-- 삭제 -->
+<update id="hotelDelete" parameterType="hvo">
+
+	UPDATE  HOTEL H
+	   SET  H.DELETEYN = 'N'
+	 WHERE  H.HOTELNUM = #{hotelnum}
+	   
+</update>	
 
 </mapper>

@@ -89,6 +89,24 @@
 		   AND  TRIPNUM = #{tripnum}
 	</update>
 	
+	<!-- 조회후 수정폼 -->
+	<select id="spot_IsudSelect_admin" parameterType="svo" resultType="svo">
+			
+		SELECT A.TRIPNUM		TRIPNUM,
+			   A.TRIPNAME		TRIPNAME,
+			   A.TRIPCATALOGUE	TRIPCATALOGUE,
+			   A.TRIPCOMENT		TRIPCOMENT,
+			   A.TRIPREGION		TRIPREGION,
+			   A.TRIPIMAGE		TRIPIMAGE,
+			   TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD')	INSERTDATE,
+			   TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD')	UPDATEDATE,
+			   A.DELETEYN		DELETEYN,
+			   A.SPOTHIT		SPOTHIT	   
+		FROM	TRIP A
+		WHERE A.DELETEYN = 'Y'
+		AND    A.TRIPNUM = #{tripnum}
+	</select>
+	
 	<!-- 댓글 -->
 	
 	<!-- 입력 -->
@@ -111,10 +129,9 @@
 	
 		SELECT  A.REVIEWNUM		 REVIEWNUM,
 				A.TRIPNUM		 TRIPNUM,
-				A.MEMNUM	 MEMNUM,
-				A.REVIEWCOMENT  REVIEWCOMENT,
-				A.INSERTDATE INSERTDATE
-				
+				A.MEMNUM	 	 MEMNUM,
+				A.REVIEWCOMENT   REVIEWCOMENT,
+				TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD')	INSERTDATE	
 		FROM	REVIEW A
 		WHERE DELETEYN = 'Y'
 		AND A.TRIPNUM = #{tripnum}
@@ -125,7 +142,6 @@
 	
 	<!-- 삭제 -->
 	<update id="spot_IsudCommentDelete" parameterType="rvo">
-	
 		UPDATE REVIEW
 		SET	   DELETEYN = 'N'
 		WHERE  DELETEYN = 'Y'

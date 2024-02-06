@@ -99,78 +99,13 @@
 			img {
 			    border: 0 none;	/* 외곽선 제거, 두께 0, 유형 없음*/
 			}			
-		
-
-			body {
-			    font-size: 17px;
-			}
-						
-			/*카테고리*/
-			#topMenu { 
-
-			 width: 100%; 
-			 margin: 0 auto;
-			 }
-			 
-			 #topMenu ul{
-				 list-style-type: none;
-				 margin: 0px;
-				 padding: 0px; 
-				 font-size : 20px;
-				 text-align: center;
-			 }
-			 
-			 #topMenu ul li 
-			 { 
-			 list-style: none; 
-			 display: inline-block;
-			 line-height: 30px; 
-			 vertical-align: middle; 
-			 text-align: center;
-			 position: relative;
-			 }
-			 
-			 .submenuLink{
-				 text-decoration:none;
-				 display: block;
-				 width: 150px;
-				 font-size: 12px;
-				 font-weight: bold;
-				 font-family: "Trebuchet Ms", Dotum;
-			 }
-			 
-			  #topMenu { 
-			 color: white; 
-			 background-color: #aaa; }
 			
-			 .submenuLink{
-				 color: white;
-				 background-color: #aaa;
-				 border: solid 1px white;
-				 margin-top: -1px;
-			 }
-			 
-			 .sb{
-				 position: absolute;
-				 height: 0px;
-				 overflow: hidden;
-				 transition: height .2s;
-			 }
-			 
-			 .topMenuLi:hover .sb{
-				 height: 100px;
-			 }
-			 
-			 .submenuLink:hover { 
-			 color: black;
-			 background-color: #aaa;
-			 }		
 			 
 			 h1 {
 			 	text-align: center;
 			 }
 			 
-			 
+			/* 위치 */ 
 		 	 .area {
 		    position: absolute;
 		    background: rgba(0, 0, 0, 0.5);
@@ -205,7 +140,21 @@
 			}
 	
 
+			#search_btn, #insertBtn, #selectAllBtn, #selectBtn, #deleteBtn {
+				padding: 10px 25px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+				font-size: 15px;
+			}
 
+			#btn {
+				text-align: center;
+			}
+			
+			h2{text-align: center;}
+			
 		</style>	
 		<!-- 폰트 어썸 CDN -->
 		<script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
@@ -273,23 +222,6 @@
 				}).submit();
 			});
 			
-		
-			
-			// D
-			$(document).on("click", "#deleteBtn", function(){
-				console.log("deletetBtn >>> : ");
-				
-				if($('.tripnum:checked').length == 0){
-					alert("삭제할 글 번호 하나를 선택하세요");
-					
-					return;
-				}
-				
-				$('#tripList').attr({
-					'action' : 'spot_IsudDelete',
-					'method' : 'GET',
-				}).submit();
-			});
 			
 			// 검색
 		      $("#search_btn").click(function(){
@@ -304,69 +236,33 @@
 		</script>		
 	</head>
 	<body>
-	<br>
+		<%@ include file="/main.jsp" %>
+		<br>
+		<hr>
+		<br>
+		<h2>관광정보 (ISUD)</h2>
+		<br>
+		<hr>
+		<br>
 		<!-- 검색 -->
 		<div id="header">
-			<table>
-				<tr>
-					<td>
-					<!-- 이미지 아이콘 -->
-						<a href="spot_IsudSelectAll">
-						<!-- <img src="${pageContext.request.contextPath}/resources/images/img_spot/지도.png" width="50px" height="50px" title="로고 이미지">  -->
-							<i class="fa-solid fa-plane-up fa-xl"></i> <!-- 폰트사이즈 :  fa-2xs - 0.625em - 10px / fa-xs - 0.75em - 12px / fa-sm - 0.875em - 14px / fa-lg - 1.25em - 20px / fa-xl - 1.5em - 24px / fa-2xl - 2em - 32px  -->
-						</a>
-						&nbsp;&nbsp;
-					</td>
-					<td>
-					<!-- 제목 -->
-					<h1>여행가기 좋은날</h1>
-					</td>
-				</tr>
-			</table>
-			<br>
 				<form name="miniSearchForm" id="miniSearchForm" action='spot_Search'> 
 				<select id="searchFilter_1" name="searchFilter_1" style="width:100px;font-size:15px;">
 					<option value="key_01">지역별</option>
 					<option value="key_02">분야별</option>
 				</select>
 				<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" 
-				style="width:200px;height:30px;font-size:15px;">
+				style="width:350px;height:30px;font-size:15px;">
 				<input type="button" id="search_btn" name="search_btn" value="검색">
-				
-				<input type="button" name="login" id="loginBtn" value="로그인" onclick="location.href='#'" >
 				</form>		
 		</div>
 		<br>
-			<div class="topnav">
-				<!--메뉴-->
-				<nav id="topMenu" >
-					 <ul>
-						 <li class="topMenuLi">
-						 <a class="menuLink" href="#content1">여행정보</a>
-						 	 <ul class ="sb">
-								  <li><a href="spot" class="submenuLink" >관광정보</a></li>
-								  <li><a href="spot_ISUD" class="submenuLink" >관광정보(ISUD)</a></li>
-						  	</ul>
-						 </li>							  
-						  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
-						 <li class="topMenuLi">
-						 <a class="menuLink" href="#content2">숙소예약</a>
-						 	<ul class ="sb"> 
-								 <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink" >숙소정보</a></li>
-						 	</ul>
-						 </li>
-						  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
-						 <li class="topMenuLi">
-						 <a class="menuLink" href="#content3">게시판</a>
-						 	<ul class ="sb"> 
-								 <li><a href="#" class="submenuLink" >자유 게시판</a></li>
-								 <li><a href="#" class="submenuLink" >공지사항 게시판</a></li>
-						 	</ul>
-						 </li>				 
-					 </ul> 
-				 </nav>
-			</div>		
-			<br><br><br>
+			<div id="btn">
+				<button type="button" id="insertBtn">여행지 등록</button>
+			</div>
+		<br>
+		
+		<br><br>
 			<div class= "main">
 				<div class="contents">
 					<div class="list_content">
@@ -401,25 +297,19 @@ for(int i=0; i < nCnt; i++){
 							%>						
 							</li>
 				</ul>
- 									<jsp:include page="spot_IsudPaging.jsp" flush="true">
- 										<jsp:param name="url" value="spot_IsudSelectAll"/>
- 										<jsp:param name="str" value=""/>
- 										<jsp:param name="pageSize" value="<%= pageSize %>"/>
- 										<jsp:param name="groupSize" value="<%= groupSize %>"/>
- 										<jsp:param name="curPage" value="<%= curPage %>"/>
- 										<jsp:param name="totalCount" value="<%= totalCount %>"/>
- 									</jsp:include>
-
- 									<button type="button" id="insertBtn">등록</button>
- 									<button type="button" id="selectAllBtn">목록</button>
- 									<button type="button" id="selectBtn">수정</button>
- 									<button type="button" id="deleteBtn">삭제</button>		
-
+						<jsp:include page="spot_IsudPaging.jsp" flush="true">
+							<jsp:param name="url" value="spot_IsudSelectAll"/>
+							<jsp:param name="str" value=""/>
+							<jsp:param name="pageSize" value="<%= pageSize %>"/>
+							<jsp:param name="groupSize" value="<%= groupSize %>"/>
+							<jsp:param name="curPage" value="<%= curPage %>"/>
+							<jsp:param name="totalCount" value="<%= totalCount %>"/>
+						</jsp:include>	
 					</div>
 				</div>
 			</div>
 			
-			
+			<br><br>
 	</body>
 </html>
 

@@ -3,11 +3,45 @@
     
 <%@ page import="org.apache.log4j.Logger" %>
 <%@ page import="org.apache.log4j.LogManager" %>    
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<!-- 스타일 -->
+		<style type="text/css">
+			h2 {
+				text-align: center;
+			}
+			
+			#insertbtn {
+				padding: 10px 25px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+				font-size: 15px;
+			}
+			
+			.deleteBtn {
+			    padding: 5px 15px;
+			    background-color: #0aa4b5;
+			    color: white;
+			    border: 0;
+			    border-radius: 10px;
+			    font-size: 15px;
+			}
+			
+			.name {
+				font-weight: bold;
+			}
+			
+			#commentlist {
+				margin-left: 45px;
+			}
+		</style>
+		
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -70,7 +104,8 @@
 					
 					let deleteURL = "spot_IsudCommentDelete";
 					let method = "POST";
-					let dataParam = { tripnum: $('#tripnum').val(rbnumV) };
+					let dataParam = { reviewnum: $('#reviewnum').val(rbnumV) };  // 댓글 번호 기준으로 삭제함
+					
 					
 					dataParam = $('#commentForm').serialize();
 					console.log("dataParam >>> : " + dataParam);
@@ -159,6 +194,8 @@
 			var writerP = $("<p>");
 			writerP.addClass("writer");
 			
+			
+			
 			// 작성자 정보의 이름
 			var nameSpan = $("<span>");
 			nameSpan.addClass("name");
@@ -204,7 +241,6 @@
 				t = t.substring(0, l);
 			}
 			$(obj).val(t);
-			$('.bytes').text(getTextLength(t));
 		}
 		
 		// 댓글 등록 후 입력창 초기화
@@ -224,7 +260,11 @@
 		</script>
 	</head>
 	<body>
-		<h3>덧글</h3>
+		<br><br>
+		<hr>
+		<br>
+		<h2>리뷰</h2>
+		<br>
 		<hr>
 <% request.setCharacterEncoding("utf-8"); %>
 <%
@@ -235,30 +275,34 @@
 	logger.info("spot_IusdComment tripnum 페이지 >>> : " + tripnum);
 %>
 		<form name="commentForm" id="commentForm">
+					<div>
+				<ol name="commentlist" id="commentlist">
+				<!-- 입력한 값이 들어갈 것임 -->
+				</ol>
+			</div>
+			<hr>
+			<br>
 			<table>
 				<tr>
-					<td>작성자</td>
+					<td style="width:120px;">작성자</td>
 					<td>
-						<input type="text" name="memnum" id="memnum" />
+						<input type="text" name="memnum" id="memnum"  size="40" style="height: 25px;"/>
 						<input type="hidden" name="tripnum" id="tripnum" value="<%= tripnum %>">
 						<input type="hidden" name="reviewnum" id="reviewnum" >
 						<input type="button" value="저장" id="insertbtn" >
 					</td>
 				</tr>
 				<tr>
-					<td>덧글 내용</td>
+				<td colspan="2" style="height:20px;"></td>
+				</tr>
+				<tr>
+					<td>내용</td>
 					<td>
-						<textarea name="reviewcoment" id="reviewcoment" rows="5" cols="50"></textarea>
-						<div><span class="bytes">0</span> bytes</div>
+						<textarea name="reviewcoment" id="reviewcoment" rows="5" cols="60"></textarea>
 					</td>
 				</tr>
 			</table>
-			<hr>
-			<div>
-				<ul name="commentlist" id="commentlist">
-				
-				</ul>
-			</div>
 		</form>
+		<br><br>
 	</body>
 </html>

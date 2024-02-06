@@ -6,15 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+		<!-- 폰트 어썸 CDN -->
+		<script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
 		<!-- 스타일 -->
 		<style type="text/css">
-		
+			table {
+				text-align: center;	
+				margin: 0 auto;
+			}
+			
+			
 			.list_content ul {
 				display: flex; 		/* flex : 수평으로 나열*/
 				flex-wrap: wrap;	/* 화면 크기에 따라 자동 줄바꿈 */
+				justify-content: center; /* 가로 방향으로 가운데 정렬  ( 가로축 - 중심축 )*/
+				
 			}
 			
-			ul, li {
+			.logo ul, .logo li {
 				list-style: none;	/* 목록 스타일 제거*/
 			}
 			
@@ -44,11 +53,21 @@
 			}
 			
 			
-			a:link, a:visited, a:focus, a:active {
+<<<<<<< HEAD
+	
+						
+=======
+			.logo a:link,
+			.logo a:visited,
+			.logo a:focus,
+			.logo a:active {
+			    /* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
 			    text-decoration: none;
-			}	/* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
+			    color: black;
+			}
 			
 							
+>>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 			
 			.img img {
 				width: 100%; /* width, height 부모 요소에 대해 이미지가 가득 차도록 함*/
@@ -65,118 +84,203 @@
 			body {
 			    font-size: 17px;
 			}
+						
+			/*카테고리*/
+			.menu {
+			  width: 100%;
+			  overflow: hidden;
+			  margin: 0 auto;
+			}
+			
+			.menu > li {
+			  width: 100%;
+			  text-align: center;
+			  line-height: 40px;
+			  background-color: #0aa4b5;
+			} 
+
+			 
+			.sb > li {
+			  line-height: 50px;
+			  background-color: #0bc5da;
+			}	
+			
+			.sb {
+ 			  height: 0; /*ul의 높이를 안보이게 처리*/ 
+			  overflow: hidden; 
+
+			}					 
+			 
+			.menu > li:hover {
+			  background-color: #0bc5da;
+			  transition-duration: 0.5s;
+			}	
+			
+			.menu > li:hover .sb {
+			  	height: 100px; /*서브메뉴 li한개의 높이 50*5*/
+			  	transition-duration: 1s;
+			  						 
+			}	
+					 
+			.menu a {
+			  color: #fff;
+			}				 
+					 
+			.logo a:link,
+			.logo a:visited,
+			.logo a:focus,
+			.logo a:active {
+			    /* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
+			    text-decoration: none;
+			    color: black;
+			}
+
+			.topnav	 a:link,
+			.topnav a:visited,
+			.topnav a:focus,
+			.topnav a:active {
+			    /* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
+			    text-decoration: none;
+			    
+			}
+		
+			#loginBtn {
+				padding: 10px 20px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+				font-size: 15px;
+			}
+			
+			#logoutBtn {
+				padding: 10px 20px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+				font-size: 15px;
+			}			
+			
+			
+			.logo {
+			    text-align: center;
+			    margin-top: 30px;
+			    font-size: 28px;
+			}
+			
+			.loginBtn {
+			    text-align: right;
+			    margin-right: 80px;
+			}
+
+		
+			a {
+			    text-align: center;
+			}
 				
-	/*카테고리*/
-	#topMenu { 
-	 height: 50px; 
-	 width: 100%; 
-	 margin: 0 auto;
-	 }
-	 
-	 #topMenu ul{
-		 list-style-type: none;
-		 margin: 0px;
-		 padding: 0px; 
-		 font-size : 20px;
-	 }
-	 
-	 #topMenu ul li 
-	 { 
-	 list-style: none; 
-	 display: inline-block;
-	 line-height: 30px; 
-	 vertical-align: middle; 
-	 text-align: center;
-	 position: relative;
-	 }
-	 
-	 .submenuLink{
-		 text-decoration:none;
-		 display: block;
-		 width: 150px;
-		 font-size: 12px;
-		 font-weight: bold;
-		 font-family: "Trebuchet Ms", Dotum;
-	 }
-	 
-	  #topMenu { 
-	 color: white; 
-	 background-color: #aaa; }
-	
-	 .submenuLink{
-		 color: white;
-		 background-color: #aaa;
-		 border: solid 1px white;
-		 margin-top: -1px;
-	 }
-	 
-	 .sb{
-		 position: absolute;
-		 height: 0px;
-		 overflow: hidden;
-		 transition: height .2s;
-	 }
-	 
-	 .topMenuLi:hover .sb{
-		 height: 100px;
-	 }
-	 
-	 .submenuLink:hover { 
-	 color: black;
-	 background-color: #aaa;
-	 }
-</style>
+			 h1 {
+			 	text-align: center;
+			 }
+			 
+		 	.update-link, .delete-link {
+			    margin-right: 10px; /* 링크 간의 간격 조절 */
+			    color: #70bdff; /* 삭제 링크의 텍스트 색상 */
+			    FLOAT: RIGHT;
+			}
+			 
+			 	
+		</style>
 </head>
 <body>
-		<div class="header">
-			<!-- 이미지 아이콘 -->
-			<a href="#">
-			<img src="#" width="50px" height="50px" title="로고 이미지">
-			</a>
-			<!-- 제목 -->
-			<h1>여행가기 좋은날</h1>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- 			<c:choose>
-			    <c:when test="${condition}">
-			        <!-- 조건이 참일 때 보이는 태그 -->
-			        <input type="button" name="logout" id="logoutBtn" value="로그아웃" onclick="location.href='#'" >
-			    </c:when>
-			    <c:otherwise>
-			        <!-- 조건이 거짓일 때 보이는 태그 -->
-			        <input type="button" name="login" id="loginBtn" value="로그인" onclick="location.href='#'" >					
-			    </c:otherwise>
-			</c:choose>
-			<input type="button" name="mypage" id="MyPageBtn" value="마이페이지" onclick="location.href='#'" >
-			</form>
-
+	<br>
+		<div id="header">
+		    <div class="logo">
+		        <a href="<%= request.getContextPath() %>/spot/spot_IsudSelectAll">
+		            <!-- <img src="${pageContext.request.contextPath}/resources/images/img_spot/지도.png" width="50px" height="50px" title="로고 이미지">  -->
+		            <i class="fa-solid fa-plane-up fa-xl">여행가기 좋은날</i>
+		        </a>		        
+		    </div>	
+ 			<div class="loginBtn">
+			    <c:choose>
+			        <c:when test="${loginCheck}">
+			            <!-- 조건이 참일 때 보이는 태그 -->
+        			    <input type="button" name="login" id="loginBtn" value="로그인" onclick="location.href='#'">
+			        </c:when>
+			        <c:otherwise>
+			            <!-- 조건이 거짓일 때 보이는 태그임 -->
+			            <input type="button" name="login" id="logoutBtn" value="로그아웃" onclick="location.href='loginForm'">
+			        </c:otherwise>
+			    </c:choose>
+			</div>
 		</div>
-		<div class="topnav">
-			<!--메뉴-->
-			<nav id="topMenu" >
-				 <ul>
-					 <li class="topMenuLi">
-					 <a class="menuLink" href="#content1">여행정보</a>
-					 	 <ul class ="sb">
-							  <li><a href="spot" class="submenuLink " >관광정보</a></li>
-					  	</ul>
-					 </li>							  
-					  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
-					 <li class="topMenuLi">
-					 <a class="menuLink" href="#content2">숙소예약</a>
-					 	<ul class ="sb"> 
-							 <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink" >숙소정보</a></li>
-					 	</ul>
-					 </li>
-					  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
-					 <li class="topMenuLi">
-					 <a class="menuLink" href="#content3">게시판</a>
-					 	<ul class ="sb"> 
-							 <li><a href="#" class="submenuLink" >자유 게시판</a></li>
-							 <li><a href="#" class="submenuLink" >공지사항 게시판</a></li>
-					 	</ul>
-					 </li>				 
-				 </ul> 
-			 </nav>
-		</div>	
+		<br>
+		 
+			<div class="topnav">
+					<!-- 메뉴 -->
+					 <ul class="menu">
+						 <li class="topMenuLi">
+						 <a class="menuLink" href="<%= request.getContextPath() %>/spot/spot">여행정보</a>
+						 <hr>
+						 	 <ul class ="sb">
+								  <li><a href="<%= request.getContextPath() %>/spot/spot" class="submenuLink" >관광정보</a></li>
+								  <li><a href="<%= request.getContextPath() %>/spot/spot_IsudSelectAll" class="submenuLink" >관광정보(ISUD)</a></li>
+						  	</ul>
+						 </li>							  
+						 <li class="topMenuLi">
+						 <a class="menuLink" href="<%= request.getContextPath() %>/hotel/hotel_main">숙소예약</a>
+						 <hr>
+						 	<ul class ="sb"> 
+								 <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink" >숙소정보</a></li>
+						 	</ul>
+						 </li>
+						 <li class="topMenuLi">
+						 <a class="menuLink" href="#content3">게시판</a>
+						 	<ul class ="sb"> 
+								 <li><a href="#" class="submenuLink" >자유 게시판</a></li>
+								 <li><a href="<%= request.getContextPath() %>/adminboard/adminBoardSelectAll" class="submenuLink" >공지사항 게시판</a></li>
+						 	</ul>
+						 </li>				 
+					 </ul> 
+			</div>	
+		<!-- top 아이콘 -->
+		<div style="position:fixed; bottom: 20px; right:25px;">
+			<a href="#"><img src="${pageContext.request.contextPath}/resources/images/img/topbutton.png" width="50" height="50" title="상단으로"></a>
+		</div>			 
+		<br>
 </body>
 </html>
+
+
+
+<%-- 			
+		<div class="topnav">
+				<!--메뉴-->
+				<nav id="topMenu" >
+					 <ul>
+						 <li class="topMenuLi">
+						 <a class="menuLink" href="#content1">여행정보</a>
+						 	 <ul class ="sb">
+								  <li><a href="spot" class="submenuLink" >관광정보</a></li>
+								  <li><a href="spot_ISUD" class="submenuLink" >관광정보(ISUD)</a></li>
+						  	</ul>
+						 </li>							  
+						  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
+						 <li class="topMenuLi">
+						 <a class="menuLink" href="#content2">숙소예약</a>
+						 	<ul class ="sb"> 
+								 <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink" >숙소정보</a></li>
+						 	</ul>
+						 </li>
+						  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
+						 <li class="topMenuLi">
+						 <a class="menuLink" href="#content3">게시판</a>
+						 	<ul class ="sb"> 
+								 <li><a href="#" class="submenuLink" >자유 게시판</a></li>
+								 <li><a href="#" class="submenuLink" >공지사항 게시판</a></li>
+						 	</ul>
+						 </li>				 
+					 </ul> 
+				 </nav>
+			</div>	
+			 --%>

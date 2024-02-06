@@ -76,6 +76,16 @@ public class SpotServiceImpl implements SpotService {
 		return spotDAO.spot_IsudDelete(svo);
 	}
 	
+	
+	// 조회 후 수정폼
+	@Override
+	public List<SpotVO> spot_IsudSelect_admin(SpotVO svo) {
+		// TODO Auto-generated method stub
+		logger.info("SpotServiceImpl spot_IsudSelect_admin 진입 >>> : ");
+		
+		return spotDAO.spot_IsudSelect_admin(svo);
+	}
+	
 	// 댓글 ============================================================
 	
 	// 입력

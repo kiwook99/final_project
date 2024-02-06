@@ -74,13 +74,6 @@
 		    position: relative;	/* 요소 자기 자신을 기준으로 배치 */
 		}
 		
-		
-		a:link, a:visited, a:focus, a:active {
-		    text-decoration: none;
-		}	/* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
-		
-						
-		
 		.img img {
 			width: 100%; /* width, height 부모 요소에 대해 이미지가 가득 차도록 함*/
 			height: 100%; 
@@ -96,69 +89,13 @@
 		body {
 		    font-size: 17px;
 		}
+		
+		a:link, a:visited, a:focus, a:active { /* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
+	    text-decoration: none;
+	    color: black;
+		}	
 				
-	/*카테고리*/
-	#topMenu { 
-	 height: 50px; 
-	 width: 100%; 
-	 margin: 0 auto;
-	 }
-	 
-	 #topMenu ul{
-		 list-style-type: none;
-		 margin: 0px;
-		 padding: 0px; 
-		 font-size : 20px;
-	 }
-	 
-	 #topMenu ul li 
-	 { 
-	 list-style: none; 
-	 display: inline-block;
-	 line-height: 30px; 
-	 vertical-align: middle; 
-	 text-align: center;
-	 position: relative;
-	 text-align: -webkit-match-parent;
-	 }
-	 
-	 .submenuLink{
-		 text-decoration:none;
-		 display: block;
-		 width: 150px;
-		 font-size: 12px;
-		 font-weight: bold;
-		 font-family: "Trebuchet Ms", Dotum;
-	 }
-	 
-	  #topMenu { 
-	 color: white; 
-	 background-color: #aaa; }
-	
-	 .submenuLink{
-		 color: white;
-		 background-color: #aaa;
-		 border: solid 1px white;
-		 margin-top: -1px;
-	 }
-	 
-	 .sb{
-		 position: absolute;
-		 height: 0px;
-		 overflow: hidden;
-		 transition: height .2s;
-	 }
-	 
-	 .topMenuLi:hover .sb{
-		 height: 100px;
-	 }
-	 
-	 .submenuLink:hover { 
-	 color: black;
-	 background-color: #aaa;
-	 }				
-	 
-	 .area {
+	 .regionarea {
 	    position: absolute;
 	    background: rgba(0, 0, 0, 0.5);
 	    border-radius: 20px;
@@ -166,9 +103,13 @@
 	    font-weight: 700;
 	    top: 10px; /* 조절할 수 있는 값으로 변경 */
 	    left: 10px; /* 조절할 수 있는 값으로 변경 */
+	    height: 26px;
+	    line-height: 26px;
+	    padding: 0 10px;
+	    font-size: 13px;
 	}
 	
-	.area::before {
+	.regionarea::before {
 	    content: '';
 	    display: inline-block;
 	    background: url('${pageContext.request.contextPath}/resources/images/지도.png') 0 0 / 100% 100% no-repeat;
@@ -179,16 +120,22 @@
 	}
 	 
 
-	.area {
-	    height: 26px;
-	    line-height: 26px;
-	    padding: 0 10px;
-	    font-size: 13px;
-	}
-	
 	.name strong {
 	    font-size: 16px;
 	    color: #000;
+	}
+	
+	.miniSearchForm{
+	    margin-bottom: 20px;
+	    text-align: center;
+	}
+	
+	#search_btn{
+	padding: 5px 15px;
+    background-color: #0aa4b5;
+    color: white;
+    border: 0;
+    border-radius: 10px;
 	}
 		</style>
 		
@@ -198,7 +145,6 @@
 		      console.log("메인 페이지 접속");
 		      
 		      $("#search_btn").click(function(){
-		         alert('검색합니다.');
 		         
 		         $("#miniSearchForm").attr({
 		            "method":"GET",
@@ -211,61 +157,19 @@
 	</script>
 </head>
 <body>
-	<div class="header">
-			<!-- 이미지 아이콘 -->
-			<a href="#">
-			<img src="#" width="50px" height="50px" title="로고 이미지">
-			</a>
-			<!-- 제목 -->
-			<h1>여행가기 좋은날</h1>
-			<!-- 조건 검색 --> 	
-			<form name="miniSearchForm" id="miniSearchForm"> 
-			<select id="searchFilter" name="searchFilter" style="width:100px;font-size:15px;">
-				<option value="key_01">지역</option>
-				<option value="key_02">숙소명</option>
-			</select>			
-			<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" 
-			style="width:200px;height:30px;font-size:15px;">
-			<input type="submit" id="search_btn" name="search_btn" value="검색">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			<input type="button" name="logout" id="logoutBtn" value="로그아웃" onclick="location.href='#'" >
-			&nbsp;&nbsp;&nbsp;
-			<input type="button" name="mypage" id="MyPageBtn" value="마이페이지" onclick="location.href='#'" >
- 
+<%@ include file="/main.jsp" %>
+		<div>
+			<form class="miniSearchForm" id="miniSearchForm">
+				<select id="searchFilter" name="searchFilter" style="width:100px;font-size:15px;">
+					<option value="key_01">지역</option>
+					<option value="key_02">숙소명</option>
+				</select>			
+				<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" 
+				style="width:200px;height:20px;font-size:15px;">
+				<input type="submit" id="search_btn" name="search_btn" value="검색">
 			</form>
-	</div>
-	
-	<div class="topnav">
-			<!--메뉴-->
-			<nav id="topMenu" >
-				 <ul>
-					 <li class="topMenuLi">
-					 <a class="menuLink" href="#content1">여행정보</a>
-					 	 <ul class ="sb">
-							  <li><a href="<%= request.getContextPath() %>/spot/spot" class="submenuLink" >관광정보</a></li>
-							  <li><a href="spot_ISUD" class="submenuLink" >관광정보(ISUD)</a></li>
-					  	</ul>
-					 </li>							  
-					  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
-					 <li class="topMenuLi">
-					 <a class="menuLink" href="#content2">숙소예약</a>
-					 	<ul class ="sb"> 
-							 <li><a href="hotel_main" class="submenuLink" >숙소정보</a></li>
-					 	</ul>
-					 </li>
-					  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
-					 <li class="topMenuLi">
-					 <a class="menuLink" href="#content3">게시판</a>
-					 	<ul class ="sb"> 
-							 <li><a href="#" class="submenuLink" >자유 게시판</a></li>
-							 <li><a href="#" class="submenuLink" >공지사항 게시판</a></li>
-					 	</ul>
-					 </li>				 
-				 </ul> 
-			 </nav>
-		</div>	
-
+		</div>
+		<hr><br><br>
 		<div class="main">
 			<div class="contents">
 				<div class="list_content">
@@ -285,9 +189,15 @@
 							<!-- 숙박시설 -->
 							<a href="hotelSelect?hotelnum=<%= hvo.getHotelnum() %>">
 							<span class="img">
-								<img src="<%= hvo.getHotelimage().indexOf(",") >= 0 ? hvo.getHotelimage().substring(0, hvo.getHotelimage().indexOf(",")) : hvo.getHotelimage() %>">
-							
-							<span class="area">
+					            <%-- 이미지 소스가 URL인지 확인 --%>
+					            <% if (hvo.getHotelimage().startsWith("http") || hvo.getHotelimage().startsWith("https")) { %>
+					                <img src="<%= hvo.getHotelimage().indexOf(",") >= 0 ? hvo.getHotelimage().substring(0, hvo.getHotelimage().indexOf(",")) : hvo.getHotelimage() %>">
+					            <% } else { %>
+					                <%-- 이미지가 파일이라면 파일을 표시할 수 있는 태그로 수정 --%>
+					                <img src="${pageContext.request.contextPath}/resources/fileupload/hotel/<%= hvo.getHotelimage() %>">
+					            <% } %>
+					        </span>
+							<span class="regionarea">
 								<%= hvo.getRegionid() %>
 							</span>
 							</span>
@@ -300,6 +210,7 @@
 							%>
 						</li>
 					</ul>
+					<div>
 						<jsp:include page="hotelPaging.jsp" flush="true">
 							<jsp:param name="url" value="hotel_main"/>
 							<jsp:param name="str" value=""/>
@@ -307,7 +218,8 @@
 							<jsp:param name="groupSize" value="<%=groupSize%>"/>
 							<jsp:param name="curPage" value="<%=curPage%>"/>
 							<jsp:param name="totalCount" value="<%=totalCount%>"/>
-						</jsp:include>							
+						</jsp:include>
+					</div>							
 				</div>
 			</div>
 		</div>

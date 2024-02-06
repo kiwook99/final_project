@@ -10,12 +10,157 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>경기도 관광지</title>
+		<title>관광지 상세정보</title>
 		
 		<!-- 스타일 -->
 		<style type="text/css">
- 		
-		</style>
+		
+			* {
+			    margin: 0;
+			    padding: 0;
+			    box-sizing: border-box;
+			}
+			
+			/* General Styles */
+			body {
+			    font-family: Arial, sans-serif;
+			}
+			
+			h4 {
+			    font-size: 30px;
+			    font-weight: bold;
+			    margin-bottom: 10px;
+			    background-color: #f7f7f7;
+			    border-radius: 10px;
+			    padding: 20px;
+			    font-weight: bold;
+			    color: #444;			    
+			}
+			
+			
+			/* Header */
+			.sub_header {
+			    padding: 20px;
+			    border-bottom: 2px solid #000;
+			}
+			
+			/* Content Wrapper */
+			.detail_wrap {
+			    max-width: 1200px;
+			    margin: 0 auto;
+			    padding: 20px;
+			}
+			
+			/* Photo Section */
+			.photo {
+			    width: 40%;
+			    margin-right: 20px;
+			}
+			
+			#img img {
+			    width: 100%;
+			    height: 365px;
+			    border-radius: 10px;
+			}
+			
+			/* Text Section */
+			.txt-wrap {
+			    width: 55%;
+			}
+			
+			/* Info Section */
+			.info {
+ 			    margin-top: 20px; 
+   			    background-color: #f7f7f7;
+			    border-radius: 10px;
+			    padding: 40px;
+/* 			    font-weight: bold; */
+			    color: #444;
+   				font-size: 20px;
+			    	    
+			}
+			
+			.info li {
+			    margin-bottom: 10px;
+			}
+			
+			.info li strong {
+			    font-weight: bold;
+			}
+			
+			/* Overview Section */
+			.overview {
+			    margin-top: 20px;
+			    font-size: 17.6px;
+			    line-height: 1.6;
+			}
+			
+			/* Additional Info Section */
+			.additionalList {
+			    margin-top: 40px;
+			}
+			
+			.additionalList h5 {
+			    font-size: 20.8px;
+			    font-weight: bold;
+			    margin-bottom: 10px;
+			}
+			
+			.right-content {
+			    margin-top: 20px;
+			}
+			
+			.explain {
+			    display: block;
+			    margin-top: 10px;
+			    font-size: 12.8px;
+			    color: #777;
+			}
+			
+			/* Map Section */
+			.article {
+			    margin-top: 40px;
+			}
+			
+			#staticMap {
+			    width: 100%;
+			    height: 350px;
+			    border-radius: 10px;
+			}
+			
+			.detail_basic {
+			    padding-bottom: 80px;
+			    display: flex;
+			    justify-content: space-between;
+			}
+			
+			.detail-intro {
+			    background-color: #f7f7f7;
+			    border-radius: 10px;
+			    padding: 20px;
+			    font-weight: bold;
+			    color: #444;
+			}			
+    		
+    		.detail-moreinfo{
+			    background-color: #f7f7f7;
+			    border-radius: 10px;
+			    padding: 40px;
+			    font-weight: bold;
+			    color: #444;
+			}	
+
+			.explain {
+				text-align: right;
+			}
+
+			#staticMap {
+			margin: 0 auto;
+			}
+			
+			h2{text-align: center;}
+			
+	</style>
 		
 		
 		<!-- 자바 스크립트 & 제이쿼리 -->
@@ -79,14 +224,14 @@
                   
                     // 주소 데이터 선언
                     var addr = '<li>' + 
-                    		   '<strong>' + "주소 " + '</strong>' + 
+                    		   '<strong>' + "주소 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + '</strong>' + 
                     		   '<span class="addr1">' + addr1 + '</span>' +   
                     		   '</li>';
                     //$('#spotList_detail_1').html(addr);                    
                     
                     // 홈페이지 데이터 선언
                     var homepage = '<li>' + 
-                    		   '<strong>' + "홈페이지 " + '</strong>' + 
+                    		   '<strong>' + "홈페이지 &nbsp;&nbsp;&nbsp;" + '</strong>' + 
                     		   '<span class="homepage">' + homepage + '</span>' +  
                     		   '</li>';
                     //$('#spotList_detail_1').html(homepage);
@@ -181,7 +326,7 @@
                   
                     // 전화번호
                     var infocenter = '<li>' + 
-                    		   '<strong>' + "문의전화 " + '</strong>' + 
+                    		   '<strong>' + "문의전화 &nbsp;&nbsp;&nbsp;" + '</strong>' + 
                     		   '<span class="infocenter">' + infocenter + '</span>' +   
                     		   '</li>';
                     $('#spotList_detail_1').append(infocenter);                    
@@ -191,29 +336,29 @@
 					
 					// 이용시간
 					var usetime = '<li>' + 
-				         		  '<strong>' + "이용시간 " + '</strong>' + 
-				        		  '<span class="usetime">' + usetime + '</span>' +   
-				        		  '</li>';
+				         		  '<strong>' + "이용시간 " + '</strong>' + '<br>' +
+				        		  '<span class="usetime">' + usetime + '</span>' + 
+				        		  '</li>' + '<br>';
 					// 휴무일
 					var restdate = '<li>' + 
-				         		  '<strong>' + "휴무일 " + '</strong>' + 
+				         		  '<strong>' + "휴무일 " + '</strong>' + '<br>' +
 				        		  '<span class="restdate">' + restdate + '</span>' +   
-				        		  '</li>';					
+				        		  '</li>' + '<br>';				
 					// 주차시설
 					var parking = '<li>' + 
-				         		  '<strong>' + "주차시설 " + '</strong>' + 
+				         		  '<strong>' + "주차시설 " + '</strong>' + '<br>' +
 				        		  '<span class="parking">' + parking + '</span>' +   
-				        		  '</li>';						
+				        		  '</li>' + '<br>';					
 					
 					// 체험가능 연령
 					var expagerange = '<li>' + 
-				         		  '<strong>' + "체험가능 연령 " + '</strong>' + 
+				         		  '<strong>' + "체험가능 연령 " + '</strong>' + '<br>' +
 				        		  '<span class="expagerange">' + expagerange + '</span>' +   
-				        		  '</li>';						
+				        		  '</li>' + '<br>';						
 					
 					// 체험안내
 					var expguide = '<li>' + 
-				         		  '<strong>' + "체험안내 " + '</strong>' + 
+				         		  '<strong>' + "체험안내 " + '</strong>' + '<br>' +
 				        		  '<span class="expguide">' + expguide + '</span>' +   
 				        		  '</li>';						
 
@@ -240,6 +385,14 @@
 		</script>
 	</head>
 	<body>
+		<%@ include file="/main.jsp" %>
+		<br>
+		<hr>
+		<br>
+		<h2>관광정보</h2>
+		<br>
+		<hr>
+		<br>		
 		<div class="main">
 			<div class="contents">
 				<div class="sub_header">
@@ -257,9 +410,11 @@
 							<div class="txt-wrap">
 								<!-- 상위 정보-1 -->
 								<div class="title-top">
+								<br>
 									<!-- 제목 -->
 									<p id="title_name"><!-- 제목 데이터 --></p>
 								</div>
+								<br><hr><br>
 								<div class="info">
 									<!-- 정보-1 -->
 									<ul id="spotList_detail_1">
@@ -269,14 +424,16 @@
 							</div>
 						</div>
 						<div class="detail-intro">
+						
 						<!-- 상세 설명 -->
 							<p class="overview" id="overview"><!-- 상세설명 데이터 --></p>
+						
 						</div>
 						<article class="article additionalList"> <!-- article 독립적으로 사용 -->
 							<div class="detail-moreinfo">
 								<div class="left-content">
 									<!-- 왼쪽 추가정보 -->
-									<h5>"추가정보"</h5>
+									<h5>추가정보</h5>
 								</div>
 								<div class="right-content">
 									<div class="moreinfo-wrap">
@@ -290,10 +447,15 @@
 							</div>
 						</article>
 						<article class="article">
+						<br>
+						<hr>
+						<br>
+						<h2>지도</h2>
+						<br>
 							<!-- 지도 -->
 							 <!-- <div id="map" style="width:100%;height:250px;"> </div>-->
 							<!-- 이미지 지도를 표시할 div 입니다 -->
-							<div id="staticMap" style="width:600px;height:350px;"></div> 
+							<div id="staticMap" style="width:1000px;height:450px;"></div> 
 								
 						</article>
 						<article class="article">

@@ -26,6 +26,9 @@ public interface SpotDAO {
 	// 삭제
 	public int spot_IsudDelete(SpotVO svo);	
 	
+	// 조회 후 수정폼
+	public List<SpotVO> spot_IsudSelect_admin(SpotVO svo);
+	
 	// 댓글 ============================================
 	
 	// 입력

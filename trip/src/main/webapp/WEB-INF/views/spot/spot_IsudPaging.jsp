@@ -102,7 +102,9 @@
     text-decoration: none;
 	}	/* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
 
-	
+	a {
+		font-size: 20px;
+	}
 </style>
 
 
@@ -150,13 +152,13 @@
 			System.out.println("그룹범위내에서 페이지 링크  if");
 			
 %>
-	<a class=page> <%= linkPage %> </a>
+	<a class=page> <%= linkPage %> </a>&nbsp;&nbsp;
 <%			
 		} else {
 			System.out.println("그룹범위내에서 페이지 링크 else");
 			
 %>
-	<a href="<%= url %>?<%= str %>curPage=<%= linkPage %>"><%= linkPage %></a> &nbsp;	
+	<a href="<%= url %>?<%= str %>curPage=<%= linkPage %>"><%= linkPage %></a> &nbsp;&nbsp;		
 <%		
 		}
 		
@@ -183,11 +185,11 @@
 		<%
 		if (linkPage <= pageCount){
 		%>
-			<a href="<%=url%>?<%=str%>curPage=<%=linkPage + 1%>">></a>&nbsp;
+			<a href="<%=url%>?<%=str%>curPage=<%=linkPage + 1%>">></a>&nbsp;&nbsp;&nbsp;
 		<% 
 		} else {
 		%>
-			<a href="<%=url%>?<%=str%>curPage=<%=pageCount%>">></a>&nbsp;
+			<a href="<%=url%>?<%=str%>curPage=<%=pageCount%>">></a>&nbsp;&nbsp;&nbsp;
 		<% 
 		}
 		%>
