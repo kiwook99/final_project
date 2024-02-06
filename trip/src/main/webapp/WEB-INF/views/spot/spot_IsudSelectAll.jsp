@@ -8,6 +8,7 @@
 <%@ page import="org.apache.log4j.Logger" %>
 
 <% request.setCharacterEncoding("UTF-8");%>	
+
 <%
 	Logger logger = LogManager.getLogger(this.getClass());
 	logger.info("spot_IsudSelectAll.jsp 페이지 진입 >>> : ");
