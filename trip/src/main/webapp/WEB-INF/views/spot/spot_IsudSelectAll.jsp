@@ -28,7 +28,7 @@
 	List<SpotVO> list = (List<SpotVO>)obj;
 	int nCnt = list.size();
 	
-
+ 
 %>     
 <!DOCTYPE html>
 <html>
