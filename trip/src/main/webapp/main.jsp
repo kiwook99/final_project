@@ -196,7 +196,7 @@
 	<br>
 		<div id="header">
 		    <div class="logo">
-		        <a href="spot_IsudSelectAll">
+		        <a href="<%= request.getContextPath() %>/spot/spot_IsudSelectAll">
 		            <!-- <img src="${pageContext.request.contextPath}/resources/images/img_spot/지도.png" width="50px" height="50px" title="로고 이미지">  -->
 		            <i class="fa-solid fa-plane-up fa-xl">여행가기 좋은날</i>
 		        </a>		        
@@ -209,7 +209,7 @@
 			        </c:when>
 			        <c:otherwise>
 			            <!-- 조건이 거짓일 때 보이는 태그 -->
-			            <input type="button" name="login" id="logoutBtn" value="로그아웃" onclick="location.href='#'">
+			            <input type="button" name="login" id="logoutBtn" value="로그아웃" onclick="location.href='loginForm'">
 			        </c:otherwise>
 			    </c:choose>
 			</div>			    	    
@@ -220,15 +220,15 @@
 					<!-- 메뉴 -->
 					 <ul class="menu">
 						 <li class="topMenuLi">
-						 <a class="menuLink" href="#content1">여행정보</a>
+						 <a class="menuLink" href="<%= request.getContextPath() %>/spot/spot">여행정보</a>
 						 <hr>
 						 	 <ul class ="sb">
-								  <li><a href="spot" class="submenuLink" >관광정보</a></li>
-								  <li><a href="spot_IsudSelectAll" class="submenuLink" >관광정보(ISUD)</a></li>
+								  <li><a href="<%= request.getContextPath() %>/spot/spot" class="submenuLink" >관광정보</a></li>
+								  <li><a href="<%= request.getContextPath() %>/spot/spot_IsudSelectAll" class="submenuLink" >관광정보(ISUD)</a></li>
 						  	</ul>
 						 </li>							  
 						 <li class="topMenuLi">
-						 <a class="menuLink" href="#content2">숙소예약</a>
+						 <a class="menuLink" href="<%= request.getContextPath() %>/hotel/hotel_main">숙소예약</a>
 						 <hr>
 						 	<ul class ="sb"> 
 								 <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink" >숙소정보</a></li>
@@ -238,7 +238,7 @@
 						 <a class="menuLink" href="#content3">게시판</a>
 						 	<ul class ="sb"> 
 								 <li><a href="#" class="submenuLink" >자유 게시판</a></li>
-								 <li><a href="adminBoardSelectAll" class="submenuLink" >공지사항 게시판</a></li>
+								 <li><a href="<%= request.getContextPath() %>/adminboard/adminBoardSelectAll" class="submenuLink" >공지사항 게시판</a></li>
 						 	</ul>
 						 </li>				 
 					 </ul> 

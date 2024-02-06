@@ -3,6 +3,7 @@
     
 <%@ page import="org.apache.log4j.Logger" %>
 <%@ page import="org.apache.log4j.LogManager" %>    
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -34,6 +35,10 @@
 			
 			.name {
 				font-weight: bold;
+			}
+			
+			#commentlist {
+				margin-left: 45px;
 			}
 		</style>
 		
@@ -99,7 +104,7 @@
 					
 					let deleteURL = "spot_IsudCommentDelete";
 					let method = "POST";
-					let dataParam = { tripnum: $('#tripnum').val(rbnumV) };
+					let dataParam = { reviewnum: $('#reviewnum').val(rbnumV) };  // 댓글 번호 기준으로 삭제
 					
 					
 					dataParam = $('#commentForm').serialize();
@@ -189,6 +194,8 @@
 			var writerP = $("<p>");
 			writerP.addClass("writer");
 			
+			
+			
 			// 작성자 정보의 이름
 			var nameSpan = $("<span>");
 			nameSpan.addClass("name");
@@ -256,7 +263,7 @@
 		<br><br>
 		<hr>
 		<br>
-		<h2>덧글</h2>
+		<h2>리뷰</h2>
 		<br>
 		<hr>
 <% request.setCharacterEncoding("utf-8"); %>
@@ -269,9 +276,9 @@
 %>
 		<form name="commentForm" id="commentForm">
 					<div>
-				<ul name="commentlist" id="commentlist">
+				<ol name="commentlist" id="commentlist">
 				<!-- 입력한 값이 들어갈 것임 -->
-				</ul>
+				</ol>
 			</div>
 			<hr>
 			<br>
@@ -289,7 +296,7 @@
 				<td colspan="2" style="height:20px;"></td>
 				</tr>
 				<tr>
-					<td>덧글 내용</td>
+					<td>내용</td>
 					<td>
 						<textarea name="reviewcoment" id="reviewcoment" rows="5" cols="60"></textarea>
 					</td>
