@@ -10,6 +10,8 @@
 	String memname = request.getParameter("memname");
 	String hotelname = request.getParameter("hotelname");
 	String hotelprice = request.getParameter("hotelprice");
+	String hotelcheckin = request.getParameter("hotelcheckin");
+	String hotelcheckout = request.getParameter("hotelcheckout");
 	hotelprice = NumUtil.comma_replace(hotelprice);
 	
 	Object obj = request.getAttribute("orderList");
@@ -35,9 +37,9 @@
 	$(document).ready(function(){
 		
 		var memname = "";
-		var hotelname = '<%= hotelname %>';	
+		var hotelname = '<%= hotelname %>';
 		var hotelprice = '<%= hotelprice %>';		
-		alert(memname + " : " + hotelprice);
+		alert(hotelname + " : " + hotelprice);
 		
 		// 이메일 
 		$('#koemail2').change(function(){	
@@ -58,12 +60,15 @@
 				
 				//가맹점 식별코드
 				IMP.init('imp23814146');
+				
+				var dynamicGoodsName = 'aa'; // 서버에서 받아온 값
+				
 				IMP.request_pay({
 				    pg : 'TC0ONETIME',
 				    pay_method : 'card',
 				    merchant_uid : 'merchant_' + new Date().getTime(),
-				    goodsname : memname , //결제창에서 보여질 이름
-				    amount: hotelprice, //실제 결제되는 가격
+				    goodsname : dynamicGoodsName,
+			        amount: hotelprice, 
 				    buyer_name : '홍길동',
 				    buyer_tel : '010-1234-5678',
 				    buyer_addr : '서울 양찬구 목동',
@@ -112,32 +117,38 @@
 </style>
 </head>
 <body>
-<h3  class="mem">주문하기</h3>
+<h3  class="mem">예약하기</h3>
 <hr>
 
 <form name="orderForm" id="orderForm">
 <table border="1" align="center">
 <tr>
-<td colspan="6" align="center">					
-	<font size="4" style="color:blue;">상품 주문하기</font> 
+<td colspan="4" align="center">					
+	<font size="4" style="color:blue;">숙소 예약하기</font> 
 </td>
 </tr>
 <tr>
-<td colspan="6" align="left"><font size="3" style="color:blue;">1. 주문확인</font></td>
+<td colspan="4" align="left"><font size="3" style="color:blue;">1. 예약확인</font></td>
 </tr>
 <tr>
-<td class="mem">주문자명</td>
-<td class="mem">호텔명</td>
-<td class="mem">금액</td>
-</tr>
-<tr>
+<td class="mem">예약자명</td>
 <td class="mem"><%= memname %></td>
+</tr>
+<tr>
+<td class="mem">숙소명</td>
 <td class="mem"><%= hotelname %></td>
-<td class="mem"><%= hotelprice %>원</td>
+</tr>
+<tr>
+	<td class="mem">입실일</td>
+	<td colspan="3" class="mem"><%= hotelcheckin %></td>
+</tr>
+<tr>
+	<td class="mem">퇴실일</td>
+	<td colspan="3" class="mem"><%= hotelcheckout %></td>
 </tr>
 <tr>
 	<td class="mem">핸드폰</td>
-	<td colspan="5">
+	<td colspan="3">
 		<select name="kohp" id="kohp">
         	<option value="010">010</option>
         	<option value="011">011</option>
@@ -150,7 +161,7 @@
 </tr>
 <tr>
 	<td class="mem">이메일</td>
-	<td  colspan="5">		
+	<td  colspan="3">		
 		<input type="text" name="koemail"  id="koemail" style="width:100px"/>
 		@ <input type="text" name="koemail1" id="koemail1" style="width:100px" placeholder="직접입력" />
 		<select name="koemail2" id="koemail2">
@@ -161,8 +172,12 @@
          </select>
 	</td>
 </tr> 
+<tr>
+<td class="mem">결제금액</td>
+<td colspan="3"><%= hotelprice %>원</td>
+</tr>
  <tr>
-	<td  colspan="6" align="center"> 			
+	<td  colspan="4" align="center"> 			
 		<button type="button" id="cardBtn">결제</button>
 		<button type="reset">다시 </button>	
 	</td>				

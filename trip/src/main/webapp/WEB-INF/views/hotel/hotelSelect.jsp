@@ -232,12 +232,16 @@
         justify-content: space-around; /* 각 요소 간의 여백을 고르게 배분 */
         margin-top: 40px; /* 필요에 따라 조절 */
     }
-    .datePickerBox {
-        padding: 10px;
-        border: 1px solid #ccc; /* 테두리 추가 */
-        border-radius: 35px; /* 모서리를 둥글게 만듦 */
+    .datePickerBox, .payBox {
+        padding: 8px;
+        border: 2px solid #ccc; /* 테두리 추가 */
         text-align-last: center;
         margin-bottom:20px;
+    }
+    
+    .payBox {
+        font-weight: bold;
+        width : 250px;
     }
     .datePickerBox label{
     	display: block;
@@ -308,24 +312,32 @@
 	   $(document).ready(function(){
 		      console.log("숙소 상세페이지 접속");
 		     
-		  // 체크인일, 체크아웃일 DatePicker 설정 
+		   // 체크인일, 체크아웃일 DatePicker 설정 
 		      $('#checkinDate, #checkoutDate').datepicker({
-		          format: 'yyyy-mm-dd',
+		          dateFormat: 'yy-mm-dd',
 		          autoclose: true
+		      }).on('changeDate', function (e) {
+		          // 날짜 클릭 시, 날짜를 'yyyy-mm-dd' 형식으로 표시
+		          $(this).val(e.format('yyyy-mm-dd'));
 		      });
 		     
-		   // 현재 날짜 구하기
+	   		// 현재 날짜 구하기
 	        var currentDate = new Date();
-	        var formattedCurrentDate = currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0');
+	        checkinDate = currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0');
 	        // 내일 날짜 구하기
 	        var tomorrowDate = new Date();
 	        tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-	        var formattedTomorrowDate = tomorrowDate.getFullYear() + '-' + (tomorrowDate.getMonth() + 1).toString().padStart(2, '0') + '-' + tomorrowDate.getDate().toString().padStart(2, '0');
+	        checkoutDate = tomorrowDate.getFullYear() + '-' + (tomorrowDate.getMonth() + 1).toString().padStart(2, '0') + '-' + tomorrowDate.getDate().toString().padStart(2, '0');
 	     	// 최종 가격 계산 및 초기 표시
 	        calculateAndDisplayDefaultPrice()
 	        // 입실일, 퇴실일 텍스트 박스에 값 설정
-	        $('#checkinDate').val(formattedCurrentDate);
-	        $('#checkoutDate').val(formattedTomorrowDate);
+	        $('#checkinDate').val(checkinDate);
+	        $('#checkoutDate').val();
+
+	        // Call the function to calculate and display the final price when datepicker is fully initialized
+	        $('#checkinDate, #checkoutDate').on('changeDate', function () {
+	            calculateAndDisplayFinalPrice();
+	        });
 	        
 	        // 체크인 날짜 선택 이벤트
 	        $('#checkinDate').change(function () {
@@ -341,6 +353,7 @@
 	            // 최종 가격 계산 및 표시
 	            calculateAndDisplayFinalPrice();
 	        });
+	        
 	        // 체크아웃 날짜 선택 이벤트
 	        $('#checkoutDate').change(function (e) {
 	            e.preventDefault();  // 기본 동작 막기
@@ -359,22 +372,32 @@
 	        function calculateAndDisplayDefaultPrice() {
 	            // 기본 가격 표시
 	            hotelprice = parseInt(<%= hvo.getHotelprice() %>);
-	            $('#finalPrice').text('이용요금: ' + hotelprice + '원');
+	            $('#finalPrice').text('1박 요금 : ' + formatNumber(hotelprice) + '원');
 	            $('#hotelprice').val(hotelprice);
 	        }
+	     	
+	     	// 숫자를 콤마 형식으로 포매팅하는 함수
+	        function formatNumber(number) {
+	            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	        }
 	       
-	     // 최종 가격 계산 및 표시 함수
+	     	// 최종 가격 계산 및 표시 함수
 	        function calculateAndDisplayFinalPrice() {
-	            var checkinDate = new Date($('#checkinDate').val());
-	            var checkoutDate = new Date($('#checkoutDate').val());
+	            checkinDate = new Date($('#checkinDate').val());
+	            checkoutDate = new Date($('#checkoutDate').val());
 	            var timeDiff = Math.abs(checkoutDate.getTime() - checkinDate.getTime());
 	            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 	            hotelprice = diffDays * parseInt(<%= hvo.getHotelprice() %>);
 	            console.log(finalPrice);
 	            // 최종 가격을 표시할 div에 텍스트 설정
-	            $('#finalPrice').text('이용요금: ' + hotelprice + '원');
+	            $('#finalPrice').text(formatNumber(hotelprice) + '원');
 	            $('#hotelprice').val(hotelprice);
 	        }
+	     
+	     	// 날짜 클릭 시, 날짜를 alert 대신에 달력에 yyyy-mm-dd 형식으로 표시
+	      	 $('#checkinDate, #checkoutDate').on('changeDate', function() {
+	            $(this).val(e.format('yyyy-mm-dd'));
+	        });
 	     
 	        function formatDate(date) {
 	            var day = date.getDate();
@@ -389,18 +412,27 @@
 	        }
 	     	
 	        $(document).on("click", "#cardBtn", function(){
+	        	
+	        	if ($('#checkoutDate').val() === '') {
+	        		alert("체크아웃날짜를 선택하세요.")
+	                $('#checkoutDate').datepicker('show');
+	                $('#checkoutDate').focus();
+	        	} else{
 				console.log("cardBtn >>> : ");
-				 alert(formatDate(checkinDate));
 				 
-				var memname = '<%=memname%>';
+				 var checkin = formatDate(checkinDate) + ' / 체크인시간 : (' + '<%= hvo.getHotelcheckin().replace("<br>", "&nbsp;/&nbsp;") %>' + ')';
+				 var checkout = formatDate(checkoutDate) + ' / 체크아웃시간 : (' + '<%= hvo.getHotelcheckout().replace("<br>", "&nbsp;/&nbsp;") %>' + ')';
+				 
+				var memname = '<%= memname%>';
 				$('#hotelname').val('<%= hvo.getHotelname() %>');
 				$('#hotelprice').val(hotelprice);
 				
 				$('#hotelOrderForm').attr({
-					'action':'hotelOrder?memname=<%= hvo.getMemname()%>&hotelname=<%=hvo.getHotelname()%>&hotelprice=' + hotelprice,
+					'action': 'hotelOrderForm?memname=<%= hvo.getMemname() %>&hotelname=<%= hvo.getHotelname() %>&hotelprice=' + hotelprice + '&hotelcheckin=' + checkin + '&hotelcheckout=' + checkout,
 					'method':'POST',
 					'enctype':'multipart/form-data'
 				}).submit();
+	        	}
 			});
 		   });
 	   
@@ -547,11 +579,11 @@
 							        <input type="text" id="checkoutDate" readonly>
 							    </div>
 							    <form form id="hotelOrderForm" action="hotelOrder" method="POST" enctype="multipart/form-data">
-							   <div >
+							   <div class="payBox">
 							   		<input type="hidden" id="hotelname" name="hotelname" class="hotelname" value="<%= hvo.getHotelname() %>" />
     								<input type="hidden" id="hotelprice" name="hotelprice" class="hotelprice" value="<%= hotelprice %>" />
     								<span id="finalPrice"></span><br>
-							   		<span class="pay"><button type="button" id="cardBtn"> 예약하기 </button>
+							   		<span class="pay"><button type="button" id="cardBtn"> 바로 예약 </button>
 							   		</span>
 								</div>
 								</form>

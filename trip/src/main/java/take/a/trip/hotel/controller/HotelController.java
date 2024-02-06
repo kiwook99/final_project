@@ -144,38 +144,6 @@ public class HotelController {
 		 return "hotel/hotel_main";
 	 }
 	 
-
-	 	// 주문 입력 폼
-	 	@PostMapping("hotel/hotelOrder")
-	    public String hotelOrder(Model model, HttpServletRequest req) {
-	        logger.info("HotelController hotelOrder 함수 진입 >>> : ");
-	        
-	        try {
-	         logger.info("hotelOrder 함수 진입 ");
-	         	
-	         	// 한글 인코딩 설정
-		        req.setCharacterEncoding("UTF-8");
-		        HotelVO hvo = new HotelVO();
-	         
-	 	        String hotelname = req.getParameter("hotelname");
-	 	        String hotelprice = req.getParameter("hotelprice");
-	 	        String memname = req.getParameter("memname");
-
-	 	        model.addAttribute("hotelname", hotelname);
-	 	        model.addAttribute("hotelprice", hotelprice);
-	 	        model.addAttribute("memname", memname);
-	 	        
-	 	       logger.info("hotelOrderForm memname: " + memname);
-	 	       logger.info("hotelOrderForm hotelname: " + hotelname);
-	 	       logger.info("hotelOrderForm hotelprice: " + hotelprice);
-
-	 	        return "hotel/hotelOrderForm";
-	 	    } catch (IOException e) {
-	 	        e.printStackTrace(); // 예외 처리
-	 	    }
-
-	 	    return "hotel/hotelSelect";
-	 	}
 	 	
 	 	@PostMapping("hotel/hotelOrderForm")
 	 	public String hotelOrderForm(Model model, HttpServletRequest req) {
@@ -189,15 +157,21 @@ public class HotelController {
 	 	        // 여기서 필요한 값들을 가져와서 model에 추가
 	 	        String hotelname = req.getParameter("hotelname");
 	 	        String hotelprice = req.getParameter("hotelprice");
+	 	        String hotelcheckin = req.getParameter("hotelcheckin");
+	 	        String hotelcheckout = req.getParameter("hotelcheckout");
 	 	        String memname = req.getParameter("memname");
 
 	 	        model.addAttribute("hotelname", hotelname);
 	 	        model.addAttribute("hotelprice", hotelprice);
+	 	        model.addAttribute("hotelcheckin", hotelcheckin);
+	 	        model.addAttribute("hotelcheckout", hotelcheckout);
 	 	        model.addAttribute("memname", memname);
 	 	        
 	 	       logger.info("hotelOrderForm memname: " + memname);
 	 	       logger.info("hotelOrderForm hotelname: " + hotelname);
 	 	       logger.info("hotelOrderForm hotelprice: " + hotelprice);
+	 	       logger.info("hotelOrderForm hotelcheckin: " + hotelcheckin);
+	 	       logger.info("hotelOrderForm hotelcheckout: " + hotelcheckout);
 
 	 	        return "hotel/hotelOrderForm";
 	 	    } catch (IOException e) {

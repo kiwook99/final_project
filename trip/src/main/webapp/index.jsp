@@ -7,6 +7,7 @@
 
 </head>
 <body>
+
         <a href="mem/insertForm">회원가입</a>
 
 		<a href="mem/loginForm">로그인</a>
@@ -26,8 +27,6 @@
 		<a href="hotel/hotel_main">숙소메인</a>
 		
 		<a href="main">메인상단</a>
-		
-
 
 </body>
 </html>
