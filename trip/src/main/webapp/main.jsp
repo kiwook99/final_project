@@ -192,11 +192,6 @@
 			 	text-align: center;
 			 }
 			 
-		 	.update-link, .delete-link {
-			    margin-right: 10px; /* 링크 간의 간격 조절 */
-			    color: #70bdff; /* 삭제 링크의 텍스트 색상 */
-			    FLOAT: RIGHT;
-			}
 			 
 			 	
 		</style>
