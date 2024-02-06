@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ page import="take.a.trip.spot.vo.SpotVO" %>
-    <%@ page import="java.util.List" %> 
+<%@ page import="java.util.List" %> 
         
 <% request.setCharacterEncoding("UTF-8");%>	
 <%
@@ -168,9 +168,12 @@
 				</table>
 				
 				<br>
-				<div class="btn">
+				<div class="btn">	
+<% Object objAdmin = request.getAttribute("adminyn"); %>
+<%			 if ("Y".equals(objAdmin)) { %>						
 					<button type="button" id="U">수정</button>&nbsp;&nbsp;&nbsp;
 					<button type="button" id="D">삭제</button>&nbsp;&nbsp;&nbsp;
+<% } %>				
 					<button type="button" id="B">돌아가기</button>
 				</div>
 			</form>

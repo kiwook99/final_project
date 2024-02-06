@@ -258,9 +258,12 @@
 				</form>		
 		</div>
 		<br>
+<% Object objAdmin = request.getAttribute("adminyn"); %>
+<%			 if ("Y".equals(objAdmin)) { %>		
 			<div id="btn">
 				<button type="button" id="insertBtn">여행지 등록</button>
 			</div>
+<% } %>			
 		<br>
 		
 		<br><br>

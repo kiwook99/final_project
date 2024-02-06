@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -12,8 +14,11 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import take.a.trip.spot.controller.SpotController;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
+	
+	Logger logger = LogManager.getLogger(LoginInterceptor.class);
 	
 	@Autowired
 	private JedisPool jedisPool;
@@ -67,18 +72,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         }
         return true;
     }
+       
 
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-            ModelAndView modelAndView) throws Exception {
-        // postHandle 메서드는 컨트롤러 메서드 실행 후, 뷰가 렌더링되기 전에 실행됩니다.
-        // 필요에 따라 후처리 작업을 수행할 수 있습니다.
-    	boolean loginCheck = false;
-    	if (jds != null) {
-    		loginCheck = true;
-    		ModelMap modelMap = modelAndView.getModelMap();
-    		modelMap.addAttribute("loginCheck", loginCheck);
-    	}
-    }
-
+    
 }

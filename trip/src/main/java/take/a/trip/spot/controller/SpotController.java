@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile; // 최신
 import com.oreilly.servlet.MultipartRequest;	// 구
 
-
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 import take.a.trip.spot.service.SpotService;
 import take.a.trip.spot.util.CommonUtils;
 import take.a.trip.spot.vo.ReviewVO;
@@ -27,7 +28,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -41,7 +42,11 @@ public class SpotController {
 	 @Autowired (required = false)
 	 private SpotService spotService;
 	
-	
+ // 래디스 의존성 주입
+	@Autowired
+	private JedisPool jedisPool;
+	 
+	 
 	// @RequestMapping("spot")
 	// 로그인 전
 	@GetMapping("spot/spot")
@@ -117,9 +122,12 @@ public class SpotController {
 	
 	// 전체조회(ISUD)
 	@GetMapping("spot/spot_IsudSelectAll")
-	public String spot_IsudSelectAll(SpotVO svo, Model model) {
+	public String spot_IsudSelectAll(SpotVO svo, Model model, HttpServletRequest req) {
 		logger.info("SpotController spot_IsudSelectAll 진입 >>> : ");
 
+        HttpSession session = req.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
+		String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+		
 		// 페이징
 		int pageSize = CommonUtils.SPOT_PAGE_SIZE;  // 페이지에 나올 값
 		int groupSize = CommonUtils.SPOT_GROUP_SIZE;	// 그룹으로 묶을 값
@@ -143,16 +151,30 @@ public class SpotController {
 		logger.info("spot_IsudSelectAll svo.getGroupSize() >>> : " + svo.getGroupSize());
 		logger.info("spot_IsudSelectAll svo.getCurPage() >>> : " + svo.getCurPage());
 		logger.info("spot_IsudSelectAll svo.getTotalCount() >>> : " + svo.getTotalCount());
-		
-		
+
+        
 		// 서비스 호출
 		List<SpotVO> listAll = spotService.spot_IsudSelectAll(svo);
 		if(listAll.size() > 0) {
 			logger.info("spot_IsudSelectAll listAll.size() >>> : " + listAll.size());
 			
-			
 			model.addAttribute("listAll", listAll);
 			model.addAttribute("pagingSVO", svo);
+			
+			 try (Jedis jedis = jedisPool.getResource()) {
+					
+				 String adminyn = jedis.get(sessionId);
+				
+				 if (adminyn != null) {
+				        // 값이 존재하는 경우
+				        logger.info("adminyn >>> : " + adminyn);
+				        model.addAttribute("adminyn", adminyn);
+				        logger.info("jedis.get >>> : ");
+				    } else {
+				        // 값이 없는 경우
+				        logger.info("adminyn is null");
+				        }
+			 }                                                                    			
 			
 			return "spot/spot_IsudSelectAll";
 		}
@@ -162,21 +184,44 @@ public class SpotController {
 	
 	// 여행지 조회
 	@GetMapping("spot/spot_IsudSelect")
-	public String spot_IsudSelect(SpotVO svo, Model model) {
+	public String spot_IsudSelect(SpotVO svo, Model model, HttpServletRequest req) {
 		logger.info("SpotController spot_IsudSelect 진입 >>> : ");
 		logger.info("spot_IsudSelect 함수 진입 obvo.getTripnum() >>> : " + svo.getTripnum());
+		
+        HttpSession session = req.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
+		String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+		
+		logger.info("session >>> : " + session);
 		
 		// 서비스 호출
 		List<SpotVO> listS = spotService.spot_IsudSelect(svo);
 		
 		if(listS.size() == 1) {
 			logger.info("spot_IsudSelect listS.size() >>> : " + listS.size());
+			 						
 			
 			// 조회수 업데이트
 			int spotCnt = spotService.spot_IsudSpothit(svo);
 			logger.info("spot_IsudSelect spotCnt >>> : " + spotCnt);
 			
 			model.addAttribute("listS", listS);
+			
+			 try (Jedis jedis = jedisPool.getResource()) {
+				 logger.info("jedisPool >>> : " + jedisPool);
+				 
+				 String adminyn = jedis.get(sessionId);
+				
+				 if (adminyn != null) {
+				        // 값이 존재하는 경우
+				        logger.info("adminyn >>> : " + adminyn);
+				        model.addAttribute("adminyn", adminyn);
+				        logger.info("jedis.get >>> : ");
+				    } else {
+				        // 값이 없는 경우
+				        logger.info("adminyn is null");
+				        }
+			 }	
+			 
 			
 			return "spot/spot_IsudSelect";
 		}
