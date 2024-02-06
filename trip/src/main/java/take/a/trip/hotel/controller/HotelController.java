@@ -154,6 +154,7 @@ public class HotelController {
 		 
 		 logger.info("hotelSelect hvo.getHotelnum()=> "+ hvo.getHotelnum());
 		 
+		 
 		 List<HotelVO> selectList = hotelService.hotelSelect(hvo);
 		 
 		 int nCnt = selectList.size();
@@ -184,15 +185,15 @@ public class HotelController {
 	 	        String hotelprice = req.getParameter("hotelprice");
 	 	        String hotelcheckin = req.getParameter("hotelcheckin");
 	 	        String hotelcheckout = req.getParameter("hotelcheckout");
-	 	        String memname = req.getParameter("memname");
+	 	      
 
 	 	        model.addAttribute("hotelname", hotelname);
 	 	        model.addAttribute("hotelprice", hotelprice);
 	 	        model.addAttribute("hotelcheckin", hotelcheckin);
 	 	        model.addAttribute("hotelcheckout", hotelcheckout);
-	 	        model.addAttribute("memname", memname);
+	 	   
 	 	        
-	 	       logger.info("hotelOrderForm memname: " + memname);
+	 	     
 	 	       logger.info("hotelOrderForm hotelname: " + hotelname);
 	 	       logger.info("hotelOrderForm hotelprice: " + hotelprice);
 	 	       logger.info("hotelOrderForm hotelcheckin: " + hotelcheckin);

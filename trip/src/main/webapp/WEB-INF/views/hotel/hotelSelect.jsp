@@ -15,8 +15,6 @@
 	
 %>    
 <%
-	//세션에서 값을 가져오기
-	//String memid = (String) session.getAttribute("memid");
 
 	Object obj = request.getAttribute("selectList");
 
@@ -425,12 +423,12 @@
 				 var checkin = formatDate(checkinDate) + ' / 체크인시간 : (' + '<%= hvo.getHotelcheckin().replace("<br>", "&nbsp;/&nbsp;") %>' + ')';
 				 var checkout = formatDate(checkoutDate) + ' / 체크아웃시간 : (' + '<%= hvo.getHotelcheckout().replace("<br>", "&nbsp;/&nbsp;") %>' + ')';
 				 
-				var memname = '<%= memname%>';
+				
 				$('#hotelname').val('<%= hvo.getHotelname() %>');
 				$('#hotelprice').val(hotelprice);
 				
 				$('#hotelOrderForm').attr({
-					'action': 'hotelOrderForm?memname=<%= hvo.getMemname() %>&hotelname=<%= hvo.getHotelname() %>&hotelprice=' + hotelprice + '&hotelcheckin=' + checkin + '&hotelcheckout=' + checkout,
+					'action': 'hotelOrderForm?hotelname=<%= hvo.getHotelname() %>&hotelprice=' + hotelprice + '&hotelcheckin=' + checkin + '&hotelcheckout=' + checkout,
 					'method':'POST',
 					'enctype':'multipart/form-data'
 				}).submit();

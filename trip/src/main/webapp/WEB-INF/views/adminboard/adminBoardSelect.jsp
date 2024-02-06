@@ -18,6 +18,7 @@
 		_abvo = list.get(0);
 	}	
 %> 
+<% Object objAdmin = request.getAttribute("adminyn"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -116,11 +117,6 @@
 <tr>
 <td colspan="2" align="center"></td>
 </tr>
-<tr>
-<td >글번호</td>
-<td><input type="text" class="mem" name="adboardnum" id="adboardnum" value="<%= _abvo.getAdboardnum() %>"  
-			style="width:100px; height:30px; font-size:16px;" readonly/></td>
-</tr>
 
 <tr>
 <td>제목</td>
@@ -128,11 +124,6 @@
 <input type="text" class="mem" name="adboardtitle" id="adboardtitle" value="<%= _abvo.getAdboardtitle() %>" 
 		style="width:100%; height:30px; font-size:16px;" readonly/>
 </td>
-</tr>
-<tr>
-<td>작성자</td>
-<td><input type="text" class="mem" name="memnum" id="memnum" value="<%=  _abvo.getMemnum() %>" 
-			style="width:300px; height:30px; font-size:16px;" readonly/></td>
 </tr>
 
 <tr>
@@ -160,15 +151,20 @@
 <td>수정일</td>
 <td> 
 <input type="text" class="mem" name="updatedate" id="updatedate" value="<%= _abvo.getUpdatedate() %>" 
-		style="width:100%; height:30px; font-size:16px;" readonly />		      
+		style="width:100%; height:30px; font-size:16px;" readonly />
+<input type="hidden" class="mem" name="adboardnum" id="adboardnum" value="<%= _abvo.getAdboardnum() %>"/>
+<input type="hidden" class="mem" name="memnum" id="memnum" value="<%=  _abvo.getMemnum() %>"/>		      
 </td>
 </tr>
+<% if ("Y".equals(objAdmin)) { %>
+
 <tr>
 	<td colspan="5" class="right">
 	<button type="button" value="수정" id="abUpdateBtn">수정하기</button>
 	<button type="button" value="삭제" id="abDeleteBtn">삭제하기</button>
     </td>      	
 </tr>
+<% } %>
 </table>
 </form>
 </body>

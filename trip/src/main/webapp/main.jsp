@@ -211,7 +211,7 @@
 		        </a>		        
 		    </div>	
  			<div class="loginBtn">
-			    
+			    	
 			        <% if(memid != null) { %> 
 			            <!-- 조건이 참일 때 보이는 태그 -->
 			            <input type="button" name="login" id="logoutBtn" value="로그아웃" onclick="location.href='/trip/mem/logout'">
