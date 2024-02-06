@@ -46,6 +46,8 @@
 </script>
 <style type="text/css">
         h3 {
+        	font-size: 2em; /* 텍스트 크기 조절 */
+        	margin-top: 10px; /* 위로 조금 올리기 */
             text-align: center;
         }
 
@@ -107,12 +109,12 @@
 <body>
 <%@ include file="/main.jsp" %>
 
-<h3 style="text-align:center;">게시글 내용</h3>
+<h3 style="text-align:center;">공지사항</h3>
 <hr>
 <form name="adBoardUpdate" id="adBoardUpdate">
 <table>
 <tr>
-<td colspan="2" align="center">공지사항 수정하기</td>
+<td colspan="2" align="center" style="color:blue;">공지사항 수정하기</td>
 </tr>
 <tr>
 <td>글번호</td>
