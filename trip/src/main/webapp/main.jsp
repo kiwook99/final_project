@@ -193,7 +193,8 @@
 		        </a>		        
 		    </div>	
  			<div class="loginBtn">
-			    		<p id="memid"><%=memid %></p>
+			    		
+
 
 			        <% if(memid != null) { %> 
 			            <!-- 조건이 참일 때 보이는 태그 -->
