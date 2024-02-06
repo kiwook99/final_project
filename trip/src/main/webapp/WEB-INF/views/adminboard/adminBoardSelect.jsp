@@ -46,6 +46,8 @@
 </script>
 <style type="text/css">
         h3 {
+        	font-size: 2em; /* 텍스트 크기 조절 */
+        	margin-top: 10px; /* 위로 조금 올리기 */
             text-align: center;
         }
 

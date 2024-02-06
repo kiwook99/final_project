@@ -69,6 +69,12 @@ if (list != null) {
         h3 {
             text-align: center;
         }
+        
+        h3.adList {
+        	font-size: 2em; /* 텍스트 크기 조절 */
+        	margin-top: 10px; /* 위로 조금 올리기 */
+            text-align: center;
+        }
 
         table {
             border-collapse: collapse;
@@ -105,7 +111,7 @@ if (list != null) {
             border: 0;
 			border-radius: 10px;
             cursor: pointer;
-            display: flex; /* 버튼을 블록 요소로 변경 */
+            display: flex;
         	float: right; /* 오른쪽으로 이동 */
         }
 
@@ -123,7 +129,7 @@ if (list != null) {
 <body>
 <%@ include file="/main.jsp" %>
 
-<h3>공지사항 글 목록</h3>
+<h3 class="adList">공지사항 글 목록</h3>
 <hr>
 <form name="adminboardList" id="adminboardList">
    <table>
