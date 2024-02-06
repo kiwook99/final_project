@@ -86,7 +86,7 @@ public class MemController {
 		            logger.info("jedis.set >>> : ");
 		        }
 			 
-			 return "spot/spot_IsudSelectAll";
+			 return "redirect:/spot/spot_IsudSelectAll";
 		}
 		return "mem/loginForm";
 	}
