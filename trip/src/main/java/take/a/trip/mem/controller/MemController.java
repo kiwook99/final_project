@@ -52,8 +52,9 @@ public class MemController {
 	public String login(Model model, MemVO mvo, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info("UserController login 진입 >>> : ");
 		
-		HttpSession session = request.getSession(true);		// HttpServletRequest에서 세션을 가져오거나 새로 생성
+		HttpSession session = request.getSession(true);	// HttpServletRequest에서 세션을 가져오거나 새로 생성
 		String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+		session.setAttribute("memid", mvo.getMemid()); // memid라는 새션키에 memid값을 넣음
 		String adminyn = "";
 		
 		logger.info("userid >>> : " + mvo.getMemid());
@@ -85,7 +86,7 @@ public class MemController {
 		            logger.info("jedis.set >>> : ");
 		        }
 			 
-			 return "mem/login";
+			 return "spot/spot_IsudSelectAll";
 		}
 		return "mem/loginForm";
 	}

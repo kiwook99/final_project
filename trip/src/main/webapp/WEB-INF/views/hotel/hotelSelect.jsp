@@ -15,6 +15,8 @@
 	
 %>    
 <%
+	//세션에서 값을 가져오기
+	//String memid = (String) session.getAttribute("memid");
 
 	Object obj = request.getAttribute("selectList");
 
