@@ -134,6 +134,11 @@
 <form name="adBoardSelect" id="adBoardSelect">
 <table>
 <tr>
+    <td colspan="5" style="text-align:center;color:white; background-color:#0aa4b5;">
+        <h3>공지사항</h3>
+    </td>
+</tr>
+<tr>
 <th style="width:10px;">제목</th>
 <th class="tt" style="width:100px; height:30px;">
 <%= _abvo.getAdboardtitle() %>	
@@ -149,7 +154,6 @@
 <tr>
 
 <th>사진</th>
-
 <td class="tt"> 
 <img src="${pageContext.request.contextPath}/resources/fileupload/adminboard/<%= _abvo.getAdboardimage() %>" 
 		border="1" width="300" height="200" alt="image" >

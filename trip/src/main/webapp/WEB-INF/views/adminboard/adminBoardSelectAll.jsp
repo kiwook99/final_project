@@ -117,6 +117,11 @@ if (list != null) {
 		}	
 
 		
+		#abBtn:hover {
+        	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
+        }
+		
     </style>
     <!-- 폰트 어썸 CDN -->
     <script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
@@ -135,7 +140,7 @@ if (list != null) {
    <table>
       <thead>
           <tr>
-              <td colspan="5" style="text-align:center">
+              <td colspan="5" style="text-align:center;color:white; background-color:#0aa4b5;">
                   <h3>공지사항</h3>
               </td>
           </tr>
