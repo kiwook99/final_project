@@ -133,7 +133,7 @@
 						<td>												   
 							<input type="file" name="tripimage" id="tripimage">
 						</td>
-					</tr>					
+					</tr>					 
 					
 					<tr>
 						<td colspan="2" align="center" height="50px">
