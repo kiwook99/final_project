@@ -164,8 +164,8 @@
 </tr>
 <tr>
 	<td colspan="5" class="right">
-	<button type="button" value="수정" id="abbUpdateBtn">수정하기</button>
 	<button type="button" value="취소" id="ccBtn">취소</button>
+	<button type="button" value="수정" id="abbUpdateBtn">수정하기</button>
     </td>      	
 </tr>
 </table>

@@ -41,6 +41,10 @@
 			e.preventDefault();
 			$("#adBoardSelect").attr({ "method":"GET", "action":"adminBoardDelete"}).submit();
 		});
+		
+		$(document).on("click", "#abCBtn", function(e){
+			location.href="adminBoardSelectAll";
+		});
 	});
 	
 
@@ -160,8 +164,9 @@
 
 <tr>
 	<td colspan="5" class="right">
-	<button type="button" value="수정" id="abUpdateBtn">수정하기</button>
+	<button type="button" value="취소" id="abCBtn">취소</button>
 	<button type="button" value="삭제" id="abDeleteBtn">삭제하기</button>
+	<button type="button" value="수정" id="abUpdateBtn">수정하기</button>
     </td>      	
 </tr>
 <% } %>
