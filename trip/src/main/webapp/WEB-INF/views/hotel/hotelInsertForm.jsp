@@ -146,7 +146,7 @@
 						<td class="tt" style="height:30px;"> 숙소 지역 </td>
 						<td>
 							<input type="text" name="regionid" id="regionid" size="50">
-						</td>
+						</td> 
 					</tr>	
 					<tr>
 						<td class="tt" height= "40px"> 숙소 주소 </td>
