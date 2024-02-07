@@ -65,6 +65,12 @@
 			}
 			
 			
+			#U:hover, #B:hover {
+        	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
+			}
+			
+			
 			.btn {
 				text-align: center;
 				margin-left: 80px;
@@ -174,7 +180,6 @@
 <% Object objAdmin = request.getAttribute("adminyn"); %>
 <%			 if ("Y".equals(objAdmin)) { %>						
 					<button type="button" id="U">수정</button>&nbsp;&nbsp;&nbsp;
-					<button type="button" id="D">삭제</button>&nbsp;&nbsp;&nbsp;
 <% } %>				
 					<button type="button" id="B">돌아가기</button>
 				</div>

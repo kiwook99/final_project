@@ -7,12 +7,8 @@
 
 </head>
 <body>
-
-        <a href="mem/insertForm">회원가입</a>
-		
-		<a href="adminboard/adminBoardSelectAll">공지사항 게시판</a>
-		
-		<a href="spot/spot_IsudSelectAll">관광정보(ISUD)</a>
-
+		<script>
+		location.href="spot/spot_IsudSelectAll";
+		</script>
 </body>
 </html>

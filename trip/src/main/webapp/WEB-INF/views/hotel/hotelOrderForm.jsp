@@ -47,11 +47,6 @@
         text-align: center;
     }
 
-    th {
-        background-color: #0aa4b5;
-        color: white;
-    }
-
     .mem {
         text-align: center;
     }
@@ -73,12 +68,28 @@
         text-align: center; /* 가운데 정렬 */
     }
 
+
+	#cardBtn:hover, #backBtn:hover {
+		 background-color: #0bc5da;
+		 transition-duration: 0.5s;
+     }	
+     
+     
+   	.sub-title{
+		font-size: 24px;
+	    padding: 24px 0;
+	    line-height: 1;
+	    color: #000;
+	    font-weight: 800;
+	    text-align: center;
+	}
+     
 </style>
 </head>
 <body>
 <%@ include file="/main.jsp" %>
 
-<h3 class="mem">예약하기</h3>
+<h3 class="sub-title">예약하기</h3>
 <hr>
 
 <form name="orderForm" id="orderForm">
@@ -89,23 +100,23 @@
 </td>
 </tr>
 <tr>
-	<td class="mem">예약자명</td>
+	<th class="mem">예약자명</th>
 	<td class="mem" id="memid"><%= memid %></td>
 </tr>
 <tr>
-	<td class="mem">숙소명</td>
+	<th class="mem">숙소명</th>
 	<td class="mem"><%= hotelname %></td>
 </tr>
 <tr>
-	<td class="mem">입실일</td>
+	<th class="mem">입실일</th>
 	<td colspan="3" class="mem"><%= hotelcheckin %></td>
 </tr>
 <tr>
-	<td class="mem">퇴실일</td>
+	<th class="mem">퇴실일</th>
 	<td colspan="3" class="mem"><%= hotelcheckout %></td>
 </tr>
 <tr>
-	<td class="mem">핸드폰</td>
+	<th class="mem">핸드폰</th>
 	<td colspan="3">
 		<select name="kohp" id="kohp">
         	<option value="010">010</option>
@@ -118,7 +129,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="mem">이메일</td>
+	<th class="mem">이메일</th>
 	<td  colspan="3">		
 		<input type="text" name="koemail"  id="koemail" style="width:100px"/>
 		@ <input type="text" name="koemail1" id="koemail1" style="width:100px" placeholder="직접입력" />
@@ -131,7 +142,7 @@
 	</td>
 </tr> 
 <tr>
-<td class="mem">결제금액</td>
+<th class="mem">결제금액</th>
 <td colspan="3"><%= totalhotelprice %>원</td>
 </tr>
 <tr>

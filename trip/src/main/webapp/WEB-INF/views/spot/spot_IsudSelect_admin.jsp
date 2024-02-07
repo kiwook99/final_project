@@ -26,6 +26,7 @@
 		<title>Insert title here</title>
 				<!-- 스타일 -->
 		<style type="text/css">
+		
 			table {
 				text-align: center;	
  				margin: 0 auto; 
@@ -60,6 +61,12 @@
 			color: white;
 			border: 0;
 			border-radius: 10px;
+			}
+			
+			
+			#U:hover, #B:hover, #D:hover {
+        	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
 			}
 			
 			

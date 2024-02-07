@@ -309,6 +309,12 @@
     cursor: pointer;
 	}
 	
+	#cardBtn:hover, #update-link:hover, #delete-link:hover {
+	 background-color: #0bc5da;
+	 transition-duration: 0.5s;
+     }
+
+	
 	</style>
 		
 	<script type="text/javascript">

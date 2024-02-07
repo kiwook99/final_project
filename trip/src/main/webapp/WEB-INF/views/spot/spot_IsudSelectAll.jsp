@@ -26,7 +26,6 @@
 	Object obj = request.getAttribute("listAll");
 	
 	List<SpotVO> list = (List<SpotVO>)obj;
-	int nCnt = list.size();
 	
  
 %>     
@@ -156,6 +155,11 @@
 			
 			h2{text-align: center;}
 			
+		    #insertBtn:hover, #search_btn:hover {
+		      	 background-color: #0bc5da;
+				 transition-duration: 0.5s;
+		      }			
+			
 		</style>	
 		<!-- 폰트 어썸 CDN -->
 		<script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
@@ -256,51 +260,56 @@
 				style="width:350px;height:30px;font-size:15px;">
 				<input type="button" id="search_btn" name="search_btn" value="검색">
 				</form>		
+				<br>
+				<% Object objAdmin = request.getAttribute("adminyn"); %>
+				<%			 if ("Y".equals(objAdmin)) { %>		
+				<div id="btn">
+					<button type="button" id="insertBtn">여행지 등록</button>
+				</div>
+				<% } %>						
 		</div>
-		<br>
-<% Object objAdmin = request.getAttribute("adminyn"); %>
-<%			 if ("Y".equals(objAdmin)) { %>		
-			<div id="btn">
-				<button type="button" id="insertBtn">여행지 등록</button>
-			</div>
-<% } %>			
-		<br>
-		
+
 		<br><br>
 			<div class= "main">
 				<div class="contents">
 					<div class="list_content">
 						<ul id="tripList">
-	
-<%  
-for(int i=0; i < nCnt; i++){
-	SpotVO svo = list.get(i);
-	
-	
-	// 페이지 세팅
-	pageSize = Integer.parseInt(pagingSVO.getPageSize());
-	groupSize = Integer.parseInt(pagingSVO.getGroupSize());
-	curPage = Integer.parseInt(pagingSVO.getCurPage());
-	totalCount = Integer.parseInt(svo.getTotalCount());
-%>						
-
-							<li>  
-								<a href="spot_IsudSelect?tripnum=<%= svo.getTripnum() %>">
-								<span class="img">
-									<img src="${pageContext.request.contextPath}/resources/images/img_spot/<%= svo.getTripimage() %>" border="1" width="25" height="25" alt="image">
-								<span class="area">
-								 	<%= svo.getTripregion() %>
-								 </span>
-								 </span>
-								 <div class="name">
-									<strong><%= svo.getTripname() %></strong> 
-								 </div>
-								</a>
-							<%
-								} // 종료
-							%>						
-							</li>
-				</ul>
+									
+								<%  
+								
+								if (list != null){
+								
+									int nCnt = list.size();
+									
+									for(int i=0; i < nCnt; i++){
+										SpotVO svo = list.get(i);
+										
+										
+										// 페이지 세팅
+										pageSize = Integer.parseInt(pagingSVO.getPageSize());
+										groupSize = Integer.parseInt(pagingSVO.getGroupSize());
+										curPage = Integer.parseInt(pagingSVO.getCurPage());
+										totalCount = Integer.parseInt(svo.getTotalCount());
+									%>						
+									
+								<li>  
+									<a href="spot_IsudSelect?tripnum=<%= svo.getTripnum() %>">
+									<span class="img">
+										<img src="${pageContext.request.contextPath}/resources/images/img_spot/<%= svo.getTripimage() %>" border="1" width="25" height="25" alt="image">
+									<span class="area">
+									 	<%= svo.getTripregion() %>
+									 </span>
+									 </span>
+									 <div class="name">
+										<strong><%= svo.getTripname() %></strong> 
+									 </div>
+									</a>
+								</li>
+								<%
+									} // 종료
+								
+								%>						
+							</ul>
 						<jsp:include page="spot_IsudPaging.jsp" flush="true">
 							<jsp:param name="url" value="spot_IsudSelectAll"/>
 							<jsp:param name="str" value=""/>
@@ -309,6 +318,14 @@ for(int i=0; i < nCnt; i++){
 							<jsp:param name="curPage" value="<%= curPage %>"/>
 							<jsp:param name="totalCount" value="<%= totalCount %>"/>
 						</jsp:include>	
+						<% 
+						} else {
+									 // 데이터가 없을 때의 처리
+				                    %>
+				                    <p class="empty" style="text-align: center;">검색 결과값이 없습니다.</p>
+				                    <%
+								}
+								%>
 					</div>
 				</div>
 			</div>

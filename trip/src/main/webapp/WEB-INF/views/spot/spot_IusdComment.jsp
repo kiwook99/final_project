@@ -41,7 +41,13 @@
 			#commentlist {
 				margin-left: 45px;
 			}
-	
+			
+			#insertbtn:hover, .deleteBtn:hover {
+        	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
+			}			
+			
+
 		</style>
 		
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

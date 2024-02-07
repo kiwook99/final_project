@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="take.a.trip.mem.dao.MemDAO">
    
     <!-- 회원 가입 쿼리 -->
     <insert id="memInsert" parameterType="take.a.trip.mem.vo.MemVO">
-    INSERT INTO MEM 
-        (MEMNUM, MEMID, MEMPW, MEMNAME, MEMEMAIL, MEMADERSS, MEMRADERSS, MEMDADRESS, MEMPHONE, INSERTDATE, UPDATEDATE, DELETEYN, ADMINYN)
-    VALUES
-        ((SELECT NVL(MAX(A.MEMNUM), 0) + 1 AS CHABUN FROM MEM A),
-         #{memid, jdbcType=VARCHAR},
-         #{mempw, jdbcType=VARCHAR},
-         #{memname, jdbcType=VARCHAR},
-         #{mememail, jdbcType=VARCHAR},
-         #{memaderss, jdbcType=VARCHAR},
-         #{memraderss, jdbcType=VARCHAR},
-         #{memdadress, jdbcType=VARCHAR},
-         #{memphone, jdbcType=VARCHAR},
-         SYSDATE,
-         SYSDATE,
-         'Y',
-         'N')
-</insert>
+        INSERT INTO MEM 
+            (MEMNUM, MEMID, MEMPW, MEMNAME, MEMEMAIL, MEMADERSS, MEMRADERSS, MEMDADRESS, MEMPHONE, INSERTDATE, UPDATEDATE, DELETEYN, ADMINYN)
+        VALUES
+            ((SELECT NVL(MAX(A.MEMNUM), 0) + 1 AS CHABUN FROM MEM A),
+             #{memid, jdbcType=VARCHAR},
+             #{mempw, jdbcType=VARCHAR},
+             #{memname, jdbcType=VARCHAR},
+             #{mememail, jdbcType=VARCHAR},
+             #{memaderss, jdbcType=VARCHAR},
+             #{memraderss, jdbcType=VARCHAR},
+             #{memdadress, jdbcType=VARCHAR},
+             #{memphone, jdbcType=VARCHAR},
+             SYSDATE,
+             SYSDATE,
+             'Y',
+             'N')
+    </insert>
 	
-	<select id="memLogin" resultType="take.a.trip.mem.vo.MemVO" parameterType="take.a.trip.mem.vo.MemVO">
-	SELECT
-			A.MEMID		MEMID
-		   ,A.MEMPW		MEMPW
-		   ,A.ADMINYN   ADMINYN
-	FROM	MEM A
-	WHERE A.DELETEYN = 'Y'
-	AND A.MEMID = #{memid, jdbcType = VARCHAR}
-	AND A.MEMPW = #{mempw, jdbcType = VARCHAR}
+    <select id="memLogin" resultType="take.a.trip.mem.vo.MemVO" parameterType="take.a.trip.mem.vo.MemVO">
+        SELECT
+                A.MEMID     MEMID
+               ,A.MEMPW     MEMPW
+               ,A.ADMINYN   ADMINYN
+        FROM    MEM A
+        WHERE A.DELETEYN = 'Y'
+        AND A.MEMID = #{memid, jdbcType = VARCHAR}
+        AND A.MEMPW = #{mempw, jdbcType = VARCHAR}
+    </select>
+	
+    <select id="idCheck" parameterType="take.a.trip.mem.vo.MemVO" resultType="take.a.trip.mem.vo.MemVO">
+		SELECT A.MEMID
+		FROM MEM A
+		WHERE MEMID = #{memid} AND DELETEYN = 'Y'
 	</select>
+
 	
 	<select id="memIdSearch" resultType="take.a.trip.mem.vo.MemVO" parameterType="take.a.trip.mem.vo.MemVO">
 	SELECT
@@ -47,5 +53,6 @@
 	SET MEMPW = #{mempw, jdbcType = VARCHAR}
 	WHERE MEMEMAIL = #{mememail, jdbcType = VARCHAR}
 	</update>
+
 
 </mapper>

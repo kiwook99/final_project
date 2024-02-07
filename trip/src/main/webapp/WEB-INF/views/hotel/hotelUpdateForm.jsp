@@ -281,6 +281,12 @@
     border-radius: 10px;
 	}
 	
+	
+	#addressCheckBtn:hover, #hotelupdateBtn:hover, #hotelback:hover {
+	 background-color: #0bc5da;
+	 transition-duration: 0.5s;
+     }	
+	
 	</style>
 	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d8e532a4251bcd6e33a49bd260de47d3&libraries=services"></script>
 	<script type="text/javascript">
