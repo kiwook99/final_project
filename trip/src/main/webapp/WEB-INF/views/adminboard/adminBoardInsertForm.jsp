@@ -20,10 +20,15 @@
 				'enctype':'multipart/form-data'
 			}).submit();
 		});
+		
+		$(document).on("click", "#abCBtn", function(e){
+			location.href="adminBoardSelectAll";
+		});
 	});	
 
 </script>
 <style type="text/css">
+
         h2 {
             text-align: center;
         }
@@ -106,6 +111,7 @@
 	    <tr>
 	        <td colspan="2" align="right">
 	            <input type="button" value="등록" id="abIBtn">
+	            <input type="button" value="취소" id="abCBtn">
 	        </td>
 	    </tr>
   	</table>
