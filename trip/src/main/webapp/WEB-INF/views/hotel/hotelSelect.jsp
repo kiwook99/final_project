@@ -430,7 +430,7 @@
 				$('#hotelprice').val(hotelprice);
 				
 				$('#hotelOrderForm').attr({
-					'action': 'hotelOrderForm?hotelname=<%= hvo.getHotelname() %>&hotelprice=' + hotelprice + '&hotelcheckin=' + checkin + '&hotelcheckout=' + checkout,
+					'action': 'hotelOrderForm?hotelnum=<%=hvo.getHotelnum()%>&hotelname=<%=hvo.getHotelname()%>&hotelprice=' + hotelprice + '&hotelcheckin=' + checkin + '&hotelcheckout=' + checkout,
 					'method':'POST',
 					'enctype':'multipart/form-data'
 				}).submit();
@@ -517,13 +517,13 @@
 </script>
 </head>
 <body>
-	<%@ include file="/main.jsp" %>
+	<%@ include file="/main.jsp"%>
 
 	
 		<div class="sub-header">
 			<h3 class="sub-title">숙소정보
 			 </h3>
-
+	
 		<% if ("Y".equals(objAdmin)) { %>
 		   <!-- 관리자만 볼수있는 태그-->
 		   <div class="admin">

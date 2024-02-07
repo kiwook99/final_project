@@ -198,19 +198,20 @@ public class HotelController {
 	 	        
 	 	        
 	 	        // 여기서 필요한 값들을 가져와서 model에 추가
+ 	        	String hotelnum = req.getParameter("hotelnum");	
 	 	        String hotelname = req.getParameter("hotelname");
 	 	        String hotelprice = req.getParameter("hotelprice");
 	 	        String hotelcheckin = req.getParameter("hotelcheckin");
 	 	        String hotelcheckout = req.getParameter("hotelcheckout");
 	 	      
-
+	 	        model.addAttribute("hotelnum", hotelnum);
 	 	        model.addAttribute("hotelname", hotelname);
 	 	        model.addAttribute("hotelprice", hotelprice);
 	 	        model.addAttribute("hotelcheckin", hotelcheckin);
 	 	        model.addAttribute("hotelcheckout", hotelcheckout);
 	 	   
 	 	        
-	 	     
+	 	       logger.info("hotelOrderForm hotelnum: " + hotelnum);
 	 	       logger.info("hotelOrderForm hotelname: " + hotelname);
 	 	       logger.info("hotelOrderForm hotelprice: " + hotelprice);
 	 	       logger.info("hotelOrderForm hotelcheckin: " + hotelcheckin);

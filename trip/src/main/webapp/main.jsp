@@ -13,6 +13,7 @@
 		<script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
 		<!-- 스타일 -->
 		<style type="text/css">
+		
 			table {
 				text-align: center;	
 				margin: 0 auto;
@@ -156,7 +157,7 @@
 				border: 0;
 				border-radius: 10px;
 				font-size: 15px;
-			}			
+			}		
 			
 			
 			.logo {
@@ -191,7 +192,20 @@
 		            <!-- <img src="${pageContext.request.contextPath}/resources/images/img_spot/지도.png" width="50px" height="50px" title="로고 이미지">  -->
 		            <i class="fa-solid fa-plane-up fa-xl">여행가기 좋은날</i>
 		        </a>		        
-		    </div>	
+
+		    </div>
+		    <div>
+		    		<table id="weatherIcon" class="weatherIcon" style="margin-left: 10px;">
+			            <tr>
+			                <td>
+			                    <a href="https://www.weather.go.kr/w/index.do#dong/2811058500/37.47405/126.63111/%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EB%8F%99%EC%9D%B8%EC%B2%9C%EB%8F%99//">
+			                        <h3 id="a" class="a"></h3>
+			                    </a>
+			                </td>
+			            </tr>
+		        </table>
+		    </div>
+
  			<div class="loginBtn">
 			    		
 
@@ -242,6 +256,42 @@
 			<a href="#"><img src="${pageContext.request.contextPath}/resources/images/img/topbutton.png" width="50" height="50" title="상단으로"></a>
 		</div>			 
 		<br>
+<script type="text/javascript">
+     $(document).ready(function() {
+     	weathers();
+     });
+ 	
+     function weathers() {
+         $.ajax({
+             type: 'GET',
+             url: 'http://127.0.0.1:5001/weather_api/weather',
+             dataType: 'json',
+             success: function (result) {
+                 var hour = result[0];
+                 var temp = result[1];
+                 var wfKor = result[2];
+                 var pop = result[3];
+                 var icon = result[4];
+             	
+                 // 아이콘이 설정되어 있다면 이미지 태그를 추가하고 스타일 조절
+                 if (icon) {
+                     htmlContent = "<img src='" + icon + "' alt='Weather Icon'>";
+                 }
+                 // 텍스트를 포함한 HTML 설정
+                 htmlContent += "<br>[서울시 날씨]<br>온도: " + temp + "°C<br>날씨: " + wfKor + "<br>강수확률: " + pop + "%";
+                 // HTML을 출력
+                 $('#a').html(htmlContent);
+                 //$('#a').html("[인천시 부평구 날씨]<br>시간: " + hour + "시<br>온도: " + temp + "°C<br>날씨: " + wfKor +"<br>강수확률: " + pop + "%");
+              	
+                 // weathers() 함수 성공 후에 mans() 함수 호출
+                 getAllImages();
+             },
+             error: function (xhr, status, error) {
+                 alert(xhr + ':' + status + ':' + error);
+             }
+         });
+     }
+</script>
 </body>
 </html>
 
