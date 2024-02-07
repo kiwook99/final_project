@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+    
     .result-container {
         background-color: #f0f0f0;
         padding: 10px;
@@ -18,9 +19,19 @@
         color: #333;
         margin: 0;
     }
+    
+    #pwSearchBtn, #loginBtn {
+    	padding: 10px 20px;
+		background-color: #0aa4b5;
+		color: white;
+		border: 0;
+		border-radius: 10px;
+		font-size: 15px;
+    }
 </style>
 </head>
 <body>
+<%@ include file="/main.jsp" %>
 <div>
 	<form name="searchForm" id="searchForm">
 		<table border="1">
