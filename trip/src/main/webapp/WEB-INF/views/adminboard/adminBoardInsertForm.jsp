@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    
+<%@ page import="take.a.trip.adminBoard.vo.AdminBoardVO" %>
+<%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,10 +96,10 @@
 	        <th>글번호</th>
 	        <td><input type="text" name="adboardnum" id="adboardnum" size="20" placeholder="자동으로 들어갑니다."  readonly></td>
 	    </tr>
-	    <tr>
+   	    <tr>
 	        <th>작성자</th>
-	        <td><input type="text" name="memnum" id="memnum" size="20"></td>
-	    </tr>	    
+	        <td><input type="text" name="memnum" id="memnum" placeholder="자동으로 들어갑니다." readonly/> </td>
+	    </tr>	        
 	    <tr>
 	        <th>제목</th>
 	        <td><input type="text" name="adboardtitle" id="adboardtitle" size="53"></td>

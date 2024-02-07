@@ -71,10 +71,10 @@
 	<form name="searchForm" id="searchForm">
 		<table border="1">
 			<tr style="background-color: #0aa4b5;">
-				<td colspan="2" align="center">ID찾기</td>
+				<td colspan="2" align="center">ID 찾기</td>
 			</tr>
 			<tr>
-				<td style="background-color: #0aa4b5;">email 입력</td>
+				<td style="background-color: #0aa4b5;">EMAIL 입력</td>
 				<td><input type="text" name="mememail" id="mememail"></td>
 			</tr>
 			<tr>
@@ -192,7 +192,7 @@
 		
 		//로그인화면 버튼
 		$(document).on("click","#loginBtn",function(){
-			location.href = "#"
+			location.href = "loginForm"
 		});
 	});
 

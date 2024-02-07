@@ -16,7 +16,7 @@
 							 )
 				  	VALUES (
 							    adboard_seq.NEXTVAL,  			<!-- 시퀀스를 사용하여 새로운 값 생성 -->  
-							    #{memnum, jdbcType=VARCHAR},   
+							    '관리자',   
 							    #{adboardtitle, jdbcType=VARCHAR},        
 							    #{adboardcoment, jdbcType=VARCHAR},       
 							    #{adboardimage, jdbcType=VARCHAR},      
