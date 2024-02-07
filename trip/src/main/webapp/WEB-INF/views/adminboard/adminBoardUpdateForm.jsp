@@ -117,8 +117,11 @@
 <form name="adBoardUpdate" id="adBoardUpdate">
 <table>
 <tr>
-<td colspan="2" align="center" style="color:blue;">공지사항 수정하기</td>
+<td colspan="2" align="center" style="color:white; background-color:#0aa4b5;">공지사항 수정하기</td>
 </tr>
+
+<input type="hidden" class="mem" name="adboardnum" id="adboardnum" value="<%= _abvo.getAdboardnum() %>"/>
+
 <tr>
 <td>제목</td>
 <td>

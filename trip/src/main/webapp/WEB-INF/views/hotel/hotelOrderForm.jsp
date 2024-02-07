@@ -92,11 +92,11 @@
 <h3 class="sub-title">예약하기</h3>
 <hr>
 
-<form name="orderForm" id="orderForm">
+<form name="orderForm" id="orderForm" style="margin-top: 10px;">
 <table border="1" align="center">
 <tr>
-<td colspan="4" align="center">					
-	<font size="4" style="color:blue;">숙소 예약하기</font> 
+<td colspan="4" align="center" style="color:white; background-color:#0aa4b5;">					
+	<font size="4">숙소 예약하기</font> 
 </td>
 </tr>
 <tr>
