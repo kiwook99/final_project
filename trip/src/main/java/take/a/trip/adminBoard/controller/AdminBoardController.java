@@ -201,6 +201,8 @@ public class AdminBoardController {
 		@GetMapping("adminboard/adminBoardUpdate")
 		public String adminBoardUpdate(AdminBoardVO abvo, Model model) {
 			logger.info("adminBoardUpdate 함수 진입 >>> : ");
+			
+			
 			logger.info("adminBoardUpdate 함수 진입 abvo.getAdboardnum() >>> : " + abvo.getAdboardnum());
 
 			int nCnt = adminBoardService.adminBoardUpdate(abvo);

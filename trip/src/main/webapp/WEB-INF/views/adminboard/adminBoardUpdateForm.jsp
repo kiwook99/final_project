@@ -131,7 +131,6 @@
 <td><input type="text" class="mem" name="memnum" id="memnum" value="<%=  _abvo.getMemnum() %>" 
 			style="width:300px; height:30px; font-size:16px;" readonly/></td>
 </tr>
-
 <tr>
 <td>내용</td>
 <td>
