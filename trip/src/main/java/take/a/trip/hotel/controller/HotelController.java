@@ -126,10 +126,10 @@ public class HotelController {
 		 hvo.setCurPage(String.valueOf(curPage));
 		 hvo.setTotalCount(String.valueOf(totalCount));
 		
-		 logger.info("spot_IsudSelectAll hvo.getPageSize() >>> : " + hvo.getPageSize());
-		 logger.info("spot_IsudSelectAll hvo.getGroupSize() >>> : " + hvo.getGroupSize());
-		 logger.info("spot_IsudSelectAll hvo.getCurPage() >>> : " + hvo.getCurPage());
-		 logger.info("spot_IsudSelectAll hvo.getTotalCount() >>> : " + hvo.getTotalCount());
+		 logger.info("hotelSearch hvo.getPageSize() >>> : " + hvo.getPageSize());
+		 logger.info("hotelSearch hvo.getGroupSize() >>> : " + hvo.getGroupSize());
+		 logger.info("hotelSearch hvo.getCurPage() >>> : " + hvo.getCurPage());
+		 logger.info("hotelSearch hvo.getTotalCount() >>> : " + hvo.getTotalCount());
 		 
 		 List<HotelVO> searchList = hotelService.hotelSearch(hvo);
 		 

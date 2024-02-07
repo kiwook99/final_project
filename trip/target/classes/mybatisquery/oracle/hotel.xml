@@ -60,7 +60,7 @@
 		FROM HOTEL H
 		WHERE 1=1 AND H.DELETEYN='Y'
 		
-		<if test="searchFilter == 'key_01'">
+		<if test="searchFilter == 'key_01' and keyword != null">
 			<![CDATA[ AND REGIONID LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 		</if>
 		
