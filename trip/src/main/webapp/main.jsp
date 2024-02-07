@@ -194,11 +194,15 @@
 			 #header{
 			 height: 103px;
 			 }
-			 
+
 			 .weatherIcon a {
 			 	text-decoration: none;
 			 }
-			 	
+
+			 body {
+			 background-color: #F7FCFC;
+			 }	
+
 		</style>
 </head>
 <body>

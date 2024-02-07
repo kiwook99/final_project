@@ -87,7 +87,7 @@
 	        max-width: 100%; /* 이미지가 부모 요소를 넘어가지 않도록 최대 너비 설정 */
 	        height: auto; /* 높이는 자동으로 조절 */
 	        display: block; /* 인라인 요소에서 블록 요소로 변환하여 가로로 정렬 */
-	        margin: auto;
+	        margin: 0 auto;
 	    }
 	
         button {
@@ -111,6 +111,13 @@
 			 transition-duration: 0.5s;
         }
 	
+		.tt {
+			 text-align: center;
+			 font-size: 20px;
+			 
+		}
+		
+		
     </style>
     <!-- 폰트 어썸 CDN -->
     <script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
@@ -128,34 +135,35 @@
 <table>
 <tr>
 <th style="width:10px;">제목</th>
-<td style="width:100px; height:30px; font-size:16px;">
+<th class="tt" style="width:100px; height:30px;">
 <%= _abvo.getAdboardtitle() %>	
-</td>
+</th>
 </tr>
 
 <tr>
 <th>내용</th>
-<td style="font-size: 18px;">
+<td class="tt">
 <%= _abvo.getAdboardcoment() %>					
 </td>
 </tr>
 <tr>
 
 <th>사진</th>
-<td> 
+
+<td class="tt"> 
 <img src="${pageContext.request.contextPath}/resources/fileupload/adminboard/<%= _abvo.getAdboardimage() %>" 
-		border="1" width="300" height="200" alt="image">
+		border="1" width="300" height="200" alt="image" >
 </td>
 </tr>
 <tr>
 <th>등록일</th>
-<td style="width:100px; height:30px; font-size:16px;">
+<td class="tt" style="width:100px; height:30px;">
 <%= _abvo.getInsertdate() %>		      
 </td>
 </tr>	 
 <tr>
 <th>수정일</th>
-<td style="width:100px; height:30px; font-size:16px;"> 
+<td class="tt" style="width:100px; height:30px;"> 
 <%= _abvo.getUpdatedate() %> 		
 <input type="hidden" class="mem" name="adboardnum" id="adboardnum" value="<%= _abvo.getAdboardnum() %>"/>
 <input type="hidden" class="mem" name="memnum" id="memnum" value="<%=  _abvo.getMemnum() %>"/>		      
