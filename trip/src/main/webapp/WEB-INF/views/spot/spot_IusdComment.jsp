@@ -13,6 +13,7 @@
 		<style type="text/css">
 			h2 {
 				text-align: center;
+				margin-left: 10px;
 			}
 			
 			#insertbtn {
@@ -40,6 +41,13 @@
 			#commentlist {
 				margin-left: 45px;
 			}
+			
+			#insertbtn:hover, .deleteBtn:hover {
+        	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
+			}			
+			
+
 		</style>
 		
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -298,7 +306,7 @@
 				<tr>
 					<td>내용</td>
 					<td>
-						<textarea name="reviewcoment" id="reviewcoment" rows="5" cols="60"></textarea>
+						<textarea name="reviewcoment" id="reviewcoment" rows="5" cols="60" style="margin-right:35px"></textarea>
 					</td>
 				</tr>
 			</table>

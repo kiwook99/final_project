@@ -35,6 +35,11 @@
 				border: 0;
 				border-radius: 10px;
 			}
+			
+	        #addressCheckBtn:hover, #hotelinsertBtn:hover {
+	        	 background-color: #0bc5da;
+				 transition-duration: 0.5s;
+	        }			
 
 		</style>
 		
@@ -101,14 +106,14 @@
 			<form name="hotelInsertForm" id="hotelInsertForm">
 				<table border="1">
 					<tr>
-						<td class="tt" style="height:30px; width:120px;"> 숙소 이름 </td>
+						<th class="tt" style="height:30px; width:120px;"> 숙소 이름 </th>
 						<td>
-							<input type="text" name="hotelname" id="hotelname" size="50">
+							<input type="text" name="hotelname" id="hotelname" size="53">
 						</td>					
-						<td class="tt" rowspan="9" width="300px;">
+						<th class="tt" rowspan="10" width="300px;">
 							     
-									경기도 지역 목록(지역별)<br>
-									<hr>
+									경기도 지역 목록(지역별)<br><br>
+									
 									
 									1.	가평군 &nbsp;	2.	고양시 &nbsp;	3.	과천시 <br><br>
 									4.	광명시 &nbsp;	5.	광주시 &nbsp;	6.	구리시 <br><br>
@@ -122,60 +127,60 @@
 									28.	평택시 &nbsp;	29.	포천시 &nbsp;	30.	하남시 <br><br>
 									31.	화성시
 									
-						</td>								
+						</th>								
 					</tr>
 					<tr>
-						<td class="tt" style="height:30px;"> 숙소 번호 </td>
+						<th class="tt" style="height:30px;"> 숙소 번호 </th>
 						<td>
-							<input type="text" name="hoteltel" id="hoteltel" size="50">
+							<input type="text" name="hoteltel" id="hoteltel" size="53">
 						</td>
 					</tr>
 					<tr>
-						<td class="tt" style="height:30px;"> 1박 요금 </td>
+						<th class="tt" style="height:30px;"> 1박 요금 </th>
 						<td>
-							<input type="text" name="hotelprice" id="hotelprice" size="50">
+							<input type="text" name="hotelprice" id="hotelprice" size="53">
 						</td>
 					</tr>	
 					<tr>
-						<td class="tt"> 숙소 소개 </td>
+						<th class="tt"> 숙소 소개 </th>
 						<td>
-							<textarea name="hotelcoment" id="hotelcoment" cols="53" rows="20"></textarea>
+							<textarea name="hotelcoment" id="hotelcoment" cols="55" rows="20"></textarea>
 						</td>
 					</tr>			
 					<tr>
-						<td class="tt" style="height:30px;"> 숙소 지역 </td>
+						<th class="tt" style="height:30px;"> 숙소 지역 </th>
 						<td>
-							<input type="text" name="regionid" id="regionid" size="50">
+							<input type="text" name="regionid" id="regionid" size="53">
 						</td> 
 					</tr>	
 					<tr>
-						<td class="tt" height= "40px"> 숙소 주소 </td>
+						<th class="tt" height= "40px"> 숙소 주소 </th>
 						<td>
-							<input type="text" name="hoteladress" id="hoteladress" size="40" style="height:25px">
+							<input type="text" name="hoteladress" id="hoteladress" size="35" style="height:25px">
 							&nbsp;
 							<button id="addressCheckBtn">좌표값 생성</button> &nbsp;&nbsp;
 						</td>
 					</tr>
 					<tr>
-						<td class="tt" style="height:30px;"> 체크인 시간 </td>
+						<th class="tt" style="height:30px;"> 체크인 시간 </th>
 						<td>
-							<input type="text" name="hotelcheckin" id="hotelcheckin" size="50">
+							<input type="text" name="hotelcheckin" id="hotelcheckin" size="53">
 						</td>
 					</tr>
 					<tr>
-						<td class="tt" style="height:30px;"> 체크아웃 시간 </td>
+						<th class="tt" style="height:30px;"> 체크아웃 시간 </th>
 						<td>
-							<input type="text" name="hotelcheckout" id="hotelcheckout" size="50">
+							<input type="text" name="hotelcheckout" id="hotelcheckout" size="53">
 						</td>
 					</tr>
 					<tr>	
-						<td class="tt" style="height:40px;"> 이미지 업로드 </td>
+						<th class="tt" style="height:40px;"> 이미지 업로드 </th>
 						<td>												   
 							<input type="file" name="hotelimage" id="hotelimage">
 						</td>
 					</tr>					
 					<tr>
-						<td colspan="2" align="center" style="height:50px;">
+						<td colspan="2" align="center" style="height:53;">
 							<input type="submit" value="여행지 등록" id="hotelinsertBtn" >
 						</td>
 					</tr>																				

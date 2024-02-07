@@ -155,6 +155,11 @@
 			
 			h2{text-align: center;}
 			
+		    #insertBtn:hover, #search_btn:hover {
+		      	 background-color: #0bc5da;
+				 transition-duration: 0.5s;
+		      }			
+			
 		</style>	
 		<!-- 폰트 어썸 CDN -->
 		<script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
@@ -255,16 +260,15 @@
 				style="width:350px;height:30px;font-size:15px;">
 				<input type="button" id="search_btn" name="search_btn" value="검색">
 				</form>		
+				<br>
+				<% Object objAdmin = request.getAttribute("adminyn"); %>
+				<%			 if ("Y".equals(objAdmin)) { %>		
+				<div id="btn">
+					<button type="button" id="insertBtn">여행지 등록</button>
+				</div>
+				<% } %>						
 		</div>
-		<br>
-<% Object objAdmin = request.getAttribute("adminyn"); %>
-<%			 if ("Y".equals(objAdmin)) { %>		
-			<div id="btn">
-				<button type="button" id="insertBtn">여행지 등록</button>
-			</div>
-<% } %>			
-		<br>
-		
+
 		<br><br>
 			<div class= "main">
 				<div class="contents">
@@ -318,7 +322,7 @@
 						} else {
 									 // 데이터가 없을 때의 처리
 				                    %>
-				                    <li class="empty" style="text-align: center;">검색 결과값이 없습니다.</li>
+				                    <p class="empty" style="text-align: center;">검색 결과값이 없습니다.</p>
 				                    <%
 								}
 								%>
