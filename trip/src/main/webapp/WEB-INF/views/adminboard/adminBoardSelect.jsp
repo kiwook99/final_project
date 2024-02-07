@@ -151,7 +151,7 @@
 <%= _abvo.getAdboardcoment() %>					
 </td>
 </tr>
-<tr>
+<tr> 
 
 <th>사진</th>
 <td class="tt"> 

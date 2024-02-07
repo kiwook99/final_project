@@ -148,7 +148,7 @@ if (list != null) {
               <th class="col1">글번호</th>    
 		      <th class="col2">제목</th>
 		      <th class="col3">글쓴이</th>    
-		      <th class="col4">날짜</th>
+		      <th class="col4">날짜</th> 
 		      <th class="col5">조회수</th>
           </tr>
       </thead>
