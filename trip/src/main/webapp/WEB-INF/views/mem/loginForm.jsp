@@ -24,6 +24,7 @@
 				width: 400px;
 				height: 250px;
 			}
+				
 			
 </style>
 </head>
@@ -59,7 +60,7 @@
 			<tr >
 				<td colspan="2">
 					<a href="javascript:kakaoLoginApi()">
-						<img height="30" width="200" src="/trip/resources/images/kakao.png"/>
+						<img height="40px" width="185px" src="/trip/resources/images/kakao.png"/>
 					</a>
 				</td>
 			</tr>
@@ -74,7 +75,7 @@
 				// 네이버 로그인			
 			  	var naver_id_login = new naver_id_login("__6vC6oTd4e9fRwVGDSd", "http://localhost:8088/trip/mem/callback");
 			  	var state = naver_id_login.getUniqState();
-			  	naver_id_login.setButton("white", 2,40);
+			  	naver_id_login.setButton("white", 20,40);
 			  	naver_id_login.setDomain("http://localhost:8088/trip/");
 			  	naver_id_login.setState(state);
 			  	//naver_id_login.setPopup();

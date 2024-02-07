@@ -105,6 +105,9 @@
 
         <!--회원가입 부분-->
         <section class="signup-wrap">
+        <tr>
+		<td colspan="2" align="center" style="color:white; background-color:#0aa4b5;">공지사항 수정하기</td>
+		</tr>
         <div>
                 <!--아이디,비번,비번재확인-->
 				<div>

@@ -200,8 +200,13 @@
 			 }
 
 			 body {
-			 background-color: #F7FCFC;
+			 	background-color: #F7FCFC;
 			 }	
+			 
+			 #logoutBtn:hover, #loginBtn:hover {
+			     background-color: #0bc5da;
+				 transition-duration: 0.5s;
+			 }
 
 		</style>
 </head>
