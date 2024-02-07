@@ -85,7 +85,3 @@ public class GooglePwMail {
 		}	
 	}
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git

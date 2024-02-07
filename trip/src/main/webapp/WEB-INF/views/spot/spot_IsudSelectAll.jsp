@@ -303,12 +303,7 @@
 								</li>
 								<%
 									} // 종료
-								} else {
-									 // 데이터가 없을 때의 처리
-				                    %>
-				                    <li class="empty" style="text-align: center;">검색 결과값이 없습니다.</li>
-				                    <%
-								}
+								
 								%>						
 							</ul>
 						<jsp:include page="spot_IsudPaging.jsp" flush="true">
@@ -319,6 +314,14 @@
 							<jsp:param name="curPage" value="<%= curPage %>"/>
 							<jsp:param name="totalCount" value="<%= totalCount %>"/>
 						</jsp:include>	
+						<% 
+						} else {
+									 // 데이터가 없을 때의 처리
+				                    %>
+				                    <li class="empty" style="text-align: center;">검색 결과값이 없습니다.</li>
+				                    <%
+								}
+								%>
 					</div>
 				</div>
 			</div>
