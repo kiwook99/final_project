@@ -164,11 +164,14 @@
 			    text-align: center;
 			    margin-top: 30px;
 			    font-size: 28px;
+			    margin-left: 710px;
+    			width: 440px;
 			}
 			
 			.loginBtn {
 			    text-align: right;
 			    margin-right: 80px;
+		        margin-top: 20px;
 			}
 
 		
@@ -180,6 +183,16 @@
 			 	text-align: center;
 			 }
 			 
+			 .weatherIcon{
+			 margin-left: 25px;
+		     float: left;
+		     height: 40px;
+		     margin-top: -88px;
+			 }
+			 
+			 #header{
+			 height: 103px;
+			 }
 			 
 			 	
 		</style>
@@ -194,16 +207,10 @@
 		        </a>		        
 
 		    </div>
-		    <div>
-		    		<table id="weatherIcon" class="weatherIcon" style="margin-left: 10px;">
-			            <tr>
-			                <td>
-			                    <a href="https://www.weather.go.kr/w/index.do#dong/2811058500/37.47405/126.63111/%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EB%8F%99%EC%9D%B8%EC%B2%9C%EB%8F%99//">
-			                        <h3 id="a" class="a"></h3>
-			                    </a>
-			                </td>
-			            </tr>
-		        </table>
+		    <div id="weatherIcon" class="weatherIcon" style="margin-left: 10px;">
+                   <a href="https://www.weather.go.kr/w/index.do#dong/2811058500/37.47405/126.63111/%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EB%8F%99%EC%9D%B8%EC%B2%9C%EB%8F%99//">
+                       <h3 id="a" class="a"></h3>
+                   </a>
 		    </div>
 
  			<div class="loginBtn">
