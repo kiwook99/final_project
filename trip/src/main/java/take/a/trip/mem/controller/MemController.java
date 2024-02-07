@@ -1,13 +1,10 @@
 package take.a.trip.mem.controller;
-
 import java.io.IOException;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
-
 import take.a.trip.mem.common.GooglePwMail;
 import take.a.trip.mem.common.PasswordUtil;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import take.a.trip.mem.service.MemService;
 import take.a.trip.mem.vo.MemVO;
-
-
 @Controller
 public class MemController {
 	
@@ -43,7 +37,7 @@ public class MemController {
 	private MemService memService;
 	
 	// 로그인 폼
-	@GetMapping("mem/loginForm")
+	@GetMapping("/mem/loginForm")
 	public String loginForm(Model model, HttpServletRequest request) {
 		logger.info("MemController loginForm 진입 >>> : ");
 	
@@ -52,7 +46,7 @@ public class MemController {
 	}
 	
 	// 로그인
-	@PostMapping("mem/login")
+	@PostMapping("/mem/login")
 	public String login(Model model, MemVO mvo, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info("MemController login 진입 >>> : ");
 		
@@ -73,7 +67,6 @@ public class MemController {
 				MemVO mvo_1 = userLogin.get(i);
 				adminyn = mvo_1.getAdminyn();
 			}
-
 			logger.info("sessionId >>> : " + sessionId);
 			logger.info("adimnyn >>> : " + adminyn);
 			
@@ -88,7 +81,7 @@ public class MemController {
 		            jedis.expire(sessionId, 3600*24);
 		            logger.info("jedis.set >>> : ");
 		        }
-			 
+			
 			 return "redirect:/spot/spot_IsudSelectAll";
 		}
 		return "mem/loginForm";
@@ -145,10 +138,8 @@ public class MemController {
     @GetMapping("mem/insertForm")
     public String insertForm() {
         logger.info("UserController insertForm 진입 >>> : ");
-
         return "mem/insertForm";
     }
-    
     // 회원가입
     @PostMapping("mem/insert")
 	public String insert(MemVO mvo) {
@@ -156,13 +147,11 @@ public class MemController {
 		
 		logger.info("userid >>> : " + mvo.getMemid());
 		logger.info("userpw >>> : " + mvo.getMempw());
-
 		int userinsert = memService.memInsert(mvo);
 		
 		
 		return "mem/loginForm";
 	}
-    
     // 아이디 찾기폼 (구글)
     @GetMapping("mem/idSearchForm")
     public String idSearchForm() {
@@ -170,7 +159,6 @@ public class MemController {
     	
     	return "mem/searchForm";
     }
-    
     // 아이디 찾기 (구글)
     @PostMapping("mem/idSearch")
     @ResponseBody
@@ -193,7 +181,6 @@ public class MemController {
     	}
     	return "false";
     }
-    
     //비밀번호 찾기
 	@PostMapping("mem/pwSearch")
 	@ResponseBody
@@ -213,13 +200,11 @@ public class MemController {
 		logger.info(" sendMsg() >>> : " + sendMsg);
 		logger.info(" mememail() >>> : " + mememail);
 		logger.info(" msg() 함수진입>>> : " + msg);
-
 		int cnt = memService.memPwSearch(mvo);
 		logger.info(" cnt() >>> : " + cnt);
 		
 		if(cnt == 0) {msg ="false";}
 		else { msg = "success";}
-
 		try {
 			GooglePwMail gms = new GooglePwMail();
 			gms.pwMail(mememail, sendMsg);
@@ -229,7 +214,6 @@ public class MemController {
 		
 		return msg;
 	}
-    
     //로그아웃
 	@GetMapping("mem/logout")
 	public String logout(HttpSession session,HttpServletRequest request) {
@@ -241,7 +225,6 @@ public class MemController {
 		
 		//래디스 연결
 		try (Jedis jedis = jedisPool.getResource()) {
-
 	            // 키를 삭제합니다.
 	            Long deletedKeysCount = jedis.del(sessionId);
 	        }
@@ -254,11 +237,9 @@ public class MemController {
 	//네이버 로그인 콜백함수
     @GetMapping("mem/callback")
     public String callback() {
-    	 
+    	
     	return "mem/callback";
     }
-
-
 	
 	//아이디중복체크
 		@PostMapping("mem/idCheck")
@@ -276,7 +257,5 @@ public class MemController {
 			
 			return msg;
 		}
-
-
 		
 }
