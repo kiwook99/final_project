@@ -177,6 +177,7 @@
 		
 			a {
 			    text-align: center;
+			    color: black;
 			}
 				
 			 h1 {
