@@ -195,6 +195,9 @@
 			 height: 103px;
 			 }
 			 
+			 .weatherIcon a {
+			 	text-decoration: none;
+			 }
 			 	
 		</style>
 </head>
