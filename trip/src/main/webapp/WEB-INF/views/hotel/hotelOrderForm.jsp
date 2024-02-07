@@ -174,21 +174,18 @@
 			//가맹점 식별코드
 			IMP.init('imp23814146');
 			
-			var dynamicGoodsName = 'aa'; // 서버에서 받아온 값
-			console.log("dynamicGoodsName: ", dynamicGoodsName);
-			
 			IMP.request_pay({
-			    mid : 'TC0ONETIME',
+			    mid : 'INIpayTest',
 			    gopaymethod : 'card',
 			    oid : 'merchant_' + new Date().getTime(),
-			    goodname : dynamicGoodsName,
-		        amount: 69000, 
+			    name : hotelname,
+		        amount: hotelprice, 
 			    buyername : '홍길동',
 			    buyertel : '010-1234-5678'
 			    //buyer_addr : '서울 양찬구 목동',
-			    //buyer_postcode : '123-456'
+			   // buyer_postcode : '123-456'
 			}, function(rsp) {
-				console.log("Goods Name in IMP.request_pay: ", dynamicGoodsName);
+				console.log("Goods Name in IMP.request_pay: ", hotelname);
 				console.log(rsp);
 			    if ( rsp.success ) {
 			    	var msg = '결제가 완료되었습니다.';
