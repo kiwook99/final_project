@@ -26,9 +26,23 @@ public class MemDAOImpl implements MemDAO {
     	logger.info("MemDAOImpl memLogin >>> : ");
         return sqlSession.openSession().selectList("memLogin", mvo);
     }
+    
+    public List<MemVO> memIdSearch(MemVO mvo) {
+    	logger.info("MemDAOImpl memIdSearch >>> : ");
+    	return sqlSession.openSession().selectList("memIdSearch", mvo);
+    }
 
     public int memInsert(MemVO mvo) {
         return sqlSession.openSession().insert("memInsert", mvo);
     }
     
+    public int memPwSearch(MemVO mvo) {
+    	return sqlSession.openSession().update("memPwSearch", mvo);
+    }
+    
+    @Override
+	public List<MemVO> idCheck(MemVO mvo){
+		
+		return sqlSession.openSession().selectList("idCheck", mvo);
+	}
 }

@@ -23,10 +23,24 @@ public class MemServiceImpl implements MemService {
     	logger.info("MemServiceImpl memLogin >>> : ");
         return memDAO.memLogin(mvo);
     }
+    
+    public List<MemVO> memIdSearch(MemVO mvo) {
+    	logger.info("MemServiceImpl memIdSearch >>> : ");
+    	return memDAO.memIdSearch(mvo);
+    }
 
     public int memInsert(MemVO mvo) {
         return memDAO.memInsert(mvo);
     }
     
+    public int memPwSearch(MemVO mvo) {
+    	return memDAO.memPwSearch(mvo);
+    }
+    
+    @Override
+	public List<MemVO> idCheck(MemVO mvo){
+		
+		return memDAO.idCheck(mvo);
+	}
     
 }
