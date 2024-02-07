@@ -46,9 +46,7 @@
 
 </script>
 <style type="text/css">
-        h3 {
-        	font-size: 2em; /* 텍스트 크기 조절 */
-        	margin-top: 10px; /* 위로 조금 올리기 */
+        h2 {
             text-align: center;
         }
 
@@ -60,7 +58,7 @@
 
         th, td {
             border: 1px solid black;
-            padding: 10px;
+            padding:5px;
             /*text-align: center;*/
         }
         
@@ -85,6 +83,7 @@
 	        max-width: 100%; /* 이미지가 부모 요소를 넘어가지 않도록 최대 너비 설정 */
 	        height: auto; /* 높이는 자동으로 조절 */
 	        display: block; /* 인라인 요소에서 블록 요소로 변환하여 가로로 정렬 */
+	        margin: auto;
 	    }
 	
         button {
@@ -102,6 +101,11 @@
 		    margin-right: 10px;
 		}
 
+
+        #abUpdateBtn:hover, #abDeleteBtn:hover {
+        	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
+        }
 	
     </style>
     <!-- 폰트 어썸 CDN -->
@@ -109,49 +113,46 @@
 </head>
 <body>
 <%@ include file="/main.jsp" %>
+		<br>
+		<hr>
+		<br>
+		<h2> 공지사항 </h2>
+		<br>
+		<hr>
+		<br>	
 
-<h3 style="text-align:center;">공지사항</h3>
-<hr>
 <form name="adBoardSelect" id="adBoardSelect">
 <table>
 <tr>
-<td colspan="2" align="center"></td>
-</tr>
-
-<tr>
-<td>제목</td>
-<td>
-<input type="text" class="mem" name="adboardtitle" id="adboardtitle" value="<%= _abvo.getAdboardtitle() %>" 
-		style="width:100%; height:30px; font-size:16px;" readonly/>
+<th style="width:10px;">제목</th>
+<td style="width:100px; height:30px; font-size:16px;">
+<%= _abvo.getAdboardtitle() %>	
 </td>
 </tr>
 
 <tr>
-<td>내용</td>
-<td>
-<textarea name="adboardcoment" id="adboardcoment" cols="70" rows="10" style="font-size: 18px;" readonly><%= _abvo.getAdboardcoment() %>					
-</textarea>
+<th>내용</th>
+<td style="font-size: 18px;">
+<%= _abvo.getAdboardcoment() %>					
 </td>
 </tr>
 <tr>
-<td>사진</td>
+<th>사진</th>
 <td> 
 <img src="${pageContext.request.contextPath}/resources/fileupload/adminboard/<%= _abvo.getAdboardimage() %>" 
 		border="1" width="300" height="200" alt="image">
 </td>
 </tr>
 <tr>
-<td>등록일</td>
-<td>
-<input type="text" class="mem" name="insertdate" id="insertdate" value="<%= _abvo.getInsertdate() %>" 
-		style="width:100%; height:30px; font-size:16px;" readonly />		      
+<th>등록일</th>
+<td style="width:100px; height:30px; font-size:16px;">
+<%= _abvo.getInsertdate() %>		      
 </td>
 </tr>	 
 <tr>
-<td>수정일</td>
-<td> 
-<input type="text" class="mem" name="updatedate" id="updatedate" value="<%= _abvo.getUpdatedate() %>" 
-		style="width:100%; height:30px; font-size:16px;" readonly />
+<th>수정일</th>
+<td style="width:100px; height:30px; font-size:16px;"> 
+<%= _abvo.getUpdatedate() %> 		
 <input type="hidden" class="mem" name="adboardnum" id="adboardnum" value="<%= _abvo.getAdboardnum() %>"/>
 <input type="hidden" class="mem" name="memnum" id="memnum" value="<%=  _abvo.getMemnum() %>"/>		      
 </td>
@@ -167,5 +168,6 @@
 <% } %>
 </table>
 </form>
+<br><br><br>
 </body>
 </html>

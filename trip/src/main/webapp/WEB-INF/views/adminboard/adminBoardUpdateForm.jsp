@@ -45,9 +45,8 @@
 
 </script>
 <style type="text/css">
-        h3 {
-        	font-size: 2em; /* 텍스트 크기 조절 */
-        	margin-top: 10px; /* 위로 조금 올리기 */
+        h2 {
+
             text-align: center;
         }
 
@@ -59,7 +58,7 @@
 
         th, td {
             border: 1px solid black;
-            padding: 10px;
+            padding: 5px;
             /*text-align: center;*/
         }
         
@@ -108,18 +107,18 @@
 </head>
 <body>
 <%@ include file="/main.jsp" %>
+		<br>
+		<hr>
+		<br>
+		<h2> 공지사항 </h2>
+		<br>
+		<hr>
+		<br>
 
-<h3 style="text-align:center;">공지사항</h3>
-<hr>
 <form name="adBoardUpdate" id="adBoardUpdate">
 <table>
 <tr>
 <td colspan="2" align="center" style="color:blue;">공지사항 수정하기</td>
-</tr>
-<tr>
-<td>글번호</td>
-<td><input type="text" class="mem" name="adboardnum" id="adboardnum" value="<%= _abvo.getAdboardnum() %>" 
-			style="width:100px; height:30px; font-size:16px;" readonly/></td>
 </tr>
 <tr>
 <td>제목</td>

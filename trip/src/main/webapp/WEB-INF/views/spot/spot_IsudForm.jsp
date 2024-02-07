@@ -19,9 +19,6 @@
 				text-align: center;
 			}
 
-			.ti {
-				text-align: left;
-			}
 			
 		
 			
@@ -32,6 +29,11 @@
 				border: 0;
 				border-radius: 10px;
 			}
+				
+			#spot_isud_insertBtn:hover {
+			  background-color: #0bc5da;
+			  transition-duration: 0.5s;
+			}				
 						
 		</style>
 		
@@ -70,11 +72,11 @@
 			<form name="spot_IsudForm" id="spot_IsudForm">
 				<table border="1">
 					<tr>
-						<td class="tt" width="120px"> 여행지 번호 </td>
+						<th class="tt" style="height:30px;width:120px;"> 여행지 번호 </th>
 						<td class="ti">
-							<input type="text" name="tripnum" id="tripnum" size="40" placeholder="자동으로 들어갑니다." readonly >
+							<input type="text" name="tripnum" id="tripnum" size="38" placeholder="자동으로 들어갑니다." readonly >
 						</td>					
-						<td class="tt" rowspan="7" width="300px;">
+						<th class="tt" rowspan="7" width="300px;">
 							     
 									경기도 지역 목록(지역별)<br>
 									<br>
@@ -91,8 +93,8 @@
 									28.	평택시 &nbsp;	29.	포천시 &nbsp;	30.	하남시 <br><br>
 									31.	화성시
 									
-						</td>	
-						<td class="tt" id="tc" rowspan="7" width="200px;">
+						</th>	
+						<th class="tt" id="tc" rowspan="7" width="200px;">
 							     <br><br><br><br><br>
 									여행지 카테고리(분야별)<br>
 									<br>
@@ -102,34 +104,34 @@
 									3. 축제공연행사<br><br>
 									4. 레포츠<br><br>
 									5. 음식점<br><br><br><br><br><br><br>					
-						</td>												
+						</th>												
 					</tr>
 					<tr>
-						<td class="tt"> 여행지 이름 </td>
+						<th class="tt" style="height:30px;"> 여행지 이름 </th>
 						<td class="ti">
-							<input type="text" name="tripname" id="tripname" size="40">
+							<input type="text" name="tripname" id="tripname" size="38">
 						</td>
 					</tr>
 					<tr>
-						<td class="tt"> 카테고리 </td>
+						<th class="tt" style="height:30px;"> 카테고리 </th>
 						<td class="ti">
-							<input type="text" name="tripcatalogue" id="tripcatalogue" size="40">
+							<input type="text" name="tripcatalogue" id="tripcatalogue" size="38">
 						</td>
 					</tr>	
 					<tr>
-						<td class="tt"> 여행지 소개 </td>
+						<th class="tt"> 여행지 소개 </th>
 						<td class="ti">
 							<textarea name="tripcoment" id="tripcoment" cols="42" rows="25"></textarea>
 						</td>
 					</tr>			
 					<tr>
-						<td class="tt"> 지역 </td>
+						<th class="tt" style="height:30px;"> 지역 </th>
 						<td class="ti">
-							<input type="text" name="tripregion" id="tripregion" size="40">
+							<input type="text" name="tripregion" id="tripregion" size="38">
 						</td>
 					</tr>	
 					<tr>	
-						<td class="tt" id="tf" height= "40px"> 이미지 </td>
+						<th class="tt" id="tf" height= "40px"> 이미지 </th>
 						<td>												   
 							<input type="file" name="tripimage" id="tripimage">
 						</td>

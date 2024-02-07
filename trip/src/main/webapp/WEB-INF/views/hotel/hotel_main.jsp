@@ -154,6 +154,12 @@
 	}
 	
 	h2{text-align: center;}
+	
+	
+    #hotelInsertForm:hover, #search_btn:hover {
+      	 background-color: #0bc5da;
+		 transition-duration: 0.5s;
+      }
 		</style>
 		
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -196,7 +202,7 @@
 		
 		<% if ("Y".equals(objAdmin)) { %>
 		<div class="hotelinsert">
-			   <span><h3><a href="hotelInsertForm">숙소등록</a></h3></span></div>
+			   <span><h3><a href="hotelInsertForm" id="hotelInsertForm">숙소등록</a></h3></span></div>
 		<% } %>		
 		<br><br>
 		<div class="main">

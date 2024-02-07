@@ -67,13 +67,7 @@ if (list != null) {
 
 </script>
  <style type="text/css">
-        h3 {
-            text-align: center;
-        }
-        
-        h3.adList {
-        	font-size: 2em; /* 텍스트 크기 조절 */
-        	margin-top: 10px; /* 위로 조금 올리기 */
+        h2 {
             text-align: center;
         }
 
@@ -129,9 +123,14 @@ if (list != null) {
 </head>
 <body>
 <%@ include file="/main.jsp" %>
+		<br>
+		<hr>
+		<br>
+		<h2> 공지사항 글 목록 </h2>
+		<br>
+		<hr>
+		<br>	
 
-<h3 class="adList">공지사항 글 목록</h3>
-<hr>
 <form name="adminboardList" id="adminboardList">
    <table>
       <thead>
@@ -205,5 +204,6 @@ if (groupSize != 0) {
       </tbody>
    </table>
 </form>
+<br><br><br>
 </body>
 </html>

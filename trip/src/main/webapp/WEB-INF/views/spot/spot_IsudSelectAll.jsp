@@ -156,6 +156,11 @@
 			
 			h2{text-align: center;}
 			
+		    #insertBtn:hover, #search_btn:hover {
+		      	 background-color: #0bc5da;
+				 transition-duration: 0.5s;
+		      }			
+			
 		</style>	
 		<!-- 폰트 어썸 CDN -->
 		<script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
