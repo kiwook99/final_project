@@ -20,11 +20,17 @@
 				'enctype':'multipart/form-data'
 			}).submit();
 		});
+		
+		$(document).on("click", "#abCBtn", function(e){
+			location.href="adminBoardSelectAll";
+		});
 	});	
 
 </script>
 <style type="text/css">
-        h3 {
+        .in {
+        	font-size: 2em; /* 텍스트 크기 조절 */
+        	margin-top: 10px; /* 위로 조금 올리기 */
             text-align: center;
         }
 
@@ -67,7 +73,7 @@
 <body>
 <%@ include file="/main.jsp" %>
 
-<h3>공지사항 글쓰기</h3>
+<h3 class="in">공지사항 글쓰기</h3>
 <hr>
 <form name="abInsert" id="abInsert">
 	<table>
@@ -97,6 +103,7 @@
 	    <tr>
 	        <td colspan="2" align="right">
 	            <input type="button" value="등록" id="abIBtn">
+	            <input type="button" value="취소" id="abCBtn">
 	        </td>
 	    </tr>
   	</table>

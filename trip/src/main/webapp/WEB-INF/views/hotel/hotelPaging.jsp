@@ -100,14 +100,7 @@
  	    color: #888;
  	    text-align:center;
 	}
-	
-	.page-num{
-	margin-left:610px;
-	}
-	
-	.hotelinsert{
-	margin-left:550px;
-	}
+
 </style>
 
 <div class=page-num>
@@ -195,5 +188,5 @@
 <%
 	}
 %>
-<sapn class="hotelinsert"><h3><a href="hotelInsertForm">숙소등록</a></sapn></h3>
+
 </div>

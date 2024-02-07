@@ -40,9 +40,11 @@ public class MemDAOImpl implements MemDAO {
     	return sqlSession.openSession().update("memPwSearch", mvo);
     }
     
+
     @Override
 	public List<MemVO> idCheck(MemVO mvo){
 		
 		return sqlSession.openSession().selectList("idCheck", mvo);
 	}
+
 }

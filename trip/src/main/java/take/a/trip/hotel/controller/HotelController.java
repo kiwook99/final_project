@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile; // 최신
 import com.oreilly.servlet.MultipartRequest;	// 구
 
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 import take.a.trip.hotel.service.HotelService;
 import take.a.trip.hotel.util.CommonUtils;
 import take.a.trip.hotel.util.NumUtil;
@@ -26,6 +28,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -39,11 +42,18 @@ public class HotelController {
 	 @Autowired (required = false)
 	 private HotelService hotelService;
 	 
+	 @Autowired
+	 private JedisPool jedisPool;
+		
+	 
 	 // 숙소페이지
 	 @GetMapping("/hotel/hotel_main")
-	 public String hotel(HotelVO hvo, Model model) {
+	 public String hotel(HotelVO hvo, Model model, HttpServletRequest request) {
 		 logger.info("hotel 함수 진입");
 		 
+		 HttpSession session = request.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
+		 String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+		 logger.info("spot_IsudSelectAll sessionId >>> : " + sessionId);
 		 // 페이징
 		 int pageSize = CommonUtils.HOTEL_PAGE_SIZE; 	// 한페이지의 값
 		 int groupSize = CommonUtils.HOTEL_GROUP_SIZE;	// 그룹 값
@@ -72,9 +82,24 @@ public class HotelController {
 			 
 			 model.addAttribute("listAll",listAll);
 			 model.addAttribute("pagingHVO",hvo);
-			 return "hotel/hotel_main";
 			 
-		 }
+			 try (Jedis jedis = jedisPool.getResource()) {
+			 
+				 String adminyn = jedis.get(sessionId);
+				 
+				 if (adminyn != null) {
+				        // 값이 존재하는 경우
+				        logger.info("adminyn >>> : " + adminyn);
+				        model.addAttribute("adminyn", adminyn);
+				        logger.info("jedis.get >>> : ");
+				    } else {
+				        // 값이 없는 경우
+				        logger.info("adminyn is null");
+				        }
+			 } 
+			 return "hotel/hotel_main";
+			
+		}
 		 
 		 return "hotel/hotel_insert";
 	 }
@@ -124,10 +149,14 @@ public class HotelController {
 	 
 	 // 지역별 
 	 @GetMapping("hotel/hotelSelect")
-	 public String hotelSelect(HotelVO hvo, Model model) {		 
+	 public String hotelSelect(HotelVO hvo, Model model, HttpServletRequest request) {		 
 		 logger.info("hotelSelect 함수진입 ");
-		 
 		 logger.info("hotelSelect hvo.getHotelnum()=> "+ hvo.getHotelnum());
+
+		 HttpSession session = request.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
+		 String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+		 logger.info("spot_IsudSelectAll sessionId >>> : " + sessionId);
+
 		 
 		 List<HotelVO> selectList = hotelService.hotelSelect(hvo);
 		 
@@ -137,7 +166,21 @@ public class HotelController {
 			 logger.info("hotelSelect nCnt = "+ nCnt);
 			 
 			 model.addAttribute("selectList",selectList);
-
+			 
+			 try (Jedis jedis = jedisPool.getResource()) {
+				 
+				 String adminyn = jedis.get(sessionId);
+				 
+				 if (adminyn != null) {
+				        // 값이 존재하는 경우
+				        logger.info("adminyn >>> : " + adminyn);
+				        model.addAttribute("adminyn", adminyn);
+				        logger.info("jedis.get >>> : ");
+				    } else {
+				        // 값이 없는 경우
+				        logger.info("adminyn is null");
+				        }
+			 } 
 			 return "hotel/hotelSelect";
 		 }
 		 
@@ -155,19 +198,20 @@ public class HotelController {
 	 	        
 	 	        
 	 	        // 여기서 필요한 값들을 가져와서 model에 추가
+ 	        	String hotelnum = req.getParameter("hotelnum");	
 	 	        String hotelname = req.getParameter("hotelname");
 	 	        String hotelprice = req.getParameter("hotelprice");
 	 	        String hotelcheckin = req.getParameter("hotelcheckin");
 	 	        String hotelcheckout = req.getParameter("hotelcheckout");
-	 	        String memname = req.getParameter("memname");
-
+	 	      
+	 	        model.addAttribute("hotelnum", hotelnum);
 	 	        model.addAttribute("hotelname", hotelname);
 	 	        model.addAttribute("hotelprice", hotelprice);
 	 	        model.addAttribute("hotelcheckin", hotelcheckin);
 	 	        model.addAttribute("hotelcheckout", hotelcheckout);
-	 	        model.addAttribute("memname", memname);
+	 	   
 	 	        
-	 	       logger.info("hotelOrderForm memname: " + memname);
+	 	       logger.info("hotelOrderForm hotelnum: " + hotelnum);
 	 	       logger.info("hotelOrderForm hotelname: " + hotelname);
 	 	       logger.info("hotelOrderForm hotelprice: " + hotelprice);
 	 	       logger.info("hotelOrderForm hotelcheckin: " + hotelcheckin);

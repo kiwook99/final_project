@@ -9,5 +9,7 @@ public interface MemService {
 	public List<MemVO> memIdSearch(MemVO mvo);
 	public int memInsert(MemVO mvo);
 	public int memPwSearch(MemVO mvo);
+
 	public List<MemVO> idCheck(MemVO ovo);
+
 }

@@ -72,7 +72,7 @@
 	int linkPage = 	curGroup * groupSize;
 	System.out.println("linkPage >>> : " + linkPage);
 %>
-<style type=text/css>
+<style type="text/css">
 	.page{
 		background: #0aa4b5;
 	    border-radius: 50%;
@@ -88,6 +88,7 @@
 		display: flex;	
 		text-align:center;
 		justify-content: center;
+		font-size: 20px;
 	}
 	
 	.paging {
@@ -102,9 +103,6 @@
     text-decoration: none;
 	}	/* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
 
-	a {
-		font-size: 20px;
-	}
 </style>
 
 

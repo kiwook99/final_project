@@ -17,7 +17,8 @@
 <%
 
 	Object obj = request.getAttribute("selectList");
-
+	Object objAdmin = request.getAttribute("adminyn"); 
+	
 	List<HotelVO> list = (List<HotelVO>)obj;
 	int nCnt = list.size();
 
@@ -68,6 +69,7 @@
 		
 		a:link, a:visited, a:focus, a:active {
 		    text-decoration: none;
+		    color: black;
 		}	/* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
 		
 						
@@ -108,6 +110,7 @@
 		.swiper-container{
 		height:670px;
 		position: relative;	/* 요소 자기 자신을 기준으로 배치 */
+		margin-top: 35px;
 		}
 	
 		.swiper-slide {
@@ -152,7 +155,6 @@
     color: #000;
     font-weight: 800;
     text-align: center;
-    margin-left: 175px;
 	}
 	
 	.sub-header{
@@ -251,9 +253,6 @@
         border: none;
         outline: none;
     }
-    #finalPrice {
-	
-	}
 
 	.coment, .info ul, .name h3{
 	background-color:#f7f7f7;
@@ -287,14 +286,18 @@
 	margin-right:100px;
 	}
 	
-	.sub-header a {
-	    margin-right: 10px; /* 링크 간의 간격 조절 */
-        padding: 5px 15px;
-	    background-color: #0AA4B5;
-	    color: white;
-	    border: 0;
-	    border-radius: 10px;
-	    FLOAT: RIGHT;
+	.admin{
+	margin-bottom:25px;
+	text-align: center;
+	}
+	
+	.admin a {
+    margin-right: 10px; /* 링크 간의 간격 조절 */
+    padding: 5px 15px;
+    background-color: #0AA4B5;
+    color: white;
+    border: 0;
+    border-radius: 10px;
 	}
 	
 	#cardBtn {
@@ -423,12 +426,12 @@
 				 var checkin = formatDate(checkinDate) + ' / 체크인시간 : (' + '<%= hvo.getHotelcheckin().replace("<br>", "&nbsp;/&nbsp;") %>' + ')';
 				 var checkout = formatDate(checkoutDate) + ' / 체크아웃시간 : (' + '<%= hvo.getHotelcheckout().replace("<br>", "&nbsp;/&nbsp;") %>' + ')';
 				 
-				var memname = '<%= memname%>';
+				
 				$('#hotelname').val('<%= hvo.getHotelname() %>');
 				$('#hotelprice').val(hotelprice);
 				
 				$('#hotelOrderForm').attr({
-					'action': 'hotelOrderForm?memname=<%= hvo.getMemname() %>&hotelname=<%= hvo.getHotelname() %>&hotelprice=' + hotelprice + '&hotelcheckin=' + checkin + '&hotelcheckout=' + checkout,
+					'action': 'hotelOrderForm?hotelnum=<%=hvo.getHotelnum()%>&hotelname=<%=hvo.getHotelname()%>&hotelprice=' + hotelprice + '&hotelcheckin=' + checkin + '&hotelcheckout=' + checkout,
 					'method':'POST',
 					'enctype':'multipart/form-data'
 				}).submit();
@@ -515,15 +518,21 @@
 </script>
 </head>
 <body>
-	<%@ include file="/main.jsp" %>
+	<%@ include file="/main.jsp"%>
 
 	
 		<div class="sub-header">
-			<h3 class="sub-title">숙박
-				<a href="hotelDelete?hotelnum=<%= hvo.getHotelnum() %>" class="delete-link" id="delete-link"> 삭제</a>
-				<a href="hotelUpdateForm?hotelnum=<%= hvo.getHotelnum() %>" class="update-link" id="update-link">수정</a>
+			<h3 class="sub-title">숙소정보
 			 </h3>
-		</div>
+	
+		<% if ("Y".equals(objAdmin)) { %>
+		   <!-- 관리자만 볼수있는 태그-->
+		   <div class="admin">
+		   <a href="hotelUpdateForm?hotelnum=<%= hvo.getHotelnum() %>" class="update-link" id="update-link">수정</a>
+		   <a href="hotelDelete?hotelnum=<%= hvo.getHotelnum() %>" class="delete-link" id="delete-link"> 삭제</a>
+			</div>
+		<% } %>
+				</div>
 			<div class="hotelSelect">
 				<div class="detail">
 					<div class="detail-basic">
@@ -558,9 +567,9 @@
 							<span class="info"><br>
 								<ul>
 									<li> 주소	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= hvo.getHoteladress() %> </li>
-									<li> 번호	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= hvo.getHoteltel().replace("<br>", "&nbsp;/&nbsp;") %>
-									<li> 체크인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckin().replace("<br>", "&nbsp;/&nbsp;") %>
-									<li> 체크아웃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckout().replace("<br>", "&nbsp;/&nbsp;") %>
+									<li> 번호 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= hvo.getHoteltel().replace("<br>", "&nbsp;/&nbsp;").replace("<br />", "&nbsp;/&nbsp;") %></li>
+									<li> 체크인 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckin().replace("<br>", "&nbsp;/&nbsp;").replace("<br />", "&nbsp;/&nbsp;") %></li>
+									<li> 체크아웃 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= hvo.getHotelcheckout().replace("<br>", "&nbsp;/&nbsp;").replace("<br />", "&nbsp;/&nbsp;") %></li>
 								</ul>
 							</span>
 							</div><br>

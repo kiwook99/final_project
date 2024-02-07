@@ -25,7 +25,8 @@
 	HotelVO pagingHVO = (HotelVO)objPaging;
 
 	Object obj = request.getAttribute("listAll");
-
+	
+	Object objAdmin = request.getAttribute("adminyn");
 	List<HotelVO> list = (List<HotelVO>)obj;
 	int nCnt = list.size();
 	
@@ -131,12 +132,28 @@
 	}
 	
 	#search_btn{
-	padding: 5px 15px;
+	padding: 15px 25px;
     background-color: #0aa4b5;
     color: white;
     border: 0;
     border-radius: 10px;
 	}
+	
+	.hotelinsert a {
+	padding: 10px 25px;
+    background-color: #0aa4b5;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+    font-size: 15px;
+	}
+	
+	.hotelinsert {
+	text-align-last: center;
+	margin-bottom: 30px;
+	}
+	
+	h2{text-align: center;}
 		</style>
 		
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -158,18 +175,30 @@
 </head>
 <body>
 <%@ include file="/main.jsp" %>
+		<br>
+		<hr>
+		<br>
+		<h2>숙소정보</h2>
+		<br>
+		<hr>
+		<br>
 		<div>
 			<form class="miniSearchForm" id="miniSearchForm">
 				<select id="searchFilter" name="searchFilter" style="width:100px;font-size:15px;">
-					<option value="key_01">지역</option>
+					<option value="key_01">지역별</option>
 					<option value="key_02">숙소명</option>
 				</select>			
 				<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" 
-				style="width:200px;height:20px;font-size:15px;">
+				style="width:350px;height:30px;font-size:15px;">
 				<input type="submit" id="search_btn" name="search_btn" value="검색">
 			</form>
 		</div>
-		<hr><br><br>
+		
+		<% if ("Y".equals(objAdmin)) { %>
+		<div class="hotelinsert">
+			   <span><h3><a href="hotelInsertForm">숙소등록</a></h3></span></div>
+		<% } %>		
+		<br><br>
 		<div class="main">
 			<div class="contents">
 				<div class="list_content">
@@ -219,7 +248,7 @@
 							<jsp:param name="curPage" value="<%=curPage%>"/>
 							<jsp:param name="totalCount" value="<%=totalCount%>"/>
 						</jsp:include>
-					</div>							
+					</div>
 				</div>
 			</div>
 		</div>

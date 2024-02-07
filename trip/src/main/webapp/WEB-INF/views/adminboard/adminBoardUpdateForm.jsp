@@ -45,7 +45,9 @@
 
 </script>
 <style type="text/css">
-        h3 {
+        .up {
+        	font-size: 2em; /* 텍스트 크기 조절 */
+        	margin-top: 10px; /* 위로 조금 올리기 */
             text-align: center;
         }
 
@@ -79,7 +81,7 @@
 		    display: inline-block;
 		}
 		
-		img {
+		.imgs img {
 	        max-width: 100%; /* 이미지가 부모 요소를 넘어가지 않도록 최대 너비 설정 */
 	        height: auto; /* 높이는 자동으로 조절 */
 	        display: block; /* 인라인 요소에서 블록 요소로 변환하여 가로로 정렬 */
@@ -107,12 +109,12 @@
 <body>
 <%@ include file="/main.jsp" %>
 
-<h3 style="text-align:center;">게시글 내용</h3>
+<h3 class="up" style="text-align:center;">공지사항</h3>
 <hr>
 <form name="adBoardUpdate" id="adBoardUpdate">
 <table>
 <tr>
-<td colspan="2" align="center">공지사항 수정하기</td>
+<td colspan="2" align="center" style="color:blue;">공지사항 수정하기</td>
 </tr>
 <tr>
 <td>글번호</td>
@@ -141,7 +143,7 @@
 </tr>
 <tr>
 <td>사진</td>
-<td> 
+<td class="imgs"> 
 <img src="${pageContext.request.contextPath}/resources/fileupload/adminboard/<%= _abvo.getAdboardimage() %>" 
 			border="1" width="300" height="200" alt="image">
 </td>
@@ -162,8 +164,8 @@
 </tr>
 <tr>
 	<td colspan="5" class="right">
-	<button type="button" value="수정" id="abbUpdateBtn">수정하기</button>
 	<button type="button" value="취소" id="ccBtn">취소</button>
+	<button type="button" value="수정" id="abbUpdateBtn">수정하기</button>
     </td>      	
 </tr>
 </table>

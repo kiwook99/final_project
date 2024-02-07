@@ -8,6 +8,7 @@
 <%@ page import="org.apache.log4j.Logger" %>
 
 <% request.setCharacterEncoding("UTF-8");%>	
+
 <%
 	Logger logger = LogManager.getLogger(this.getClass());
 	logger.info("spot_IsudSelectAll.jsp 페이지 진입 >>> : ");
@@ -18,7 +19,7 @@
 	int curPage = 0;
 	int totalCount = 0;
 	
-	
+	 
 	Object objPaging = request.getAttribute("pagingSVO"); 
 	SpotVO pagingSVO = (SpotVO)objPaging;
 	
@@ -27,7 +28,7 @@
 	List<SpotVO> list = (List<SpotVO>)obj;
 	int nCnt = list.size();
 	
-
+ 
 %>     
 <!DOCTYPE html>
 <html>
@@ -257,9 +258,12 @@
 				</form>		
 		</div>
 		<br>
+<% Object objAdmin = request.getAttribute("adminyn"); %>
+<%			 if ("Y".equals(objAdmin)) { %>		
 			<div id="btn">
 				<button type="button" id="insertBtn">여행지 등록</button>
 			</div>
+<% } %>			
 		<br>
 		
 		<br><br>

@@ -39,4 +39,20 @@
 		WHERE MEMID = #{memid} AND DELETEYN = 'Y'
 	</select>
 
+	
+	<select id="memIdSearch" resultType="take.a.trip.mem.vo.MemVO" parameterType="take.a.trip.mem.vo.MemVO">
+	SELECT
+			A.MEMID		MEMID
+	FROM	MEM A
+	WHERE A.DELETEYN = 'Y'
+	AND A.MEMEMAIL = #{mememail, jdbcType = VARCHAR}
+	</select>
+	
+	<update id="memPwSearch" parameterType="take.a.trip.mem.vo.MemVO">
+	UPDATE MEM
+	SET MEMPW = #{mempw, jdbcType = VARCHAR}
+	WHERE MEMEMAIL = #{mememail, jdbcType = VARCHAR}
+	</update>
+
+
 </mapper>

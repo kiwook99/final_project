@@ -228,6 +228,7 @@ public class MemController {
 		
 		return "redirect:/spot/spot_IsudSelectAll";
 	}
+
 	
 	//아이디중복체크
 		@PostMapping("mem/idCheck")
@@ -245,5 +246,6 @@ public class MemController {
 			
 			return msg;
 		}
+
 		
 }

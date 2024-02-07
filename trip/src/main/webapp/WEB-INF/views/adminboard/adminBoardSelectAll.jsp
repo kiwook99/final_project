@@ -35,6 +35,7 @@ if (list != null) {
     nCnt = list.size();
 }
 %>
+<% Object objAdmin = request.getAttribute("adminyn"); %>
 
  
 <!DOCTYPE html>
@@ -67,6 +68,12 @@ if (list != null) {
 </script>
  <style type="text/css">
         h3 {
+            text-align: center;
+        }
+        
+        h3.adList {
+        	font-size: 2em; /* 텍스트 크기 조절 */
+        	margin-top: 10px; /* 위로 조금 올리기 */
             text-align: center;
         }
 
@@ -105,7 +112,7 @@ if (list != null) {
             border: 0;
 			border-radius: 10px;
             cursor: pointer;
-            display: flex; /* 버튼을 블록 요소로 변경 */
+            display: flex;
         	float: right; /* 오른쪽으로 이동 */
         }
 
@@ -123,7 +130,7 @@ if (list != null) {
 <body>
 <%@ include file="/main.jsp" %>
 
-<h3>공지사항 글 목록</h3>
+<h3 class="adList">공지사항 글 목록</h3>
 <hr>
 <form name="adminboardList" id="adminboardList">
    <table>
@@ -134,7 +141,7 @@ if (list != null) {
               </td>
           </tr>
           <tr>
-              <th class="col1">체크박스</th>    
+              <th class="col1">글번호</th>    
 		      <th class="col2">제목</th>
 		      <th class="col3">글쓴이</th>    
 		      <th class="col4">날짜</th>
@@ -153,11 +160,9 @@ for(int i=0; i<nCnt; i++){
 %>
       <tbody>
       <tr>
-		<td style="width:5%">
-			<input type="checkbox" id="adboardnum" name="adboardnum" class="adboardnum" value=<%= _abvo.getAdboardnum() %> >
-		</td>			
+		<td style="width:5%"><%= _abvo.getAdboardnum() %></td>			
 		<td style="width:10%"><a href="adminBoardSelect?adboardnum=<%= _abvo.getAdboardnum() %>"><%= _abvo.getAdboardtitle() %> </td>
-		<td style="text-align:center;"><%= _abvo.getMemnum() %> </td>	
+		<td style="text-align:center;">관리자</td>	
 		<td style="width:10%"><%= _abvo.getInsertdate() %></td> 
 		<td style="width:8%"><%= _abvo.getAdboardhits() %></td>				
 	 </tr>	
@@ -186,13 +191,17 @@ if (groupSize != 0) {
 		</jsp:include>
 	</td>
 </tr>
+                               
+                <% if ("Y".equals(objAdmin)) { %>
                 
-                
-                <tr>
+					   <!-- 관리자만 볼수있는 태그-->
+				    <tr>
                 	<td colspan="5" class="right">
                 	<button type="button" value="글쓰기" id="abBtn">글쓰기</button>
               	    </td>      	
-                </tr>
+                	</tr>
+				<% } %>
+				    
       </tbody>
    </table>
 </form>

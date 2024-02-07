@@ -9,8 +9,6 @@
 <body>
 
         <a href="mem/insertForm">회원가입</a>
-
-		<a href="mem/loginForm">로그인</a>
 		
 		<a href="adminboard/adminBoardSelectAll">공지사항 게시판</a>
 		
