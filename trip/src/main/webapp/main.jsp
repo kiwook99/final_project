@@ -192,6 +192,7 @@
 		            <!-- <img src="${pageContext.request.contextPath}/resources/images/img_spot/지도.png" width="50px" height="50px" title="로고 이미지">  -->
 		            <i class="fa-solid fa-plane-up fa-xl">여행가기 좋은날</i>
 		        </a>		        
+
 		    </div>
 		    <div>
 		    		<table id="weatherIcon" class="weatherIcon" style="margin-left: 10px;">
@@ -204,7 +205,10 @@
 			            </tr>
 		        </table>
 		    </div>
+
  			<div class="loginBtn">
+			    		
+
 
 			        <% if(memid != null) { %> 
 			            <!-- 조건이 참일 때 보이는 태그 -->
