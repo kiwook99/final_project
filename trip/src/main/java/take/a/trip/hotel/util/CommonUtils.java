@@ -4,7 +4,7 @@ public class CommonUtils {
 
 	
 	// 여행지 이미지 업로드
-	public static final String HOTEL_IMG_UPLOAD_PATH = "C:\\00.KOSMO137\\finalProject\\finalProject_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\trip\\resources\\fileupload\\hotel";
+	public static final String HOTEL_IMG_UPLOAD_PATH = "C:\\00.KOSMO137\\finalProject\\finalProject_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\trip\\resources\\fileupload\\hotel";
 	public static final int HOTEL_IMG_FILE_SIZE = 10*1024*1024;
 	public static final String HOTEL_ENCODE ="UTF-8"; 
 	
