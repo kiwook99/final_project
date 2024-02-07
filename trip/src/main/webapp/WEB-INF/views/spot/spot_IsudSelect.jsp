@@ -67,6 +67,7 @@
 			
 			.btn {
 				text-align: center;
+				margin-left: 80px;
 			}	
 			
 			
@@ -130,7 +131,7 @@
 		<hr>
 		<br>
 		   <!-- 이미지 부분을 테이블 외부로 이동 -->
-		   <div style="text-align: center;">
+		   <div style="text-align: center; margin-left: 50px;">
 		       <img src="${pageContext.request.contextPath}/resources/images/img_spot/<%= svo.getTripimage() %>" border="1" width="600" height="400" alt="image">
 		   </div>		
 		
@@ -153,18 +154,19 @@
 						</td>
 					</tr>
 					<tr>
+						<td class="tt" height="40px"> 지역 </td>
+						<td  width="50%">
+							<%= svo.getTripregion() %>
+						</td>
+					</tr>	
+					<tr>
 						<td class="tt"> 소개 </td>
 						<td  width="50%" class="tripcoment">
 							<%= svo.getTripcoment() %>
 						</td>
 
 					</tr>	
-					<tr>
-						<td class="tt" height="40px"> 지역 </td>
-						<td  width="50%">
-							<%= svo.getTripregion() %>
-						</td>
-					</tr>																							
+																								
 				</table>
 				
 				<br>
