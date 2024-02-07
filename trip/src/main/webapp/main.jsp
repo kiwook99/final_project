@@ -195,7 +195,9 @@
 			 height: 103px;
 			 }
 			 
-			 	
+			 body {
+			 background-color: #F7FCFC;
+			 }	
 		</style>
 </head>
 <body>
