@@ -56,7 +56,7 @@
             padding: 8px;
         }
 
-         #abIBtn {
+         #abIBtn, #abCBtn {
           
             padding: 10px 30px;
             background-color: #0aa4b5;
@@ -66,7 +66,7 @@
             cursor: pointer;
         }
         
-        #abIBtn:hover {
+        #abIBtn:hover, #abCBtn:hover {
         	 background-color: #0bc5da;
 			 transition-duration: 0.5s;
         }
