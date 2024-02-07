@@ -98,16 +98,10 @@
 </script>
 </head>
 <body>
+<%@ include file="/main.jsp" %>
     <form name="MemInsert" id="MemInsert">
     <div class="main-signup">
         <!--웹페이지 상단-->
-       <header>
-            여행가기 좋은날
-            <div class="logo">
-                <a href="adminboard/adminBoardSelectAll" target="_blank" title="여행사 메인 홈페이지"><img src="image/NAVER_LOGO.png"
-                        class="image"></a>
-            </div>
-        </header>
 
         <!--회원가입 부분-->
         <section class="signup-wrap">

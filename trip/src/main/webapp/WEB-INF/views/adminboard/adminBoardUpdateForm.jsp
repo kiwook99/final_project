@@ -23,7 +23,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"> 
 
 	$(document).ready(function(){
 		//  취소
@@ -65,7 +65,6 @@
         td {
             border: 1px solid black;
             padding: 10px;
-            text-align: left;
         }
         
          /* 텍스트 박스 스타일 */
@@ -84,6 +83,7 @@
 	        max-width: 100%; /* 이미지가 부모 요소를 넘어가지 않도록 최대 너비 설정 */
 	        height: auto; /* 높이는 자동으로 조절 */
 	        display: block; /* 인라인 요소에서 블록 요소로 변환하여 가로로 정렬 */
+	        margin: auto;
 	    }
 
         button {
@@ -117,8 +117,11 @@
 <form name="adBoardUpdate" id="adBoardUpdate">
 <table>
 <tr>
-<td colspan="2" align="center" style="color:blue;">공지사항 수정하기</td>
+<td colspan="2" align="center" style="color:white; background-color:#0aa4b5;">공지사항 수정하기</td>
 </tr>
+
+<input type="hidden" class="mem" name="adboardnum" id="adboardnum" value="<%= _abvo.getAdboardnum() %>"/>
+
 <tr>
 <td>제목</td>
 <td>
@@ -129,7 +132,7 @@
 <tr>
 <td>작성자</td>
 <td><input type="text" class="mem" name="memnum" id="memnum" value="<%=  _abvo.getMemnum() %>" 
-			style="width:300px; height:30px; font-size:16px;" readonly/></td>
+			style="width:100%; height:30px; font-size:16px;" readonly/></td>
 </tr>
 <tr>
 <td>내용</td>
@@ -167,5 +170,6 @@
 </tr>
 </table>
 </form>
+<br><br><br>
 </body>
 </html>

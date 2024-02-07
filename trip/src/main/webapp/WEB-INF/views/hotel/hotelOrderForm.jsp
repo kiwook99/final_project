@@ -83,24 +83,38 @@
 	    font-weight: 800;
 	    text-align: center;
 	}
+    
+	.sub-header{
+	border-bottom: 2px solid #000;
+	padding: 10px 0 0;
+    height: auto;
+    margin-left: 100px;
+    margin-right: 100px;
+	}    
      
 </style>
 </head>
 <body>
 <%@ include file="/main.jsp" %>
-
+<div class=sub-header>
 <h3 class="sub-title">예약하기</h3>
+
 <hr>
 
-<form name="orderForm" id="orderForm">
+<form name="orderForm" id="orderForm" style="margin-top: 10px;">
+
+</div>
+<br><br>
+
 <table border="1" align="center">
 <tr>
-<td colspan="4" align="center">					
-	<font size="4" style="color:blue;">숙소 예약하기</font> 
+
+<td colspan="4" align="center" style="color:white; background-color:#0aa4b5;">					
+	<font size="4">숙소 예약하기</font> 
 </td>
 </tr>
 <tr>
-	<th class="mem">예약자명</th>
+	<th class="mem" style="width:100px;">예약자명</th>
 	<td class="mem" id="memid"><%= memid %></td>
 </tr>
 <tr>
