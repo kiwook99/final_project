@@ -7,21 +7,16 @@
   
 <% request.setCharacterEncoding("UTF-8"); %>    
 <%
-
-	//세션에서 값을 가져오기
-	//String memid = (String) session.getAttribute("memid");
 	
+	String hotelnum = request.getParameter("hotelnum");
 	String hotelname = request.getParameter("hotelname");
 	String hotelprice = request.getParameter("hotelprice");
 	String hotelcheckin = request.getParameter("hotelcheckin");
 	String hotelcheckout = request.getParameter("hotelcheckout");
-	String shotelprice = NumUtil.comma_replace(hotelprice);
+	String totalhotelprice = NumUtil.comma_replace(hotelprice);
 	
 	Object obj = request.getAttribute("orderList");
 
-	List<HotelVO> orderList = (List<HotelVO>) obj;
-
-	HotelVO hvo = (orderList != null && orderList.size() > 0) ? orderList.get(0) : new HotelVO();
 %>
 
 <!DOCTYPE html>
@@ -61,7 +56,7 @@
         text-align: center;
     }
 
-    button {
+    button, .pay input {
         padding: 10px 20px;
         background-color: #0aa4b5;
         color: white;
@@ -137,12 +132,12 @@
 </tr> 
 <tr>
 <td class="mem">결제금액</td>
-<td colspan="3"><%= shotelprice %>원</td>
+<td colspan="3"><%= totalhotelprice %>원</td>
 </tr>
 <tr>
-	<td colspan="4" align="center"> 			
+	<td colspan="4" align="center" class="pay"> 			
 		<button type="button" id="cardBtn">결제하기</button>
-		<button type="reset">다시하기</button>	
+		<a href="hotelSelect?hotelnum=<%= hotelnum %>"> <input type="button" id="backBtn" value="돌아가기"></a>
 	</td>				
 </tr>
 </table>				 		        		     
@@ -170,6 +165,8 @@
 				}
 			}); 
 		}); 	
+		
+		
 
 		
 		$(document).on('click', '#cardBtn', function(){
