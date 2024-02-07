@@ -51,3 +51,4 @@ public abstract class PasswordUtil {
 		System.out.println("random >>> : " + s2);
 	}
 }
+

@@ -20,13 +20,16 @@
 				'enctype':'multipart/form-data'
 			}).submit();
 		});
+		
+		$(document).on("click", "#abCBtn", function(e){
+			location.href="adminBoardSelectAll";
+		});
 	});	
 
 </script>
 <style type="text/css">
-        h3 {
-        	font-size: 2em; /* 텍스트 크기 조절 */
-        	margin-top: 10px; /* 위로 조금 올리기 */
+
+        h2 {
             text-align: center;
         }
 
@@ -53,55 +56,66 @@
             padding: 8px;
         }
 
-        input[type="button"] {
+         #abIBtn {
           
-            padding: 5px 15px;
+            padding: 10px 30px;
             background-color: #0aa4b5;
             color: white;
             border: 0;
             border-radius: 10px;
             cursor: pointer;
         }
+        
+        #abIBtn:hover {
+        	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
+        }
+
+
+
 
     </style>
 
 </head>
 <body>
 <%@ include file="/main.jsp" %>
-
-<h3>공지사항 글쓰기</h3>
-<hr>
+		<br>
+		<hr>
+		<br>
+		<h2> 공지사항 글쓰기 </h2>
+		<br>
+		<hr>
+		<br>	
 <form name="abInsert" id="abInsert">
 	<table>
 	    <tr>
-	        <td colspan="2" align="center"></td>
+	        <th>글번호</th>
+	        <td><input type="text" name="adboardnum" id="adboardnum" size="20" placeholder="자동으로 들어갑니다."  readonly></td>
 	    </tr>
 	    <tr>
-	        <td>글번호</td>
-	        <td><input type="text" name="adboardnum" id="adboardnum" size="20" readonly></td>
-	    </tr>
-	    <tr>
-	        <td>작성자</td>
+	        <th>작성자</th>
 	        <td><input type="text" name="memnum" id="memnum" size="20"></td>
 	    </tr>	    
 	    <tr>
-	        <td>제목</td>
+	        <th>제목</th>
 	        <td><input type="text" name="adboardtitle" id="adboardtitle" size="53"></td>
 	    </tr>
 	    <tr>
-	        <td>내용</td>
+	        <th>내용</th>
 	        <td><textarea name="adboardcoment" id="adboardcoment" cols="50" rows="10"></textarea></td>
 	    </tr>
 	    <tr>
-	        <td>이미지</td>
+	        <th>이미지</th>
 	        <td><input type="file" name="adboardimage" id="adboardimage"></td>
 	    </tr>
 	    <tr>
 	        <td colspan="2" align="right">
 	            <input type="button" value="등록" id="abIBtn">
+	            <input type="button" value="취소" id="abCBtn">
 	        </td>
 	    </tr>
   	</table>
 </form>
+<br><br><br>
 </body>
 </html>

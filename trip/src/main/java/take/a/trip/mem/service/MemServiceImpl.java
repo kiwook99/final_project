@@ -36,5 +36,13 @@ public class MemServiceImpl implements MemService {
     public int memPwSearch(MemVO mvo) {
     	return memDAO.memPwSearch(mvo);
     }
+
+    
+    @Override
+	public List<MemVO> idCheck(MemVO mvo){
+		
+		return memDAO.idCheck(mvo);
+	}
+
     
 }

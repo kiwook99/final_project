@@ -64,6 +64,7 @@
 	
 	a:link, a:visited, a:focus, a:active {
 	    text-decoration: none;
+	    color: black;
 	}	/* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
 	
 					
@@ -280,6 +281,12 @@
     border-radius: 10px;
 	}
 	
+	
+	#addressCheckBtn:hover, #hotelupdateBtn:hover, #hotelback:hover {
+	 background-color: #0bc5da;
+	 transition-duration: 0.5s;
+     }	
+	
 	</style>
 	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d8e532a4251bcd6e33a49bd260de47d3&libraries=services"></script>
 	<script type="text/javascript">
@@ -416,7 +423,7 @@
 </script>
 </head>
 <body>
-
+<%@ include file="/main.jsp"%>
 
 <div class="sub-header">
 			<h3 class="sub-title">정보 수정  </h3>

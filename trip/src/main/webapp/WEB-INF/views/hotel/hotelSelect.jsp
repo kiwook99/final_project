@@ -69,6 +69,7 @@
 		
 		a:link, a:visited, a:focus, a:active {
 		    text-decoration: none;
+		    color: black;
 		}	/* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
 		
 						
@@ -307,6 +308,12 @@
 	border-radius: 10px;
     cursor: pointer;
 	}
+	
+	#cardBtn:hover, #update-link:hover, #delete-link:hover {
+	 background-color: #0bc5da;
+	 transition-duration: 0.5s;
+     }
+
 	
 	</style>
 		

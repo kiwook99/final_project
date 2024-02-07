@@ -28,7 +28,6 @@
 	
 	Object objAdmin = request.getAttribute("adminyn");
 	List<HotelVO> list = (List<HotelVO>)obj;
-	int nCnt = list.size();
 	
 
 %>
@@ -154,6 +153,12 @@
 	}
 	
 	h2{text-align: center;}
+	
+	
+    #hotelInsertForm:hover, #search_btn:hover {
+      	 background-color: #0bc5da;
+		 transition-duration: 0.5s;
+      }
 		</style>
 		
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -196,61 +201,71 @@
 		
 		<% if ("Y".equals(objAdmin)) { %>
 		<div class="hotelinsert">
-			   <span><h3><a href="hotelInsertForm">숙소등록</a></h3></span></div>
+			   <span><h3><a href="hotelInsertForm" id="hotelInsertForm">숙소등록</a></h3></span></div>
 		<% } %>		
 		<br><br>
 		<div class="main">
-			<div class="contents">
-				<div class="list_content">
-						<ul id="hotelList">
-							<%
-								for(int i=0; i<nCnt; i++){
-									HotelVO hvo = list.get(i);
-									
-									//  페이징 세팅
-									pageSize = Integer.parseInt(pagingHVO.getPageSize());
-									groupSize = Integer.parseInt(pagingHVO.getGroupSize());
-									curPage = Integer.parseInt(pagingHVO.getCurPage());
-									totalCount = Integer.parseInt(hvo.getTotalCount());
-							%>	
-						<li>
-							
-							<!-- 숙박시설 -->
-							<a href="hotelSelect?hotelnum=<%= hvo.getHotelnum() %>">
-							<span class="img">
-					            <%-- 이미지 소스가 URL인지 확인 --%>
-					            <% if (hvo.getHotelimage().startsWith("http") || hvo.getHotelimage().startsWith("https")) { %>
-					                <img src="<%= hvo.getHotelimage().indexOf(",") >= 0 ? hvo.getHotelimage().substring(0, hvo.getHotelimage().indexOf(",")) : hvo.getHotelimage() %>">
-					            <% } else { %>
-					                <%-- 이미지가 파일이라면 파일을 표시할 수 있는 태그로 수정 --%>
-					                <img src="${pageContext.request.contextPath}/resources/fileupload/hotel/<%= hvo.getHotelimage() %>">
-					            <% } %>
-					        </span>
-							<span class="regionarea">
-								<%= hvo.getRegionid() %>
-							</span>
-							</span>
-							<div class="name">
-								 <strong><%= hvo.getHotelname().replaceAll("\"", "") %></strong>
-							</div>
-							</a>
-							<%
-								}
-							%>
-						</li>
-					</ul>
-					<div>
-						<jsp:include page="hotelPaging.jsp" flush="true">
-							<jsp:param name="url" value="hotel_main"/>
-							<jsp:param name="str" value=""/>
-							<jsp:param name="pageSize" value="<%=pageSize%>"/>
-							<jsp:param name="groupSize" value="<%=groupSize%>"/>
-							<jsp:param name="curPage" value="<%=curPage%>"/>
-							<jsp:param name="totalCount" value="<%=totalCount%>"/>
-						</jsp:include>
-					</div>
-				</div>
-			</div>
-		</div>
+    <div class="contents">
+        <div class="list_content">
+            <ul id="hotelList">
+                <%
+                    if ( list != null) {
+                    	
+                    	int nCnt = list.size();
+                    	
+                        for (int i = 0; i < nCnt; i++) {
+                            HotelVO hvo = list.get(i);
+
+                            //  페이징 세팅
+                            pageSize = Integer.parseInt(pagingHVO.getPageSize());
+                            groupSize = Integer.parseInt(pagingHVO.getGroupSize());
+                            curPage = Integer.parseInt(pagingHVO.getCurPage());
+                            totalCount = Integer.parseInt(hvo.getTotalCount());
+                %>
+                <li>
+                    <!-- 숙박시설 -->
+                    <a href="hotelSelect?hotelnum=<%= hvo.getHotelnum() %>">
+                        <span class="img">
+                            <%-- 이미지 소스가 URL인지 확인 --%>
+                            <% if (hvo.getHotelimage().startsWith("http") || hvo.getHotelimage().startsWith("https")) { %>
+                                <img src="<%= hvo.getHotelimage().indexOf(",") >= 0 ? hvo.getHotelimage().substring(0, hvo.getHotelimage().indexOf(",")) : hvo.getHotelimage() %>">
+                            <% } else { %>
+                                <%-- 이미지가 파일이라면 파일을 표시할 수 있는 태그로 수정 --%>
+                                <img src="${pageContext.request.contextPath}/resources/fileupload/hotel/<%= hvo.getHotelimage() %>">
+                            <% } %>
+                        </span>
+                        <span class="regionarea">
+                            <%= hvo.getRegionid() %>
+                        </span>
+                        <div class="name">
+                            <strong><%= hvo.getHotelname().replaceAll("\"", "") %></strong>
+                        </div>
+                    </a>
+                </li>
+                <%
+                    }
+                %>
+            </ul>
+            <div>
+                <jsp:include page="hotelPaging.jsp" flush="true">
+                    <jsp:param name="url" value="hotel_main" />
+                    <jsp:param name="str" value="" />
+                    <jsp:param name="pageSize" value="<%=pageSize%>" />
+                    <jsp:param name="groupSize" value="<%=groupSize%>" />
+                    <jsp:param name="curPage" value="<%=curPage%>" />
+                    <jsp:param name="totalCount" value="<%=totalCount%>" />
+                </jsp:include>
+                <%
+                 } else {
+                    // 데이터가 없을 때의 처리
+                    %>
+                    <li class="empty" style="text-align: center;">검색 결과값이 없습니다.</li>
+                    <%
+                }
+                %>
+            </div>
+        </div>
+    </div>
+</div>
 	</body>
 </html>

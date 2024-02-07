@@ -258,5 +258,26 @@ public class MemController {
     	 
     	return "mem/callback";
     }
+
+
+	
+	//아이디중복체크
+		@PostMapping("mem/idCheck")
+		@ResponseBody
+		public Object idCheck(MemVO mvo) {
+			logger.info("idCheck 함수 진입 >>> :");		
+			logger.info("idCheck ovo.getmid()() >>> : " + mvo.getMemid());
+			
+			List<MemVO> list = memService.idCheck(mvo);
+			logger.info("idCheck list.size() >>> :" + list.size());
+			
+			String msg = "";
+			if(list.size() == 0) {msg = "ID_YES";}
+			else { msg = "ID_NO";}
+			
+			return msg;
+		}
+
+
 		
 }
