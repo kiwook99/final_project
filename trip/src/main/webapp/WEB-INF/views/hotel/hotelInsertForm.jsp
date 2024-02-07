@@ -8,16 +8,33 @@
 		<style type="text/css">
 			table {
 				margin: 0 auto;
+				border-radius: 5px;
 			}
 			
-			h3 {
+			h2 {
 				text-align: center;
 			}
 			
 			.tt {
 				text-align: center;
 			}
-
+		
+			
+			#hotelinsertBtn {
+				padding: 7px 20px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+			}
+			
+			#addressCheckBtn {
+				padding: 6px 10px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+			}
 
 		</style>
 		
@@ -73,15 +90,20 @@
     </script>	
 	</head>
 	<body>
-		<h3> 숙소 등록</h3>
+	<%@ include file="/main.jsp" %>
+		<br>
+		<hr>
+		<br>
+		<h2> 숙소 등록 </h2>
+		<br>
 		<hr>
 		<br>	
 			<form name="hotelInsertForm" id="hotelInsertForm">
 				<table border="1">
 					<tr>
-						<td class="tt"> 숙소 이름 </td>
+						<td class="tt" style="height:30px; width:120px;"> 숙소 이름 </td>
 						<td>
-							<input type="text" name="hotelname" id="hotelname">
+							<input type="text" name="hotelname" id="hotelname" size="50">
 						</td>					
 						<td class="tt" rowspan="9" width="300px;">
 							     
@@ -103,56 +125,57 @@
 						</td>								
 					</tr>
 					<tr>
-						<td class="tt"> 숙소 번호 </td>
+						<td class="tt" style="height:30px;"> 숙소 번호 </td>
 						<td>
-							<input type="text" name="hoteltel" id="hoteltel" size="40">
+							<input type="text" name="hoteltel" id="hoteltel" size="50">
 						</td>
 					</tr>
 					<tr>
-						<td class="tt"> 1박 요금 </td>
+						<td class="tt" style="height:30px;"> 1박 요금 </td>
 						<td>
-							<input type="text" name="hotelprice" id="hotelprice" size="30">
+							<input type="text" name="hotelprice" id="hotelprice" size="50">
 						</td>
 					</tr>	
 					<tr>
 						<td class="tt"> 숙소 소개 </td>
 						<td>
-							<textarea name="hotelcoment" id="hotelcoment" cols="42" rows="20"></textarea>
+							<textarea name="hotelcoment" id="hotelcoment" cols="53" rows="20"></textarea>
 						</td>
 					</tr>			
 					<tr>
-						<td class="tt"> 숙소 지역 </td>
+						<td class="tt" style="height:30px;"> 숙소 지역 </td>
 						<td>
-							<input type="text" name="regionid" id="regionid" size="30">
+							<input type="text" name="regionid" id="regionid" size="50">
 						</td>
 					</tr>	
 					<tr>
-						<td class="tt"> 숙소 주소 </td>
+						<td class="tt" height= "40px"> 숙소 주소 </td>
 						<td>
-							<input type="text" name="hoteladress" id="hoteladress" size="40">
-							<button id="addressCheckBtn">좌표값 생성</button>
+							<input type="text" name="hoteladress" id="hoteladress" size="40" style="height:25px">
+							&nbsp;
+							<button id="addressCheckBtn">좌표값 생성</button> &nbsp;&nbsp;
 						</td>
 					</tr>
 					<tr>
-						<td class="tt"> 체크인 시간 </td>
+						<td class="tt" style="height:30px;"> 체크인 시간 </td>
 						<td>
-							<input type="text" name="hotelcheckin" id="hotelcheckin" size="40">
+							<input type="text" name="hotelcheckin" id="hotelcheckin" size="50">
 						</td>
 					</tr>
 					<tr>
-						<td class="tt"> 체크아웃 시간 </td>
+						<td class="tt" style="height:30px;"> 체크아웃 시간 </td>
 						<td>
-							<input type="text" name="hotelcheckout" id="hotelcheckout" size="40">
+							<input type="text" name="hotelcheckout" id="hotelcheckout" size="50">
 						</td>
 					</tr>
 					<tr>	
-						<td class="tt"> 이미지 업로드 </td>
+						<td class="tt" style="height:40px;"> 이미지 업로드 </td>
 						<td>												   
 							<input type="file" name="hotelimage" id="hotelimage">
 						</td>
 					</tr>					
 					<tr>
-						<td colspan="2" align="center">
+						<td colspan="2" align="center" style="height:50px;">
 							<input type="submit" value="여행지 등록" id="hotelinsertBtn" >
 						</td>
 					</tr>																				
@@ -160,5 +183,6 @@
 				<input type="hidden" name="hotelmapx" id="hotelmapx" value="">
 				<input type="hidden" name="hotelmapy" id="hotelmapy" value="">
 			</form>
+			<br><br><br><br><br>			
 	</body>
 </html>
