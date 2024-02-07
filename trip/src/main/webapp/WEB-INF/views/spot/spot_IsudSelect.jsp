@@ -65,6 +65,12 @@
 			}
 			
 			
+			#U:hover, #B:hover {
+        	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
+			}
+			
+			
 			.btn {
 				text-align: center;
 			}	
