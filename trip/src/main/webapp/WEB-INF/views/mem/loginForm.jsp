@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-			#loginbtn, #insertbtn, #idbtn, #pwbtn {
+			#loginbtn, #insertbtn, #searchbtn {
 				padding: 10px 20px;
 				background-color: #0aa4b5;
 				color: white;
@@ -47,38 +47,42 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="button" id="idbtn" value="아이디 찾기">
-					<input type="button" id="pwbtn" value="비밀번호 찾기">
+					<input type="button" id="searchbtn" value="아이디 /비밀번호찾기">
 				</td>
 			</tr>
-		</table>
-		<table border = "1"  id="signApi">
-			<tr>
-				<td>
+			<tr >
+				<td colspan="2">
+					  <div id="naver_id_login"></div>
+					  <!-- //네이버 로그인 버튼 노출 영역 -->
+				</td>
+			</tr>
+			<tr >
+				<td colspan="2">
 					<a href="javascript:kakaoLoginApi()">
-						<img height="30" width="208" src="/trip/resources/images/kakao.png"/>
-					</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="#">
-						<img height="30" width="208" src="/trip/resources/images/naver.png"/>
+						<img height="30" width="200" src="/trip/resources/images/kakao.png"/>
 					</a>
 				</td>
 			</tr>
 		</table>
 	</form>
-	<!-- 카카오 로그인 api  -->
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript">
-				//카카오 로그인 ===================================================================================
-				window.Kakao.init('a9ebba1056f14cfd5ef8692b0b89f172'); // 사용하려는 앱의 JavaScript 키 입력
 				
+				
+				// 네이버 로그인			
+			  	var naver_id_login = new naver_id_login("__6vC6oTd4e9fRwVGDSd", "http://localhost:8088/trip/mem/callback");
+			  	var state = naver_id_login.getUniqState();
+			  	naver_id_login.setButton("white", 2,40);
+			  	naver_id_login.setDomain("http://localhost:8088/trip/");
+			  	naver_id_login.setState(state);
+			  	//naver_id_login.setPopup();
+			  	naver_id_login.init_naver_id_login();
+
+				//카카오 로그인
 				function kakaoLoginApi() {
-					alert("kakaoLoginApi >>> : ");
-					
+					window.Kakao.init('a9ebba1056f14cfd5ef8692b0b89f172'); // 사용하려는 앱의 JavaScript 키 입력
 					window.Kakao.Auth.login({
 
 						success: function(authObj){
@@ -124,7 +128,6 @@
 		        	});
 
 				}
-				//카카오 로그인 ===================================================================================
 
 				$(document).ready(function(){
 					console.log("document.ready >>> : ");
@@ -139,25 +142,16 @@
 						}).submit();
 					});
 					
+					//회원가입 버튼
 					$(document).on("click","#insertbtn",function(){
 						location.href = "insertForm"
 					});
 					
-					// 아이디 찾기 버튼
-					$(document).on("click","#idbtn",function(){
+					// 아이디/비밀번호 찾기 버튼
+					$(document).on("click","#searchbtn",function(){
 						location.href = "idSearchForm"
 					});
-					
-					// 비밀번호 찾기 버튼
-					$(document).on("click","#pwbtn",function(){
-						location.href = "#"
-					});
-					
-					$(document).on("click","#kakaobtn",function(){
-						Kakao.Auth.authorize();
-					});
-					
 				});	
-			</script>
+	</script>
 </body>
 </html>

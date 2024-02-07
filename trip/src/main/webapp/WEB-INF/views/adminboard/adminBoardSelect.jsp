@@ -149,6 +149,7 @@
 <tr>
 
 <th>사진</th>
+
 <td class="tt"> 
 <img src="${pageContext.request.contextPath}/resources/fileupload/adminboard/<%= _abvo.getAdboardimage() %>" 
 		border="1" width="300" height="200" alt="image" >

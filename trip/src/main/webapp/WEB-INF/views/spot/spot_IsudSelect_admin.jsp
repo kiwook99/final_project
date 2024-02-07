@@ -153,6 +153,13 @@
 							<hr>
 						</td>
 					</tr>
+						<tr>
+						<td class="tt" height="40px"> 지역 <hr></td>
+						<td class="tt">
+						<input type="text" name="tripregion" id="tripregion" value="<%= svo.getTripregion() %>" size="40">						
+							<hr>
+						</td>
+					</tr>	
 					<tr>
 						<td class="tt" height="40px"> 소개 </td>
 						<td class="tt">
@@ -160,13 +167,7 @@
 							<hr>
 						</td>
 					</tr>	
-					<tr>
-						<td class="tt" height="40px"> 지역 <hr></td>
-						<td class="tt">
-						<input type="text" name="tripregion" id="tripregion" value="<%= svo.getTripregion() %>" size="40">						
-							<hr>
-						</td>
-					</tr>	
+			
 				<tr>
 					<td colspan="3">
 
