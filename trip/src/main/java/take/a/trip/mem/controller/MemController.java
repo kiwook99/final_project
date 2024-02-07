@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import take.a.trip.mem.common.GooglePwMail;
 import take.a.trip.mem.common.PasswordUtil;
@@ -110,14 +111,36 @@ public class MemController {
             }
             String path = request.getContextPath();
             // 요청 성공 시 이동할 페이지 반환
-            return "/mem/loginForm";
+            return "mem/loginForm";
         } catch (Exception e) {
             e.printStackTrace();
             // 오류 응답 생성
             return "error";
         }
     }
-
+	
+		// 네이버 로그인
+		@PostMapping("mem/naverLogin")
+		public String neverLogin(@RequestParam("memid") String memid, HttpServletRequest request) {
+			logger.info("UserController naverLogin 진입 >>> : ");		
+			try {
+	            HttpSession session = request.getSession();
+	            session.setAttribute("memid", memid);
+	            String adminyn = "N";
+	            String msg = "";
+	            // Redis에 데이터 저장
+	            try (Jedis jedis = jedisPool.getResource()) {
+	                jedis.set(session.getId(), adminyn);
+	                jedis.expire(session.getId(), 3600 * 24);
+	            }
+	            // 요청 성공 시 이동할 페이지 반환
+	            return "redirect:/spot/spot_IsudSelectAll";
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            // 오류 응답 생성
+	            return "error";
+	    }
+	}
 	
 	// 회원가입 폼
     @GetMapping("mem/insertForm")
@@ -228,6 +251,12 @@ public class MemController {
 		
 		return "redirect:/spot/spot_IsudSelectAll";
 	}
-
+	
+	//네이버 로그인 콜백함수
+    @GetMapping("mem/callback")
+    public String callback() {
+    	 
+    	return "mem/callback";
+    }
 		
 }
