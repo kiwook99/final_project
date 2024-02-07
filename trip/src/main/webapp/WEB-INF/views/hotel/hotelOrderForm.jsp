@@ -191,9 +191,6 @@
 			}); 
 		}); 	
 		
-		
-
-		
 		$(document).on('click', '#cardBtn', function(){
 			
 			//가맹점 식별코드
