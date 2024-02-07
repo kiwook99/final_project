@@ -85,7 +85,7 @@
 		    display: inline-block;
 		}
 		
-		.img img {
+		.imgs img {
 	        max-width: 100%; /* 이미지가 부모 요소를 넘어가지 않도록 최대 너비 설정 */
 	        height: auto; /* 높이는 자동으로 조절 */
 	        display: block; /* 인라인 요소에서 블록 요소로 변환하여 가로로 정렬 */
@@ -139,7 +139,7 @@
 </tr>
 <tr>
 <td>사진</td>
-<td class="img"> 
+<td class="imgs"> 
 <img src="${pageContext.request.contextPath}/resources/fileupload/adminboard/<%= _abvo.getAdboardimage() %>" 
 		border="1" width="300" height="200" alt="image">
 </td>
