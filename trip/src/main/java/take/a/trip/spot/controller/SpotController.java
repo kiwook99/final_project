@@ -121,7 +121,7 @@ public class SpotController {
 	
 	
 	// 전체조회(ISUD)
-	@GetMapping("spot/spot_IsudSelectAll")
+	@GetMapping("/spot/spot_IsudSelectAll")
 	public String spot_IsudSelectAll(SpotVO svo, Model model, HttpServletRequest req) {
 		logger.info("SpotController spot_IsudSelectAll 진입 >>> : ");
 
