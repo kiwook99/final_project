@@ -19,6 +19,11 @@
 				font-size: 15px;
 			}
 			
+			#loginbtn:hover, #insertbtn:hover, #searchbtn:hover{
+					background-color: #0bc5da;
+					 transition-duration: 0.5s;
+		        }
+			
 			#sign {
 			
 				width: 400px;

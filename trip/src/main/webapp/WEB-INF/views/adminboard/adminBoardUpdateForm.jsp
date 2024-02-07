@@ -100,6 +100,12 @@
         .right button {
 		    margin-right: 10px;
 		}
+		
+		
+        button:hover {
+        	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
+        }
 
     </style>
     <!-- 폰트 어썸 CDN -->
