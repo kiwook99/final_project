@@ -45,7 +45,7 @@ public class MemController {
 	// 로그인 폼
 	@GetMapping("mem/loginForm")
 	public String loginForm(Model model, HttpServletRequest request) {
-		logger.info("UserController loginForm 진입 >>> : ");
+		logger.info("MemController loginForm 진입 >>> : ");
 	
 		
 		return "mem/loginForm";
@@ -54,7 +54,7 @@ public class MemController {
 	// 로그인
 	@PostMapping("mem/login")
 	public String login(Model model, MemVO mvo, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		logger.info("UserController login 진입 >>> : ");
+		logger.info("MemController login 진입 >>> : ");
 		
 		HttpSession session = request.getSession();	// HttpServletRequest에서 세션을 가져오거나 새로 생성
 		String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
