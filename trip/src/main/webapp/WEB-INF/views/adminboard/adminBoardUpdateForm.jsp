@@ -150,8 +150,14 @@
 <tr>
 <td>사진</td>
 <td class="imgs"> 
-<img src="${pageContext.request.contextPath}/resources/fileupload/adminboard/<%= _abvo.getAdboardimage() %>" 
-			border="1" width="300" height="200" alt="image">
+<% if (_abvo.getAdboardimage().startsWith("http")) { %>
+   <img src="${pageContext.request.contextPath}/resources/images/<%= _abvo.getAdboardimage() %>" 
+        border="1" width="300" height="200" alt="image" >
+<% } else { %>
+   <img src="${pageContext.request.contextPath}/resources/fileupload/adminboard/<%= _abvo.getAdboardimage() %>" 
+        border="1" width="300" height="200" alt="image" >
+<% } %>
+
 </td>
 </tr>
 <tr>

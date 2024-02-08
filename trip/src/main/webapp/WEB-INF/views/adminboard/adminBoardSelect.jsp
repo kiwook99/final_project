@@ -151,8 +151,8 @@
 <%= _abvo.getAdboardcoment() %>					
 </td>
 </tr>
-<tr> 
 
+<tr> 
 <th>사진</th>
 <td class="tt"> 
 <% if (_abvo.getAdboardimage().startsWith("http")) { %>
@@ -164,20 +164,18 @@
 <% } %>
 </td>
 </tr>
+
 <tr>
 <th>등록일</th>
 <td class="tt" style="width:100px; height:30px;">
 <%= _abvo.getInsertdate() %>		      
 </td>
-</tr>	 
-<tr>
-<th>수정일</th>
-<td class="tt" style="width:100px; height:30px;"> 
-<%= _abvo.getUpdatedate() %> 		
+</tr>	
+ 
 <input type="hidden" class="mem" name="adboardnum" id="adboardnum" value="<%= _abvo.getAdboardnum() %>"/>
-<input type="hidden" class="mem" name="memnum" id="memnum" value="<%=  _abvo.getMemnum() %>"/>		      
-</td>
-</tr>
+<input type="hidden" class="mem" name="memnum" id="memnum" value="<%=  _abvo.getMemnum() %>"/>
+<input type="hidden" class="tt" name="updatedate" id="updatedate" value="<%=  _abvo.getUpdatedate() %>"/>	      
+
 <% if ("Y".equals(objAdmin)) { %>
 
 <tr>
