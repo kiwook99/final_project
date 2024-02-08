@@ -327,34 +327,7 @@
 			        </li>
 			    </ul>
 			</div>
-				<div class="topnav">
-					<!-- 메뉴 -->
-					 <ul class="menu">
-						 <li class="topMenuLi">
-						 <a class="menuLink" href="<%= request.getContextPath() %>/spot/spot">여행정보</a>
-						 <hr>
-						 	 <ul class ="sb">
-								  <li><a href="<%= request.getContextPath() %>/spot/spot" class="submenuLink" >관광정보</a></li>
-								  <li><a href="<%= request.getContextPath() %>/spot/spot_IsudSelectAll" class="submenuLink" >관광정보(ISUD)</a></li>
-						  	</ul>
-						 </li>							  
-						 <li class="topMenuLi">
-						 <a class="menuLink" href="<%= request.getContextPath() %>/hotel/hotel_main">숙소예약</a>
-						 <hr>
-						 	<ul class ="sb"> 
-								 <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink" >숙소정보</a></li>
-								 <li> <a class="menuLink" href="<%= request.getContextPath() %>/hotel/hotelReview">숙소리뷰</a></li>
-						 	</ul>
-						 </li>
-						 <li class="topMenuLi">
-						 <a class="menuLink" href="#content3">게시판</a>
-						 	<ul class ="sb"> 
-								 <li><a href="#" class="submenuLink" >자유 게시판</a></li>
-								 <li><a href="<%= request.getContextPath() %>/adminboard/adminBoardSelectAll" class="submenuLink" >공지사항 게시판</a></li>
-						 	</ul>
-						 </li>				 
-					 </ul> 
-			</div>	
+				
 
 		<!-- top 아이콘 -->
 		<div style="position:fixed; bottom: 20px; right:25px;">
