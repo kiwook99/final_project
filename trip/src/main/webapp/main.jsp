@@ -106,13 +106,16 @@
 			  width: 100%;
 			  overflow: hidden;
 			  margin: 0 auto;
+			  margin-left: 5px;
+			  font-size: 25px;
 			}
 			
 			.menu > li {
-			  width: 100%;
+			  width: 33%;
 			  text-align: center;
 			  line-height: 40px;
 			  background-color: #0aa4b5;
+		      vertical-align: text-top;
 			} 
 
 			 
@@ -167,8 +170,14 @@
 				border: 0;
 				border-radius: 10px;
 				font-size: 15px;
-				margin-top: -65px; 
+				margin-top: -55px; 
 				float: right;
+			}
+			
+			.loginBtn p {
+				font-size: 30px;
+			    margin-right: 125px;
+   				margin-top: -90px;
 			}
 			
 			.logo {
@@ -230,6 +239,43 @@
 			  font-size: 85px;
 			}
 
+
+
+			
+			.menuLink {
+		        display: block;
+		        text-decoration: none;
+		        padding: 8px;
+	        	position: relative;
+		    }
+		
+		    .topMenuLi {
+		        display: inline-block;
+		        position: relative;
+				font-family: 'East Sea Dokdo', sans-serif;
+		    }
+		
+
+		    .topMenuLi:hover .sb {
+		        display: block;
+		    }
+		    
+		    .sb {
+		     	display: table-column;
+		        position: relative;
+			    top: 100%; /* Adjust this value as needed to control the vertical spacing */
+			    left: 0;
+			    background-color: #fff; /* Optional: Background color for the submenu */
+			    border: 1px solid #ccc; /* Optional: Border for the submenu */
+			    text-align-last: center;
+			}
+
+			.loginBtn p, .loginBtn input {
+			  display: inline-block;
+			  vertical-align: middle;
+			}
+		
+
 		</style>
 </head>
 <body>
@@ -265,33 +311,35 @@
 		<br>
 		 
 			<div class="topnav">
-					<!-- 메뉴 -->
-					 <ul class="menu">
-						 <li class="topMenuLi">
-						 <a class="menuLink" href="<%= request.getContextPath() %>/spot/spot">여행정보</a>
-						 <hr>
-						 	 <ul class ="sb">
-								  <li><a href="<%= request.getContextPath() %>/spot/spot" class="submenuLink" >관광정보</a></li>
-								  <li><a href="<%= request.getContextPath() %>/spot/spot_IsudSelectAll" class="submenuLink" >관광정보(ISUD)</a></li>
-						  	</ul>
-						 </li>							  
-						 <li class="topMenuLi">
-						 <a class="menuLink" href="<%= request.getContextPath() %>/hotel/hotel_main">숙소예약</a>
-						 <hr>
-						 	<ul class ="sb"> 
-								 <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink" >숙소정보</a></li>
-								 <li> <a class="menuLink" href="<%= request.getContextPath() %>/hotel/hotelReview">숙소리뷰</a></li>
-						 	</ul>
-						 </li>
-						 <li class="topMenuLi">
-						 <a class="menuLink" href="#content3">게시판</a>
-						 	<ul class ="sb"> 
-								 <li><a href="#" class="submenuLink" >자유 게시판</a></li>
-								 <li><a href="<%= request.getContextPath() %>/adminboard/adminBoardSelectAll" class="submenuLink" >공지사항 게시판</a></li>
-						 	</ul>
-						 </li>				 
-					 </ul> 
-			</div>	
+
+			    <!-- 메뉴 -->
+			    <ul class="menu">
+			        <li class="topMenuLi">
+			            <a class="menuLink" href="<%= request.getContextPath() %>/spot/spot">여행정보</a>
+			            <ul class="sb">
+			                <li><a href="<%= request.getContextPath() %>/spot/spot" class="submenuLink">관광정보</a></li>
+			                <li><a href="<%= request.getContextPath() %>/spot/spot_IsudSelectAll" class="submenuLink">관광정보(ISUD)</a></li>
+			            </ul>
+			        </li>
+			
+			        <li class="topMenuLi">
+			            <a class="menuLink" href="<%= request.getContextPath() %>/hotel/hotel_main">숙소예약</a>
+			            <ul class="sb">
+			                <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink">숙소정보</a></li>
+			            </ul>
+			        </li>
+			
+			        <li class="topMenuLi">
+			            <a class="menuLink" href="#content3">게시판</a>
+			            <ul class="sb">
+			                <li><a href="#" class="submenuLink">자유 게시판</a></li>
+			                <li><a href="<%= request.getContextPath() %>/adminboard/adminBoardSelectAll" class="submenuLink">공지사항 게시판</a></li>
+			            </ul>
+			        </li>
+			    </ul>
+			</div>
+				
+
 		<!-- top 아이콘 -->
 		<div style="position:fixed; bottom: 20px; right:25px;">
 			<a href="#"><img src="${pageContext.request.contextPath}/resources/images/img/topbutton.png" width="50" height="50" title="상단으로"></a>
