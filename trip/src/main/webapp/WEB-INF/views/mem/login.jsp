@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	로그인성공
+	<script>
+	alert("로그인 성공");
+	location.href="spot/spot_IsudSelectAll";
+	</script>
 </body>
 </html>

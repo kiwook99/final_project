@@ -26,6 +26,27 @@
        	   float: right; /* 오른쪽으로 이동 */
         }
         
+        th {
+        text-align: center;
+        }
+        
+        
+        #idCheck, #pwCheck {
+     		padding: 5px 25px;
+			background-color: #0aa4b5;
+			color: white;
+			border: 0;
+			border-radius: 10px;
+        }
+        
+         #inBtn, #caBtn {
+     		padding: 10px 30px;
+			background-color: #0aa4b5;
+			color: white;
+			border: 0;
+			border-radius: 10px;
+        }
+        
     </style>
     
     
@@ -135,74 +156,70 @@
     	<form name="MemInsert" id="MemInsert">
 			<table border="1">
 		        <tr>
-					<td colspan="4" align="center" style="color:white; background-color:#0aa4b5; height: 40px;">공지사항 수정하기</td>
+					<th colspan="2" style="color:white; background-color:#0aa4b5; height: 40px;  text-align:center;">회원가입</th>
 				</tr>		
 				<tr>
-					<th style="height: 40px;">아이디<th>
+					<th style="height: 40px; width: 160px;">아이디</th>
 					<td>
-						<input type="text" name=memid" id=memid" />
-					</td>
-					<td>
+						<input type="text" name="memid" id="memid" />&nbsp;&nbsp;&nbsp;&nbsp;
+
 						<input type="button" value="중복확인" id="idCheck" />
 					</td>
 					
 				</tr>
 				<tr>
 					<th style="height: 40px;">비밀번호</th>
-					<td colspan="2">
-						<input type="password" name=mempw" id=mempw" />
+					<td>
+						<input type="password" name="mempw" id="mempw" style="margin-right: 107px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
 					</td>
 				</tr>
 				<tr>
 					<th style="height: 40px;">비밀번호 재확인</th>
-					<td colspan="2">
-						<input type="password" name=mempw_r" id="mempw_r" />
-					</td>
 					<td>
+						<input type="password" name="mempw_r" id="mempw_r" />&nbsp;&nbsp;&nbsp;&nbsp;
+
 						<input type="button" value="중복확인" id="pwCheck" />
 					</td>
 				</tr>	
 				<tr>
 					<th style="height: 40px;">이름</th>
-					<td colspan="2">
-						<input type="text" name="memname" id="memname" />
+					<td>
+						<input type="text" name="memname" id="memname" style="margin-right: 107px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
 					</td>
 				</tr>	
 				<tr>
 					<th style="height: 40px;">이메일</th>
-					<td colspan="2">
-						<input type="text" name="mememail" id="mememail" />
+					<td>
+						<input type="text" name="mememail" id="mememail" style="margin-right: 107px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
 					</td>
 				</tr>	
 				<tr>
 					<th style="height: 40px;">휴대전화</th>
-					<td colspan="2">
-						<input type="text" name="memphone" id="memphone" "placeholder="특수기호없이" />
+					<td>
+						<input type="text" name="memphone" id="memphone" "placeholder="특수기호없이" style="margin-right: 107px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+
 					</td>
 				</tr>
 				<tr>
 					<th rowspan="3" style="height: 160px;">주소</th>
-					<td colspan="2">
-						<input type="text" id="memaderss" placeholder="우편번호" />
-					</td>
 					<td>
+						<input type="text" id="memaderss" placeholder="우편번호" style="margin-left: 15px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+
 						<input type="button" id="addressBtn" value="우편번호 찾기" />
 					</td>
 				</tr>
 				<tr>
-					<th></th>
 					<td>
-						<input type="text" id="memraderss" placeholder="도로명주소" />
+						<input type="text" id="memraderss" placeholder="도로명주소" style="margin-right: 107px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
 					</td>				
 				</tr>	
 				<tr>
-					<th></th>
 					<td>
-						<input type="text" id="memdaderss" placeholder="상세주소를 입력하세요" />
+						<input type="text" id="memdaderss" placeholder="상세주소를 입력하세요" style="margin-right: 107px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
 					</td>				
 				</tr>
 				<tr>
-					<td colspan="4" style="height: 60px;">
+					<td colspan="2" style="height: 60px;">
 						<input type="button" value="가입하기" id="inBtn" />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="button" value="뒤로가기" id="caBtn" />
