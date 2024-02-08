@@ -210,6 +210,7 @@
 		     float: left;
 		     height: 40px;
 		     margin-top: -156px;
+		     font-family: 'East Sea Dokdo', sans-serif;
 			 }
 			 
 			 #header{
@@ -229,8 +230,6 @@
 				 transition-duration: 0.5s;
 			 }
 
-<<<<<<< HEAD
-=======
 			#header {
 				font-family: 'East Sea Dokdo', sans-serif;
 			}
@@ -241,7 +240,6 @@
 			  font-size: 85px;
 			}
 
->>>>>>> branch 'ban' of https://github.com/Ban-uu/trip.git
 		</style>
 </head>
 <body>
