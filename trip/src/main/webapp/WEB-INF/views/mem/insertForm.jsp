@@ -224,7 +224,7 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="button" value="뒤로가기" id="caBtn" />
 					</td>
-				</tr>											
+				</tr>										 	
 			</table>
     	</form>
     </div>
