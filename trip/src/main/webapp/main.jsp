@@ -9,11 +9,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-		<!-- 폰트 어썸 CDN -->
-		<script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+<style>
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+</style>
 		<!-- 스타일 -->
 		<style type="text/css">
-		
+			
+			.material-symbols-outlined {
+				font-size: 65px;
+			}
+			
 			table {
 				text-align: center;	
 				margin: 0 auto;
@@ -141,24 +160,16 @@
 			    
 			}
 		
-			#loginBtn {
+			#loginBtn, #logoutBtn {
 				padding: 10px 20px;
 				background-color: #0aa4b5;
 				color: white;
 				border: 0;
 				border-radius: 10px;
 				font-size: 15px;
+				margin-top: -65px; 
+				float: right;
 			}
-			
-			#logoutBtn {
-				padding: 10px 20px;
-				background-color: #0aa4b5;
-				color: white;
-				border: 0;
-				border-radius: 10px;
-				font-size: 15px;
-			}		
-			
 			
 			.logo {
 			    text-align: center;
@@ -185,10 +196,11 @@
 			 }
 			 
 			 .weatherIcon{
-			 margin-left: 25px;
+			 margin-left: 20px;
 		     float: left;
 		     height: 40px;
-		     margin-top: -88px;
+		     margin-top: -156px;
+		     font-family: 'East Sea Dokdo', sans-serif;
 			 }
 			 
 			 #header{
@@ -208,19 +220,29 @@
 				 transition-duration: 0.5s;
 			 }
 
+			#header {
+				font-family: 'East Sea Dokdo', sans-serif;
+			}
+
+
+			.main_logo {
+			  font-family: 'East Sea Dokdo', sans-serif;
+			  font-size: 85px;
+			}
+
 		</style>
 </head>
 <body>
 	<br>
 		<div id="header">
 		    <div class="logo">
-		        <a href="<%= request.getContextPath() %>/spot/spot_IsudSelectAll">
-		            <!-- <img src="${pageContext.request.contextPath}/resources/images/img_spot/지도.png" width="50px" height="50px" title="로고 이미지">  -->
-		            <i class="fa-solid fa-plane-up fa-xl">여행가기 좋은날</i>
+		        <a href="<%= request.getContextPath() %>/spot/spot_IsudSelectAll" class="main_logo">
+					<span class="material-symbols-outlined">travel</span> 여행하기 좋은날
+				
 		        </a>		        
 
 		    </div>
-		    <div id="weatherIcon" class="weatherIcon" style="margin-left: 10px;">
+		    <div id="weatherIcon" class="weatherIcon">
                    <a href="https://www.weather.go.kr/w/index.do#dong/2811058500/37.47405/126.63111/%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EB%8F%99%EC%9D%B8%EC%B2%9C%EB%8F%99//">
                        <h3 id="a" class="a"></h3>
                    </a>

@@ -80,7 +80,7 @@
 			<tr>
 				<td colspan="2">
 					<input type="button" name="idSearchBtn" id="idSearchBtn" value="ID 찾기">
-					<input type="button" name="loginBtn" id="loginBtn" value="로그인 화면으로">
+					<input type="button" name="loginBBtn" id="loginBBtn" value="로그인 화면으로">
 				</td>
 			</tr>
 		</table>
@@ -107,7 +107,7 @@
 			<tr>
 				<td colspan="2">
 					<input type="button" name="pwSearchBtn" id="pwSearchBtn" value="PW 찾기">
-					<input type="button" name="loginBtn" id="loginBtn" value="로그인 화면으로">
+					<input type="button" name="loginBBtn" id="loginBBtn" value="로그인 화면으로">
 				</td>
 			</tr>
 		</table>
