@@ -141,6 +141,12 @@
 	        let reqType = "POST";
 	        let dataParam = { mememail: $("#mememail").val() };
 
+            if ($("#mememail").val() == "") {
+                alert("이메일을 입력해 주세요");
+                return;
+            }
+	        
+	        
 	        $.ajax({
 	            url: idCheckURL,
 	            type: reqType,
@@ -153,7 +159,7 @@
 	        function whenSuccess(resData) {
 	            console.log("resData >>> : " + resData.result);
 	            if (undefined == resData.result) {
-	                alert("이메일을 입력하세요");
+	                alert("ID가 없습니다.");
 	            } else {
 	                var rowHtml =  '<p style="color: black;">ID는  <strong class="result-text" style="color:red;">' + resData.result + '</strong>' + ' 입니다.</p>';
 	                $("#idSearch").html(rowHtml);
