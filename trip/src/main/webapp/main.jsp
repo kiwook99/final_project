@@ -169,8 +169,12 @@
 				border: 0;
 				border-radius: 10px;
 				font-size: 15px;
-				margin-top: -65px; 
+				margin-top: -80px; 
 				float: right;
+			}
+			
+			.loginBtn p {
+				font-size: 30px;
 			}
 			
 			.logo {
