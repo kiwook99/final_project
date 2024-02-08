@@ -103,7 +103,7 @@
             var pw_r = $("#mempw_r").val();
             if (pw == pw_r) {
                 alert("비밀번호가 같습니다.");
-                $("#mempw_r").val('mempw_r');
+                $("#mempw_r").val(pw_r);
                 $("#mempw").css('background-color', 'yellow');
                 $("#mempw_r").css('background-color', 'gray');
                 $("#mempw").attr("readonly", true);
