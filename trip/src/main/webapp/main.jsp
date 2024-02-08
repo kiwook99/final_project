@@ -285,12 +285,10 @@
 
  			<div class="loginBtn">
 			    		
-
-
 			        <% if(memid != null) { %> 
 			            <!-- 조건이 참일 때 보이는 태그 -->
+			            <p><%= memid %> 님</p>
 			            <input type="button" name="login" id="logoutBtn" value="로그아웃" onclick="location.href='/trip/mem/logout'">
-
        			   <% } else { %> 
 			        
 			            <!-- 조건이 거짓일 때 보이는 태그임 -->
@@ -302,6 +300,7 @@
 		<br>
 		 
 			<div class="topnav">
+
 			    <!-- 메뉴 -->
 			    <ul class="menu">
 			        <li class="topMenuLi">
@@ -328,6 +327,35 @@
 			        </li>
 			    </ul>
 			</div>
+				<div class="topnav">
+					<!-- 메뉴 -->
+					 <ul class="menu">
+						 <li class="topMenuLi">
+						 <a class="menuLink" href="<%= request.getContextPath() %>/spot/spot">여행정보</a>
+						 <hr>
+						 	 <ul class ="sb">
+								  <li><a href="<%= request.getContextPath() %>/spot/spot" class="submenuLink" >관광정보</a></li>
+								  <li><a href="<%= request.getContextPath() %>/spot/spot_IsudSelectAll" class="submenuLink" >관광정보(ISUD)</a></li>
+						  	</ul>
+						 </li>							  
+						 <li class="topMenuLi">
+						 <a class="menuLink" href="<%= request.getContextPath() %>/hotel/hotel_main">숙소예약</a>
+						 <hr>
+						 	<ul class ="sb"> 
+								 <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink" >숙소정보</a></li>
+								 <li> <a class="menuLink" href="<%= request.getContextPath() %>/hotel/hotelReview">숙소리뷰</a></li>
+						 	</ul>
+						 </li>
+						 <li class="topMenuLi">
+						 <a class="menuLink" href="#content3">게시판</a>
+						 	<ul class ="sb"> 
+								 <li><a href="#" class="submenuLink" >자유 게시판</a></li>
+								 <li><a href="<%= request.getContextPath() %>/adminboard/adminBoardSelectAll" class="submenuLink" >공지사항 게시판</a></li>
+						 	</ul>
+						 </li>				 
+					 </ul> 
+			</div>	
+
 		<!-- top 아이콘 -->
 		<div style="position:fixed; bottom: 20px; right:25px;">
 			<a href="#"><img src="${pageContext.request.contextPath}/resources/images/img/topbutton.png" width="50" height="50" title="상단으로"></a>
