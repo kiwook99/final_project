@@ -132,11 +132,11 @@ public class AdminBoardController {
 	
 	
 	@GetMapping("adminboard/adminBoardInsertForm")
-    public String adminBoardInsertForm(AdminBoardVO abvo) {
+    public String adminBoardInsertForm(AdminBoardVO abvo, Model model) {
 		logger.info("adminBoardInsertForm 함수 진입 >>> : ");
 		
-        return "adminboard/adminBoardInsertForm";
-    }
+			return "adminboard/adminBoardInsertForm";
+	}
 
 	// 입력
 	@PostMapping("adminboard/adminBoardInsert")
