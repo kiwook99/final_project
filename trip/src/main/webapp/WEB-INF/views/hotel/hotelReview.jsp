@@ -41,8 +41,6 @@ input{
 
 /* 댓글 목록 스타일 */
 .comment-list {
-  
-
   width: 90%;
   list-style-type: none;
   padding: 0;
@@ -58,6 +56,10 @@ input{
 
 .comment-list li:last-child {
   margin-bottom: 0;
+}
+
+#delecte {
+	
 }
 </style>
 </head>
@@ -84,7 +86,7 @@ input{
 		    try {
 	 	       await fetch('http://192.168.0.4:3001/api/comments', {
  		           method: 'POST',
-  	    	      headers: { 'Content-Type': 'application/json' },
+  	    	       headers: { 'Content-Type': 'application/json' },
  	        	   body: JSON.stringify({ text, memid }), // text와 memid 함께 전송
 		       });
  		       this.setState({ text: '', memid: '' }); // 입력 필드 초기화
@@ -102,7 +104,7 @@ input{
    	 	 	   this.setState({ memid: e.target.value });
     	   };
 
-         render() {
+        render() {
         return (
             <div className="comment-form">
                 <form id="commentForm" onSubmit={this.handleSubmit}>
@@ -154,6 +156,20 @@ input{
                 }
             };
 
+		   handleDelete = async (_id) => {
+  			  try {
+     			   await fetch('http://192.168.0.4:3001/api/comments/delete', {
+      			      method: 'POST',
+					  headers: { 'Content-Type': 'application/json' },
+ 	        	      body: JSON.stringify({ _id }),
+    			    });
+     			   // 댓글 목록을 다시 가져와서 화면 갱신
+      			  this.fetchComments();
+   			  } catch (error) {
+   			    console.error('Error deleting comment:', error);
+  			  }
+			};
+
             render() {
                 return (
                     <div class="comment-list">
@@ -161,7 +177,12 @@ input{
                         <ul id="commentList">
                             {this.state.comments.map((comment, index) => (
                                 <li key={index}>
-                            		<div id="com_list">{comment.text} <h4>작성자: {comment.memid}</h4></div>
+                            		<div id="com_list">
+										 {comment.text}
+           								 <h4>작성자: {comment.memid}</h4>  
+           								 <input type="hidden" value={comment._id} />
+            							 <button onClick={() => this.handleDelete(comment._id)}>삭제</button>
+										 </div>
 								</li>
                             ))}
                         </ul>

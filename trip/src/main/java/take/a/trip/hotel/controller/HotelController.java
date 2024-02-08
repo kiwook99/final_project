@@ -375,9 +375,28 @@ public class HotelController {
 		
 		//호텔 리뷰
 		@GetMapping("hotel/hotelReview")
-		public String hotelReview() {
+		public String hotelReview(Model model, HttpServletRequest request) {
 			logger.info("hotelReview 함수 진입 ");
-
+			
+			HttpSession session = request.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
+			String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+			
+			logger.info("spot_IsudSelectAll sessionId >>> : " + sessionId);
+			try (Jedis jedis = jedisPool.getResource()) {
+				 
+				 String isAdmin = jedis.get(sessionId);
+				 
+				 if (isAdmin.equals("Y")) {
+				        // 값이 존재하는 경우
+				        logger.info("adminyn >>> : " + isAdmin);
+				        
+				        model.addAttribute("isAdmin", true);
+				    } else {
+				        // 값이 없는 경우
+				    	model.addAttribute("isAdmin", false);
+				        logger.info("adminyn is null");
+				    }
+			 } 
 			return "hotel/hotelReview";
 		}	
 	}
