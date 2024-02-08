@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/style.css">
     <title>회원가입</title>
     <style type="text/css">
+    
+    	.MemIns {
+    	width: 500px;
+    	}
+    	
     	h2 {
     		text-align: center;
     	}
@@ -31,8 +36,16 @@
         }
         
         
-        #idCheck, #pwCheck {
+        #idCheck  {
      		padding: 5px 25px;
+			background-color: #0aa4b5;
+			color: white;
+			border: 0;
+			border-radius: 10px;
+        }
+        
+        #pwCheck {
+       	    padding: 5px 13px;
 			background-color: #0aa4b5;
 			color: white;
 			border: 0;
@@ -49,6 +62,28 @@
         
         #addressBtn {
         	 margin-right: 12px;
+        }
+        
+        #mempw_r {
+            margin-left: 7px;
+        }
+        
+        #memaderss {
+        margin-left: -45px;
+	    width: 70px;
+	    margin-bottom: 10px;
+        }
+        
+        #memraderss {
+        margin-right: 29px;
+	    width: 247px;
+	    margin-bottom: 10px;
+        }
+        
+        #memdaderss {
+        margin-right: 30px;
+	    margin-bottom: 11px;
+	    width: 247px;
         }
         
     </style>
@@ -184,14 +219,14 @@
 <br>
 	<div class="main-signup">
     	<form name="MemInsert" id="MemInsert">
-			<table border="1">
+			<table border="1" class="MemIns">
 		        <tr>
 					<th colspan="2" style="color:white; background-color:#0aa4b5; height: 40px;  text-align:center;">정보입력</th>
 				</tr>		
 				<tr>
 					<th style="height: 40px; width: 160px;">아이디*</th>
 					<td>
-						<input type="text" name="memid" id="memid" />&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="text" name="memid" id="memid" required/>&nbsp;&nbsp;&nbsp;&nbsp;
 
 						<input type="button" value="중복확인" id="idCheck" />
 					</td>
@@ -204,11 +239,11 @@
 					</td>
 				</tr>
 				<tr>
-					<th style="height: 40px;">비밀번호 재확인*</th>
+					<th style="height: 40px;">비밀번호 확인*</th>
 					<td>
-						<input type="password" name="mempw_r" id="mempw_r" />&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="password" name="mempw_r" id="mempw_r" />&nbsp;&nbsp;&nbsp;
 
-						<input type="button" value="중복확인" id="pwCheck" />
+						<input type="button" value="비밀번호 확인" id="pwCheck" />
 					</td>
 				</tr>	
 				<tr>
@@ -231,23 +266,18 @@
 					</td>
 				</tr>
 				<tr>
-					<th rowspan="3" style="height: 160px;">주소</th>
-					<td>
-						<input type="text" id="memaderss" placeholder="우편번호" style="margin-left: 19px;"/>&nbsp;&nbsp;&nbsp;
-
-						<input type="button" id="addressBtn" value="우편번호 찾기" />
-					</td>
+					<th rowspan="1" style="height: 160px;">주소</th>
+						<td>
+							<input type="text" id="memaderss" placeholder="우편번호" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	
+							<input type="button" id="addressBtn" value="우편번호 찾기" /><br>
+	
+							<input type="text" id="memraderss" placeholder="도로명주소"/>&nbsp;&nbsp;&nbsp;&nbsp;<br>
+							
+							<input type="text" id="memdaderss" placeholder="상세주소를 입력하세요" />&nbsp;&nbsp;&nbsp;&nbsp;
+						</td>
 				</tr>
-				<tr>
-					<td>
-						<input type="text" id="memraderss" placeholder="도로명주소" style="margin-right: 107px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-					</td>				
-				</tr>	
-				<tr>
-					<td>
-						<input type="text" id="memdaderss" placeholder="상세주소를 입력하세요" style="margin-right: 107px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
-					</td>				
-				</tr>
+				
 				<tr>
 					<td colspan="2" style="height: 60px;">
 						<input type="button" value="가입하기" id="inBtn" />
