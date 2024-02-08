@@ -40,7 +40,7 @@
 	<form name="loginForm" id="loginForm">
 		<table border = "1" id="sign">
 	        <tr>
-				<td colspan="4" align="center" style="color:white; background-color:#0aa4b5; height: 40px;">공지사항 수정하기</td>
+				<td colspan="4" align="center" style="color:white; background-color:#0aa4b5; height: 40px;">로그인</td>
 			</tr>			
 			<tr>
 				<td width="50px">ID</td>
