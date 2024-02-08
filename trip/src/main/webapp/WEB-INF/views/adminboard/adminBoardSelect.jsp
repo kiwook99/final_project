@@ -174,13 +174,12 @@
  
 <input type="hidden" class="mem" name="adboardnum" id="adboardnum" value="<%= _abvo.getAdboardnum() %>"/>
 <input type="hidden" class="mem" name="memnum" id="memnum" value="<%=  _abvo.getMemnum() %>"/>
-<input type="hidden" class="tt" name="updatedate" id="updatedate" value="<%=  _abvo.getUpdatedate() %>"/>	      
-
-<% if ("Y".equals(objAdmin)) { %>
-
+<input type="hidden" class="tt" name="updatedate" id="updatedate" value="<%=  _abvo.getUpdatedate() %>"/>
+	      
 <tr>
 	<td colspan="5" class="right">
-	<button type="button" value="취소" id="abCBtn">취소</button>
+	<button type="button" value="취소" id="abCBtn">돌아가기</button>
+<% if ("Y".equals(objAdmin)) { %>
 	<button type="button" value="삭제" id="abDeleteBtn">삭제하기</button>
 	<button type="button" value="수정" id="abUpdateBtn">수정하기</button>
     </td>      	
