@@ -76,7 +76,7 @@ input{
 		    e.preventDefault();
 	 	   const { text, memid } = this.state; // memid 값도 함께 가져오도록 수정
 		    try {
-	 	       await fetch('http://192.168.0.4/api/comments', {
+	 	       await fetch('http://192.168.0.4:3001/api/comments', {
  		           method: 'POST',
   	    	      headers: { 'Content-Type': 'application/json' },
  	        	   body: JSON.stringify({ text, memid }), // text와 memid 함께 전송
