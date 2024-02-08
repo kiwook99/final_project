@@ -372,4 +372,12 @@ public class HotelController {
 			}
 			return "hotel/hotel_main";
 		}	
+		
+		//호텔 리뷰
+		@GetMapping("hotel/hotelReview")
+		public String hotelReview() {
+			logger.info("hotelReview 함수 진입 ");
+
+			return "hotel/hotelReview";
+		}	
 	}

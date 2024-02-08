@@ -228,12 +228,10 @@
 
  			<div class="loginBtn">
 			    		
-
-
 			        <% if(memid != null) { %> 
 			            <!-- 조건이 참일 때 보이는 태그 -->
+			            <p><%= memid %> 님</p>
 			            <input type="button" name="login" id="logoutBtn" value="로그아웃" onclick="location.href='/trip/mem/logout'">
-
        			   <% } else { %> 
 			        
 			            <!-- 조건이 거짓일 때 보이는 태그임 -->
@@ -260,6 +258,7 @@
 						 <hr>
 						 	<ul class ="sb"> 
 								 <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink" >숙소정보</a></li>
+								 <li> <a class="menuLink" href="<%= request.getContextPath() %>/hotel/hotelReview">숙소리뷰</a></li>
 						 	</ul>
 						 </li>
 						 <li class="topMenuLi">
