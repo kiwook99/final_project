@@ -75,15 +75,17 @@
         }
         
         #memraderss {
-        margin-right: 29px;
-	    width: 247px;
+        margin-right: 8px;
+	    width: 270px;
 	    margin-bottom: 10px;
+	    height: 22px;
         }
         
         #memdaderss {
-        margin-right: 30px;
+        margin-right: 8px;
 	    margin-bottom: 11px;
-	    width: 247px;
+	    width: 270px;
+	    height: 22px;
         }
         
     </style>
