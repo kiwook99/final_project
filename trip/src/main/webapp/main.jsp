@@ -107,6 +107,7 @@
 			  overflow: hidden;
 			  margin: 0 auto;
 			  margin-left: 5px;
+			  font-size: 25px;
 			}
 			
 			.menu > li {
@@ -169,12 +170,14 @@
 				border: 0;
 				border-radius: 10px;
 				font-size: 15px;
-				margin-top: -80px; 
+				margin-top: -55px; 
 				float: right;
 			}
 			
 			.loginBtn p {
 				font-size: 30px;
+			    margin-right: 125px;
+   				margin-top: -90px;
 			}
 			
 			.logo {
@@ -267,6 +270,10 @@
 			    text-align-last: center;
 			}
 
+			.loginBtn p, .loginBtn input {
+			  display: inline-block;
+			  vertical-align: middle;
+			}
 		
 
 		</style>
