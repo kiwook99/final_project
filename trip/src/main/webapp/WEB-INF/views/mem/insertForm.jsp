@@ -103,7 +103,7 @@
             var pw_r = $("#mempw_r").val();
             if (pw == pw_r) {
                 alert("비밀번호가 같습니다.");
-                $("#mempw_r").val('');
+                $("#mempw_r").val(pw_r);
                 $("#mempw").css('background-color', 'yellow');
                 $("#mempw_r").css('background-color', 'gray');
                 $("#mempw").attr("readonly", true);
@@ -121,6 +121,32 @@
         // 회원가입
         $(document).on("click", "#inBtn", function(){
             console.log("inBtn >>> : ");            
+            
+         	// 각 필수 입력 항목의 값을 가져옵니다.
+            var memid = $("#memid").val();
+            var mempw = $("#mempw").val();
+            var mempw_r = $("#mempw_r").val();
+            var memname = $("#memname").val();
+            var mememail = $("#mememail").val();
+            
+            // 필수 입력 항목이 비어있는지 확인합니다.
+            if (memid.trim() === '' || mempw.trim() === '' || mempw_r.trim() === '' || memname.trim() === '' || mememail.trim() === '') {
+                alert("필수 항목(*)을 입력하세요.");
+                return;
+            }
+
+        	 // 아이디 중복 확인이 되었는지 확인합니다.
+            if ($("#memid").attr("readonly") !== "readonly") {
+                alert("아이디 중복 확인을 해주세요.");
+                return;
+            }
+            
+        	 // 비밀번호 확인이 되었는지 확인합니다.
+            if ($("#mempw").attr("readonly") !== "readonly") {
+                alert("비밀번호 확인을 해주세요.");
+                return;
+            }
+            
             $('#MemInsert').attr({
                 'action':'insert',
                 'method':'POST',
@@ -160,10 +186,10 @@
     	<form name="MemInsert" id="MemInsert">
 			<table border="1">
 		        <tr>
-					<th colspan="2" style="color:white; background-color:#0aa4b5; height: 40px;  text-align:center;">회원가입</th>
+					<th colspan="2" style="color:white; background-color:#0aa4b5; height: 40px;  text-align:center;">정보입력</th>
 				</tr>		
 				<tr>
-					<th style="height: 40px; width: 160px;">아이디</th>
+					<th style="height: 40px; width: 160px;">아이디*</th>
 					<td>
 						<input type="text" name="memid" id="memid" />&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -172,13 +198,13 @@
 					
 				</tr>
 				<tr>
-					<th style="height: 40px;">비밀번호</th>
+					<th style="height: 40px;">비밀번호*</th>
 					<td>
 						<input type="password" name="mempw" id="mempw" style="margin-right: 107px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
 					</td>
 				</tr>
 				<tr>
-					<th style="height: 40px;">비밀번호 재확인</th>
+					<th style="height: 40px;">비밀번호 재확인*</th>
 					<td>
 						<input type="password" name="mempw_r" id="mempw_r" />&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -186,13 +212,13 @@
 					</td>
 				</tr>	
 				<tr>
-					<th style="height: 40px;">이름</th>
+					<th style="height: 40px;">이름*</th>
 					<td>
 						<input type="text" name="memname" id="memname" style="margin-right: 107px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
 					</td>
 				</tr>	
 				<tr>
-					<th style="height: 40px;">이메일</th>
+					<th style="height: 40px;">이메일*</th>
 					<td>
 						<input type="text" name="mememail" id="mememail" style="margin-right: 107px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
 					</td>
