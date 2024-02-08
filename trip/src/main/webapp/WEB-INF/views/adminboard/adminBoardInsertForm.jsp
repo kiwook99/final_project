@@ -75,9 +75,6 @@
 			 transition-duration: 0.5s;
         }
 
-
-
-
     </style>
 
 </head>
@@ -92,13 +89,9 @@
 		<br>	
 <form name="abInsert" id="abInsert">
 	<table>
-	    <tr>
-	        <th>글번호</th>
-	        <td><input type="text" name="adboardnum" id="adboardnum" size="20" placeholder="자동으로 들어갑니다."  readonly></td>
-	    </tr>
    	    <tr>
 	        <th>작성자</th>
-	        <td><input type="text" name="memnum" id="memnum" placeholder="자동으로 들어갑니다." readonly/> </td>
+	        <td name=memid id="memid"><%= memid %></td>
 	    </tr>	        
 	    <tr>
 	        <th>제목</th>
