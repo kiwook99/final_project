@@ -157,7 +157,7 @@
 			// ajax 시작
 			$.ajax({ 
 				type: 'GET', 
-				url: "http://127.0.0.1:5001/api_spot/spot", // url : flask, blueprint 참고, flask api 엔드 포인트
+				url: "http://192.168.0.4:5001/api_spot/spot", // url : flask, blueprint 참고, flask api 엔드 포인트
 				data: {page : currentPage}, // 페이징을 위한 값
 				dataType: 'JSON', // 데이터 타입
 				success : function(spot_list) { // 성공할 시 실행되는 콜백 함수
