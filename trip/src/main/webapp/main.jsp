@@ -315,18 +315,18 @@
 			    <!-- 메뉴 -->
 			    <ul class="menu">
 			        <li class="topMenuLi">
-			            <a class="menuLink" href="<%= request.getContextPath() %>/spot/spot">여행정보</a>
+			            <a class="menuLink" href="<%= request.getContextPath() %>/spot/spot">관광지</a>
 			            <ul class="sb">
-			                <li><a href="<%= request.getContextPath() %>/spot/spot" class="submenuLink">관광정보</a></li>
-			                <li><a href="<%= request.getContextPath() %>/spot/spot_IsudSelectAll" class="submenuLink">관광정보(ISUD)</a></li>
+			                <li><a href="<%= request.getContextPath() %>/spot/spot" class="submenuLink">관광 정보</a></li>
+			                <li><a href="<%= request.getContextPath() %>/spot/spot_IsudSelectAll" class="submenuLink">관광 정보(ISUD)</a></li>
 			            </ul>
 			        </li>
 			
 			        <li class="topMenuLi">
-			            <a class="menuLink" href="<%= request.getContextPath() %>/hotel/hotel_main">숙소예약</a>
+			            <a class="menuLink" href="<%= request.getContextPath() %>/hotel/hotel_main">숙소</a>
 			            <ul class="sb">
-			                <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink">숙소정보</a></li>
-			                <li><a href="<%= request.getContextPath() %>/hotel/hotelReview" class="submenuLink">숙소리뷰</a></li>
+			                <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink">숙소 정보</a></li>
+			                <li><a href="<%= request.getContextPath() %>/hotel/hotelReview" class="submenuLink">숙소 리뷰</a></li>
 			            </ul>
 			        </li>
 			

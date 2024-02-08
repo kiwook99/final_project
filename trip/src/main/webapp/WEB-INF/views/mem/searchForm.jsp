@@ -141,6 +141,16 @@
 	        let reqType = "POST";
 	        let dataParam = { mememail: $("#mememail").val() };
 
+            if ($("#mememail").val() == "") {
+//                 alert("이메일을 입력해 주세요");
+                
+                var rowHtml =  '<strong style="color: black;"> 이메일을 입력해 주세요.' + '</strong>';
+                $("#idSearch").html(rowHtml);
+                
+                return;
+            }
+	        
+	        
 	        $.ajax({
 	            url: idCheckURL,
 	            type: reqType,
@@ -153,7 +163,11 @@
 	        function whenSuccess(resData) {
 	            console.log("resData >>> : " + resData.result);
 	            if (undefined == resData.result) {
-	                alert("이메일을 입력하세요");
+// 	                alert("가입된 이메일이 없습니다.");      
+	                
+	                var rowHtml =  '<strong style="color: black;"> 가입된 이메일이 없습니다.' + '</strong>';
+	                $("#idSearch").html(rowHtml);
+	                
 	            } else {
 	                var rowHtml =  '<p style="color: black;">ID는  <strong class="result-text" style="color:red;">' + resData.result + '</strong>' + ' 입니다.</p>';
 	                $("#idSearch").html(rowHtml);
@@ -173,7 +187,11 @@
             let dataParam = { mememail: $("#mememail_").val(), memid: $("#memid").val() };
 
             if ($("#mememail_").val() == "" || $("#memid").val() == "") {
-                alert("ID와 이메일을 입력해 주세요");
+//                 alert("ID와 이메일을 입력해 주세요");
+                
+                var rowHtml =  '<strong class="result-text" style="color: black;">ID와 이메일을 입력해 주세요.</strong>';
+                $("#pwSearch").html(rowHtml);
+                
                 return;
             }
             
@@ -190,7 +208,9 @@
                function whenSuccess(resData) {  // 실패시
                     console.log("resData >>> : " + resData.result);
 					
-					alert("ID 혹은 이메일이 틀립니다.");   	            
+// 					alert("ID 혹은 이메일이 틀립니다.");   
+	                var rowHtml =  '<strong class="result-text" style="color: black;">ID 혹은 이메일이 틀립니다.</strong>';
+	                $("#pwSearch").html(rowHtml);
                 } 
                
                
@@ -199,8 +219,8 @@
                         // 에러 처리 로직 추가 
                     	alert("오류 발생!");
                     }
-                    alert("결과 >>> : " + e.responseText);
-                    var rowHtml =  '<strong class="result-text" style="color: black;">이메일로 임시비밀번호가 발급되었습니다.</strong>';
+//                     alert("결과 >>> : " + e.responseText);
+                    var rowHtml =  '<strong class="result-text" style="color: blue;">이메일로 임시비밀번호가 발급되었습니다.</strong>';
                     $("#pwSearch").html(rowHtml);
                 }
         }); 
