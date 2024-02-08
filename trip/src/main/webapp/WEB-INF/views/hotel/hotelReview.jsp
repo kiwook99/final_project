@@ -23,7 +23,7 @@
 
 .comment-form button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #0AA4B5;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -37,13 +37,19 @@
 input{
 	margin-bottom: 10px;
 }
+
+
 /* 댓글 목록 스타일 */
 .comment-list {
+  
+
+  width: 90%;
   list-style-type: none;
   padding: 0;
 }
 
 .comment-list li {
+  margin-left: 200px;
   margin-bottom: 10px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -82,6 +88,7 @@ input{
  	        	   body: JSON.stringify({ text, memid }), // text와 memid 함께 전송
 		       });
  		       this.setState({ text: '', memid: '' }); // 입력 필드 초기화
+			   window.location.reload(); //폼 제출 후 새로고침
 	 	   } catch (error) {
  		       console.error('Error creating comment:', error);
  	 	  }
@@ -103,6 +110,7 @@ input{
                         id="commentText"
                         value={this.state.text}
                         onChange={this.handleChange}
+
                         placeholder="후기를 입력하세요..."
                         required
                     ></textarea>
@@ -149,11 +157,11 @@ input{
             render() {
                 return (
                     <div class="comment-list">
-                        <h2 class="comment-list">후기 목록</h2>
+                        <h2 class="comment-list"></h2>
                         <ul id="commentList">
                             {this.state.comments.map((comment, index) => (
                                 <li key={index}>
-                            		<div>{comment.text} <h4>작성자: {comment.memid}</h4></div>
+                            		<div id="com_list">{comment.text} <h4>작성자: {comment.memid}</h4></div>
 								</li>
                             ))}
                         </ul>
