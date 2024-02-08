@@ -326,6 +326,7 @@
 			            <a class="menuLink" href="<%= request.getContextPath() %>/hotel/hotel_main">숙소예약</a>
 			            <ul class="sb">
 			                <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink">숙소정보</a></li>
+			                <li><a href="<%= request.getContextPath() %>/hotel/hotelReview" class="submenuLink">숙소리뷰</a></li>
 			            </ul>
 			        </li>
 			
