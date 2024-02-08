@@ -152,7 +152,7 @@
 
 	        function whenSuccess(resData) {
 	            console.log("resData >>> : " + resData.result);
-	            if ("false" === resData.result) {
+	            if (undefined == resData.result) {
 	                alert("ID가 없습니다");
 	            } else {
 	                var rowHtml =  '<p style="color: black;">ID는  <strong class="result-text" style="color:red;">' + resData.result + '</strong>' + ' 입니다.</p>';
