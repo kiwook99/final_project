@@ -27,13 +27,13 @@ import take.a.trip.mem.vo.MemVO;
 @Controller
 public class MemController {
 	
-	@Autowired
+	@Autowired 
 	private JedisPool jedisPool;
 	
 	// Logger 객체 생성
 	Logger logger = LogManager.getLogger(MemController.class);
 	
-	@Autowired(required = false)
+	@Autowired(required = false) 
 	private MemService memService;
 	
 	// 로그인 폼
@@ -203,13 +203,13 @@ public class MemController {
 		int cnt = memService.memPwSearch(mvo);
 		logger.info(" cnt() >>> : " + cnt);
 		
-		if(cnt == 0) {msg ="false";}
+		if(cnt == 0) {msg = "false";}
 		else { msg = "success";}
 		try {
 			GooglePwMail gms = new GooglePwMail();
 			gms.pwMail(mememail, sendMsg);
 		}catch(Exception e) {
-			logger.info(" GooglePwMail() 에러 >>> : " + e);
+            return "이메일 전송 중 오류가 발생했습니다: " + e.getMessage();
 		}
 		
 		return msg;

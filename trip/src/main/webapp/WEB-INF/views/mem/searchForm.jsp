@@ -153,7 +153,7 @@
 	        function whenSuccess(resData) {
 	            console.log("resData >>> : " + resData.result);
 	            if (undefined == resData.result) {
-	                alert("이메일을 입력하세요!!");
+	                alert("이메일을 입력하세요");
 	            } else {
 	                var rowHtml =  '<p style="color: black;">ID는  <strong class="result-text" style="color:red;">' + resData.result + '</strong>' + ' 입니다.</p>';
 	                $("#idSearch").html(rowHtml);
@@ -172,6 +172,12 @@
             let reqType = "POST";
             let dataParam = { mememail: $("#mememail_").val(), memid: $("#memid").val() };
 
+            if ($("#mememail_").val() == "" || $("#memid").val() == "") {
+                alert("ID와 이메일을 입력해 주세요");
+                return;
+            }
+            
+            
             $.ajax({
                 url: idCheckURL,
                 type: reqType,
@@ -181,16 +187,16 @@
 	            error: whenError
 	        });
                      
-               function whenSuccess(resData) {
+               function whenSuccess(resData) {  // 실패시
                     console.log("resData >>> : " + resData.result);
 					
-					alert("ID와 이메일을 입력해 주세요");   	            
-                }
+					alert("ID 혹은 이메일이 틀립니다.");   	            
+                } 
                
                
-                function whenError(e) {
+                function whenError(e) { // 성공시
                     if (e.responseText !== "success") {
-                        // 에러 처리 로직 추가
+                        // 에러 처리 로직 추가 
                     	alert("오류 발생!");
                     }
                     alert("결과 >>> : " + e.responseText);
