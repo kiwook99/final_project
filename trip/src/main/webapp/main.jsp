@@ -160,7 +160,7 @@
 			    
 			}
 		
-			#loginBtn {
+			#loginBtn, #logoutBtn {
 				padding: 10px 20px;
 				background-color: #0aa4b5;
 				color: white;
@@ -170,16 +170,6 @@
 				margin-top: -65px; 
 				float: right;
 			}
-			
-			#logoutBtn {
-				padding: 10px 20px;
-				background-color: #0aa4b5;
-				color: white;
-				border: 0;
-				border-radius: 10px;
-				font-size: 15px;
-			}		
-			
 			
 			.logo {
 			    text-align: center;
