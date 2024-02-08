@@ -33,7 +33,7 @@ public class MemController {
 	// Logger 객체 생성
 	Logger logger = LogManager.getLogger(MemController.class);
 	
-	@Autowired(required = false)
+	@Autowired(required = false) 
 	private MemService memService;
 	
 	// 로그인 폼

@@ -196,7 +196,7 @@
                
                 function whenError(e) { // 성공시
                     if (e.responseText !== "success") {
-                        // 에러 처리 로직 추가
+                        // 에러 처리 로직 추가 
                     	alert("오류 발생!");
                     }
                     alert("결과 >>> : " + e.responseText);
