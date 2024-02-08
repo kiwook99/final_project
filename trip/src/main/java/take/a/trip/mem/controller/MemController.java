@@ -27,7 +27,7 @@ import take.a.trip.mem.vo.MemVO;
 @Controller
 public class MemController {
 	
-	@Autowired
+	@Autowired 
 	private JedisPool jedisPool;
 	
 	// Logger 객체 생성

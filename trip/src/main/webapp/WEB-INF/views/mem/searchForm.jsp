@@ -191,7 +191,7 @@
                     console.log("resData >>> : " + resData.result);
 					
 					alert("ID 혹은 이메일이 틀립니다.");   	            
-                }
+                } 
                
                
                 function whenError(e) { // 성공시
