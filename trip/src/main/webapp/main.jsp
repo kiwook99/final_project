@@ -305,7 +305,7 @@
      function weathers() {
          $.ajax({
              type: 'GET',
-             url: 'http://192.168.0.55:5001/weather_api/weather',
+             url: 'http://192.168.0.4:5001/weather_api/weather',
              dataType: 'json',
              success: function (result) {
                  var hour = result[0];

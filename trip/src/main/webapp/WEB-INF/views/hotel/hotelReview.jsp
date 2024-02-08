@@ -69,27 +69,31 @@ input{
         class CommentForm extends React.Component {
             constructor(props) {
                 super(props);
-                this.state = { text: '' };
+                this.state = { text: '', memid: '' };
             }
 
-            handleSubmit = async (e) => {
-                e.preventDefault();
-                const { text } = this.state;
-                try {
-                    await fetch('http://localhost:3001/api/comments', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ text }),
-                    });
-                    this.setState({ text: '' }); // 입력 필드 초기화
-                } catch (error) {
-                    console.error('Error creating comment:', error);
-                }
-            };
+		handleSubmit = async (e) => {
+		    e.preventDefault();
+	 	   const { text, memid } = this.state; // memid 값도 함께 가져오도록 수정
+		    try {
+	 	       await fetch('http://192.168.0.4/api/comments', {
+ 		           method: 'POST',
+  	    	      headers: { 'Content-Type': 'application/json' },
+ 	        	   body: JSON.stringify({ text, memid }), // text와 memid 함께 전송
+		       });
+ 		       this.setState({ text: '', memid: '' }); // 입력 필드 초기화
+	 	   } catch (error) {
+ 		       console.error('Error creating comment:', error);
+ 	 	  }
+		};
 
             handleChange = (e) => {
                 this.setState({ text: e.target.value });
             };
+
+	 	   handleMemidChange = (e) => { // memid 입력값 처리 메서드 추가
+   	 	 	   this.setState({ memid: e.target.value });
+    	   };
 
          render() {
         return (
@@ -134,7 +138,7 @@ input{
 
             fetchComments = async () => {
                 try {
-                    const response = await fetch('http://localhost:3001/api/comments');
+                    const response = await fetch('http://192.168.0.4:3001/api/comments');
                     const comments = await response.json();
                     this.setState({ comments });
                 } catch (error) {
@@ -148,9 +152,8 @@ input{
                         <h2 class="comment-list">후기 목록</h2>
                         <ul id="commentList">
                             {this.state.comments.map((comment, index) => (
-                                <li key={index}>     
-	                        		<div className="comment-author">{comment.author}</div>
-                            		<div>{comment.text}</div>
+                                <li key={index}>
+                            		<div>{comment.text} <h4>작성자: {comment.memid}</h4></div>
 								</li>
                             ))}
                         </ul>
