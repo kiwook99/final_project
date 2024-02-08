@@ -47,6 +47,10 @@
 			border-radius: 10px;
         }
         
+        #addressBtn {
+        	 margin-right: 12px;
+        }
+        
     </style>
     
     
@@ -229,7 +233,7 @@
 				<tr>
 					<th rowspan="3" style="height: 160px;">주소</th>
 					<td>
-						<input type="text" id="memaderss" placeholder="우편번호" style="margin-left: 15px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="text" id="memaderss" placeholder="우편번호" style="margin-left: 19px;"/>&nbsp;&nbsp;&nbsp;
 
 						<input type="button" id="addressBtn" value="우편번호 찾기" />
 					</td>

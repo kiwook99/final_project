@@ -153,7 +153,7 @@
 	        function whenSuccess(resData) {
 	            console.log("resData >>> : " + resData.result);
 	            if (undefined == resData.result) {
-	                alert("ID가 없습니다");
+	                alert("이메일을 입력하세요!!");
 	            } else {
 	                var rowHtml =  '<p style="color: black;">ID는  <strong class="result-text" style="color:red;">' + resData.result + '</strong>' + ' 입니다.</p>';
 	                $("#idSearch").html(rowHtml);
@@ -183,7 +183,7 @@
                      
                function whenSuccess(resData) {
                     console.log("resData >>> : " + resData.result);
-                    
+					
 					alert("ID와 이메일을 입력해 주세요");   	            
                 }
                
