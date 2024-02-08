@@ -106,7 +106,7 @@
 		}
 
 
-        #abUpdateBtn:hover, #abDeleteBtn:hover {
+        #abUpdateBtn:hover, #abDeleteBtn:hover, #abCBtn:hover {
         	 background-color: #0bc5da;
 			 transition-duration: 0.5s;
         }

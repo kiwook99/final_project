@@ -3,9 +3,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style>
+    .form-container {
+        margin: 10px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: white;
+        max-width: 800px; /* 최대 너비 설정 */
+        margin: 0 auto; /* 가운데 정렬 */
+    }
+
+    .form-container table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .form-container table, .form-container table td {
+        border: 1px solid #ddd;
+    }
+
+    .form-container td {
+        padding: 10px;
+        text-align: center;
+        color: white;
+    }
+
+    .form-container input[type="text"] {
+        width: 100%;
+        padding: 5px;
+        margin: 5px 0;
+        box-sizing: border-box;
+    }
+
+    .form-container input[type="button"] {
+        padding: 10px 20px;
+        background-color: #0aa4b5;
+        color: white;
+        border: 0;
+        border-radius: 10px;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
     .result-container {
         background-color: #f0f0f0;
         padding: 10px;
@@ -21,12 +65,16 @@
 </style>
 </head>
 <body>
-<div>
+<%@ include file="/main.jsp" %>
+
+<div class="form-container">
 	<form name="searchForm" id="searchForm">
 		<table border="1">
+			<tr style="background-color: #0aa4b5;">
+				<td colspan="2" align="center">ID찾기</td>
+			</tr>
 			<tr>
-				<td>ID찾기</td>
-				<td>email 입력</td>
+				<td style="background-color: #0aa4b5;">email 입력</td>
 				<td><input type="text" name="mememail" id="mememail"></td>
 			</tr>
 			<tr>
@@ -38,18 +86,22 @@
 		</table>
 	</form>
 </div>
-<div>
+<br>
+<br>
+<br>
+<br>
+<div class="form-container">
 	<form action="">
 		<table border="1">
-			<tr>
-				<td>임시 PW 발급</td>
+			<tr style="background-color: #0aa4b5;">
+				<td colspan="2" align="center">임시 PW 발급</td>
 			</tr>
 			<tr>
-				<td>ID 입력</td>
+				<td style="background-color: #0aa4b5;">ID 입력</td>
 				<td><input type="text" name="memid" id="memid"></td>
 			</tr>
 			<tr>
-				<td>EMAIL 입력</td>
+				<td style="background-color: #0aa4b5;">EMAIL 입력</td>
 				<td><input type="text" name="mememail_" id="mememail_"></td>
 			</tr>
 			<tr>

@@ -5,6 +5,30 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/style.css">
     <title>회원가입</title>
+    <style type="text/css">
+    	h2 {
+    		text-align: center;
+    	}
+    
+        #idCheck:hover, #pwCheck:hover, #inBtn:hover, #caBtn:hover {
+        	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
+        }
+        
+        button {
+           padding: 5px 15px;
+           background-color: #0aa4b5;
+           color: white;
+           border: 0;
+		   border-radius: 10px;
+           cursor: pointer;
+           display: flex; /* 버튼을 블록 요소로 변경 */
+       	   float: right; /* 오른쪽으로 이동 */
+        }
+        
+    </style>
+    
+    
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- Daum 우편번호 서비스 스크립트 로드 -->
     <script type="text/javascript" defer>
@@ -99,89 +123,94 @@
 </head>
 <body>
 <%@ include file="/main.jsp" %>
-    <form name="MemInsert" id="MemInsert">
-    <div class="main-signup">
-        <!--웹페이지 상단-->
 
-        <!--회원가입 부분-->
-        <section class="signup-wrap">
-        <tr>
-		<td colspan="2" align="center" style="color:white; background-color:#0aa4b5;">공지사항 수정하기</td>
-		</tr>
-        <div>
-                <!--아이디,비번,비번재확인-->
-				<div>
-                <h3>아이디</h3>
-                <div style="display: flex; align-items: center;">
-                <span class="signup-input" style="flex: 1;">
-                    <input name="memid" id="memid" type="text"></input>
-                </span>
-                <span class="cnum-btn-wrap">
-            			<button id="idCheck" value="중복확인">중복확인</button>
-        			</span>
-				</div>
-				
-                <h3>비밀번호</h3>
-				<span class="signup-input">
-    				<input name="mempw" id="mempw" type="password"></input>
-   					<span class="pw-lock"></span>
-				</span>
-
-				<h3>비밀번호 재확인</h3>
-				<div style="display: flex; align-items: center;">
-                <span class="signup-input" style="flex: 1;">
-                    <input name="mempw_r" id="mempw_r" type="text"></input>
-                </span>
-                <span class="cnum-btn-wrap">
-            			<button id="pwCheck" value="중복확인">중복확인</button>
-        			</span>
-				</div>
-                
-                <h3>이름</h3>
-                <span class="signup-input">
-                    <input name="memname" id="memname" type="text"></input>
-                    
-                </span>
-
-                <h3>이메일</h3>
-                <span class="signup-input">
-                    <input name="mememail" id="mememail" type="text"></input>
-                </span>
-
-                <h3>휴대전화</h3>
-                <span class="signup-input">
-                    <input name="memphone" id="memphone" type="text"placeholder="특수기호없이"></input>
-                </span>
-            </div>
-       
-       		<div style="margin-top: 35px;">
-                <h3>주소</h3>
-                
-                <div style="display: flex; flex-direction: column;">
-    				<div style="display: flex; align-items: center;">
-        			<span class="signup-input" style="flex: 1;">
-            			<input type="text" id="memaderss" placeholder="우편번호">
-        			</span>
-        			<span class="cnum-btn-wrap">
-            			<button id="addressBtn" value="우편번호 찾기">우편번호 찾기</button>
-        			</span>
-    			</div>
-    				<div class="signup-input-c" style="margin-top: 10px;">
-        				<input type="text" id="memraderss" placeholder="도로명주소">
-    			</div>
-    				<div class="signup-input-c" style="margin-top: 10px;">
-        				<input type="text" id="memdaderss" placeholder="상세주소를 입력하세요">
-    				</div>
-				</div>
-       
-       		<div>
-                <!--가입하기-->
-                <div class="signup-btn-wrap">
-                    <button id="inBtn">가입하기</button>
-                    <button id="caBtn">뒤로가기</button>
-                </div>
-            </div>
-        </section>
-    </form>
+<br>
+<hr>
+<br>
+<h2> 회원가입 </h2>
+<br>
+<hr>
+<br>
+	<div class="main-signup">
+    	<form name="MemInsert" id="MemInsert">
+			<table border="1">
+		        <tr>
+					<td colspan="4" align="center" style="color:white; background-color:#0aa4b5; height: 40px;">공지사항 수정하기</td>
+				</tr>		
+				<tr>
+					<th style="height: 40px;">아이디<th>
+					<td>
+						<input type="text" name=memid" id=memid" />
+					</td>
+					<td>
+						<input type="button" value="중복확인" id="idCheck" />
+					</td>
+					
+				</tr>
+				<tr>
+					<th style="height: 40px;">비밀번호</th>
+					<td colspan="2">
+						<input type="password" name=mempw" id=mempw" />
+					</td>
+				</tr>
+				<tr>
+					<th style="height: 40px;">비밀번호 재확인</th>
+					<td colspan="2">
+						<input type="password" name=mempw_r" id="mempw_r" />
+					</td>
+					<td>
+						<input type="button" value="중복확인" id="pwCheck" />
+					</td>
+				</tr>	
+				<tr>
+					<th style="height: 40px;">이름</th>
+					<td colspan="2">
+						<input type="text" name="memname" id="memname" />
+					</td>
+				</tr>	
+				<tr>
+					<th style="height: 40px;">이메일</th>
+					<td colspan="2">
+						<input type="text" name="mememail" id="mememail" />
+					</td>
+				</tr>	
+				<tr>
+					<th style="height: 40px;">휴대전화</th>
+					<td colspan="2">
+						<input type="text" name="memphone" id="memphone" "placeholder="특수기호없이" />
+					</td>
+				</tr>
+				<tr>
+					<th rowspan="3" style="height: 160px;">주소</th>
+					<td colspan="2">
+						<input type="text" id="memaderss" placeholder="우편번호" />
+					</td>
+					<td>
+						<input type="button" id="addressBtn" value="우편번호 찾기" />
+					</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td>
+						<input type="text" id="memraderss" placeholder="도로명주소" />
+					</td>				
+				</tr>	
+				<tr>
+					<th></th>
+					<td>
+						<input type="text" id="memdaderss" placeholder="상세주소를 입력하세요" />
+					</td>				
+				</tr>
+				<tr>
+					<td colspan="4" style="height: 60px;">
+						<input type="button" value="가입하기" id="inBtn" />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="button" value="뒤로가기" id="caBtn" />
+					</td>
+				</tr>											
+			</table>
+    	</form>
+    </div>
+    <br><br><br>
 </body>
 </html>

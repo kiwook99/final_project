@@ -100,6 +100,12 @@
         .right button {
 		    margin-right: 10px;
 		}
+		
+		
+        button:hover {
+        	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
+        }
 
     </style>
     <!-- 폰트 어썸 CDN -->
@@ -134,7 +140,6 @@
 <td><input type="text" class="mem" name="memnum" id="memnum" value="<%=  _abvo.getMemnum() %>" 
 			style="width:100%; height:30px; font-size:16px;" readonly/></td>
 </tr>
-
 <tr>
 <td>내용</td>
 <td>
