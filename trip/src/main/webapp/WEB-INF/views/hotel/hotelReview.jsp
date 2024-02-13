@@ -162,18 +162,25 @@ input{
 
 		   handleDelete = async (_id) => {
   			  try {
-     			   await fetch('http://192.168.0.4:3001/api/comments/delete', {
+     			   const response = await fetch('http://192.168.0.4:3001/api/comments/delete', {
       			      method: 'POST',
 					  headers: { 'Content-Type': 'application/json' },
  	        	      body: JSON.stringify({ _id, memid}),
     			    });
-     			   // 댓글 목록을 다시 가져와서 화면 갱신
-      			  this.fetchComments();
-   			  } catch (error) {
-   			    console.error('Error deleting comment:', error);
-
-  			  }
-			};
+ 					// 서버가 403 Forbidden을 응답하면 알림을 표시합니다.
+					console.log(response.status);
+   					if (response.status === 403) {
+      					alert('관리자만 사용할수있는 권한 입니다.');
+    					} else if (response.ok) {
+      					// 댓글 삭제 성공 시 댓글 목록을 다시 가져와서 화면을 갱신합니다.
+      					this.fetchComments();
+    					} else {
+      					console.error('Error deleting comment:', response.statusText);
+    					}
+  					} catch (error) {
+    					console.error('Error deleting comment:', error);
+  					}
+				};
 
             render() {
                 return (
