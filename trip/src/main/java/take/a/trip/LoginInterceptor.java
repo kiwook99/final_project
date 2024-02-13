@@ -22,14 +22,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Autowired
 	private T_Session t_Session;
 	
-	String jds="";
+	String jds=null;
 	
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) // HttpServletResponse response,
             throws Exception {
     	
 		String sessionId = t_Session.getSession(request);
-		jds = null;
 		
         if (request.getRequestURI().startsWith("/trip/resources/")) {
             return true; // resources은 인터셉터를 거치지 않고 계속 진행

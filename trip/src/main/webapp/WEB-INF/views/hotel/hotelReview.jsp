@@ -80,19 +80,19 @@ input{
         class CommentForm extends React.Component {
             constructor(props) {
                 super(props);
-                this.state = { text: '', memid: '' };
+                this.state = { text: '' };
             }
 
 		handleSubmit = async (e) => {
-		    e.preventDefault();
-	 	   const { text, memid } = this.state; // memid 값도 함께 가져오도록 수정
+		   e.preventDefault();
+	 	   const { text } = this.state;
 		    try {
 	 	       await fetch('http://192.168.0.4:3001/api/comments', {
  		           method: 'POST',
   	    	       headers: { 'Content-Type': 'application/json' },
  	        	   body: JSON.stringify({ text, memid }), // text와 memid 함께 전송
 		       });
- 		       this.setState({ text: '', memid: '' }); // 입력 필드 초기화
+ 		       this.setState({ text: ''}); // 입력 필드 초기화
 			   window.location.reload(); //폼 제출 후 새로고침
 	 	   } catch (error) {
  		       console.error('Error creating comment:', error);
@@ -103,9 +103,9 @@ input{
                 this.setState({ text: e.target.value });
             };
 
-	 	   handleMemidChange = (e) => { // memid 입력값 처리 메서드 추가
-   	 	 	   this.setState({ memid: e.target.value });
-    	   };
+           handleMemidChange = (e) => { // memid 입력값 처리 메서드 추가
+               memid = e.target.value; // 전역 변수 memid를 설정
+           };
 
         render() {
         return (
@@ -115,19 +115,19 @@ input{
                         id="commentText"
                         value={this.state.text}
                         onChange={this.handleChange}
-
                         placeholder="후기를 입력하세요..."
                         required
                     ></textarea>
                     <br />
                     {/* memid 입력 필드 */}
-                    <input
-                        type="text"
-                        value={this.state.memid}
-                        onChange={this.handleMemidChange}
-                        placeholder="작성자 이름"
-                        required
-                    />
+					<p>작성자</p>
+					<input
+					  type="text"
+  					  value={memid} // memid 값을 읽기 전용 필드에 할당
+ 					  readOnly // 읽기 전용으로 설정
+ 					  placeholder="작성자 이름"
+   					  required
+					/>
                     <br />
                     <button type="submit">후기 작성</button>
                 </form>
@@ -170,6 +170,7 @@ input{
       			  this.fetchComments();
    			  } catch (error) {
    			    console.error('Error deleting comment:', error);
+
   			  }
 			};
 
