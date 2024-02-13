@@ -158,7 +158,9 @@
 		    #insertBtn:hover, #search_btn:hover {
 		      	 background-color: #0bc5da;
 				 transition-duration: 0.5s;
-		      }			
+		      }	
+		      
+		     	
 			
 		</style>	
 		<!-- 폰트 어썸 CDN -->

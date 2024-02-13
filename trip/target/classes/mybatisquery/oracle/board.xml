@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- dao클래스의 경로 입력 -->
+<mapper namespace="take.a.trip.board.dao.BoardDAO">
+
+<!-- Insert 데이터 입력-->
+<!-- parameter:매개변수 -->
+<insert id="boardInsert" parameterType="boardvo">
+
+	INSERT INTO BOARD (BOARDNUM, MEMNUM, BOARDTITLE, BOARDCOMENT, BOARDIMAGE, DELETEYN, INSERTDATE, UPDATEDATE)
+				 VALUES ( BOARD_SEQ.NEXTVAL<!--시퀀스 1씩 증가 BOARDNUM:회원번호 -->
+				 		 ,#{memnum,jdbcType=VARCHAR}
+				 		 ,#{boardtitle,jdbcType=VARCHAR}
+				 		 ,#{boardcoment,jdbcType=VARCHAR}
+						 ,#{boardimage,jdbcType=VARCHAR}	  		
+				 		 ,'Y'<!--브라우저에 띄워지는 고정값  게시글 조회 Y로 고정-->
+				 		 ,SYSDATE
+				 		 ,SYSDATE)	
+</insert>
+
+<!-- SelectAll 전체조회-->
+<!-- 페이징을 위한  parameterType="boardvo" 입력  -->
+<select id="boardSelectAll" parameterType="boardvo" resultType="boardvo">
+<!-- 페이징을 위한  SELECT * FROM() WHERE  A.DELETEYN = 'Y'... ) WHERE pageSize = #{curPage} 조건절 추가 입력-->
+	SELECT * FROM (
+		SELECT   A.BOARDNUM  BOARDNUM 
+				,A.MEMNUM	MEMNUM
+	       		,A.BOARDTITLE  BOARDTITLE
+	       		,A.BOARDCOMENT	BOARDCOMENT
+	       		,A.BOARDIMAGE   BOARDIMAGE  
+		        ,A.DELETEYN	DELETEYN      		
+	       		,TO_CHAR(TO_DATE(A.INSERTDATE), 'YYYY-MM-DD') INSERTDATE
+	       		,TO_CHAR(TO_DATE(A.UPDATEDATE), 'YYYY-MM-DD') UPDATEDATE
+	       		<!--  ? : 페이지 사이즈 : pageSize  -->
+		       ,CEIL(ROW_NUMBER() OVER(ORDER BY A.BOARDNUM)/ #{pageSize} ) pageSize		
+			   ,COUNT(A.BOARDNUM) OVER() AS totalCount
+		FROM    BOARD A
+		<!-- 페이징을 위한 WHERE  A.DELETEYN = 'Y' 조건절 입력  -->
+		WHERE   A.DELETEYN = 'Y' 
+		ORDER BY BOARDNUM 
+	  <!--  ? : 현재 페이지 : curPage -->
+	  ) WHERE pageSize = #{curPage}
+	
+</select>
+
+<!-- Select 조건조회 -->
+<select id="boardSelect" parameterType="boardvo" resultType="boardvo">
+
+	SELECT   A.BOARDNUM  BOARDNUM 
+			,A.MEMNUM	MEMNUM
+       		,A.BOARDTITLE  BOARDTITLE
+       		,A.BOARDCOMENT	BOARDCOMENT
+       		,A.BOARDIMAGE   BOARDIMAGE  
+	        ,A.DELETEYN	DELETEYN      		
+       		,TO_CHAR(TO_DATE(A.INSERTDATE), 'YYYY-MM-DD') INSERTDATE
+       		,TO_CHAR(TO_DATE(A.UPDATEDATE), 'YYYY-MM-DD') UPDATEDATE       		
+	<!-- 조건절 -->
+	FROM    BOARD A 	         
+	WHERE   A.DELETEYN = 'Y'
+	<!-- Insert 입력한 데이터 불러오기 -->
+	AND     A.BOARDTITLE = #{boardtitle,jdbcType=VARCHAR}	
+</select>
+
+<!-- SearchSelect 검색조회 -->
+<select id="boardSearchSelect" parameterType="boardvo" resultType="boardvo">
+	<!--페이징을 위한 추가 입력  SELECT * FROM () WHERE pageSize = #{curPage} 조건절  전체조회 추가입력-->
+	SELECT * FROM (
+		SELECT   A.BOARDNUM  BOARDNUM 
+				,A.MEMNUM	MEMNUM
+	       		,A.BOARDTITLE  BOARDTITLE
+	       		,A.BOARDCOMENT	BOARDCOMENT
+	       		,A.BOARDIMAGE   BOARDIMAGE  
+		        ,A.DELETEYN	DELETEYN      		
+	       		,TO_CHAR(TO_DATE(A.INSERTDATE), 'YYYY-MM-DD') INSERTDATE
+	       		,TO_CHAR(TO_DATE(A.UPDATEDATE), 'YYYY-MM-DD') UPDATEDATE  
+	       		<!--  ? : 페이지 사이즈 : pageSize  -->
+		        ,CEIL(ROW_NUMBER() OVER(ORDER BY A.BOARDNUM)/ #{pageSize} ) pageSize		
+			   ,COUNT(A.BOARDNUM) OVER() AS totalCount	     		
+		<!-- 조건절 -->
+		FROM    BOARD A 	         
+		WHERE   1=1
+		AND     A.DELETEYN = 'Y'		
+		<if test="searchFilter=='key_01'">
+			<![CDATA[ AND A.BOARDTITLE LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>				
+		</if>
+	<!--  ? : 현재 페이지 : curPage -->
+	) WHERE pageSize = #{curPage}
+		
+</select>
+
+</mapper> 
+
+  
