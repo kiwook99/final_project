@@ -31,7 +31,8 @@
 }
 
 .comment-form button:hover {
-  background-color: #0056b3;
+  background-color: #0bc5da;
+  transition-duration: 0.5s;
 }
 
 input{
