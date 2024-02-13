@@ -92,6 +92,9 @@
     margin-right: 100px;
 	}    
      
+     td {
+     margin-right: 30px;
+     }
 </style>
 </head>
 <body>

@@ -21,6 +21,7 @@ import take.a.trip.hotel.util.NumUtil;
 import take.a.trip.hotel.vo.HotelVO;
 import take.a.trip.order.vo.OrderVO;
 import take.a.trip.spot.vo.SpotVO;
+import take.a.trip.T_Session;
 import take.a.trip.hotel.controller.HotelController;
 import take.a.trip.hotel.service.HotelService;
 
@@ -44,6 +45,9 @@ public class HotelController {
 	 
 	 @Autowired
 	 private JedisPool jedisPool;
+	 
+	 @Autowired
+	 private T_Session t_Session;
 		
 	 
 	 // 숙소페이지
@@ -51,8 +55,8 @@ public class HotelController {
 	 public String hotel(HotelVO hvo, Model model, HttpServletRequest request) {
 		 logger.info("hotel 함수 진입");
 		 
-		 HttpSession session = request.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
-		 String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+		 String sessionId = t_Session.getSession(request);
+		 
 		 logger.info("spot_IsudSelectAll sessionId >>> : " + sessionId);
 		 // 페이징
 		 int pageSize = CommonUtils.HOTEL_PAGE_SIZE; 	// 한페이지의 값
@@ -153,8 +157,7 @@ public class HotelController {
 		 logger.info("hotelSelect 함수진입 ");
 		 logger.info("hotelSelect hvo.getHotelnum()=> "+ hvo.getHotelnum());
 
-		 HttpSession session = request.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
-		 String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+		 String sessionId = t_Session.getSession(request);
 		 logger.info("spot_IsudSelectAll sessionId >>> : " + sessionId);
 
 		 
@@ -375,9 +378,9 @@ public class HotelController {
 		
 		//호텔 리뷰
 		@GetMapping("hotel/hotelReview")
-		public String hotelReview() {
+		public String hotelReview(Model model, HttpServletRequest request) {
 			logger.info("hotelReview 함수 진입 ");
-
+			
 			return "hotel/hotelReview";
 		}	
 	}

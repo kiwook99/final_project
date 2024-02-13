@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<% 	//세션에서 값을 가져오기
-	String memid = (String) session.getAttribute("memid");
+<%@ page import="take.a.trip.T_Session" %>
+
+<%
+//T_Session 객체 생성
+T_Session tSession = T_Session.getInstance();
+
+//HttpServletRequest 객체를 사용하여 세션 가져오기
+HttpServletRequest httpServletRequest = (HttpServletRequest) pageContext.getRequest();
+String memid = tSession.getSession(httpServletRequest);
 %>
 <!DOCTYPE html>
 <html>
@@ -170,8 +177,10 @@
 				border: 0;
 				border-radius: 10px;
 				font-size: 15px;
+/* 				font-size: 20px; */
 				margin-top: -55px; 
 				float: right;
+/* 				font-family: 'East Sea Dokdo', sans-serif; */
 			}
 			
 			.loginBtn p {
@@ -354,7 +363,7 @@
      function weathers() {
          $.ajax({
              type: 'GET',
-             url: 'http://192.168.0.4:5001/weather_api/weather',
+             url: 'http://192.168.0.55:5001/weather_api/weather',
              dataType: 'json',
              success: function (result) {
                  var hour = result[0];

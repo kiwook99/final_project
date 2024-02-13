@@ -18,20 +18,18 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
 	@Autowired
 	private JedisPool jedisPool;
+	
+	@Autowired
+	private T_Session t_Session;
+	
 	String jds="";
 	
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) // HttpServletResponse response,
             throws Exception {
     	
-    	HttpSession session = request.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
-		String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
-		jds = "";
-		
-		try (Jedis jedis = jedisPool.getResource()) {       	
-  			 // Redis에 데이터 검색
-  	         	jds = jedis.get(sessionId);
-  	        }
+		String sessionId = t_Session.getSession(request);
+		jds = null;
 		
         if (request.getRequestURI().startsWith("/trip/resources/")) {
             return true; // resources은 인터셉터를 거치지 않고 계속 진행
@@ -57,11 +55,21 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         	}
         	return false;
         }
-        if (jds == null) {
+        
+		//로그인 중이라면 래디스에서 값을 가져오고 없다면 로그인 폼으로 보냄
+		if (sessionId != null) {
+			try (Jedis jedis = jedisPool.getResource()) {       	
+	  			 // Redis에 데이터 검색
+	  	         	jds = jedis.get(sessionId);
+	  	        }
+			return true;
+		} else if (jds == null) {
     		
         	response.sendRedirect("/trip/mem/loginForm");
         }
-        return true;
+        
+       
+       return false;
     }
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,

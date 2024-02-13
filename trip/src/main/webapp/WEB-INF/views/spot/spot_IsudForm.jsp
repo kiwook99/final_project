@@ -34,6 +34,20 @@
 			  background-color: #0bc5da;
 			  transition-duration: 0.5s;
 			}				
+			
+			
+           input[type=file]::file-selector-button {
+       			padding: 5px 15px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+           }	
+           
+           input[type=file]::file-selector-button:hover {
+			  background-color: #0bc5da;
+			  transition-duration: 0.5s;
+           }           		
 						
 		</style>
 		

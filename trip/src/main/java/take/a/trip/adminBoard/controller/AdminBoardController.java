@@ -20,6 +20,7 @@ import com.oreilly.servlet.MultipartRequest;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import take.a.trip.T_Session;
 import take.a.trip.adminBoard.common.CommonUtils;
 import take.a.trip.adminBoard.vo.AdminBoardVO;
 import take.a.trip.adminBoard.service.AdminBoardService;
@@ -33,14 +34,14 @@ public class AdminBoardController {
 	private AdminBoardService adminBoardService;
 	@Autowired
 	private JedisPool jedisPool;
-
+	@Autowired
+	private T_Session t_Session;
 	
 	@GetMapping("adminboard/adminBoardSelectAll")
 	public String adminBoardSelectAll(AdminBoardVO abvo, Model model, HttpServletRequest request) {
 		logger.info("adminBoardSelectAll 함수 진입 >>> : ");
 		
-		 HttpSession session = request.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
-		 String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+		 String sessionId = t_Session.getSession(request);
 		
 		// 페이징 처리 ====================================================================
 				int pageSize = CommonUtils.ADMINBOARD_PAGE_SIZE;
@@ -95,8 +96,8 @@ public class AdminBoardController {
 		@GetMapping("adminboard/adminBoardSelect")
 		public String adminBoardSelect(AdminBoardVO abvo, Model model, HttpServletRequest request) {
 			logger.info("adminBoardSelect 함수 진입 >>> : ");
-			HttpSession session = request.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
-			String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+			
+			String sessionId = t_Session.getSession(request);
 			
 			logger.info("adminBoardSelect 함수 진입  abvo.getAdboardnum() >>> : " + abvo.getAdboardnum());
 			
