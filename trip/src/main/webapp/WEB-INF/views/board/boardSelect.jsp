@@ -15,15 +15,23 @@
 		text-align: center;
 	}
 	
-	table {
-	    width:600px; 
-	    margin: auto;
-	}
-	
-	table, td, th {
-	    border-collapse : collapse;
-	    border : 1px solid black;
-	};
+        #post table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        #post th, #post td {
+            border: 1px solid black;
+            padding:5px;
+            /*text-align: center;*/
+        }
+        
+       #post td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
 	.img_div {
 		margin: auto;
 		height: 500px;
@@ -39,6 +47,21 @@
 	    margin: auto;
 	    display: block;
 	}
+	
+			#bUBtn, #bDBtn, #bWBtn {
+			padding: 5px 25px;
+			background-color: #0aa4b5;
+			color: white;
+			border: 0;
+			border-radius: 10px;
+			font-size: 15px;
+			}
+			
+			
+			#bUBtn:hover, #bDBtn:hover, #bWBtn:hover {
+        	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
+			}
 </style>
 </head>
 <body>
@@ -62,7 +85,12 @@
 %>
 
 <form name="fileuploadForm" id="fileuploadForm">
-<table>
+<table id="post">
+<tr>
+    <td colspan="5" style="text-align:center;color:white; background-color:#0aa4b5;">
+        <h3>게시글</h3>
+    </td>
+</tr>
 	<!--style="border:none":입력창 모서리 없애기-->
 	<tr>
 		<td>제목 : <%=bvo.getBoardtitle()%> </td>
