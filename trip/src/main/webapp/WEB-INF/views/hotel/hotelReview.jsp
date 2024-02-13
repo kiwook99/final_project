@@ -71,7 +71,10 @@ input{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
-
+	<script>
+	    // memid 값을 JavaScript 변수로 가져오기
+	    var memid = "<%= memid %>";
+	</script>
     <!-- 댓글 작성 폼 컴포넌트 -->
     <script type="text/babel">
         class CommentForm extends React.Component {
@@ -161,7 +164,7 @@ input{
      			   await fetch('http://192.168.0.4:3001/api/comments/delete', {
       			      method: 'POST',
 					  headers: { 'Content-Type': 'application/json' },
- 	        	      body: JSON.stringify({ _id }),
+ 	        	      body: JSON.stringify({ _id, memid}),
     			    });
      			   // 댓글 목록을 다시 가져와서 화면 갱신
       			  this.fetchComments();

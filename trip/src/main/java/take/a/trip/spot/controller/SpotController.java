@@ -130,7 +130,7 @@ public class SpotController {
 
         
 		String sessionId = t_Session.getSession(req);
-		
+		logger.info("sessionId >>> : " + sessionId );
 		// 페이징
 		int pageSize = CommonUtils.SPOT_PAGE_SIZE;  // 페이지에 나올 값
 		int groupSize = CommonUtils.SPOT_GROUP_SIZE;	// 그룹으로 묶을 값
@@ -164,6 +164,7 @@ public class SpotController {
 			model.addAttribute("listAll", listAll);
 			model.addAttribute("pagingSVO", svo);
 			
+			if (sessionId != null) {
 			 try (Jedis jedis = jedisPool.getResource()) {
 					
 				 String adminyn = jedis.get(sessionId);
@@ -177,7 +178,8 @@ public class SpotController {
 				        // 값이 없는 경우
 				        logger.info("adminyn is null");
 				        }
-			 }                                                                    			
+			 	}
+			 }                                                         			
 			
 			return "spot/spot_IsudSelectAll";
 		}
@@ -207,7 +209,7 @@ public class SpotController {
 			logger.info("spot_IsudSelect spotCnt >>> : " + spotCnt);
 			
 			model.addAttribute("listS", listS);
-			
+			if (sessionId != null) {
 			 try (Jedis jedis = jedisPool.getResource()) {
 				 logger.info("jedisPool >>> : " + jedisPool);
 				 
@@ -222,8 +224,8 @@ public class SpotController {
 				        // 값이 없는 경우
 				        logger.info("adminyn is null");
 				        }
-			 }	
-			 
+			 	}	
+			}
 			
 			return "spot/spot_IsudSelect";
 		}

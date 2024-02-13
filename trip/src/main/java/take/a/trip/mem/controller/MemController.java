@@ -223,8 +223,6 @@ public class MemController {
 		logger.info("UserController logout 진입 >>> : ");
 		
 		String memid = t_Session.getSession(request);	
-		t_Session.killSession(request);
-		
 		logger.info("sessionId >>> : "+ memid);
 		
 		//래디스 연결
@@ -232,8 +230,8 @@ public class MemController {
 	            // 키를 삭제합니다.
 	            Long deletedKeysCount = jedis.del(memid);
 	        }
-		// 세션을 무효화하여 삭제
-		session.invalidate();
+		// 세션을 삭제
+		t_Session.killSession(request);
 		
 		return "redirect:/spot/spot_IsudSelectAll";
 	}
