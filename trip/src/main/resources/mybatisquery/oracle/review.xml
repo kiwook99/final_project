@@ -6,7 +6,7 @@
 
 <insert id="reviewInsert" parameterType="reviewvo" >
  
-	INSERT INTO REVIEW (REVIEWNUM, MEMNUM, TRIPNUM, REVIEWCOMENT, DELETEYN, INSERTDATE) 
+	INSERT INTO BREVIEW (REVIEWNUM, MEMNUM, TRIPNUM, REVIEWCOMENT, DELETEYN, INSERTDATE) 
 	            VALUES (REVIEW_SEQ.NEXTVAL, #{memnum}, #{tripnum}, #{reviewcoment}, 'Y', SYSDATE)
 </insert>
 
@@ -18,7 +18,7 @@
 		       ,A.TRIPNUM 		TRIPNUM
 		       ,A.REVIEWCOMENT 	REVIEWCOMENT	   
 	           ,A.INSERTDATE 	INSERTDATE
-		FROM 	REVIEW A
+		FROM 	BREVIEW A
 		WHERE 	DELETEYN = 'Y' 
 		AND 	A.MEMNUM = #{memnum}
 		ORDER BY 1 DESC
@@ -26,7 +26,7 @@
 
 <update id="reviewDelete" parameterType="reviewvo">
 	
-	UPDATE 	REVIEW 
+	UPDATE  BREVIEW 
 	SET 	DELETEYN = 'N', 
 			INSERTDATE = SYSDATE
 	WHERE 	DELETEYN = 'Y' 

@@ -48,8 +48,8 @@ String memid = tSession.getSession(httpServletRequest);
 		selectAll();
 		
 		// 댓글 등록
-		$(document).on("click", "#insertBtn", function(){
-			console.log("insertBtn >>> : ");
+		$(document).on("click", "#insertbtn", function(){
+			console.log("insertbtn >>> : ");
 			
 			let insertURL = "<%= request.getContextPath() %>/review/reviewInsert";		
 			let method = "POST";

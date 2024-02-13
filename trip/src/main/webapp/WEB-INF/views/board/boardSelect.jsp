@@ -82,6 +82,7 @@
 	List<BoardVO> list =(List<BoardVO>)obj;
 	//if (list.size() == 1){
 		BoardVO bvo = list.get(0);		
+		
 %>
 
 <form name="fileuploadForm" id="fileuploadForm">
