@@ -87,7 +87,7 @@
 					});
 					
 					function whenSuccess(resData){
-						alert("resData >>> : " + resData);
+
 						if ("GOOD" == resData){
 							// 입력데이터 초기화 함수호출
 							rboardFormData();
@@ -106,7 +106,7 @@
 					console.log("D >>> : ");
 					
 					var rbnumV = $(this).parents("li").attr("dataNum");
-					alert("rbnumV >>> : " + rbnumV);
+
 					var target = $(this).parents(".rbmemoItem");
 					console.log("target >>> : " + target);
 					

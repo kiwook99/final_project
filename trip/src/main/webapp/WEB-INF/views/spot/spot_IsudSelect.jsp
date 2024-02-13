@@ -31,10 +31,18 @@
  				margin: 0 auto; 
  				font-size: 20px;
  				border-radius: 5px;
-			}					
+			    border-top: 1px solid #444444;
+    			border-collapse: collapse;
+			}	
+							
+		  td {
+		    border-bottom: 1px solid #444444;
+		    padding: 10px;
+		  }
 
 			.tt {
 				font-weight: bold;
+				border-right: 1px solid #444444;
 			}
 			
 						
@@ -144,7 +152,7 @@
 			<form name="spotUpdateForm" id="spotUpdateForm">
 				<input type="hidden" name="tripnum" id="tripnum" value="<%= svo.getTripnum() %>">
 				<br>
-				<table border="1">					
+				<table>					
 					<tr>
 						<td class="tt" width="5%" height="40px"> 여행지명 </td>
 						<td width="50%" style="font-weight: bold;">

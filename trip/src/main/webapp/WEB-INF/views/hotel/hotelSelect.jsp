@@ -252,6 +252,7 @@
 	input[type="text"] {
         border: none;
         outline: none;
+        background-color: #F7FCFC;
     }
 
 	.coment, .info ul, .name h3{

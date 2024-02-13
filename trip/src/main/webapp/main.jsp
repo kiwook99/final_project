@@ -170,8 +170,10 @@
 				border: 0;
 				border-radius: 10px;
 				font-size: 15px;
+/* 				font-size: 20px; */
 				margin-top: -55px; 
 				float: right;
+/* 				font-family: 'East Sea Dokdo', sans-serif; */
 			}
 			
 			.loginBtn p {
@@ -354,7 +356,7 @@
      function weathers() {
          $.ajax({
              type: 'GET',
-             url: 'http://192.168.0.4:5001/weather_api/weather',
+             url: 'http://192.168.0.55:5001/weather_api/weather',
              dataType: 'json',
              success: function (result) {
                  var hour = result[0];

@@ -34,7 +34,7 @@
 			    border-radius: 10px;
 			    padding: 20px;
 			    font-weight: bold;
-			    color: #444;			    
+			    color: #000;			    
 			}
 			
 			
@@ -75,7 +75,7 @@
 			    border-radius: 10px;
 			    padding: 40px;
 /* 			    font-weight: bold; */
-			    color: #444;
+			    color: #000;
    				font-size: 20px;
 			    	    
 			}
@@ -139,7 +139,7 @@
 			    border-radius: 10px;
 			    padding: 20px;
 			    font-weight: bold;
-			    color: #444;
+			    color: #000;
 			}			
     		
     		.detail-moreinfo{
@@ -147,7 +147,7 @@
 			    border-radius: 10px;
 			    padding: 40px;
 			    font-weight: bold;
-			    color: #444;
+			    color: #000;
 			}	
 
 			.explain {
