@@ -186,7 +186,7 @@
 					$('.tripnum').prop('checked',false);
 					$(this).prop('checked',true);
 				}
-				alert("선택완료");
+
 			});	
 			
 			// I
@@ -215,7 +215,6 @@
 				console.log("selectBtn >>> : ");
 				
 				if($('.tripnum:checked').length == 0){
-						alert("수정할 글 번호 하나를 선택하세요");
 						
 						return;
 					}
@@ -230,7 +229,6 @@
 			
 			// 검색
 		      $("#search_btn").click(function(){
-			         alert('검색합니다.');
 			         
 			         $("#miniSearchForm").attr({
 			        	 'method':'GET'
