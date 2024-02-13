@@ -61,6 +61,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	  			 // Redis에 데이터 검색
 	  	         	jds = jedis.get(sessionId);
 	  	        }
+			return true;
 		} else if (jds == null) {
     		
         	response.sendRedirect("/trip/mem/loginForm");
