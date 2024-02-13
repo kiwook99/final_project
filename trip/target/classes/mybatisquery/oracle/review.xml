@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+          
+<mapper namespace="take.a.trip.review.dao.ReviewDAO">
+
+<insert id="reviewInsert" parameterType="reviewvo" >
+ 
+	INSERT INTO REVIEW (REVIEWNUM, MEMNUM, TRIPNUM, REVIEWCOMENT, DELETEYN, INSERTDATE) 
+	            VALUES (REVIEW_SEQ.NEXTVAL, #{memnum}, #{tripnum}, #{reviewcoment}, 'Y', SYSDATE)
+</insert>
+
+
+<select id="reviewSelectAll" parameterType="reviewvo" resultType="reviewvo">
+	
+		SELECT 	A.REVIEWNUM 		REVIEWNUM
+		       ,A.MEMNUM  		MEMNUM
+		       ,A.TRIPNUM 		TRIPNUM
+		       ,A.REVIEWCOMENT 	REVIEWCOMENT	   
+	           ,A.INSERTDATE 	INSERTDATE
+		FROM 	REVIEW A
+		WHERE 	DELETEYN = 'Y' 
+		AND 	A.MEMNUM = #{memnum}
+		ORDER BY 1 DESC
+</select>
+
+<update id="reviewDelete" parameterType="reviewvo">
+	
+	UPDATE 	REVIEW 
+	SET 	DELETEYN = 'N', 
+			INSERTDATE = SYSDATE
+	WHERE 	DELETEYN = 'Y' 
+	AND 	REVIEWNUM = #{reviewnum}
+	
+</update>
+
+</mapper>      

@@ -16,6 +16,9 @@
 		<typeAlias type="take.a.trip.spot.vo.SpotVO" alias="svo"/>
 		<typeAlias type="take.a.trip.spot.vo.ReviewVO" alias="rvo"/>					
 		
+		
+		<typeAlias type="take.a.trip.board.vo.BoardVO" alias="boardvo"/>
+		<typeAlias type="take.a.trip.review.vo.ReviewVO" alias="reviewvo"/>
 
 	</typeAliases>
 </configuration>

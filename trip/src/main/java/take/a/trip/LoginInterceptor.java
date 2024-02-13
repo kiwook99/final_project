@@ -48,6 +48,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if (request.getRequestURI().startsWith("/trip/mem")) {
             return true; // mem 은 인터셉터를 거치지 않고 계속 진행
         }
+
         // adminBoard는 관리자 확인
         if (request.getRequestURI().startsWith("/trip/adminBoard")) {
     		//adminBoard는 Redis에 값을 조회후 Y일 경우에만 진행

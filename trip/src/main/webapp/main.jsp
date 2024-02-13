@@ -333,7 +333,7 @@
 			        <li class="topMenuLi">
 			            <a class="menuLink" href="#content3">게시판</a>
 			            <ul class="sb">
-			                <li><a href="#" class="submenuLink">자유 게시판</a></li>
+			                <li><a href="<%= request.getContextPath() %>/board/boardSelectAll" class="submenuLink">자유 게시판</a></li>
 			                <li><a href="<%= request.getContextPath() %>/adminboard/adminBoardSelectAll" class="submenuLink">공지사항 게시판</a></li>
 			            </ul>
 			        </li>
