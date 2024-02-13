@@ -39,40 +39,106 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 
+ <style type="text/css">
+        h2 {
+            text-align: center;
+        }
 
-<style type="text/css">
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .col1 {
+	        width: 10%;
+	    }
 	
-	h3 {
-		text-align: center;
-	}
-	
-	 table, th, td {
-    	border: 1px solid #bcbcbc;
-    	text-align: center;
-  	 }
-  	 table {
-  	 	margin: auto;
-     	width: 600px;
-  	 }/*상단 게시판 선 */
-  	 hr {  	
-	  	width : 600px;	  
-	 }
-	 
+	    .col2 {
+	        width: 40%;
+	    }
+	    
+	    .col3, .col4 {
+	    	width: 10%;
+	    }
+	    
+	    .col5 {
+	    	width: 5%;
+	    }
+
+        button {
+            padding: 5px 15px;
+            background-color: #0aa4b5;
+            color: white;
+            border: 0;
+			border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+        	float: right; /* 오른쪽으로 이동 */
+        }
+
+
+		a:link { /* 링크를 클릭하거나 방문한 상태, 포커스된 상태, 활성 상태의 링크에 대해 텍스트 장식을 제거 */
+		    text-decoration: none;
+		    color: black;
+		}	
+
+		
+		#abBtn:hover {
+        	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
+        }
+		
+		#searchForm {
+			text-align: center;
+		}
+		
+		#search_btn, #writeBtn {
+			padding: 10px 25px;
+			background-color: #0aa4b5;
+			color: white;
+			border: 0;
+			border-radius: 10px;
+			font-size: 15px;
+		}		
+		
+	    #writeBtn:hover, #search_btn:hover {
+	      	 background-color: #0bc5da;
+			 transition-duration: 0.5s;
+	      }			
 </style>
-
 </head>
 <body>
 <%@ include file="/main.jsp" %>
-<h3>게시판</h3>
-<hr>
+		<br>
+		<hr>
+		<br>
+		<h2> 게시판 </h2>
+		<br>
+		<hr>
+		<br>
 <form name="boardListForm" id="boardListForm">
 <table>
-	<tr>
-		<td>번호 </td>
-		<td>제목</td>
-		<td>글쓴이</td>
-		<td>날짜</td>
-	</tr>
+	<thead>
+      <thead>
+          <tr>
+              <td colspan="4" style="text-align:center;color:white; background-color:#0aa4b5;">
+                  <h3>게시판</h3>
+              </td>
+          </tr>
+          <tr>
+              <th class="col1">번호</th>    
+		      <th class="col2">제목</th>
+		      <th class="col3">글쓴이</th>    
+		      <th class="col4">날짜</th> 
+          </tr>
+      </thead>
 	
 <%
 	if (list.size() > 0){
@@ -85,6 +151,7 @@
 			curPage = Integer.parseInt(pagingKBVO.getCurPage());
 			totalCount = Integer.parseInt(bvo.getTotalCount());
 %>			
+      <tbody>
 		<tr>
 			<td><%= bvo.getBoardnum() %></td>		
 			<td>
@@ -117,25 +184,23 @@
 <%		
 	}
 %>
+	</tbody>
 </table>
+<br><br>
 </form>
-
-<!-- 검색 조건조회-->
-<hr>
-<form name="searchForm" id="searchForm">
-<table style="text-align:center">
-	<tr>
-		<td>
-			<select name="searchFilter" id="searchFilter">
-				<option value="key_00">카테고리</option>
-				<option value="key_01">제목</option>
-			</select>
-			<input type="text" name="keyword" id="keyword" placeholder="검색어 입력">
-			<input type="button" id="searchBtn" value="검색" />
-		</td>
-	</tr>	
-</table>
-</form>
+		<!-- 검색 -->
+		<div id="header">
+				<form name="searchForm" id="searchForm" action='boardSearchSelect'> 
+				<select id="searchFilter" name="searchFilter" style="width:100px;font-size:15px;">
+					<option value="key_00">카테고리</option>
+					<option value="key_01">제목</option>
+				</select>
+				<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" 
+				style="width:350px;height:30px;font-size:15px;">
+				<input type="button" id="search_btn" name="search_btn" value="검색">
+				</form>		
+				<br>					
+		</div>
 
 <script type="text/javascript">
 	//alert("자바스크립트 블럭 진입 >>> : ");
@@ -153,7 +218,7 @@
 		//  검색
 		$(document).on("click", "#searchBtn", function(){	
 			//alert("검색 버튼 클릭 :: searchBtn");
-			$("#searchForm").attr({ "method":"GET","action":"boardSearchSelect"}).submit();
+			$("#searchForm").attr({ "method":"GET"}).submit();
 		});		
 		
 	});	

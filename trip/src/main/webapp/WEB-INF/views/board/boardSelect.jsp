@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 	
-	h3 {
+	h2 {
 		text-align: center;
 	}
 	
@@ -43,8 +43,13 @@
 </head>
 <body>
 <%@ include file="/main.jsp" %>
-<h3>게시글</h3>
-<hr>
+		<br>
+		<hr>
+		<br>
+		<h2> 게시글 </h2>
+		<br>
+		<hr>
+		<br>	
 <% 
 	Object adj = request.getAttribute("adminyn");
 	boolean adbool = adj.equals("Y");
@@ -60,19 +65,21 @@
 <table>
 	<!--style="border:none":입력창 모서리 없애기-->
 	<tr>
-		<td>제목 : <input type="text" name="boardtitle" value="<%=bvo.getBoardtitle()%>" style="border:none"></td>
+		<td>제목 : <%=bvo.getBoardtitle()%> </td>
 	</tr>	
 	
 	<tr>		
-		<td>글쓴이 : <input type="text" name="memnum" value="<%=bvo.getMemnum()%>"  style="border:none"></td>
+		<td>글쓴이 : <%=bvo.getMemnum()%> </td>
 	</tr>
-	
 	<tr>
 		<td>
-			<div class="img_div">					
+<!-- 			<div class="img_div">					 -->
 				<img src="${pageContext.request.contextPath}/resources/fileupload/board/<%= bvo.getBoardimage() %>" />
-			</div>
-			<hr>
+<!-- 			</div> -->
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<div class="text_div">	
 				<%=  bvo.getBoardcoment()%>
 			</div>
@@ -94,6 +101,7 @@
 <%		
 	//}
 %>
+<br><br><br>
 </body>
 <!-- 댓글 처리 하는 루틴  -->  
 

@@ -249,48 +249,87 @@ String memid = tSession.getSession(httpServletRequest);
 
 </script>
 
-<!-- 
+		<!-- 스타일 -->
 <style type="text/css">
-	
-	.reviewlist {		 
-		margin: 20px auto; 	
-		width: 50%;	
-		border:1px solid #000000;
-		display:table;
-	}
-</style>	
- -->
+			h2 {
+				text-align: center;
+				margin-left: 10px;
+			}
+			
+			#insertbtn {
+				padding: 10px 25px;
+				background-color: #0aa4b5;
+				color: white;
+				border: 0;
+				border-radius: 10px;
+				font-size: 15px;
+			}
+			
+			.deleteBtn {
+			    padding: 5px 15px;
+			    background-color: #0aa4b5;
+			    color: white;
+			    border: 0;
+			    border-radius: 10px;
+			    font-size: 15px;
+			}
+			
+			.name {
+				font-weight: bold;
+			}
+			
+			#commentlist {
+				margin-left: 45px;
+			}
+			
+			#insertbtn:hover, .deleteBtn:hover {
+	        	 background-color: #0bc5da;
+				 transition-duration: 0.5s;
+			}			
+		
+
+table {
+    border: none;
+}
+</style>
 </head>
 <body>
-
-<h3 style="text-align:center">덧글</h3>
 <hr>
-
+<br>
+<h2 style="text-align:center">덧글</h2>
+<br>
+<hr>
+<br><br>
 <form name="reviewForm" id="reviewForm">
+<div class="reviewlist">
+<ol name="reviewlist" id="reviewlist">
+	<!-- 여기에 동적 생성 요소가 들어온다. -->
+</ol>
+</div>
+<hr>
+<br>
 <table>
 <tr>
-	<td>작성자</td>
+	<td style="width:120px;">작성자</td>
 	<td>
-		<input type="text" name="tripnum" id="tripnum" value=<%=memid%> readonly>
-	    <input type="button" value="저장하기" id="insertBtn">
+		<input type="text" name="tripnum" id="tripnum" value=<%=memid%> size="40" style="height: 25px;" readonly />
+		<input type="hidden" name="memnum" id="memnum" value="<%=memnum%>">
+		<input type="hidden" name="reviewnum" id="reviewnum">
+	    <input type="button" value="저장하기" id="insertbtn">
 	</td>
+</tr>
+<tr>
+<td colspan="2" style="height:20px;"></td>
 </tr>
 <tr>
 	<td>덧글 내용</td>
 	<td>
 		<textarea name="reviewcoment" id="reviewcoment" rows="5" cols="50" style="resize: none"></textarea>	
 		<div style="text-align: center;"><span class="bytes">0</span>  bytes</div>
-		<input type="hidden" name="memnum" id="memnum" value="<%=memnum%>">
-		<input type="hidden" name="reviewnum" id="reviewnum">	
 	</td>
 </tr>
 </table>
-<hr>
-<div class="reviewlist">
-<ul name="reviewlist" id="reviewlist">
-	<!-- 여기에 동적 생성 요소가 들어온다. -->
-</ul>
-</div>
 </form>
+<br><br>
 </body>
 </html>

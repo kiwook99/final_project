@@ -283,7 +283,7 @@
 	logger.info("spot_IusdComment tripnum 페이지 >>> : " + tripnum);
 %>
 		<form name="commentForm" id="commentForm">
-					<div>
+			<div>
 				<ol name="commentlist" id="commentlist">
 				<!-- 입력한 값이 들어갈 것임 -->
 				</ol>

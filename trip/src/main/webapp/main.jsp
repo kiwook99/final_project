@@ -15,6 +15,7 @@ String memid = tSession.getSession(httpServletRequest);
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +24,10 @@ String memid = tSession.getSession(httpServletRequest);
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
+<!-- CDN css only -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> -->
+<!-- CDN js bundle with popper -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> -->
 
 <style>
 .material-symbols-outlined {
@@ -286,6 +291,8 @@ String memid = tSession.getSession(httpServletRequest);
 		
 
 		</style>
+
+		
 </head>
 <body>
 	<br>
@@ -319,8 +326,8 @@ String memid = tSession.getSession(httpServletRequest);
 		</div>
 		<br>
 		 
-			<div class="topnav">
-
+ 			<div class="topnav">
+		
 			    <!-- 메뉴 -->
 			    <ul class="menu">
 			        <li class="topMenuLi">
@@ -391,39 +398,11 @@ String memid = tSession.getSession(httpServletRequest);
          });
      }
 </script>
+<!-- CDN js bundle with popper -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> -->
+
 </body>
 </html>
 
 
 
-<%-- 			
-		<div class="topnav">
-				<!--메뉴-->
-				<nav id="topMenu" >
-					 <ul>
-						 <li class="topMenuLi">
-						 <a class="menuLink" href="#content1">여행정보</a>
-						 	 <ul class ="sb">
-								  <li><a href="spot" class="submenuLink" >관광정보</a></li>
-								  <li><a href="spot_ISUD" class="submenuLink" >관광정보(ISUD)</a></li>
-						  	</ul>
-						 </li>							  
-						  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
-						 <li class="topMenuLi">
-						 <a class="menuLink" href="#content2">숙소예약</a>
-						 	<ul class ="sb"> 
-								 <li><a href="<%= request.getContextPath() %>/hotel/hotel_main" class="submenuLink" >숙소정보</a></li>
-						 	</ul>
-						 </li>
-						  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>					  
-						 <li class="topMenuLi">
-						 <a class="menuLink" href="#content3">게시판</a>
-						 	<ul class ="sb"> 
-								 <li><a href="#" class="submenuLink" >자유 게시판</a></li>
-								 <li><a href="#" class="submenuLink" >공지사항 게시판</a></li>
-						 	</ul>
-						 </li>				 
-					 </ul> 
-				 </nav>
-			</div>	
-			 --%>
