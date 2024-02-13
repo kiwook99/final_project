@@ -18,14 +18,17 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
 	@Autowired
 	private JedisPool jedisPool;
+	
+	@Autowired
+	private T_Session t_Session;
+	
 	String jds="";
 	
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) // HttpServletResponse response,
             throws Exception {
     	
-    	HttpSession session = request.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
-		String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+		String sessionId = t_Session.getSession(request);
 		jds = "";
 		
 		try (Jedis jedis = jedisPool.getResource()) {       	

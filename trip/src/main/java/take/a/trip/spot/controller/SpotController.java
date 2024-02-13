@@ -16,6 +16,7 @@ import com.oreilly.servlet.MultipartRequest;	// 구
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import take.a.trip.T_Session;
 import take.a.trip.spot.service.SpotService;
 import take.a.trip.spot.util.CommonUtils;
 import take.a.trip.spot.vo.ReviewVO;
@@ -42,10 +43,12 @@ public class SpotController {
 	 @Autowired (required = false)
 	 private SpotService spotService;
 	
- // 래디스 의존성 주입
+	// 래디스 의존성 주입
 	@Autowired
 	private JedisPool jedisPool;
 	 
+	@Autowired
+	private T_Session t_Session;
 	 
 	// @RequestMapping("spot")
 	// 로그인 전
@@ -125,8 +128,8 @@ public class SpotController {
 	public String spot_IsudSelectAll(SpotVO svo, Model model, HttpServletRequest req) {
 		logger.info("SpotController spot_IsudSelectAll 진입 >>> : ");
 
-        HttpSession session = req.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
-		String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+        
+		String sessionId = t_Session.getSession(req);
 		
 		// 페이징
 		int pageSize = CommonUtils.SPOT_PAGE_SIZE;  // 페이지에 나올 값
@@ -188,10 +191,9 @@ public class SpotController {
 		logger.info("SpotController spot_IsudSelect 진입 >>> : ");
 		logger.info("spot_IsudSelect 함수 진입 obvo.getTripnum() >>> : " + svo.getTripnum());
 		
-        HttpSession session = req.getSession();		// HttpServletRequest에서 세션을 가져오거나 새로 생성
-		String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
+		String sessionId = t_Session.getSession(req);
 		
-		logger.info("session >>> : " + session);
+		logger.info("session >>> : " + sessionId);
 		
 		// 서비스 호출
 		List<SpotVO> listS = spotService.spot_IsudSelect(svo);

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+
+import take.a.trip.T_Session;
 import take.a.trip.mem.common.GooglePwMail;
 import take.a.trip.mem.common.PasswordUtil;
 import redis.clients.jedis.Jedis;
@@ -27,14 +29,17 @@ import take.a.trip.mem.vo.MemVO;
 @Controller
 public class MemController {
 	
-	@Autowired 
-	private JedisPool jedisPool;
-	
 	// Logger 객체 생성
 	Logger logger = LogManager.getLogger(MemController.class);
 	
+	@Autowired 
+	private JedisPool jedisPool;
+	
 	@Autowired(required = false) 
 	private MemService memService;
+	
+	@Autowired
+	private T_Session t_Session;
 	
 	// 로그인 폼
 	@GetMapping("/mem/loginForm")
@@ -50,8 +55,6 @@ public class MemController {
 	public String login(Model model, MemVO mvo, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info("MemController login 진입 >>> : ");
 		
-		HttpSession session = request.getSession();	// HttpServletRequest에서 세션을 가져오거나 새로 생성
-		String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기	
 		String adminyn = "";
 		
 		logger.info("userid >>> : " + mvo.getMemid());
@@ -61,13 +64,15 @@ public class MemController {
 		logger.info("userLogin >>> : " + userLogin.size());
 		
 		if (userLogin != null && userLogin.size() != 0) {
-			session.setAttribute("memid", mvo.getMemid()); // memid라는 새션키에 memid값을 넣음
+			
+			t_Session.setSession(request, mvo.getMemid()); //새션에 memid값을 넣음
+			
 			// List<MemVO> userLogin 에서 adminyn 값 추출
 			for (int i=0; i<userLogin.size(); i++) {
 				MemVO mvo_1 = userLogin.get(i);
 				adminyn = mvo_1.getAdminyn();
 			}
-			logger.info("sessionId >>> : " + sessionId);
+			
 			logger.info("adimnyn >>> : " + adminyn);
 			
 			// 모델객체에 로그인정보 담기
@@ -76,9 +81,9 @@ public class MemController {
 			 try (Jedis jedis = jedisPool.getResource()) {
 		        	
 				 	// Redis에 데이터 저장
-		            jedis.set( sessionId, adminyn);
+		            jedis.set( mvo.getMemid(), adminyn);
 		            // Redis 만료 시간 설정 (3600=1시간)
-		            jedis.expire(sessionId, 3600*24);
+		            jedis.expire(mvo.getMemid(), 3600*24);
 		            logger.info("jedis.set >>> : ");
 		        }
 			
@@ -92,14 +97,13 @@ public class MemController {
 	public String kakaoLogin(@RequestParam("memid") String memid, HttpServletRequest request) {
 		logger.info("UserController kakaoLogin 진입 >>> : ");		
 		try {
-            HttpSession session = request.getSession();
-            session.setAttribute("memid", memid);
+			t_Session.setSession(request, memid); //새션에 memid값을 넣음
             String adminyn = "N";
             String msg = "";
             // Redis에 데이터 저장
             try (Jedis jedis = jedisPool.getResource()) {
-                jedis.set(session.getId(), adminyn);
-                jedis.expire(session.getId(), 3600 * 24);
+                jedis.set(memid, adminyn);
+                jedis.expire(memid, 3600 * 24);
             }
             String path = request.getContextPath();
             // 요청 성공 시 이동할 페이지 반환
@@ -116,14 +120,13 @@ public class MemController {
 		public String neverLogin(@RequestParam("memid") String memid, HttpServletRequest request) {
 			logger.info("UserController naverLogin 진입 >>> : ");		
 			try {
-	            HttpSession session = request.getSession();
-	            session.setAttribute("memid", memid);
+				t_Session.setSession(request, memid); //새션에 memid값을 넣음
 	            String adminyn = "N";
 	            String msg = "";
 	            // Redis에 데이터 저장
 	            try (Jedis jedis = jedisPool.getResource()) {
-	                jedis.set(session.getId(), adminyn);
-	                jedis.expire(session.getId(), 3600 * 24);
+	                jedis.set(memid, adminyn);
+	                jedis.expire(memid, 3600 * 24);
 	            }
 	            // 요청 성공 시 이동할 페이지 반환
 	            return "redirect:/spot/spot_IsudSelectAll";
@@ -219,14 +222,15 @@ public class MemController {
 	public String logout(HttpSession session,HttpServletRequest request) {
 		logger.info("UserController logout 진입 >>> : ");
 		
-		session = request.getSession();	// HttpServletRequest에서 세션을 가져오거나 새로 생성
-		String sessionId = session.getId(); 		// 세션에서 고유한 세션 아이디 가져오기
-		logger.info("sessionId >>> : "+ sessionId);
+		String memid = t_Session.getSession(request);	
+		t_Session.killSession(request);
+		
+		logger.info("sessionId >>> : "+ memid);
 		
 		//래디스 연결
 		try (Jedis jedis = jedisPool.getResource()) {
 	            // 키를 삭제합니다.
-	            Long deletedKeysCount = jedis.del(sessionId);
+	            Long deletedKeysCount = jedis.del(memid);
 	        }
 		// 세션을 무효화하여 삭제
 		session.invalidate();
