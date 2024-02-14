@@ -4,7 +4,7 @@
 <%@ page import="take.a.trip.board.vo.BoardVO"%>
 <%@ page import="java.util.List" %>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
 <meta charset="UTF-8">
@@ -48,7 +48,7 @@
 	    display: block;
 	}
 	
-			#bUBtn, #bDBtn, #bWBtn {
+			#bUBtn, #bDBtn, #bWBtn, #bCBtn {
 			padding: 5px 25px;
 			background-color: #0aa4b5;
 			color: white;
@@ -58,11 +58,36 @@
 			}
 			
 			
-			#bUBtn:hover, #bDBtn:hover, #bWBtn:hover {
+			#bUBtn:hover, #bDBtn:hover, #bWBtn:hover, #bCBtn:hover {
         	 background-color: #0bc5da;
 			 transition-duration: 0.5s;
 			}
 </style>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		//  U	
+		$(document).on("click", "#bUBtn", function(e){
+			
+			e.preventDefault();
+			$("#adBoardSelect").attr({ "method":"GET", "action":"adminBoardUpdateForm"}).submit();
+		});
+		
+		// D
+		$(document).on("click", "#bDBtn", function(e){
+			alert("삭제하기");
+			e.preventDefault();
+			$("#adBoardSelect").attr({ "method":"GET", "action":"adminBoardDelete"}).submit();
+		});
+		
+		$(document).on("click", "#bCBtn", function(e){
+			location.href="boardSelectAll";
+		});
+	});
+	
+
+</script>
 </head>
 <body>
 <%@ include file="/main.jsp" %>
@@ -116,12 +141,13 @@
 	</tr>
 	<!-- 버튼 -->	
 	<tr>
+		
 		<td style="text-align:right">
 		<% if(adbool) { %> 			
 			<input type="button" id="bUBtn" value="수정">
 			<input type="button" id="bDBtn" value="삭제">
-			<input type="button" id="bWBtn" value="등록">
 		<% } %>		
+		<button type="button" value="취소" id="bCBtn">돌아가기</button>
 		</td>
 	</tr>
 	

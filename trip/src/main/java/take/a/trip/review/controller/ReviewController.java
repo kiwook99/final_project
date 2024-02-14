@@ -48,7 +48,7 @@ public class ReviewController {
 							
 		logger.info("rvo.getMemnum() >>> : " + rvo.getMemnum());
 		logger.info("rvo.getTripnum() >>> : " + rvo.getTripnum());
-		logger.info("rvo.getReviewcoment() >>> : " + rvo.getReviewcoment());		
+		logger.info("rvo.getBreviewcoment() >>> : " + rvo.getBreviewcoment());		
 		
 		int nCnt = reviewService.reviewInsert(rvo);
 		logger.info("reviewInsert nCnt >>> : " + nCnt);
@@ -72,9 +72,9 @@ public class ReviewController {
 		String listStr = "";
 		for (int i=0; i < list.size(); i++) {
 			ReviewVO _rvo = list.get(i);
-			String s0 = _rvo.getReviewnum();
+			String s0 = _rvo.getBreviewnum();
 			String s1 = _rvo.getTripnum();
-			String s2 = _rvo.getReviewcoment();
+			String s2 = _rvo.getBreviewcoment();
 			String s3 = _rvo.getInsertdate();
 			
 			try {

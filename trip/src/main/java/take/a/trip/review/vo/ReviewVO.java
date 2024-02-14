@@ -2,10 +2,10 @@ package take.a.trip.review.vo;
 
 public class ReviewVO {
 	
-	String reviewnum; // 시퀀스 
+	String breviewnum; // 시퀀스 
 	String memnum; // 로그인한사람 이름 , 덧글 쓴 사람	 
 	String tripnum; // 제목 
-	String reviewcoment; // 덧글 내용
+	String breviewcoment; // 덧글 내용
 	String insertdate; // 덧글 입력한 일자 
 
 	// 생성자 
@@ -13,21 +13,21 @@ public class ReviewVO {
 	
 	}
 
-	public ReviewVO(String reviewnum, String memnum, String tripnum, String reviewcoment, String insertdate) {
+	public ReviewVO(String breviewnum, String memnum, String tripnum, String reviewcoment, String insertdate) {
 		
-		this.reviewnum = reviewnum;
+		this.breviewnum = breviewnum;
 		this.memnum = memnum;
 		this.tripnum = tripnum;
-		this.reviewcoment = reviewcoment;
+		this.breviewcoment = breviewcoment;
 		this.insertdate = insertdate;
 	}
 		
 	// getter / setter 
-	public String getReviewnum() {
-		return reviewnum;
+	public String getBreviewnum() {
+		return breviewnum;
 	}
-	public void setReviewnum(String reviewnum) {
-		this.reviewnum = reviewnum;
+	public void setBreviewnum(String breviewnum) {
+		this.breviewnum = breviewnum;
 	}
 	public String getMemnum() {
 		return memnum;
@@ -41,11 +41,11 @@ public class ReviewVO {
 	public void setTripnum(String tripnum) {
 		this.tripnum = tripnum;
 	}
-	public String getReviewcoment() {
-		return reviewcoment;
+	public String getBreviewcoment() {
+		return breviewcoment;
 	}
-	public void setReviewcoment(String reviewcoment) {
-		this.reviewcoment = reviewcoment;
+	public void setBreviewcoment(String breviewcoment) {
+		this.breviewcoment = breviewcoment;
 	}
 	public String getInsertdate() {
 		return insertdate;

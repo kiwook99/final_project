@@ -81,7 +81,7 @@
 		FROM    BOARD A 	         
 		WHERE   1=1
 		AND     A.DELETEYN = 'Y'		
-		<if test="searchFilter=='key_01'">
+		<if test="searchFilter =='key_01'">
 			<![CDATA[ AND A.BOARDTITLE LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>				
 		</if>
 	<!--  ? : 현재 페이지 : curPage -->

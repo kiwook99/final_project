@@ -9,7 +9,7 @@
 <%@ page import="org.apache.log4j.Logger" %>
 <%@ page import="take.a.trip.T_Session" %>
 
-<%
+<% 
 //T_Session 객체 생성
 T_Session tSession = T_Session.getInstance();
 
@@ -56,7 +56,7 @@ String memid = tSession.getSession(httpServletRequest);
 			let dataParam = {
 				bnum: $("#memnum").val(),
 				bname: $("#tripnum").val(),
-				bcontent: $("#reviewcoment").val(),
+				bcontent: $("#breviewcoment").val(),
 			};
 			dataParam = $("#reviewForm").serialize();
 			console.log("dataParam >>> : " + dataParam);
@@ -70,7 +70,7 @@ String memid = tSession.getSession(httpServletRequest);
 			});
 			
 			function whenSuccess(resData){	
-				alert("resData >>> : " + resData);	
+				
 				if ("GOOD" == resData){
 					// 입력데이터 초기화 함수호출 
 					reviewFormData();
@@ -90,14 +90,14 @@ String memid = tSession.getSession(httpServletRequest);
 			console.log("D >>> : ");
 			
 			var rbnumV = $(this).parents("li").attr("dataNum");
-			alert("rbnumV >>> : " + rbnumV);
+			
 			var target = $(this).parents(".rbmemoItem");
 			console.log("target >>> : " + target);
 			
 			let deleteURL = "<%= request.getContextPath() %>/review/reviewDelete";
 			let method = "POST";
 			let dataParam = {
-				rkbnum: $('#rbnum').val(rbnumV),				
+					breviewnum: $('#breviewnum').val(rbnumV),				
 			};		
 			dataParam = $("#reviewForm").serialize();
 			console.log("dataParam >>> : " + dataParam);
@@ -235,7 +235,7 @@ String memid = tSession.getSession(httpServletRequest);
 	//댓글 등록 후 입력창 초기화
 	function reviewFormData(){
 		$("#tripnum").val("");
-		$("#reviewcoment").val("");
+		$("#breviewcoment").val("");
 	}
 	
 	//데이터 체크
@@ -314,7 +314,7 @@ table {
 	<td>
 		<input type="text" name="tripnum" id="tripnum" value=<%=memid%> size="40" style="height: 25px;" readonly />
 		<input type="hidden" name="memnum" id="memnum" value="<%=memnum%>">
-		<input type="hidden" name="reviewnum" id="reviewnum">
+		<input type="hidden" name="breviewnum" id="breviewnum">
 	    <input type="button" value="저장하기" id="insertbtn">
 	</td>
 </tr>
@@ -324,7 +324,8 @@ table {
 <tr>
 	<td>덧글 내용</td>
 	<td>
-		<textarea name="reviewcoment" id="reviewcoment" rows="5" cols="50" style="resize: none"></textarea>	
+		
+		<textarea name="breviewcoment" id="breviewcoment" rows="5" cols="50" style="resize: none"></textarea>	
 		<div style="text-align: center;"><span class="bytes">0</span>  bytes</div>
 	</td>
 </tr>

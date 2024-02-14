@@ -11,7 +11,7 @@
 <%	
 	Logger logger = LogManager.getLogger(this.getClass());
 	logger.info("BoardSelectAll.jsp 페이지 >>> : ");
-	
+	 
 	//페이징 변수 세팅
 	int pageSize = 0;
 	int groupSize = 0;
@@ -113,13 +113,31 @@
 			 transition-duration: 0.5s;
 	      }			
 </style>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+		<script type="text/javascript">
+			console.log("자바스크립트 진입 >>> : ");
+			
+			$(document).ready(function(){
+				console.log("jQuery 진입 >>> : ");
+	
+			
+			// 검색
+		      $("#search_btn").click(function(){
+			         
+			         $("#searchForm").attr({
+			        	 'method':'GET'
+			         }).submit();
+			      });
+		});		
+			
+		</script>
 </head>
 <body>
 <%@ include file="/main.jsp" %>
 		<br>
 		<hr>
 		<br>
-		<h2> 게시판 </h2>
+		<h2> 자유 게시판 </h2>
 		<br>
 		<hr>
 		<br>
@@ -129,7 +147,7 @@
       <thead>
           <tr>
               <td colspan="4" style="text-align:center;color:white; background-color:#0aa4b5;">
-                  <h3>게시판</h3>
+                  <h3> 자유 게시판</h3>
               </td>
           </tr>
           <tr>
