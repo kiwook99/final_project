@@ -23,6 +23,8 @@ import redis.clients.jedis.JedisPool;
 import take.a.trip.T_Session;
 import take.a.trip.adminBoard.common.CommonUtils;
 import take.a.trip.adminBoard.vo.AdminBoardVO;
+import take.a.trip.board.vo.BoardVO;
+import take.a.trip.spot.vo.SpotVO;
 import take.a.trip.adminBoard.service.AdminBoardService;
 
 @Controller
@@ -44,9 +46,9 @@ public class AdminBoardController {
 		 String sessionId = t_Session.getSession(request);
 		
 		// 페이징 처리 ====================================================================
-				int pageSize = CommonUtils.ADMINBOARD_PAGE_SIZE;
-				int groupSize = CommonUtils.ADMINBOARD_GROUP_SIZE;
-				int curPage = CommonUtils.ADMINBOARD_CUR_PAGE;
+				int pageSize = CommonUtils.ADMINBOARD_PAGE_SIZE;	// 페이지에 나올 값
+				int groupSize = CommonUtils.ADMINBOARD_GROUP_SIZE;	// 그룹으로 묶을 값
+				int curPage = CommonUtils.ADMINBOARD_CUR_PAGE;		// 현재 페이지 
 				int totalCount = CommonUtils.ADMINBOARD_TOTAL_COUNT;
 				
 				if (abvo.getCurPage() !=null){
@@ -229,6 +231,51 @@ public class AdminBoardController {
 			}
 			return "#";		
 		}
-
-
+		
+		// 검색
+		@GetMapping("adminboard/admin_SearchSelect")
+		public String admin_SearchSelect(AdminBoardVO abvo, Model model) {
+			logger.info("AdminBoardController ::: adminBoardSelect함수 진입 >> : ");
+			logger.info("AdminBoardController abvo.getSearchFilter() >>> : " + abvo.getSearchFilter());
+			logger.info("AdminBoardController abvo.getKeyword() >>> : " + abvo.getKeyword());
+		  
+		  
+			// 페이징
+			int pageSize = CommonUtils.ADMINBOARD_PAGE_SIZE;	// 페이지에 나올 값
+			int groupSize = CommonUtils.ADMINBOARD_GROUP_SIZE;	// 그룹으로 묶을 값
+			int curPage = CommonUtils.ADMINBOARD_CUR_PAGE;		// 현재 페이지 
+			int totalCount = CommonUtils.ADMINBOARD_TOTAL_COUNT;		
+			
+			// 페이지가 null이 아닐때 실행
+			if(abvo.getCurPage() != null) {
+				// parseInt : 문자열 숫자로 변환
+				curPage = Integer.parseInt(abvo.getCurPage());
+				
+			}
+			
+			// 메모리에 올림
+			abvo.setPageSize(String.valueOf(pageSize));;
+			abvo.setGroupSize(String.valueOf(groupSize));
+			abvo.setCurPage(String.valueOf(curPage));
+			abvo.setTotalCount(String.valueOf(totalCount));
+			
+			logger.info("AdminBoardController abvo.getPageSize() >>> : " + abvo.getPageSize());
+			logger.info("AdminBoardController abvo.getGroupSize() >>> : " + abvo.getGroupSize());
+			logger.info("AdminBoardController abvo.getCurPage() >>> : " + abvo.getCurPage());
+			logger.info("AdminBoardController abvo.getTotalCount() >>> : " + abvo.getTotalCount());
+		  
+			//서비스를연결하여 참조변수 listS를 통해 호출한다
+			List<AdminBoardVO> listAll = adminBoardService.admin_SearchSelect(abvo);
+			int nCnt = listAll.size();
+			
+			if (nCnt > 0){
+				logger.info("adminBoardSelectAll admin_SearchSelect nCnt >> " + nCnt);
+				
+				//페이징을 위한 model.addAttribute("pagingBVO", abvo);입력
+				model.addAttribute("pagingABVO", abvo);
+				model.addAttribute("listAll", listAll);
+				return "adminboard/adminBoardSelectAll";
+			}	
+			return "adminboard/adminBoardSelectAll";
+		}
 }

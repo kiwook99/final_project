@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import take.a.trip.adminBoard.controller.AdminBoardController;
 import take.a.trip.adminBoard.vo.AdminBoardVO;
+import take.a.trip.spot.vo.SpotVO;
 
 public interface AdminBoardService {
 	
@@ -20,5 +21,8 @@ public interface AdminBoardService {
 	
 	public int adminBoardUpdate(AdminBoardVO abvo);
 	public int adminBoardDelete(AdminBoardVO abvo);
+	
+	// 검색
+	public List<AdminBoardVO> admin_SearchSelect(AdminBoardVO abvo);
 
 }

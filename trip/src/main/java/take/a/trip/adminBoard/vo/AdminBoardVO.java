@@ -21,11 +21,15 @@ public class AdminBoardVO {
 	// 조회수 필드
 	private int adboardhits;
 	
+	//search 변수
+	private String keyword;			// 검색어
+	private String searchFilter;	// 검색조건
+	
 	// 생성자 
 	public AdminBoardVO() {
 		
 	}
-	
+
 	public AdminBoardVO(String adboardnum, String memnum, String adboardtitle, String adboardcoment, String adboardimage, String insertdate,
 			String updatedate, String deleteyn) {
 		
@@ -59,6 +63,28 @@ public class AdminBoardVO {
 	
 	public AdminBoardVO(String adboardnum, String memnum, String adboardtitle, String adboardcoment, String adboardimage, String insertdate,
 			String updatedate, String deleteyn, String pageSize, String groupSize, String curPage,
+			String totalCount, int adboardhits, String keyword, String searchFilter) {
+		
+		this.adboardnum = adboardnum;
+		this.memnum = memnum;
+		this.adboardtitle = adboardtitle;
+		this.adboardcoment = adboardcoment;
+		this.adboardimage = adboardimage;
+		this.insertdate = insertdate;
+		this.updatedate = updatedate;
+		this.deleteyn = deleteyn;
+		this.pageSize = pageSize;
+		this.groupSize = groupSize;
+		this.curPage = curPage;
+		this.totalCount = totalCount;
+		this.adboardhits = adboardhits;
+		this.keyword = keyword;
+		this.searchFilter = searchFilter;		
+	}
+
+
+	public AdminBoardVO(String adboardnum, String memnum, String adboardtitle, String adboardcoment, String adboardimage, String insertdate,
+			String updatedate, String deleteyn, String pageSize, String groupSize, String curPage,
 			String totalCount, int adboardhits) {
 		
 		this.adboardnum = adboardnum;
@@ -75,7 +101,10 @@ public class AdminBoardVO {
 		this.totalCount = totalCount;
 		this.adboardhits = adboardhits;
 	}
-
+	
+	
+	
+	
 	public String getAdboardnum() {
 		return adboardnum;
 	}
@@ -173,6 +202,22 @@ public class AdminBoardVO {
 	public void setAdboardhits(int adboardhits) {
 		this.adboardhits = adboardhits;
 	}
+	
+	// 검색
+	public String getKeyword() {
+		return keyword;
+	}
 
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getSearchFilter() {
+		return searchFilter;
+	}
+
+	public void setSearchFilter(String searchFilter) {
+		this.searchFilter = searchFilter;
+	}
 
 }

@@ -46,23 +46,23 @@ if (list != null) {
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	//alert("자바스크립트 블럭 진입 >>> : ");
-	// abnum 체크박스 체크 확인하기
-	$(document).on("click", "#adboardnum", function(){				
-		
-		if($(this).prop('checked')){			 			
-			$('.adboardnum').prop('checked',false);
-			$(this).prop('checked',true);
-		}
-	});
-	
+
 	$(document).ready(function(){
 
 		$(document).on("click", "#abBtn", function(){
 			
 			location.href="adminBoardInsertForm";
 		});	
-			
-	});	
+
+		
+		// 검색
+	      $("#adsearch_btn").click(function(){
+		         
+		         $("#adsearchForm").attr({
+		        	 'method':'GET'
+		         }).submit();
+		      });	
+		});	
 	
 
 </script>
@@ -117,14 +117,27 @@ if (list != null) {
 		}	
 
 		
-		#abBtn:hover {
+		#abBtn:hover,
+		#adsearch_btn:hover {
         	 background-color: #0bc5da;
 			 transition-duration: 0.5s;
         }
+        
+        #adsearchForm {
+			text-align: center;
+		}
+		
+		#adsearch_btn {
+			padding: 10px 25px;
+			background-color: #0aa4b5;
+			color: white;
+			border: 0;
+			border-radius: 10px;
+			font-size: 15px;
+		}
 		
     </style>
-    <!-- 폰트 어썸 CDN -->
-    <script src="https://kit.fontawesome.com/2211a5118a.js" crossorigin="anonymous"></script>	
+
 </head>
 <body>
 <%@ include file="/main.jsp" %>
@@ -165,7 +178,7 @@ for(int i=0; i<nCnt; i++){
       <tbody>
       <tr>
 		<td style="width:5%"><%= _abvo.getAdboardnum() %></td>			
-		<td style="width:10%"><a href="adminBoardSelect?adboardnum=<%= _abvo.getAdboardnum() %>"><%= _abvo.getAdboardtitle() %> </td>
+		<td style="width:10%"><a href="adminBoardSelect?adboardnum=<%= _abvo.getAdboardnum() %>"><%= _abvo.getAdboardtitle() %> </a></td>
 <!-- 		<td style="text-align:center;">관리자</td>	 -->
 		<td style="width:10%"><%= _abvo.getMemnum() %></td>
 		<td style="width:10%"><%= _abvo.getInsertdate() %></td> 
@@ -184,7 +197,7 @@ if (groupSize != 0) {
 %>		
 
                 
-                <tr>
+<tr>
 	<td colspan="7">
 		<jsp:include page="adminBoardPaging.jsp" flush="true">
 			<jsp:param name="url" value="adminBoardSelectAll"/>
@@ -210,6 +223,19 @@ if (groupSize != 0) {
       </tbody>
    </table>
 </form>
+<br>
+<!-- 검색 -->
+		<div id="header">
+				<form name="adsearchForm" id="adsearchForm" action="admin_SearchSelect"> 
+				<select id="searchFilter" name="searchFilter" style="width:100px;font-size:15px;">
+					<option value="key_01">제목</option>
+				</select>
+				<input type="text" id="keyword" name="keyword" placeholder="검색어 입력" 
+				style="width:350px;height:30px;font-size:15px;">
+				<input type="button" id="adsearch_btn" name="adsearch_btn" value="검색">
+				</form>		
+				<br>					
+		</div>
 <br><br><br>
 </body>
 </html>
