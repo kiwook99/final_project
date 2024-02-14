@@ -138,7 +138,7 @@
 				<%=  bvo.getBoardcoment()%>
 			</div>
 		</td>
-	</tr>
+	</tr> 
 	<!-- 버튼 -->	
 	<tr>
 		

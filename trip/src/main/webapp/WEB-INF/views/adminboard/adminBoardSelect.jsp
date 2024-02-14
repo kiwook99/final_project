@@ -16,7 +16,7 @@
 	AdminBoardVO _abvo = null;
 	if (nCnt == 1){
 		_abvo = list.get(0);
-	}	
+	}	 
 %> 
 <% Object objAdmin = request.getAttribute("adminyn"); %>
 <!DOCTYPE html>

@@ -19,7 +19,7 @@
 	int totalCount = 0;
 
 	Object objPaging = request.getAttribute("pagingBVO");
-	BoardVO pagingKBVO = (BoardVO)objPaging;
+	BoardVO pagingKBVO = (BoardVO)objPaging; 
 	
 	Object obj = request.getAttribute("ListAll");
 	if (obj == null){ return; }
