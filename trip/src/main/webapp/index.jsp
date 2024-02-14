@@ -11,4 +11,4 @@
 		location.href="spot/spot_IsudSelectAll";
 		</script>
 </body>
-</html>
+</html> 

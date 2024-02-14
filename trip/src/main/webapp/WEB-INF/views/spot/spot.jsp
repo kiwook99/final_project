@@ -167,40 +167,17 @@
 					
 					var spotList = $('#spotList'); // ul태그의 id
 					
-
 		            // 반복문: spot_list의 각 요소에 대해 작업
 					// $.each() 메서드의 첫번째 매겨변수로 위에서 선언한 객체를 전달
 				    // 객체를 전달받으면 index는 객체의 key(property)를 가리키고(반복문의 횟수)
 				    // item은 키의 값을 가져옴(해당 태그안의 값, item태그 안에 값(태그))					
-					$.each(spot_list, function(index, item) {
-						/*
-					    var code = ["가평군", "고양시", "과천시", "광명시", "광주시", "구리시", "군포시", "김포시", "남양주시", "동두천시", "부천시", "성남시", "수원시", "시흥시", "안산시", "안성시", "안양시", "양주시", "양평군", "여주시", "연천군", "오산시", "용인시", "의왕시", "의정부시", "이천시", "파주시", "평택시", "포천시", "하남시", "화성시"];
-					    
-					    var sigunguName = "Unknown"; // 기본값 설정
-
-					    // sigungucode가 인덱스 범위 내에 있는지 확인합니다.
-					    if (item.sigungucode >= 1 && item.sigungucode <= code.length) {
-					        sigunguName = code[item.sigungucode - 1]; // 코드 배열에서 해당하는 이름을 가져옵니다.
-					    }
-
-					    var itemHtml = '<li>' +
-					                   '<a href="spot_detail/' + item.contentid + '" class="item">' +		
-					                   '<span class="img">' + '<img src="' + item.firstimage + '" alt="' + item.title + '">' + 
-					                   '<span class="area">' + sigunguName + '</span>' + '</span>' +
-					                   '<div class="name" onclick="location.href=spot_detail">' +
-					                   '<strong>' + item.title + '</strong>' +
-					                   '</div>' + 
-					                   '</a>' +
-					                   '</li>';
-					     */
-						
+					$.each(spot_list, function(index, item) {						
 						
 						var code = ["가평군", "고양시", "과천시", "광명시", "광주시", "구리시", "군포시", "김포시", "남양주시", "동두천시", "부천시", "성남시", "수원시", "시흥시", "안산시", "안성시", "안양시", "양주시", "양평군", "여주시", "연천군", "오산시", "용인시", "의왕시", "의정부시", "이천시", "파주시", "평택시", "포천시", "하남시", "화성시"];
 						
 						var sigunguName = "Unknown"; // 기본값 설정
 						var sigungucode = item.sigungucode;
-						
-						
+							
 						for (var sgc=0; sgc <= code.length; sgc++){
 							if (sigungucode == sgc) {
 								sigunguName = code[sgc - 1];
@@ -208,9 +185,7 @@
 							}
 						}
 
-						//if(item.firstimage.length > 0) { // 이미지 값이 존재하는 경우, 없으면 안보여 줄것임
 					    var itemHtml = '<li>' +
-				 	                   //'<a href="spot_detail" class="item" onclick="spot_detail(' + item.contentid + ')">' +
     								   '<a href="spot_detail/' + item.contentid + '" class="item">' +		
 									   '<span class="img">' + '<img src="' + item.firstimage + '" alt="' + item.title + '">' + 
 									   '<span class="area">' + sigunguName + '</span>' + '</span>' +
@@ -218,10 +193,7 @@
 									   '<strong>' + item.title + '</strong>' +
 									   '</div>' + 
 									   '</a>' +
-									   '</li>';
-						//}									   
-					    			   
-
+									   '</li>';				   
 						
 						spotList.append(itemHtml); // ul 태그안에 값을 추가
 						
@@ -305,5 +277,6 @@
 				</div>
 			</div>
 		</div>
+		<br><br>
 	</body>
 </html>

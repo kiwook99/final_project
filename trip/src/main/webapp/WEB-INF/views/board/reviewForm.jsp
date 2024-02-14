@@ -288,9 +288,9 @@ String memid = tSession.getSession(httpServletRequest);
 			}			
 		
 
-table {
-    border: none;
-}
+			#comment {
+			    border: none;
+			}
 </style>
 </head>
 <body>
@@ -308,7 +308,7 @@ table {
 </div>
 <hr>
 <br>
-<table>
+<table id="comment" >
 <tr>
 	<td style="width:120px;">작성자</td>
 	<td>

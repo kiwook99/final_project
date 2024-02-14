@@ -16,7 +16,7 @@
 	AdminBoardVO _abvo = null;
 	if (nCnt == 1){
 		_abvo = list.get(0);
-	}	
+	}	 
 %> 
 <% Object objAdmin = request.getAttribute("adminyn"); %>
 <!DOCTYPE html>
@@ -139,7 +139,7 @@
     </td>
 </tr>
 <tr>
-<th style="width:10px;">제목</th>
+<th style="width:50px;">제목</th>
 <th class="tt" style="width:100px; height:30px;">
 <%= _abvo.getAdboardtitle() %>	
 </th>

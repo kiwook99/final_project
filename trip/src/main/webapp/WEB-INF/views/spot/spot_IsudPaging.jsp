@@ -20,7 +20,7 @@
 	if(str != null && str.length() > 0) {
 		str = str + "&";
 		System.out.println("str + & >>> : " + str);	
-	}
+	} 
 %>
 
 <%

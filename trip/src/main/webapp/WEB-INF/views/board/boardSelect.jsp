@@ -15,16 +15,16 @@
 		text-align: center;
 	}
 	
-        #post table {
+	       #post {
             border-collapse: collapse;
-            width: 50%;
+            width: 80%;
             margin: 0 auto;
         }
 
-        #post th, #post td {
+       #post th, #post td {
             border: 1px solid black;
             padding:5px;
-            /*text-align: center;*/
+/*             text-align: center; */
         }
         
        #post td {
@@ -32,22 +32,14 @@
             padding: 10px;
             text-align: left;
         }
-	.img_div {
-		margin: auto;
-		height: 500px;
-		width: 600px;
-		text-align: center;
-	}
-	.text_div {
-		height: 80px;
-		width: 600px;
-	}
+        
+         /* 텍스트 박스 스타일 */
+	   #post textarea {
+	        width: 100%; /* 테이블의 100% 크기로 조절 */
+	        box-sizing: border-box; /* 패딩과 테두리를 포함한 전체 크기로 설정 */
+	    }	
 	
-	img {
-	    margin: auto;
-	    display: block;
-	}
-	
+
 			#bUBtn, #bDBtn, #bWBtn, #bCBtn {
 			padding: 5px 25px;
 			background-color: #0aa4b5;
@@ -62,8 +54,14 @@
         	 background-color: #0bc5da;
 			 transition-duration: 0.5s;
 			}
+			
+		.tt {
+			 text-align: center;
+			 font-size: 20px;
+			 
+		}
 </style>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
@@ -111,7 +109,7 @@
 %>
 
 <form name="fileuploadForm" id="fileuploadForm">
-<table id="post">
+<table id="post" border="1">
 <tr>
     <td colspan="5" style="text-align:center;color:white; background-color:#0aa4b5;">
         <h3>게시글</h3>
@@ -119,35 +117,37 @@
 </tr>
 	<!--style="border:none":입력창 모서리 없애기-->
 	<tr>
-		<td>제목 : <%=bvo.getBoardtitle()%> </td>
+		<th  style="width:80px;">제목 </th>
+		<td class="tt"  style="width:100px; height:30px; text-align: center;"><%=bvo.getBoardtitle()%> </td>
 	</tr>	
 	
-	<tr>		
-		<td>글쓴이 : <%=bvo.getMemnum()%> </td>
+	<tr>	
+		<th>글쓴이 </th>	
+		<td class="tt" style="text-align: center;"><%=bvo.getMemnum()%> </td>
 	</tr>
 	<tr>
-		<td>
-<!-- 			<div class="img_div">					 -->
-				<img src="${pageContext.request.contextPath}/resources/fileupload/board/<%= bvo.getBoardimage() %>" />
-<!-- 			</div> -->
+		<th>사진 </th>
+		<td class="tt" style="text-align: center;">
+				<img src="${pageContext.request.contextPath}/resources/fileupload/board/<%= bvo.getBoardimage() %>" width="300" height="200" alt="image"/>
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<th>내용 </th>	
+		<td  class="tt" style="text-align: center;">
 			<div class="text_div">	
 				<%=  bvo.getBoardcoment()%>
 			</div>
 		</td>
-	</tr>
+	</tr> 
 	<!-- 버튼 -->	
 	<tr>
 		
-		<td style="text-align:right">
-		<% if(adbool) { %> 			
-			<input type="button" id="bUBtn" value="수정">
-			<input type="button" id="bDBtn" value="삭제">
+		<td style="text-align:right" colspan="2">
+		<% if ("Y".equals(adj)) { %>			
+			<input type="button" id="bUBtn" value="수정"/>
+			<input type="button" id="bDBtn" value="삭제"/>
 		<% } %>		
-		<button type="button" value="취소" id="bCBtn">돌아가기</button>
+		<input type="button" value="돌아가기" id="bCBtn" />
 		</td>
 	</tr>
 	
