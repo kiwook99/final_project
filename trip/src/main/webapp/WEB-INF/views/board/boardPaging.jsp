@@ -38,29 +38,32 @@
 	int pageCount = 0;
 	
 	if(request.getParameter("pageSize") != null){
-		pageSize = Integer.parseInt(request.getParameter("pageSize"));//10
+		pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		System.out.println("pageSize >>> : " + pageSize);
 	}
 	
 	if(request.getParameter("groupSize") != null){
-		groupSize = Integer.parseInt(request.getParameter("groupSize"));//5
+		groupSize = Integer.parseInt(request.getParameter("groupSize"));
 		System.out.println("groupSize >>> : " + groupSize);
 	}
 	
 	if(request.getParameter("curPage") != null){
-		curPage = Integer.parseInt(request.getParameter("curPage"));//1
+		curPage = Integer.parseInt(request.getParameter("curPage"));
 		System.out.println("curPage >>> : " + curPage);
 		
 	}
 	
 	if(request.getParameter("totalCount") != null){
-		totalCount = Integer.parseInt(request.getParameter("totalCount"));//400
+		totalCount = Integer.parseInt(request.getParameter("totalCount"));
 		System.out.println("totalCount >>> : " + totalCount);
 	}
 	
+	// groupSize가 0인 경우 1로 설정
+	groupSize = (groupSize != 0) ? groupSize : 1;
+	
 	// 전체게시물수와 페이지크기를 가지고 전체 페이지 개수를 계산함.
 	// 소수점에 따라 계산상의 오류가 없도록 한것임.
-	pageCount = (int)Math.ceil(totalCount / (groupSize + 0.0));
+	pageCount = (int)Math.ceil(totalCount / (pageSize + 0.0));
 	System.out.println("pageCount >>> : " + pageCount);
 	//(0/page)
 	
@@ -73,20 +76,58 @@
 	int linkPage = curGroup * groupSize;
 	System.out.println("linkPage >>> : " + linkPage);
 %>
-<p style="text-align:center;">
+<style type=text/css>
+
+	.page{
+		background: #0aa4b5;
+	    border-radius: 50%;
+	    color: #fff;
+	    font-weight: 800;
+	    margin: 0 5px;
+	    width: 30px;
+   	 	height: 30px;
+   	 	text-align:center;
+	}
+	
+	.page-num {
+		display: flex;	
+		text-align:center;
+		justify-content: center;
+	}
+	
+	.paging {
+		margin: 0 5px;
+		width: 30px;
+ 	    height: 30px;
+ 	    color: #000;
+ 	    text-align:center;
+	}
+
+</style>
+
+<div class=page-num>
 <%
 	// 첫번째 그룹인 아닌경우
 	if(curGroup > 0) {
 		
-	//boardSelectList.jsp?&curPage=1	
-	//boardSelectList.jsp?&curPage=0
 %>
-	<a href="<%=url%>?<%=str%>curPage=1">◁◁</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>">◀</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?<%=str%>curPage=1">≪</a>&nbsp;&nbsp;
+	<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>">＜</a>&nbsp;&nbsp;
 <%
 	}else{
 %>
-		◁◁&nbsp;&nbsp;&nbsp;◀&nbsp;&nbsp;&nbsp;
+		<a href="<%=url%>?<%=str%>curPage=1">≪</a>&nbsp;&nbsp;
+		<%
+		if (curGroup > 0){
+		%>
+		<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>-1">＜</a>&nbsp;&nbsp;
+		<% 
+		} else {
+		%>
+		<a href="<%=url%>?<%=str%>curPage=1">＜</a>&nbsp;&nbsp;
+		<% 
+		}
+		%>
 <%
 	}
 	
@@ -107,39 +148,46 @@
 			System.out.println("그룹범위내에서 페이지 링크 if");
 		//linkPage :1
 %>
-	<%=linkPage%>
+	<a class=page> <%=linkPage%> </a>
 <%
 		}else{
 			System.out.println("그룹범위내에서 페이지 링크 else");
-			//[2][3][4][5]
 %>
-	[<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>"><%=linkPage%></a>]&nbsp;
+	<a class=paging href="<%=url%>?<%=str%>curPage=<%=linkPage%>"><%=linkPage%></a>
 <%
 		}
-		
 		linkPage++;
 		loopCount--;
 	}
-	
-	// 다음그룹이 있는 경우
-	//		6			40
+
 	if(linkPage <= pageCount){
 		System.out.println("다음그룹이 있는 경우 linkPage >>> : " + linkPage);
 		System.out.println("다음그룹이 있는 경우 pageCount >>> : " + pageCount);
-		
-	//	boardSelectList.jsp?&curPage=6
-	//	boardSelectList.jsp?&curPage=40	
 %>
-	<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>">▶</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?<%=str%>curPage=<%=pageCount%>">▷▷</a>&nbsp;&nbsp;&nbsp;
+	
+	
+	&nbsp;<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>">＞</a>&nbsp;&nbsp;
+	<a href="<%=url%>?<%=str%>curPage=<%=pageCount%>">≫</a>&nbsp;
 <%
 	}else{
 		System.out.println("다음그룹이 있는 경우 linkPage >>> : " + linkPage);
 		System.out.println("다음그룹이 있는 경우 pageCount >>> : " +pageCount);
 		System.out.println("다음그룹이 있는 경우 else");
 %>
-	▶&nbsp;&nbsp;&nbsp;▷▷&nbsp;&nbsp;&nbsp;
+		
+		<%
+		if (curGroup < pageCount/5){
+		%>
+		&nbsp;<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>+1">＞</a>&nbsp;&nbsp;
+		<% 
+		} else {
+		%>
+		&nbsp;<a href="<%=url%>?<%=str%>curPage=<%=pageCount%>">＞</a>&nbsp;&nbsp;
+		<% 
+		}
+		%>
+		<a href="<%=url%>?<%=str%>curPage=<%=pageCount%>">≫</a>&nbsp;
 <%
 	}
 %>
-</p>
+</div>

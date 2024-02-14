@@ -114,23 +114,7 @@
 	      }			
 </style>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-		<script type="text/javascript">
-			console.log("자바스크립트 진입 >>> : ");
-			
-			$(document).ready(function(){
-				console.log("jQuery 진입 >>> : ");
-	
-			
-			// 검색
-		      $("#search_btn").click(function(){
-			         
-			         $("#searchForm").attr({
-			        	 'method':'GET'
-			         }).submit();
-			      });
-		});		
-			
-		</script>
+
 </head>
 <body>
 <%@ include file="/main.jsp" %>
@@ -226,18 +210,20 @@
 	$(document).ready(function(){
 		//alert("jQuery ready() 함수 블럭 진입 >>> : ");
 		
+
 		//  글쓰기 
 		$(document).on("click", "#writeBtn", function(){
 			//alert("글쓰기 버튼 클릭 :: writeBtn");
 			//입력폼의 memnum(닉네임)고정
 			location.href="boardInsertForm?memnum=<%=memid%>";
 		});
-
-		//  검색
-		$(document).on("click", "#searchBtn", function(){	
-			//alert("검색 버튼 클릭 :: searchBtn");
-			$("#searchForm").attr({ "method":"GET"}).submit();
-		});		
+		// 검색
+	      $("#search_btn").click(function(){
+		         
+		         $("#searchForm").attr({
+		        	 'method':'GET'
+		         }).submit();
+		      });	
 		
 	});	
 

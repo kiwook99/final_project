@@ -99,7 +99,7 @@
 		margin: 0 5px;
 		width: 30px;
  	    height: 30px;
- 	    color: #888;
+ 	    color: #000;
  	    text-align:center;
 	}
 
