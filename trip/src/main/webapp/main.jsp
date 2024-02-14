@@ -367,12 +367,14 @@ String memid = tSession.getSession(httpServletRequest);
      	weathers();
      });
  	
+  	// 서버에서 날씨 정보를 가져와서 화면에 출력
      function weathers() {
          $.ajax({
              type: 'GET',
              url: 'http://192.168.0.55:5001/weather_api/weather',
              dataType: 'json',
              success: function (result) {
+            	// 날씨 정보 추출
                  var hour = result[0];
                  var temp = result[1];
                  var wfKor = result[2];
@@ -387,12 +389,12 @@ String memid = tSession.getSession(httpServletRequest);
                  htmlContent += "<br>[서울시 날씨]<br>온도: " + temp + "°C<br>날씨: " + wfKor + "<br>강수확률: " + pop + "%";
                  // HTML을 출력
                  $('#a').html(htmlContent);
-                 //$('#a').html("[인천시 부평구 날씨]<br>시간: " + hour + "시<br>온도: " + temp + "°C<br>날씨: " + wfKor +"<br>강수확률: " + pop + "%");
               	
-                 // weathers() 함수 성공 후에 mans() 함수 호출
+                 // weathers() 함수 성공 후에 getAllImages() 함수 호출
                  getAllImages();
              },
              error: function (xhr, status, error) {
+            	// 에러 발생 시 알림
                  alert(xhr + ':' + status + ':' + error);
              }
          });

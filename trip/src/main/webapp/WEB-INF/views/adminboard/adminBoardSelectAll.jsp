@@ -179,7 +179,6 @@ for(int i=0; i<nCnt; i++){
       <tr>
 		<td style="width:5%"><%= _abvo.getAdboardnum() %></td>			
 		<td style="width:10%"><a href="adminBoardSelect?adboardnum=<%= _abvo.getAdboardnum() %>"><%= _abvo.getAdboardtitle() %> </a></td>
-<!-- 		<td style="text-align:center;">관리자</td>	 -->
 		<td style="width:10%"><%= _abvo.getMemnum() %></td>
 		<td style="width:10%"><%= _abvo.getInsertdate() %></td> 
 		<td style="width:8%"><%= _abvo.getAdboardhits() %></td>				

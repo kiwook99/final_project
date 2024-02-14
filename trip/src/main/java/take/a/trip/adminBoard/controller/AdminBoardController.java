@@ -32,108 +32,122 @@ public class AdminBoardController {
 	Logger logger = LogManager.getLogger(AdminBoardController.class);
 	
     //컨트롤러에서 회원 서비스 연결 
+	//의존성 주입
 	@Autowired(required=false)
 	private AdminBoardService adminBoardService;
+	//래디스 의존성 주입
 	@Autowired
 	private JedisPool jedisPool;
+	
 	@Autowired
 	private T_Session t_Session;
 	
-	@GetMapping("adminboard/adminBoardSelectAll")
-	public String adminBoardSelectAll(AdminBoardVO abvo, Model model, HttpServletRequest request) {
-		logger.info("adminBoardSelectAll 함수 진입 >>> : ");
-		
-		 String sessionId = t_Session.getSession(request);
-		
-		// 페이징 처리 ====================================================================
-				int pageSize = CommonUtils.ADMINBOARD_PAGE_SIZE;	// 페이지에 나올 값
-				int groupSize = CommonUtils.ADMINBOARD_GROUP_SIZE;	// 그룹으로 묶을 값
-				int curPage = CommonUtils.ADMINBOARD_CUR_PAGE;		// 현재 페이지 
-				int totalCount = CommonUtils.ADMINBOARD_TOTAL_COUNT;
-				
-				if (abvo.getCurPage() !=null){
-					curPage = Integer.parseInt(abvo.getCurPage());
-				}
-				
-				abvo.setPageSize(String.valueOf(pageSize));
-				abvo.setGroupSize(String.valueOf(groupSize));
-				abvo.setCurPage(String.valueOf(curPage));
-				abvo.setTotalCount(String.valueOf(totalCount));
+	// 전체 조회 (ISUD)
+    @GetMapping("adminboard/adminBoardSelectAll")
+    public String adminBoardSelectAll(AdminBoardVO abvo, Model model, HttpServletRequest request) {
+        logger.info("adminBoardSelectAll 함수 진입 >>> : ");
 
-				logger.info("abvo.getPageSize() >>> : 	" + abvo.getPageSize());
-				logger.info("abvo.getGroupSize() >>> : 	" + abvo.getGroupSize());
-				logger.info("abvo.getCurPage() >>> : 	" + abvo.getCurPage());
-				logger.info("abvo.getTotalCount() >>> : " + abvo.getTotalCount());
-		// 페이징 처리 ======================================================================================
-				
-		List<AdminBoardVO> listAll = adminBoardService.adminBoardSelectAll(abvo);
-		if (listAll.size() > 0) {
-			logger.info("adminBoardSelectAll listAll.size() 함수 진입 >>> : " + listAll.size());
-			
-			model.addAttribute("pagingABVO", abvo);
-			model.addAttribute("listAll", listAll);
-			
-			 try (Jedis jedis = jedisPool.getResource()) {
-					
-				 String adminyn = jedis.get(sessionId);
-				
-				 if (adminyn != null) {
-				        // 값이 존재하는 경우
-				        logger.info("adminyn >>> : " + adminyn);
-				        model.addAttribute("adminyn", adminyn);
-				        logger.info("jedis.get >>> : ");
-				    } else {
-				        // 값이 없는 경우
-				        logger.info("adminyn is null");
-				        }
-			 }
-			
-			return "adminboard/adminBoardSelectAll";
-		}
-			
-		return "adminboard/adminBoardInsertForm";
-	}
+        // 사용자 세션 ID 가져오기
+        String sessionId = t_Session.getSession(request);
+
+        // 페이징 처리 ====================================================================
+        int pageSize = CommonUtils.ADMINBOARD_PAGE_SIZE;  // 페이지에 나올 값
+        int groupSize = CommonUtils.ADMINBOARD_GROUP_SIZE;  // 그룹으로 묶을 값
+        int curPage = CommonUtils.ADMINBOARD_CUR_PAGE;  // 현재 페이지 
+        int totalCount = CommonUtils.ADMINBOARD_TOTAL_COUNT;
+
+        // 현재 페이지가 null이 아닐 때 실행
+        if (abvo.getCurPage() != null){
+            curPage = Integer.parseInt(abvo.getCurPage());
+        }
+
+        abvo.setPageSize(String.valueOf(pageSize));
+        abvo.setGroupSize(String.valueOf(groupSize));
+        abvo.setCurPage(String.valueOf(curPage));
+        abvo.setTotalCount(String.valueOf(totalCount));
+
+        logger.info("abvo.getPageSize() >>> : " + abvo.getPageSize());
+        logger.info("abvo.getGroupSize() >>> : " + abvo.getGroupSize());
+        logger.info("abvo.getCurPage() >>> : " + abvo.getCurPage());
+        logger.info("abvo.getTotalCount() >>> : " + abvo.getTotalCount());
+        // 페이징 처리 ======================================================================================
+
+        List<AdminBoardVO> listAll = adminBoardService.adminBoardSelectAll(abvo);
+        if (listAll.size() > 0) {
+            logger.info("adminBoardSelectAll listAll.size() 함수 진입 >>> : " + listAll.size());
+
+            // Redis에서 세션 정보 확인
+            try (Jedis jedis = jedisPool.getResource()) {
+                String adminyn = jedis.get(sessionId);
+
+                if (adminyn != null) {
+                    // 값이 존재하는 경우
+                    logger.info("adminyn >>> : " + adminyn);
+                    model.addAttribute("adminyn", adminyn);
+                    logger.info("jedis.get >>> : ");
+                } else {
+                    // 값이 없는 경우
+                    logger.info("adminyn is null");
+                }
+            }
+
+            // 목록 및 페이징 정보 전달
+            model.addAttribute("pagingABVO", abvo);
+            model.addAttribute("listAll", listAll);
+
+            return "adminboard/adminBoardSelectAll";
+        }
+
+        return "adminboard/adminBoardInsertForm";
+    }
+
 	
-		// 게시글 조회 
-		@GetMapping("adminboard/adminBoardSelect")
-		public String adminBoardSelect(AdminBoardVO abvo, Model model, HttpServletRequest request) {
-			logger.info("adminBoardSelect 함수 진입 >>> : ");
-			
-			String sessionId = t_Session.getSession(request);
-			
-			logger.info("adminBoardSelect 함수 진입  abvo.getAdboardnum() >>> : " + abvo.getAdboardnum());
-			
-			// 서비스 호출
-			List<AdminBoardVO> listS = adminBoardService.adminBoardSelect(abvo);		
-			if (listS.size() == 1) { 
-				logger.info("adminBoardSelect listS.size() >>> : " + listS.size());
-				
-				// 조회수 업데이트 
-				int bhitCnt = adminBoardService.adminBoardHits(abvo);
-				logger.info("adminBoardSelect bhitCnt >>> : " + bhitCnt);
-						
-				model.addAttribute("listS", listS);
-				
-				try (Jedis jedis = jedisPool.getResource()) {
-					
-					 String adminyn = jedis.get(sessionId);
-					
-					 if (adminyn != null) {
-					        // 값이 존재하는 경우
-					        logger.info("adminyn >>> : " + adminyn);
-					        model.addAttribute("adminyn", adminyn);
-					        logger.info("jedis.get >>> : ");
-					    } else {
-					        // 값이 없는 경우
-					        logger.info("adminyn is null");
-					        }
-				 }
-				return "adminboard/adminBoardSelect";
-			}		
-			return "adminboard/adminBoardSelectAll";
-		}
+    // 게시글 조회 
+    @GetMapping("adminboard/adminBoardSelect")
+    public String adminBoardSelect(AdminBoardVO abvo, Model model, HttpServletRequest request) {
+        logger.info("adminBoardSelect 함수 진입 >>> : ");
+        
+        // 사용자 세션 ID 가져오기
+        String sessionId = t_Session.getSession(request);
+        
+        logger.info("adminBoardSelect 함수 진입 abvo.getAdboardnum() >>> : " + abvo.getAdboardnum());
+        
+        // 서비스 호출
+        List<AdminBoardVO> listS = adminBoardService.adminBoardSelect(abvo);
+        
+        // 조회된 게시글이 1개인 경우
+        if (listS.size() == 1) { 
+            logger.info("adminBoardSelect listS.size() >>> : " + listS.size());
+            
+            // 조회수 업데이트 
+            int bhitCnt = adminBoardService.adminBoardHits(abvo);
+            logger.info("adminBoardSelect bhitCnt >>> : " + bhitCnt);
+                    
+            // 조회된 게시글 정보 전달
+            model.addAttribute("listS", listS);
+            
+            try (Jedis jedis = jedisPool.getResource()) {
+                String adminyn = jedis.get(sessionId);
+                
+                if (adminyn != null) {
+                    // 값이 존재하는 경우
+                    logger.info("adminyn >>> : " + adminyn);
+                    model.addAttribute("adminyn", adminyn);
+                    logger.info("jedis.get >>> : ");
+                } else {
+                    // 값이 없는 경우
+                    logger.info("adminyn is null");
+                }
+            }
+            
+            return "adminboard/adminBoardSelect";
+        }        
+        
+        // 조회된 게시글이 없거나 여러 개인 경우 목록 페이지로 이동
+        return "adminboard/adminBoardSelectAll";
+    }
 	
-	
+	//입력 폼(ISUD)
 	@GetMapping("adminboard/adminBoardInsertForm")
     public String adminBoardInsertForm(AdminBoardVO abvo, Model model) {
 		logger.info("adminBoardInsertForm 함수 진입 >>> : ");
@@ -141,7 +155,7 @@ public class AdminBoardController {
 			return "adminboard/adminBoardInsertForm";
 	}
 
-	// 입력
+	//입력
 	@PostMapping("adminboard/adminBoardInsert")
 	public String adminBoardInsert(HttpServletRequest req) {
 	    logger.info("adminBoardInsert 함수 진입 >>> : "+ req);
@@ -184,7 +198,7 @@ public class AdminBoardController {
 	    }
 
 	
-		// 게시글 수정 
+		// 게시글 수정 폼
 		@GetMapping("adminboard/adminBoardUpdateForm")
 		public String adminBoardUpdateForm(AdminBoardVO abvo, Model model) {
 			logger.info("adminBoardUpdateForm 함수 진입 >>> : ");
@@ -250,7 +264,6 @@ public class AdminBoardController {
 			if(abvo.getCurPage() != null) {
 				// parseInt : 문자열 숫자로 변환
 				curPage = Integer.parseInt(abvo.getCurPage());
-				
 			}
 			
 			// 메모리에 올림
