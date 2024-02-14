@@ -106,5 +106,35 @@
 		WHERE  	DELETEYN    = 'Y'
 		AND    	ADBOARDNUM = #{adboardnum}	
 	</update>
+	
+	<!-- 검색 -->
+
+	<select id="admin_SearchSelect" parameterType="abvo" resultType="abvo">
+	
+    SELECT * FROM (
+        SELECT
+            A.ADBOARDNUM ADBOARDNUM,
+            A.MEMNUM MEMNUM,
+            A.ADBOARDTITLE ADBOARDTITLE,
+            A.ADBOARDCOMENT ADBOARDCOMENT,
+            A.ADBOARDIMAGE ADBOARDIMAGE,
+            A.INSERTDATE INSERTDATE,
+            A.UPDATEDATE UPDATEDATE,
+            A.DELETEYN DELETEYN,
+            CEIL(ROW_NUMBER() OVER(ORDER BY A.ADBOARDNUM DESC)/ #{pageSize} ) pageSize,		
+		    COUNT(A.ADBOARDNUM) OVER() AS totalCount	 
+        FROM ADBOARD A
+        WHERE 1=1 
+        AND A.DELETEYN='Y'
+        
+        <if test="searchFilter == 'key_01' and keyword != null">
+            <![CDATA[ AND A.ADBOARDTITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+        </if>
+        
+	ORDER BY ADBOARDNUM
+		<!--  ? : 현재 페이지 : curPage -->
+	) WHERE pageSize = #{curPage}
+    
+	</select>
 
 </mapper>

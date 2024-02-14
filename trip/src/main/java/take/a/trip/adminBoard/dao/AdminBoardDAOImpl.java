@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import take.a.trip.adminBoard.vo.*;
+import take.a.trip.spot.vo.SpotVO;
 
 @Repository
 public class AdminBoardDAOImpl implements AdminBoardDAO {
@@ -70,6 +71,15 @@ public class AdminBoardDAOImpl implements AdminBoardDAO {
 		logger.info("adminBoardUpdateForm 함수 진입 >>> : ");	
 		
 		return sqlSession.selectList("adminBoardUpdateForm", abvo);
+	}
+	
+	// 검색 
+	@Override
+	public List admin_SearchSelect(AdminBoardVO abvo) {
+		// TODO Auto-generated method stub
+		logger.info("AdminBoardDAOImpl admin_SearchSelect 진입 >>> : ");
+		
+		return sqlSession.selectList("admin_SearchSelect", abvo);		
 	}
 
 }

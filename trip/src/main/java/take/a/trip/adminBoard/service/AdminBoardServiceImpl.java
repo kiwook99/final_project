@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import take.a.trip.adminBoard.vo.AdminBoardVO;
+import take.a.trip.spot.vo.SpotVO;
 import take.a.trip.adminBoard.dao.AdminBoardDAO;
 
 @Service
@@ -60,6 +61,15 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	public List<AdminBoardVO> adminBoardUpdateForm(AdminBoardVO abvo) {
 	    logger.info("adminBoardUpdateForm 함수 진입 >>> : ");
 	    return adminBoardDAO.adminBoardUpdateForm(abvo);
+	}
+	
+	// 검색 ================================================================
+	@Override
+	public List admin_SearchSelect(AdminBoardVO abvo) {
+		// TODO Auto-generated method stub
+		logger.info("AdminBoardServiceImpl admin_SearchSelect 진입 >>> : ");
+		
+		return adminBoardDAO.admin_SearchSelect(abvo);		
 	}
 	
 
