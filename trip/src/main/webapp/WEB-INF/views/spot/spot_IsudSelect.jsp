@@ -184,31 +184,7 @@
 					<button type="button" id="B">돌아가기</button>
 				</div>
 			</form>
-			<div class="main">
-				<div class="contents">
-					<div class="sub_header">
-					<!-- 제목 -->
-					</div>
-					<div class="sub_content">
-						<div class="sub_search">
-							<!-- 조건 검색 -->
-						</div>
-						<div class="sub_list">
-							<div class="list_head">
-								<!-- 페이지 수 -->
-							</div>
-							<div class="list_content">
-								<!-- 관광지 -->
-								<ul id="spotList">
-									<!-- 데이터 들어갈 것임 -->
-								</ul>
-								<div id="buttonContainer"></div>							
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
+
 			
 		<!-- 댓글 처리 -->
 		<jsp:include page="spot_IusdComment.jsp">  
