@@ -1,4 +1,4 @@
-<%-- 조건조회  html, form태그 --%>
+<%--:: 댓글 :: 조건조회  html, form태그 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="take.a.trip.board.vo.BoardVO"%>

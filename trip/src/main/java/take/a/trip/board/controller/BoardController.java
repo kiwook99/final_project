@@ -62,13 +62,13 @@ public class BoardController {
 	
 	//[SelectAll 전체조회]
 	@GetMapping("board/boardSelectAll")
-	//함수()페이징 호출을위한 매개변수 BoardVO bvo 입력
 	public String boardSelectAll(BoardVO bvo, Model model,  HttpServletRequest request) {
 		logger.info("BoardController ::: boardSelectAll함수 진입 >> : ");
 		
 		String sessionId = t_Session.getSession(request);
 		
 		// 페이징 처리 ====================================================================
+		//상수값
 		int pageSize = BoardCommonUtils.BOARD_PAGE_SIZE;
 		int groupSize = BoardCommonUtils.BOARD_GROUP_SIZE;
 		int curPage = BoardCommonUtils.BOARD_CUR_PAGE;
@@ -77,7 +77,7 @@ public class BoardController {
 		if (bvo.getCurPage() !=null){
 			curPage = Integer.parseInt(bvo.getCurPage());
 		}
-		
+
 		bvo.setPageSize(String.valueOf(pageSize));
 		bvo.setGroupSize(String.valueOf(groupSize));
 		bvo.setCurPage(String.valueOf(curPage));
@@ -137,39 +137,21 @@ public class BoardController {
 													  encodeType,
 								          new BoardFileRename());
 			
-		//2024-01-29
-//		String boardnum;//게시판번호 fk
-//		String memnum;//회원번호
-//		String boardtitle;//게시글제목
-//		String boardcoment;//게시글댓글	
-		
-//		String boardnum = mr.getParameter("boardnum");
 		String memnum = mr.getParameter("memnum");//회원번호
 		String boardtitle = mr.getParameter("boardtitle");;//게시글제목
 		String boardcoment = mr.getParameter("boardcoment");;//게시글댓글
 		
-		
-		//2024-01-23
-		//문자열 참조변수에 매개변수(파일명)을 받은 getFilesystemName()함수
-		//2024-01-29 참조변수 boardimage
 		String boardimage= mr.getFilesystemName("boardimage");
-//		String originalFileName= mr.getOriginalFileName("boardimage");
 		logger.info("boardimage >> : " + boardimage);
-//		logger.info("originalFileName >> : " + originalFileName);
 		
-		//VO의 setBoardimage()함수 호출 
 		BoardVO bvd = new BoardVO();
-//		bvd.setBoardnum(boardnum);
 		bvd.setMemnum(memnum);
 		bvd.setBoardtitle(boardtitle);
 		bvd.setBoardcoment(boardcoment);
 		bvd.setBoardimage(boardimage);
 		
-		//테이블에 파일이름 입력하기 시작
-		//db연결을위한 코드 
 		int nCnt = boardService.boardInsert(bvd);
-		//--------------	
-			
+
 		} catch (IOException e) {
 			logger.info("파일 업로드 중 에러가  >>> : " + e.getMessage());
 		}											  
