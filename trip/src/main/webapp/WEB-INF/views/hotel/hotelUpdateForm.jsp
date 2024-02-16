@@ -434,16 +434,21 @@
 						<div class="slider">
 							<div class="swiper-container">
 								<div class="swiper-wrapper">
-									<%
-								        String[] imageUrls = hvo.getHotelimage().split(",");
-								        for (String imageUrl : imageUrls) {
-								    %>
-										<div class="swiper-slide">
-											 <img src="<%= imageUrl.trim() %>">
-										</div>
-									<%
-										}
-									%>
+									 <!-- 이미지 동적 생성 -->
+		                            <%if (hvo.getHotelimage().startsWith("http") || hvo.getHotelimage().startsWith("https")) { 
+		                                String[] imageUrls = hvo.getHotelimage().split(",");
+		                                for (String imageUrl : imageUrls) {
+		                            %>
+		                            <div class="swiper-slide">
+		                                <img src="<%= imageUrl.trim() %>">
+		                            </div>
+		                            <%  }} else { %>
+		                            <div class="swiper-slide">
+		                                <img src="${pageContext.request.contextPath}/resources/fileupload/hotel/<%= hvo.getHotelimage() %>">
+		                            </div>
+		                            <%
+		                                }
+		                            %>
 								</div>
 								<div class="page_box">
 									<div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"></div>
