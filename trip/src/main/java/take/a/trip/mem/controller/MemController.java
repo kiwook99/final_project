@@ -55,11 +55,13 @@ public class MemController {
 	public String login(Model model, MemVO mvo, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info("MemController login 진입 >>> : ");
 		
+		//사용자 권한을 담을 변수 선언 
 		String adminyn = "";
 		
 		logger.info("userid >>> : " + mvo.getMemid());
 		logger.info("userpw >>> : " + mvo.getMempw());
 		
+		//서비스 호출
 		List<MemVO> userLogin = memService.memLogin(mvo);
 		logger.info("userLogin >>> : " + userLogin.size());
 		
@@ -78,8 +80,7 @@ public class MemController {
 			// 모델객체에 로그인정보 담기
 			model.addAttribute("userLogin", userLogin);
 			
-			 try (Jedis jedis = jedisPool.getResource()) {
-		        	
+			 try (Jedis jedis = jedisPool.getResource()) {	        	
 				 	// Redis에 데이터 저장
 		            jedis.set( mvo.getMemid(), adminyn);
 		            // Redis 만료 시간 설정 (3600=1시간)

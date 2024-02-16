@@ -12,27 +12,36 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style type="text/css">
-			#loginbtn, #insertbtn, #searchbtn {
-				padding: 10px 20px;
-				background-color: #0aa4b5;
-				color: white;
-				border: 0;
-				border-radius: 10px;
-				font-size: 15px;
-			}
-			
-			#loginbtn:hover, #insertbtn:hover, #searchbtn:hover{
-					background-color: #0bc5da;
-					 transition-duration: 0.5s;
-		        }
-			
-			#sign {
-			
-				width: 400px;
-				height: 250px;
-			}
-				
-			
+	#sign {
+	    width: 400px;
+	    height: 250px;
+	    border-collapse: collapse; /* 테이블의 테두리를 병합합니다. */
+	}
+	
+	#sign td {
+	    border: 1px solid #ddd; /* 각 셀에 회색 라인을 추가합니다. */
+	    padding: 8px; /* 셀 내부 여백 설정 */
+	    text-align: center; /* 셀 내용 가운데 정렬 */
+	}
+	
+	#sign tr:first-child {
+	    background-color: #0aa4b5; /* 첫 번째 행의 배경색을 설정합니다. */
+	    color: white; /* 첫 번째 행의 텍스트 색상을 흰색으로 설정합니다. */
+	}
+	
+	#loginbtn, #insertbtn, #searchbtn {
+	    padding: 10px 20px;
+	    background-color: #0aa4b5;
+	    color: white;
+	    border: 0;
+	    border-radius: 10px;
+	    font-size: 15px;
+	}
+	
+	#loginbtn:hover, #insertbtn:hover, #searchbtn:hover {
+	    background-color: #0bc5da;
+	    transition-duration: 0.5s;
+	}
 </style>
 </head>
 <body>
