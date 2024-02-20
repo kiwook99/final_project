@@ -74,7 +74,7 @@
 							memnum: $('#memnum').val(),
 							reviewcoment: $('#reviewcoment').val()
 					};
-					dataParam = $("#commentForm").serialize();
+					dataParam = $("#commentForm").serialize(); // 데이터 변환
 					console.log("dataParam : " + dataParam);
 					
 					$.ajax({
