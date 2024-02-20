@@ -183,7 +183,7 @@
 			// 공통정보 ajax 시작
 			$.ajax({ 
 				type: 'GET', 
-				url: "http://127.0.0.55:5001/api_spot_detail_1/spot_detail_1", // url : flask, blueprint 참고, flask api 엔드 포인트
+				url: "http://192.168.0.55:5001/api_spot_detail_1/spot_detail_1", // url : flask, blueprint 참고, flask api 엔드 포인트
 		        data: { contentid: contentid }, // contentid 전달
 				dataType: 'JSON', // 데이터 타입
 				success : function(item_list) { // 성공할 시 실행되는 콜백 함수
@@ -285,7 +285,7 @@
 			// 공통정보 ajax 시작
 			$.ajax({ 
 				type: 'GET', 
-				url: "http://127.0.0.55:5001/api_spot_detail_2/spot_detail_2", // url : flask, blueprint 참고, flask api 엔드 포인트
+				url: "http://192.168.0.55:5001/api_spot_detail_2/spot_detail_2", // url : flask, blueprint 참고, flask api 엔드 포인트
 		        data: { contentid: contentid }, // contentid 전달
 				dataType: 'JSON', // 데이터 타입
 				success : function(item_list) { // 성공할 시 실행되는 콜백 함수
