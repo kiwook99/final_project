@@ -396,7 +396,7 @@
 	     	// 초기 1박 가격
 	        function calculateAndDisplayDefaultPrice() {
 	            // 기본 가격 표시
-	            hotelprice = parseInt(<%= hvo.getHotelprice() %>);ㄴ
+	            hotelprice = parseInt(<%= hvo.getHotelprice() %>);
 	            $('#finalPrice').text('1박 요금 : ' + formatNumber(hotelprice) + '원');
 	            $('#hotelprice').val(hotelprice);
 	        }
