@@ -39,6 +39,9 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 
+</script>
+
+
  <style type="text/css">
         h2 {
             text-align: center;
