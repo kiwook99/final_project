@@ -57,7 +57,7 @@
 			</tr>
 			<tr>
 				<td>PW</td>
-				<td><input type="text" name="mempw" id="mempw" size="35"></td>
+				<td><input type="password" name="mempw" id="mempw" size="35"></td>
 			</tr>
 			<tr>
 				<td colspan="2">
