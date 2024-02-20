@@ -102,8 +102,6 @@
 <div class=sub-header>
 <h3 class="sub-title">예약하기</h3>
 
-<hr>
-
 <form name="orderForm" id="orderForm" style="margin-top: 10px;">
 
 </div>

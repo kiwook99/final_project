@@ -199,7 +199,7 @@ String memid = tSession.getSession(httpServletRequest);
 		delInput.addClass("deleteBtn");
 		// 내용
 		var contentP = $("<p>");
-		contentP.html(decodeURIComponent(content));
+		contentP.html(decodeURIComponent(content.replace(/\+/g, " ")));
 		
 		// 조립하기
 		writerP.append(nameSpan).append(dateSpan).append(delInput);
@@ -303,6 +303,7 @@ String memid = tSession.getSession(httpServletRequest);
 <form name="reviewForm" id="reviewForm">
 <div class="reviewlist">
 <ol name="reviewlist" id="reviewlist">
+
 	<!-- 여기에 동적 생성 요소가 들어온다. -->
 </ol>
 </div>

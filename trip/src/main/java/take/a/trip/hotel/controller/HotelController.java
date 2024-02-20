@@ -50,145 +50,163 @@ public class HotelController {
 	 private T_Session t_Session;
 		
 	 
-	 // 숙소페이지
+	// 호텔 페이지 컨트롤러
 	 @GetMapping("/hotel/hotel_main")
 	 public String hotel(HotelVO hvo, Model model, HttpServletRequest request) {
-		 logger.info("hotel 함수 진입");
-		 
-		 String sessionId = t_Session.getSession(request);
-		 
-		 logger.info("spot_IsudSelectAll sessionId >>> : " + sessionId);
-		 // 페이징
-		 int pageSize = CommonUtils.HOTEL_PAGE_SIZE; 	// 한페이지의 값
-		 int groupSize = CommonUtils.HOTEL_GROUP_SIZE;	// 그룹 값
-		 int curPage = CommonUtils.HOTEL_CUR_PAGE;		// 현재페이지
-		 int totalCount = CommonUtils.HOTEL_TOTAL_COUNT;
-		 
-		 if(hvo.getCurPage() != null) {
-				// parseInt : 문자열 숫자로 변환
-				curPage = Integer.parseInt(hvo.getCurPage());
-			}
-		 
-		 hvo.setPageSize(String.valueOf(pageSize));;
-		 hvo.setGroupSize(String.valueOf(groupSize));
-		 hvo.setCurPage(String.valueOf(curPage));
-		 hvo.setTotalCount(String.valueOf(totalCount));
-		
-		 logger.info("spot_IsudSelectAll hvo.getPageSize() >>> : " + hvo.getPageSize());
-		 logger.info("spot_IsudSelectAll hvo.getGroupSize() >>> : " + hvo.getGroupSize());
-		 logger.info("spot_IsudSelectAll hvo.getCurPage() >>> : " + hvo.getCurPage());
-		 logger.info("spot_IsudSelectAll hvo.getTotalCount() >>> : " + hvo.getTotalCount());
-		 
-		 // 서비스 호출
-		 List<HotelVO> listAll = hotelService.hotel_main(hvo);
-		 if (listAll.size()>0) {
-			 logger.info("hotel listAll.size() => "+listAll.size());
-			 
-			 model.addAttribute("listAll",listAll);
-			 model.addAttribute("pagingHVO",hvo);
-			 
-			 try (Jedis jedis = jedisPool.getResource()) {
-			 
-				 String adminyn = jedis.get(sessionId);
-				 
-				 if (adminyn != null) {
-				        // 값이 존재하는 경우
-				        logger.info("adminyn >>> : " + adminyn);
-				        model.addAttribute("adminyn", adminyn);
-				        logger.info("jedis.get >>> : ");
-				    } else {
-				        // 값이 없는 경우
-				        logger.info("adminyn is null");
-				        }
-			 } 
-			 return "hotel/hotel_main";
-			
-		}
-		 
-		 return "hotel/hotel_insert";
+	     logger.info("hotel 함수 진입");
+
+	     // hotel_main 화면을 렌더링할 때 페이징 정보를 받아와서 모델에 추가
+	     HotelVO pagingHVO = (HotelVO)request.getAttribute("pagingHVO");
+	     model.addAttribute("pagingHVO", pagingHVO);
+
+	     // 세션 ID 가져오기
+	     String sessionId = t_Session.getSession(request);
+
+	     logger.info("spot_IsudSelectAll sessionId >>> : " + sessionId);
+
+	     // 페이징 설정
+	     int pageSize = CommonUtils.HOTEL_PAGE_SIZE;     // 한 페이지의 값
+	     int groupSize = CommonUtils.HOTEL_GROUP_SIZE;   // 그룹 값
+	     int curPage = CommonUtils.HOTEL_CUR_PAGE;       // 현재 페이지
+	     int totalCount = CommonUtils.HOTEL_TOTAL_COUNT;
+
+	     // 현재 페이지 파라미터가 존재할 경우 설정
+	     if(hvo.getCurPage() != null) {
+	         // parseInt: 문자열 숫자로 변환
+	         curPage = Integer.parseInt(hvo.getCurPage());
+	     }
+
+	     hvo.setPageSize(String.valueOf(pageSize));
+	     hvo.setGroupSize(String.valueOf(groupSize));
+	     hvo.setCurPage(String.valueOf(curPage));
+	     hvo.setTotalCount(String.valueOf(totalCount));
+
+	     logger.info("spot_IsudSelectAll hvo.getPageSize() >>> : " + hvo.getPageSize());
+	     logger.info("spot_IsudSelectAll hvo.getGroupSize() >>> : " + hvo.getGroupSize());
+	     logger.info("spot_IsudSelectAll hvo.getCurPage() >>> : " + hvo.getCurPage());
+	     logger.info("spot_IsudSelectAll hvo.getTotalCount() >>> : " + hvo.getTotalCount());
+
+	     // 호텔 서비스 호출
+	     List<HotelVO> listAll = hotelService.hotel_main(hvo);
+	     
+	     if (listAll.size() > 0) {
+	         logger.info("hotel listAll.size() => " + listAll.size());
+
+	         // 모델에 리스트 및 페이징 정보 추가
+	         model.addAttribute("listAll", listAll);
+	         model.addAttribute("pagingHVO", hvo);
+
+	         try (Jedis jedis = jedisPool.getResource()) {
+	             // 세션에 저장된 값 가져오기
+	             String adminyn = jedis.get(sessionId);
+
+	             if (adminyn != null) {
+	                 // 값이 존재하는 경우
+	                 logger.info("adminyn >>> : " + adminyn);
+	                 model.addAttribute("adminyn", adminyn);
+	                 logger.info("jedis.get >>> : ");
+	             } else {
+	                 // 값이 없는 경우
+	                 logger.info("adminyn is null");
+	             }
+	         }
+
+	         // 호텔 메인 화면 반환
+	         return "hotel/hotel_main";
+	     }
+
+	     // 호텔 리스트가 없는 경우 호텔 추가 화면 반환
+	     return "hotel/hotel_insert";
+	 }
+
+	 
+	// 검색 컨트롤러
+	 @GetMapping("/hotel/hotelSearch")
+	 public String hotelSearch(HotelVO hvo, Model model, HttpServletRequest request) {
+	     logger.info("hotelSearch hvo.getSerachFilter()=> " + hvo.getSearchFilter());
+	     logger.info("hotelSearch hvo.getKeyword()=> " + hvo.getKeyword());
+
+	     // 페이지 정보를 직접 받아옴
+	     int pageSize = CommonUtils.HOTEL_PAGE_SIZE;  // 한 페이지의 값
+	     int groupSize = CommonUtils.HOTEL_GROUP_SIZE; // 그룹 값
+	     int curPage = CommonUtils.HOTEL_CUR_PAGE;     // 현재 페이지
+	     int totalCount = CommonUtils.HOTEL_TOTAL_COUNT;
+
+	     if (hvo.getCurPage() != null) {
+	         // parseInt : 문자열 숫자로 변환
+	         curPage = Integer.parseInt(hvo.getCurPage());
+	     }
+
+	     hvo.setPageSize(String.valueOf(pageSize));
+	     hvo.setGroupSize(String.valueOf(groupSize));
+	     hvo.setCurPage(String.valueOf(curPage));
+	     hvo.setTotalCount(String.valueOf(totalCount));
+
+	     logger.info("hotelSearch hvo.getPageSize() >>> : " + hvo.getPageSize());
+	     logger.info("hotelSearch hvo.getGroupSize() >>> : " + hvo.getGroupSize());
+	     logger.info("hotelSearch hvo.getCurPage() >>> : " + hvo.getCurPage());
+	     logger.info("hotelSearch hvo.getTotalCount() >>> : " + hvo.getTotalCount());
+
+	     List<HotelVO> searchList = hotelService.hotelSearch(hvo);
+
+	     int nCnt = searchList.size();
+
+	     if (nCnt > 0) {
+	         logger.info("hotelSearch nCnt = " + nCnt);
+
+	         model.addAttribute("listAll", searchList);
+	         model.addAttribute("pagingHVO", hvo);
+
+	         // 검색 결과가 있는 경우 hotel_search 페이지로 이동
+	         return "hotel/hotel_search";
+	     } else {
+	         // 검색 결과가 없는 경우
+	         return "hotel/hotel_main";
+	     }
 	 }
 	 
-	 // 지역별 검색
-	 @GetMapping("hotel/hotelSearch")
-	 public String hotelSearch(HotelVO hvo, Model model) {
-		 logger.info("hotelSearch hvo.getSerachFilter()=> "+ hvo.getSearchFilter());
-		 logger.info("hotelSearch hvo.getKeyword()=> "+ hvo.getKeyword());
-		 
-		// 페이징
-		 int pageSize = CommonUtils.HOTEL_PAGE_SIZE; 	// 한페이지의 값
-		 int groupSize = CommonUtils.HOTEL_GROUP_SIZE;	// 그룹 값
-		 int curPage = CommonUtils.HOTEL_CUR_PAGE;		// 현재페이지
-		 int totalCount = CommonUtils.HOTEL_TOTAL_COUNT;
-		 
-		 if(hvo.getCurPage() != null) {
-				// parseInt : 문자열 숫자로 변환
-				curPage = Integer.parseInt(hvo.getCurPage());
-			}
-		 
-		 hvo.setPageSize(String.valueOf(pageSize));;
-		 hvo.setGroupSize(String.valueOf(groupSize));
-		 hvo.setCurPage(String.valueOf(curPage));
-		 hvo.setTotalCount(String.valueOf(totalCount));
-		
-		 logger.info("hotelSearch hvo.getPageSize() >>> : " + hvo.getPageSize());
-		 logger.info("hotelSearch hvo.getGroupSize() >>> : " + hvo.getGroupSize());
-		 logger.info("hotelSearch hvo.getCurPage() >>> : " + hvo.getCurPage());
-		 logger.info("hotelSearch hvo.getTotalCount() >>> : " + hvo.getTotalCount());
-		 
-		 List<HotelVO> searchList = hotelService.hotelSearch(hvo);
-		 
-		 int nCnt = searchList.size();
-		 
-		 if (nCnt>0) {
-			 logger.info("hotelSearch nCnt = "+nCnt);
-			 
-			 model.addAttribute("listAll",searchList);
-			 model.addAttribute("pagingHVO",hvo);
-			 
-			 return "hotel/hotel_main";
-		 }
-		 
-		 return "hotel/hotel_main";
-	 }
-	 
-	 // 지역별 
+	// 상세 페이지 컨트롤러
 	 @GetMapping("hotel/hotelSelect")
 	 public String hotelSelect(HotelVO hvo, Model model, HttpServletRequest request) {		 
-		 logger.info("hotelSelect 함수진입 ");
-		 logger.info("hotelSelect hvo.getHotelnum()=> "+ hvo.getHotelnum());
+	     logger.info("hotelSelect 함수 진입 ");
+	     logger.info("hotelSelect hvo.getHotelnum() => "+ hvo.getHotelnum());
 
-		 String sessionId = t_Session.getSession(request);
-		 logger.info("spot_IsudSelectAll sessionId >>> : " + sessionId);
+	     // 세션 ID 가져오기
+	     String sessionId = t_Session.getSession(request);
+	     logger.info("spot_IsudSelectAll sessionId >>> : " + sessionId);
 
-		 
-		 List<HotelVO> selectList = hotelService.hotelSelect(hvo);
-		 
-		 int nCnt = selectList.size();
-		 
-		 if (nCnt>0) {
-			 logger.info("hotelSelect nCnt = "+ nCnt);
-			 
-			 model.addAttribute("selectList",selectList);
-			 
-			 try (Jedis jedis = jedisPool.getResource()) {
-				 
-				 String adminyn = jedis.get(sessionId);
-				 
-				 if (adminyn != null) {
-				        // 값이 존재하는 경우
-				        logger.info("adminyn >>> : " + adminyn);
-				        model.addAttribute("adminyn", adminyn);
-				        logger.info("jedis.get >>> : ");
-				    } else {
-				        // 값이 없는 경우
-				        logger.info("adminyn is null");
-				        }
-			 } 
-			 return "hotel/hotelSelect";
-		 }
-		 
-		 return "hotel/hotel_main";
+	     // 호텔 서비스 호출
+	     List<HotelVO> selectList = hotelService.hotelSelect(hvo);
+	     
+	     int nCnt = selectList.size();
+	     
+	     if (nCnt > 0) {
+	         logger.info("hotelSelect nCnt = " + nCnt);
+	         
+	         // 모델에 선택된 호텔 리스트 추가
+	         model.addAttribute("selectList", selectList);
+	         
+	         try (Jedis jedis = jedisPool.getResource()) {
+	             
+	             // 세션에 저장된 값 가져오기
+	             String adminyn = jedis.get(sessionId);
+	             
+	             if (adminyn != null) {
+	                 // 값이 존재하는 경우
+	                 logger.info("adminyn >>> : " + adminyn);
+	                 model.addAttribute("adminyn", adminyn);
+	                 logger.info("jedis.get >>> : ");
+	             } else {
+	                 // 값이 없는 경우
+	                 logger.info("adminyn is null");
+	             }
+	         } 
+	         return "hotel/hotelSelect";
+	     }
+	     // 호텔 리스트가 없는 경우 호텔 메인 화면 반환
+	     return "hotel/hotel_main";
 	 }
+
 	 
 	 	
 	 	@PostMapping("hotel/hotelOrderForm")
@@ -294,7 +312,7 @@ public class HotelController {
 			return "hotel/hotelInsertForm";
 		}
 		
-		// 숙소 입력폼(ISUD)
+		// 숙소 수정폼(ISUD)
 		@GetMapping("hotel/hotelUpdateForm")
 		public String hotelUpdateForm(HotelVO hvo, Model model) {
 			logger.info("hotelUpdateForm 함수 진입");

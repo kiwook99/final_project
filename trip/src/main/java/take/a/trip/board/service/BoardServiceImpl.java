@@ -20,13 +20,7 @@ public class BoardServiceImpl implements BoardService {
 	// 서비스에서  @Autowired 어노테이션으로  DI (의존성 주입하기)
 	@Autowired(required=false)
 	public BoardDAO boardDAO;
-//	두 개 는 필요없다	
-	//서비스에서  @Autowired 어노테이션으로  DI (의존성 주입하기)
-	@Autowired(required=false)
-	public BoardServiceImpl(BoardDAO boardDAO) {
-		this.boardDAO = boardDAO;
-	}
-	
+
 	//[Insert 데이터 입력]
 	@Override
 	public int boardInsert(BoardVO bvo) {
