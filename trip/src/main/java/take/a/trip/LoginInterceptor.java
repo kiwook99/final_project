@@ -62,7 +62,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	  	         	jds = jedis.get(sessionId);
 	  	        }
 			return true;
-		} else if (jds == null) {
+		} else if (sessionId == null) {
     		
         	response.sendRedirect("/trip/mem/loginForm");
         }
